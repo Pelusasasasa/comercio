@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose'
+const { model, Schema, Types } = require ('mongoose');
 
 const Cheque = new Schema({
   fechaRecibido: {
@@ -13,7 +13,8 @@ const Cheque = new Schema({
   banco: {
     type: String,
     requred: true,
-    trim: true
+    trim: true,
+    set: value => value.toUpperCase()
   },
   importe: {
     type: Number,
@@ -63,6 +64,6 @@ const Cheque = new Schema({
     type: Boolean,
     default: false
   }
-})
+});
 
 module.exports = model('Cheque', Cheque)

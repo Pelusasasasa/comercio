@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/comercio/categoria', require('./routes/categoria.route'))
+app.use('/comercio/cheque', require('./routes/cheque.route'))
 app.use('/comercio/cliente', require('./routes/cliente.route'))
 
 app.listen(PORT, () => {

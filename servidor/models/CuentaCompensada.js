@@ -35,7 +35,7 @@ const CuentaCompensada = new Schema({
         type: String,
         required: true
     },
-    creadoor: {
+    creadoPor: {
         type: Types.ObjectId,
         ref: 'Usuario'
     }

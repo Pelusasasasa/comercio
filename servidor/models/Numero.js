@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+import { model } from 'mongoose';
 
 const Numero = new Schema({
     tipo: {
@@ -22,4 +23,6 @@ const Numero = new Schema({
         default: '',
         set: value => value.toUpperCase()
     }
-})
+});
+
+module.exports = model('Numero', Numero);

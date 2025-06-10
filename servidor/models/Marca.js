@@ -17,11 +17,6 @@ const Marca = new Schema({
         type: Boolean,
         default: true
     },
-    creadoPor: {
-        type: Types.ObjectId,
-        ref: 'Usuario',
-        required: true
-    },
     fechaCreacion: {
         type: Date,
         default: Date.now

@@ -1,0 +1,29 @@
+GET http://localhost:3000/comercio/categoria
+
+###Traer Por Id
+GET http://localhost:3000/comercio/categoria/684840bf9a837d6f82f97881
+
+
+###Crear Categoria
+POST http://localhost:3000/comercio/categoria
+Content-Type: application/json
+
+{
+    "nombre": "alarmasssss",
+    "descripcion": "Alarmas centrales",
+    "activo": true
+}
+
+###Eliminar
+DELETE  http://localhost:3000/comercio/categoria/68484151dee79813feed72b7
+
+###Modificar
+PUT http://localhost:3000/comercio/categoria/684840bf9a837d6f82f97881
+Content-Type: application/json
+
+{
+    "activo": true
+}
+
+###Cambiar activo
+PATCH http://localhost:3000/comercio/categoria/684840bf9a837d6f82f97881

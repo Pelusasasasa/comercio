@@ -1,4 +1,5 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
+const moment = require('moment-timezone');
 
 const Categoria = new Schema({
     nombre: {
@@ -17,13 +18,11 @@ const Categoria = new Schema({
         type: Boolean,
         default: true
     },
-    creadoPor: {
-        type: Types.ObjectId,
-        ref: 'Usuario',
-        required: true
-    },
     fechaAlta: {
         type: Date,
-        default: Date.now()
+        default: () => moment().tz('America/Argentina/Buenos_Aires').toDate()
     }
-})
+});
+
+
+module.exports = model('Categoria', Categoria);

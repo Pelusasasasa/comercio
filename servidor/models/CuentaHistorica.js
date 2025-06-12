@@ -14,7 +14,7 @@ const CuentaHistorica = new Schema({
         required: true,
         trim: true
     },
-    nro_comprobante: {
+    numeroComprobante: {
         type: String,
         required: true,
         trim: true
@@ -33,7 +33,6 @@ const CuentaHistorica = new Schema({
     },
     observaciones: {
         type: String,
-        required: true
     },
     creadoPor: {
         type: Types.ObjectId,

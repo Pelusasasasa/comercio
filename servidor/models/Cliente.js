@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-import { model } from 'mongoose';
 
 const Cliente = new Schema({
 

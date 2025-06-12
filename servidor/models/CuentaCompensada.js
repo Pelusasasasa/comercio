@@ -12,9 +12,10 @@ const CuentaCompensada = new Schema({
     tipoComprobante: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        set: value => value.toUpperCase()
     },
-    nro_comprobante: {
+    numeroComprobante: {
         type: String,
         required: true,
         trim: true
@@ -33,7 +34,6 @@ const CuentaCompensada = new Schema({
     },
     observaciones: {
         type: String,
-        required: true
     },
     creadoPor: {
         type: Types.ObjectId,

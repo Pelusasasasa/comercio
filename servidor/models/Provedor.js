@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const Provedor = new Schema({
     codigo: {
@@ -78,4 +78,7 @@ const Provedor = new Schema({
         type: Boolean,
         default: true
     }
-})
+});
+
+
+module.exports = model('Provedor', Provedor);

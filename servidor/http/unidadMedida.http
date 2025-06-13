@@ -1,0 +1,26 @@
+##GET ALL 
+GET http://localhost:3000/comercio/unidadMedida
+
+###GET ONE 
+GET http://localhost:3000/comercio/unidadMedida/684c868660817230b0f15655
+
+### POST ONE 
+POST http://localhost:3000/comercio/unidadMedida
+Content-Type: application/json
+
+{
+    "nombre": "Unidad",
+    "abreviatura": "U",
+    "permiteDecimal": false
+}
+
+###PATCH ONE
+PATCH http://localhost:3000/comercio/unidadMedida/684c868660817230b0f15655
+
+###PUT ONE
+PUT http://localhost:3000/comercio/unidadMedida/684c868660817230b0f15655
+Content-Type: application/json
+
+{
+    "activo": true
+}

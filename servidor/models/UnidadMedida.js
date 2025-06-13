@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const UnidadMedida = new Schema({
 
@@ -30,4 +30,4 @@ const UnidadMedida = new Schema({
 
 });
 
-module.exports = UnidadMedida;
+module.exports = model('UnidadMedida', UnidadMedida);

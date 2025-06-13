@@ -1,4 +1,5 @@
-import { model } from 'mongoose'
+const { model, Schema, Types } = require('mongoose');
+
 const Usuario = new Schema({
     codigo: {
         type: String,
@@ -9,6 +10,7 @@ const Usuario = new Schema({
         type: String,
         required: true,
         trim: true,
+        unique: true,
         set: value => value.toUpperCase()
     },
     permiso: {
@@ -31,7 +33,6 @@ const Usuario = new Schema({
     creadoPor: {
         type: Types.ObjectId,
         ref: 'Usuario',
-        required: true
     }
 });
 

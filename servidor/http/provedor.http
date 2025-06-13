@@ -1,0 +1,32 @@
+###DELETE ONE
+DELETE http://localhost:3000/comercio/provedor/684c741415903a21f20a1093
+
+###GET ALL
+GET http://localhost:3000/comercio/provedor
+
+###GET ONE
+GET http://localhost:3000/comercio/provedor/684c741415903a21f20a1093
+
+### GET NOMBRES
+GET http://localhost:3000/comercio/provedor/nombres
+
+
+###POST ONE 
+POST http://localhost:3000/comercio/provedor
+Content-Type: application/json
+
+{
+    "codigo": "0001",
+    "nombre": "SOLUTION BOX",
+    "cuit": "20165767433",
+    "telefono": "3456445977"
+
+}
+
+###PUT ONE
+PUT http://localhost:3000/comercio/provedor/684c741415903a21f20a1093
+Content-Type: application/json
+
+{
+    "cuit": "2016567432"
+}

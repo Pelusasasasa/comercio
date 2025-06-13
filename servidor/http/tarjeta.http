@@ -1,0 +1,29 @@
+###DELETE ONE
+DELETE http://localhost:3000/comercio/tarjeta/684c78ddcc8a65fe0b92fbce
+
+###GET ALL
+GET http://localhost:3000/comercio/tarjeta
+
+###GET ONE
+GET http://localhost:3000/comercio/tarjeta/684c78ddcc8a65fe0b92fbce
+
+###POST ONE
+POST http://localhost:3000/comercio/tarjeta
+Content-Type:  application/json
+
+{
+    "tipoTarjeta": "684abe9f7f16faf8ae89a060",
+    "cliente": "Lorenzatto Agustin",
+    "numeroComprobante": "0005-00000030",
+    "tipoComprobante": "Factura A",
+    "importe": 5000,
+    "creadoPor": "684abe9f7f16faf8ae89a060"
+}
+
+###PUT ONE
+PUT http://localhost:3000/comercio/tarjeta/684c78ddcc8a65fe0b92fbce
+Content-Type:  application/json
+
+{
+    "importe": 2000
+}

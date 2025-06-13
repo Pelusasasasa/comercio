@@ -1,0 +1,29 @@
+###DELETE ONE
+DELETE http://localhost:3000/comercio/usuario/684c8b934f2e0d9c408e47e2
+
+###GET ALL
+GET http://localhost:3000/comercio/usuario
+
+###GET ONE
+GET http://localhost:3000/comercio/usuario/684c8b934f2e0d9c408e47e2
+
+###POST ONE
+POST http://localhost:3000/comercio/usuario
+Content-Type: application/json
+
+{
+    "codigo": "210",
+    "nombre": "Agustin"
+    
+}
+
+###PATCH ONE
+PATCH http://localhost:3000/comercio/usuario/684c8b934f2e0d9c408e47e2
+
+###PUT ONE
+PUT http://localhost:3000/comercio/usuario/684c8b934f2e0d9c408e47e2
+Content-Type: application/json
+
+{
+    "activo": true
+}

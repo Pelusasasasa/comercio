@@ -1,4 +1,4 @@
-import { model, Types } from 'mongoose';
+const { model, Schema, Types } = require('mongoose');
 const Tarjeta = new Schema({
 
     fecha: {
@@ -36,7 +36,7 @@ const Tarjeta = new Schema({
         type: Number,
         default: 0
     },
-    recargp: {
+    recargo: {
         type: Number,
         default: 0
     }

@@ -1,0 +1,29 @@
+###DELETE 
+DELETE http://localhost:3000/comercio/numero/684c0d38393fba26d01232f5
+
+###GET ALL
+GET http://localhost:3000/comercio/numero
+
+###GET POR TIPO
+GET http://localhost:3000/comercio/numero/porTipo/FACTURA A
+
+
+###POST ONE
+POST http://localhost:3000/comercio/numero
+Content-Type: application/json
+
+{
+    "tipo": "FACTURA A",
+    "puntoVenta": 5,
+    "numero": 0,
+    "prefijo": "FA"
+
+}
+
+###PUT ONE 
+PUT http://localhost:3000/comercio/numero/684c0d38393fba26d01232f5
+Content-Type: application/json
+
+{
+    "puntoVenta": 4
+}

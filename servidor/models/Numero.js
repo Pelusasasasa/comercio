@@ -1,5 +1,4 @@
-const { Schema } = require("mongoose");
-import { model } from 'mongoose';
+const { Schema, model } = require("mongoose");
 
 const Numero = new Schema({
     tipo: {
@@ -10,7 +9,7 @@ const Numero = new Schema({
         set: value => value.toUpperCase()
     },
     puntoVenta: {
-        type: number,
+        type: Number,
         required: true,
     },
     numero: {

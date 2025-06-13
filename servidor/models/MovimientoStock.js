@@ -1,5 +1,4 @@
-const { Schema } = require("mongoose");
-import { model, Types } from 'mongoose';
+const { Schema, model, Types } = require("mongoose");
 
 const MovimientoStock = new Schema({
     fecha: {
@@ -13,7 +12,8 @@ const MovimientoStock = new Schema({
     },
     tipo: {
         type: String,
-        required: true
+        required: true,
+        set: value => value.toUpperCase()
     },
     cantidad: {
         type: Number,
@@ -34,6 +34,7 @@ const MovimientoStock = new Schema({
     },
     numeroComprobante: {
         type: String,
+        required: true,
         trim: true,
         set: value => value.toUpperCase()
     },

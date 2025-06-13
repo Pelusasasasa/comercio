@@ -8,8 +8,8 @@ const Pedido = new Schema({
     },
     cliente: {
         type: String,
-        ref: 'Cliente',
-        required: true
+        trim: true,
+        set: value => value.toUpperCase()
     },
     codigoProducto: {
         type: Types.ObjectId,

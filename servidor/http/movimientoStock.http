@@ -1,0 +1,32 @@
+###DELETE
+DELETE http://localhost:3000/comercio/movimientoStock/
+
+###GET Por Producto
+GET http://localhost:3000/comercio/movimientoStock/producto/684abeb07f16faf8ae89a064
+
+###GET Por Tipo y Numero
+GET http://localhost:3000/comercio/movimientoStock/porTipoYNumero/COMPROBANTE/0005-00000030
+
+
+###POST
+POST http://localhost:3000/comercio/movimientoStock
+Content-Type: application/json
+
+{
+    "producto": "684abeb07f16faf8ae89a064",
+    "tipo": "comprobante",
+    "cantidad": 2,
+    "stockAntes": 10,
+    "stockAhora": 8,
+    "detalle": "",
+    "numeroComprobante": "0005-00000031",
+    "creadoPor": "684abeb07f16faf8ae89a064"
+}
+
+###PUT 
+PUT http://localhost:3000/comercio/movimientoStock/684b8572b959e7e400b047f4
+Content-Type: application/json
+
+{
+    "detalle": "Este es el primer detalle"
+}

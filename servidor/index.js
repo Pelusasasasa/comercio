@@ -17,6 +17,10 @@ app.use('/comercio/cliente', require('./routes/cliente.route'))
 app.use('/comercio/cuentaCompensada', require('./routes/cuentaCompensada.route'))
 app.use('/comercio/cuentaHistorica', require('./routes/cuentaHistorica.route'))
 app.use('/comercio/marca', require('./routes/marca.route'))
+app.use('/comercio/movimientoStock', require('./routes/movimientoStock.route'))
+app.use('/comercio/numero', require('./routes/numero.route'))
+app.use('/comercio/pedido', require('./routes/pedido.route'))
+app.use('/comercio/producto', require('./routes/producto.route'))
 
 app.listen(PORT, () => {
     console.log(`Servidor cooriendo en el puerto ${PORT}`);

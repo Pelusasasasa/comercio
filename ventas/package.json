@@ -1,0 +1,19 @@
+{
+  "name": "ventas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:electron\" \"npm:dev:render\"",
+    "dev:electron": "electron .",
+    "dev:render": "cd renderer && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^36.4.0"
+  }
+}

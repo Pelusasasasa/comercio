@@ -15,29 +15,25 @@ const Cliente = new Schema({
         },
         dni: {
             type: String,
-            required: true,
             trim: true,
+            default: '00000000'
         },
         telefono: {
             type: String,
-            required: true,
             trim: true
         },
         direccion: {
             type: String,
-            required: true,
             trim: true,
             set: value => value.toUpperCase()
         },
         localidad: {
             type: String,
-            required: true,
             trim: true,
             set: value => value.toUpperCase()
         },
         email: {
             type: String,
-            required: true,
             trim: true
         },
         saldo: {

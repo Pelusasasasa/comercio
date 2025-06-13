@@ -20,9 +20,8 @@ POST http://localhost:3000/comercio/cliente
 Content-Type: application/json
 
 {
-    "codigo": 4,
+    "codigo": 6,
     "nombre": "Lorenzatto agustin",
-    "dni": "41630584",
     "telefono": "3456445977",
     "direccion": "Repetto 3345",
     "localidad": "Chajari",

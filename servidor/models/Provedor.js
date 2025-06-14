@@ -47,7 +47,7 @@ const Provedor = new Schema({
     condicionIva: {
         type: String,
         trim: true,
-        enum: ['RESPONSABLE INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL', 'OTRO'],
+        enum: ['INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL', 'OTRO'],
         default: 'CONSUMIDOR FINAL',
         set: value => value.toUpperCase()
     },

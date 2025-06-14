@@ -1,12 +1,14 @@
 const {Router} = require('express');
 const { crearCuentaCompensada, borrarCuentaCompensada, modificarCuentaCompensada, traerCuentaCompensadaActivaPorCliente } = require('../controllers/cuentaCompensada.controllers');
+const { validarCuentaCompensada } = require('../validators/cuentaCompensada.validator');
+const validarCampos = require('../middlewares/validarCampos');
 const router = Router();
 
 router.route('/')
-    .post(crearCuentaCompensada)
+    .post(validarCuentaCompensada, validarCampos, crearCuentaCompensada)
 router.route('/:id')
     .delete(borrarCuentaCompensada)
-    .put(modificarCuentaCompensada)
+    .put(validarCuentaCompensada, validarCampos, modificarCuentaCompensada)
 router.route('/cliente/:cliente')
     .get(traerCuentaCompensadaActivaPorCliente)
 

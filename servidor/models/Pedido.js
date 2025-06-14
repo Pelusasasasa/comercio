@@ -11,6 +11,11 @@ const Pedido = new Schema({
         trim: true,
         set: value => value.toUpperCase()
     },
+    numero: {
+        type: String,
+        trim: true,
+        required: true
+    },
     codigoProducto: {
         type: Types.ObjectId,
         ref: 'Producto',
@@ -38,7 +43,7 @@ const Pedido = new Schema({
         default: 'Pendiente',
         enum: ['Pendiente', 'Entregado', 'Cancelado']
     },
-    observacones: {
+    observaciones: {
         type: String,
         trim: true,
         set: value => value.toUpperCase()

@@ -1,16 +1,18 @@
 const { traerUsuarios, crearUsuario, modificarUsuario, borrarUsuario, pausarUsuario } = require("../controllers/usuario.controllers");
 
 const { Router } = require('express');
+const { validarUsuario } = require("../validators/Usuario.validator");
+const validarCampos = require("../middlewares/validarCampos");
 const router = Router();
 
 router.route('/')
     .get(traerUsuarios)
-    .post(crearUsuario)
+    .post(validarUsuario, validarCampos, crearUsuario)
 router.route('/:id')
     .delete(borrarUsuario)
     .get(traerUsuarios)
     .patch(pausarUsuario)
-    .put(modificarUsuario)
+    .put(validarUsuario, validarCampos, modificarUsuario)
 
 
 

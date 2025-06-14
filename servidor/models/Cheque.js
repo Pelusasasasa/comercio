@@ -12,17 +12,17 @@ const Cheque = new Schema({
   },
   banco: {
     type: String,
-    requred: true,
+    required: true,
     trim: true,
     set: value => value.toUpperCase()
   },
   importe: {
     type: Number,
-    requred: true,
+    required: true,
   },
   fechaDeposito: {
     type: Date,
-    requred: true,
+    required: true,
     trim: true
   },
   entregadoPor: {

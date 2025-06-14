@@ -14,7 +14,7 @@ const Numero = new Schema({
     },
     numero: {
         type: Number,
-        default: 0
+        required: true,
     },
     prefijo: {
         type: String,

@@ -1,13 +1,15 @@
 const {Router} = require('express');
 const { crearCuentaHistorica, borrarCuentaHistorica, modifcarCuentaHistorica, traerCuentaHistoricaPorCliente } = require('../controllers/cuentaHistorica.controllers');
+const { validarCuentaHistorica } = require('../validators/cuentaHistorica.validator');
+const validarCampos = require('../middlewares/validarCampos');
 
 const router = Router();
 
 router.route('/')
-    .post(crearCuentaHistorica)
+    .post(validarCuentaHistorica, validarCampos, crearCuentaHistorica)
 router.route('/:id')
     .delete(borrarCuentaHistorica)
-    .put(modifcarCuentaHistorica)
+    .put(validarCuentaHistorica, validarCampos, modifcarCuentaHistorica)
 router.route('/cliente/:cliente')
     .get(traerCuentaHistoricaPorCliente)
 

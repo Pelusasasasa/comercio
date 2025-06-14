@@ -1,26 +1,38 @@
 
 import { IoPeopleOutline } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
+import { BsBoxSeam } from 'react-icons/bs'
+import { FiShoppingCart } from 'react-icons/fi'
+import { CardMenu } from '../components/CardMenu'
+import { useState } from 'react'
+import PasswordModal from '../components/PasswordModal'
 const cards = [
-  { title: 'Clientes', route: '/clientes', icon: <IoPeopleOutline size={50} color='' className='bg-yellow-200 text-orange-400 rounded-full p-2'/> },
+  { title: 'Ventas', route: '/ventas', icon: <FiShoppingCart size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Clientes', route: '/clientes', icon: <IoPeopleOutline size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Productos', route: '/productos', icon: <BsBoxSeam size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
 ]
 
 const Home = () => {
-  const navigate = useNavigate();
+
+  const [passwordModal, setPassWordModal] = useState(true)
+
+  const validarUsuario = (text) => {
+    if(text === "210"){
+      return true
+    }else{
+      return false
+    }
+  }
+
   return (
     <div className="min-h-screen bg-yellow-50 p-8">
-      <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            onClick={() => navigate(card.route)}
-            className="cursor-pointer bg-white shadow-md p-8 rounded-lg flex items-center justify-center hover:bg-yellow-100 transition gap-2"
-          >
-            {card.icon}
-            <span className="text-xl font-semibold text-yellow-600">{card.title}</span>
-          </div>
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mx-auto">
+        {cards.map((card) => (
+          <CardMenu key={card.title} title={card.title} icon={card.icon} route={card.route} setPassWordModal={setPassWordModal}/>
         ))}
       </div>
+
+
+      { passwordModal && <PasswordModal isOpen={passwordModal} onClose={setPassWordModal} onValidate={validarUsuario}/>}
     </div>
   )
 }

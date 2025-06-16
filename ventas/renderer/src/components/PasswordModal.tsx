@@ -13,8 +13,9 @@ interface usePasswordStore {
 }
 
 
-function PasswordModal({ isOpen, onClose }) {
-    const { usuario, messageErrro, isSaving, startGetUsuario }:usePasswordStore = useUsuarioStore();
+function PasswordModal({ isOpen, onClose, onValidate }) {
+
+    const { usuario, messageErrro, isSaving, startGetUsuario } = useUsuarioStore();
 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,13 +24,20 @@ function PasswordModal({ isOpen, onClose }) {
     const result = startGetUsuario(password);
     
     if (result) {
+      onValidate()
       onClose(true); // contraseña correcta
       setPassword('');
       setError('');
-      onClose()
+      onClose();
     } else {
       setError('Contraseña incorrecta');
     }
+  };
+
+  const handleKeyDown = (e) => {
+    if(e.keyCode === 13){
+      handleValidate();
+    };
   };
 
   if (!isOpen) return null;
@@ -45,7 +53,7 @@ function PasswordModal({ isOpen, onClose }) {
             <MdOutlineClose onClick={() => onClose(false)} className='cursor-pointer'/>
             
         </div>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border p-2 w-full mb-4 text-center rounded-xl focus:border-gray-200" placeholder="Contraseña" />
+        <input type="password" autoFocus value={password} onKeyDown={handleKeyDown} onChange={(e) => setPassword(e.target.value)} className="border p-2 w-full mb-4 text-center rounded-xl focus:border-gray-200" placeholder="Contraseña" />
         {error && <p className="text-red-500 mb-2">{error}</p>}
         <div className="flex  gap-4 justify-end">
           <button onClick={() => onClose(false)} className="bg-gray-300 px-4 rounded-md py-2">Cancelar</button>

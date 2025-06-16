@@ -1,25 +1,18 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 
 interface Props {
   route: string
   icon: React.ReactNode
   title: string,
-  setPassWordModal: (arg: Boolean) => void
+  setPassWordModal: (arg: boolean) => void,
+  handleClick: (arg: string) => void
 }
 
-export const CardMenu = ({route, icon, title, setPassWordModal}: Props ) => {
-  const navigate = useNavigate()
-
-  const validarUsuario = () => {
-    setPassWordModal(true)
-  };
-
-  // navigate(route)
+export const CardMenu = ({route, icon, title, handleClick}: Props ) => {
 
   return (
     <div
-            onClick={validarUsuario}
+            onClick={() => handleClick(route)}
             className="cursor-pointer bg-white shadow-md p-8 rounded-lg flex items-center justify-center hover:bg-yellow-100 transition gap-2"
           >
             {icon}

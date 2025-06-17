@@ -1,4 +1,6 @@
+import Swal from 'sweetalert2';
 import { useForm } from '../hooks';
+import { useClienteStore } from '../hooks/useClienteStore';
 
 interface Props {
     setButtonActive: (arg: string) => void
@@ -19,26 +21,32 @@ export interface ClienteFormState  {
     
 }
 
-const initilState: ClienteFormState  = {
-    nombre: '',
-    codigo: '',
-    dni: '',
-    telefono: '',
-    direccion: '',
-    localidad: '',
-    email: '',
-    condicionCuenta: 'CONTADO',
-    condicionIva: 'CONSUMIDOR FINAL',
-    observaciones: '',
+export interface useCliente {
+    agregarCliente: (arg: {}) => void,
+    clienteActive: {},
+    modificarCliente: (arg: {}) => void
 }
 
 const HandleCliente = ({setButtonActive}: Props) => {
-    const {codigo, nombre, dni, telefono, direccion,localidad, email, condicionCuenta, condicionIva, observaciones, formState, onInputChange, onResetForm} = useForm<ClienteFormState>(initilState);
+    const { agregarCliente, clienteActive, modificarCliente }:useCliente = useClienteStore();
+    const {codigo, nombre, dni, telefono, direccion,localidad, email, condicionCuenta, condicionIva, observaciones, formState, onInputChange, onResetForm} = useForm<ClienteFormState>(clienteActive);
+    
 
-
-    const cargarCliente = (e) => {
+    const cargarCliente = async(e) => {
         e.preventDefault();
+
+        if(codigo === '') return await Swal.fire('Falta el codigo', 'Error al cargar cliente', 'error')
+        if(nombre === '') return await Swal.fire('Falta el nombre', 'Error al cargar cliente', 'error')
+
+        agregarCliente(formState);
+
+        setButtonActive('listado');
         
+    };
+
+    const handlePutCliente = async(e) => {
+        modificarCliente(formState);
+        setButtonActive('listado');
     };
 
 
@@ -108,7 +116,11 @@ const HandleCliente = ({setButtonActive}: Props) => {
 
             <div className='flex justify-end p-5 gap-5 bg-white'>
                 <button type='button' onClick={() => setButtonActive('listado')} className='border rounded-lg hover:bg-gray-100 cursor-pointer p-2 font-medium bg-white border-gray-200'>Cancelar</button>
-                <button type='submit' onClick={cargarCliente} className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Guardar Cliente</button>
+                {
+                    clienteActive 
+                    ? <button type='button' onClick={handlePutCliente} className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Modificar Cliente</button>
+                    : <button type='submit' className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Guardar Cliente</button>
+                }
             </div>    
         </form>
 

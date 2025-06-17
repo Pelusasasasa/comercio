@@ -47,7 +47,7 @@ const Cliente = new Schema({
         },
         condicionIva: {
             type: String,
-            enum: ['RESPONSABLE INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL'],
+            enum: ['INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL'],
             default: 'CONSUMIDOR FINAL'
         },
         fechaAlta:{

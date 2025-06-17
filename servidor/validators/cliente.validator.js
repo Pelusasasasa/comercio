@@ -8,7 +8,6 @@ const validarCliente = [
         .notEmpty().withMessage('El nombre es obligatorio'),
     check('dni')
         .optional()
-        .isLength({ min: 8, max: 11}).withMessage('la longitud del dni esta mal')
         .isString().withMessage('El DNI debe ser un texto'),
     check('telefono')
         .optional()
@@ -20,8 +19,8 @@ const validarCliente = [
     .optional()
         .isString().withMessage('La localidad debe ser un texto'),
     check('email')
-        .optional()
-        .isEmail().withMessage('Debe ser un email válido'),
+        .isString().withMessage('Debe ser un email válido')
+        .optional(),
     check('saldo')
         .optional()
         .isFloat({ min: 0 }).withMessage('El saldo no puede ser negativo'),
@@ -30,7 +29,7 @@ const validarCliente = [
         .isIn(['CONTADO', 'CORRIENTE']).withMessage('Condición de cuenta inválida'),
     check('condicionIva')
         .optional()
-        .isIn(['RESPONSABLE INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL'])
+        .isIn(['INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL'])
         .withMessage('Condición de IVA inválida')
 ];
 

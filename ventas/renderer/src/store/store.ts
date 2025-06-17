@@ -7,4 +7,6 @@ export const store = configureStore({
         cliente: clienteSlice.reducer,
         usuario: usuarioSlice.reducer
     }
-})
+});
+
+export type RootState = ReturnType<typeof store.getState>;

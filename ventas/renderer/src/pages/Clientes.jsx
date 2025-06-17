@@ -4,11 +4,15 @@ import { GoArrowLeft, GoDownload, GoSearch  } from "react-icons/go";
 import { LuFilter } from "react-icons/lu";
 import { Listaclientes } from '../components/Listaclientes';
 import HandleCliente from '../components/handleCliente';
+import { useClienteStore } from '../hooks/useClienteStore';
 
 
 
 const Clientes = () => {
   const navigate = useNavigate();
+
+  const { clientes, traerClientes } = useClienteStore();
+
   const [buttonActive, setButtonActive] = useState('listado');
   const [listFilter, setListFilter] = useState(false);
 
@@ -19,8 +23,9 @@ const Clientes = () => {
   };
 
   useEffect(() => {
-    console.log("a");
-  }, [filtro])
+    traerClientes()
+    console.log(filtro);
+  }, []);
 
   return (
     <>
@@ -76,7 +81,7 @@ const Clientes = () => {
         </div>
 
         <div>
-          {buttonActive === 'listado' ? <Listaclientes /> : <HandleCliente setButtonActive={setButtonActive}/>}
+          {buttonActive === 'listado' ? <Listaclientes clientes={clientes} setButtonActive={setButtonActive} /> : <HandleCliente setButtonActive={setButtonActive}/>}
         </div>
       </main>
     </>

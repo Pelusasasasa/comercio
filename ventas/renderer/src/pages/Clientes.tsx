@@ -8,6 +8,7 @@ import { LuFilter } from "react-icons/lu";
 
 import { Listaclientes } from '../components/Listaclientes';
 import HandleCliente from '../components/handleCliente';
+import { exportarClientes } from '../helpers/exportarExcel';
 
 
 const Clientes = () => {
@@ -55,7 +56,7 @@ const Clientes = () => {
   }, [filtro])
 
   const exportar = () => {
-    console.log("a")
+    exportarClientes(clientes)
   }
 
   return (

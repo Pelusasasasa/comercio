@@ -1,37 +1,50 @@
 import Swal from 'sweetalert2';
 import { useForm } from '../hooks';
 import { useClienteStore } from '../hooks/useClienteStore';
+import { ClienteFormState } from '../../types/cliente';
 
 interface Props {
     setButtonActive: (arg: string) => void
 }
 
-export interface ClienteFormState  {
-    codigo: string,
-    nombre: string,
-    dni: string,
-    telefono: string,
-    direccion: string,
-    localidad: string,
-    email: string,
-    condicionCuenta: string,
-    condicionIva: string,
-    observaciones: string,
-    // onInputchange: (arg: string) => void
-    
-}
+const initialFormState: ClienteFormState = {
+    _id: '',
+    codigo: '',
+    nombre: '',
+    dni: '',
+    telefono: '',
+    direccion: '',
+    localidad: '',
+    email: '',
+    condicionCuenta: 'CONTADO',
+    condicionIva: 'CONSUMIDOR FINAL',
+    observaciones: '',
+};
 
 export interface useCliente {
     agregarCliente: (arg: {}) => void,
-    clienteActive: {},
+    clienteActive: ClienteFormState,
     modificarCliente: (arg: {}) => void
 }
 
-const HandleCliente = ({setButtonActive}: Props) => {
-    const { agregarCliente, clienteActive, modificarCliente }:useCliente = useClienteStore();
-    const {codigo, nombre, dni, telefono, direccion,localidad, email, condicionCuenta, condicionIva, observaciones, formState, onInputChange, onResetForm} = useForm<ClienteFormState>(clienteActive);
+const HandleCliente = ({setButtonActive}: Props): useCliente  => {
+    const { agregarCliente, clienteActive, modificarCliente, isSavingCliente } = useClienteStore();
+    const {
+        codigo,
+        nombre,
+        dni,
+        telefono,
+        direccion, 
+        localidad, 
+        email, 
+        condicionCuenta, 
+        condicionIva, 
+        observaciones, 
+        formState, 
+        onInputChange, 
+        onResetForm
+    } = useForm<ClienteFormState>(clienteActive ? clienteActive : initialFormState);
     
-
     const cargarCliente = async(e) => {
         e.preventDefault();
 
@@ -52,7 +65,7 @@ const HandleCliente = ({setButtonActive}: Props) => {
 
   return (
     <div className='mx-10 border border-gray-200'>
-        <h3 className='text-2xl m-5'>Agregar Nuevo Cliente</h3>
+        <h3 className='text-2xl m-5'>{clienteActive ? 'Modificar Cliente' : 'Agregar Nuevo Cliente'}</h3>
         <form onSubmit={cargarCliente} className=''>
             <div className='grid grid-cols-2 gap-5 py-5 bg-white px-5'>
                 <div className='flex flex-col'>
@@ -118,8 +131,8 @@ const HandleCliente = ({setButtonActive}: Props) => {
                 <button type='button' onClick={() => setButtonActive('listado')} className='border rounded-lg hover:bg-gray-100 cursor-pointer p-2 font-medium bg-white border-gray-200'>Cancelar</button>
                 {
                     clienteActive 
-                    ? <button type='button' onClick={handlePutCliente} className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Modificar Cliente</button>
-                    : <button type='submit' className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Guardar Cliente</button>
+                    ? <button type='button' onClick={handlePutCliente} disabled={isSavingCliente} className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Modificar Cliente</button>
+                    : <button type='submit' disabled={isSavingCliente} className='cursor-pointer rounded-lg border bg-yellow-500 p-2 font-medium text-white hover:bg-yellow-600'>Guardar Cliente</button>
                 }
             </div>    
         </form>

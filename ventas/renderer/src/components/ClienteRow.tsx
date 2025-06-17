@@ -17,7 +17,7 @@ export interface clienteProps {
 
 
 export const ClienteRow = ({_id, codigo, nombre, direccion, telefono, dni, condicionIva, saldo, setButtonActive}: clienteProps) => {
-  const { borrarCliente, setActiveCliente } = useClienteStore();
+  const { borrarCliente, isSavingCliente, setActiveCliente } = useClienteStore();
 
   const condicionStyles:Record<string, string> = {
     'CONSUMIDOR FINAL':  'border border-gray-300 rounded-lg text-center bg-gray-200',
@@ -60,8 +60,8 @@ export const ClienteRow = ({_id, codigo, nombre, direccion, telefono, dni, condi
 
         <td>
             <div className="flex items-center justify-around h-full">
-                <VscEdit size={20} onClick={handleUpdateCliente} className="rounded-sm text-gray-600 cursor-pointer hover:bg-gray-400"/>
-                <RiDeleteBin5Line onClick={handleDeleteCliente} size={20} className="rounded-sm hover:bg-gray-400 hover:text-gray-600 cursor-pointer text-red-600"/>
+                <VscEdit size={20} onClick={handleUpdateCliente} className={`rounded-sm text-gray-600 cursor-pointer hover:bg-gray-400 ${isSavingCliente ? 'hidden' : 'block'}`}/>
+                <RiDeleteBin5Line onClick={handleDeleteCliente} size={20} className={`rounded-sm hover:bg-gray-400 hover:text-gray-600 cursor-pointer text-red-600  ${isSavingCliente ? 'hidden' : 'block'}`}/>
             </div>
         </td>
 

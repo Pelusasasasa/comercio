@@ -2,13 +2,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 import comercioApi from '../api/comercioApi';
-import { addCliente, putCliente, setActive, setClientes } from '../store/cliente/clienteSlice';
-import { RootState } from '../store/store';
+import { addCliente, deleteCliente, putCliente, saving, setActive, setClientes } from '../store/cliente/clienteSlice';
+import { ClienteFormState } from '../../types/cliente';
 
 
 export const useClienteStore = () => {
 
-    const { clienteActive, clientes, isSavingCliente, messageErrorCliente } = useSelector((state: RootState) => state.cliente);
+    const { clienteActive, clientes, isSavingCliente, messageErrorCliente } = useSelector((state: { cliente: 
+        {
+            clienteActive: ClienteFormState | null,
+            clientes: ClienteFormState[],
+            isSavingCliente: boolean,
+            messageErrorCliente: string | null
+        }
+    }) => state.cliente);
     const dispach = useDispatch();
 
     /*
@@ -17,6 +24,8 @@ export const useClienteStore = () => {
     */
     
             const traerClientes = async() => {
+                dispach(saving());
+
                 const { data } = await comercioApi.get('/cliente');
 
                 if(data.ok){
@@ -42,11 +51,12 @@ export const useClienteStore = () => {
             };
 
             const borrarCliente = async(id) => {
+                dispach(saving());
                 try {
                     const { data } = await comercioApi.delete(`cliente/${id}`);
 
                     if(data.ok){
-
+                        dispach(deleteCliente(id))
                     }else{
                         await Swal.fire('No se pudo eliminar el cliente', data.msg, 'error');
                     };
@@ -57,6 +67,7 @@ export const useClienteStore = () => {
             };
 
             const modificarCliente = async(cliente) => {
+                dispach(saving());
                 try {
                     const { data } = await comercioApi.put(`cliente/${cliente._id}`, cliente);
                     if(data.ok){

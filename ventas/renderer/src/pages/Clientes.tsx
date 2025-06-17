@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
-import { GoArrowLeft, GoDownload, GoSearch  } from "react-icons/go";
-import { LuFilter } from "react-icons/lu";
-import { Listaclientes } from '../components/Listaclientes';
-import HandleCliente from '../components/handleCliente';
 import { useClienteStore } from '../hooks/useClienteStore';
 
+import { GoArrowLeft, GoDownload, GoSearch  } from "react-icons/go";
+import { LuFilter } from "react-icons/lu";
+
+import { Listaclientes } from '../components/Listaclientes';
+import HandleCliente from '../components/handleCliente';
 
 
 const Clientes = () => {
   const navigate = useNavigate();
 
-  const { clientes, traerClientes } = useClienteStore();
+  const { clientes, traerClientes, isSavingCliente } = useClienteStore();
 
   const [buttonActive, setButtonActive] = useState('listado');
   const [listFilter, setListFilter] = useState(false);
 
   const [filtro,  setFiltro] = useState('');
+  const [buscador, setBuscador] = useState('');
+  const [ listado, setListado ] = useState(clientes);
 
   const handleBack = () => {
     navigate(-1);
@@ -24,8 +28,35 @@ const Clientes = () => {
 
   useEffect(() => {
     traerClientes()
-    console.log(filtro);
   }, []);
+
+
+  useEffect(() => {
+    const nuevaLista = clientes.filter(elem => {
+      const nombre = elem.nombre.toUpperCase();
+      const codigo = elem.codigo;
+      const dni = elem.dni.toUpperCase();
+      
+      return nombre.includes(buscador.toUpperCase()) || codigo == buscador || dni.includes(buscador.toUpperCase());
+    });
+
+    setListado(nuevaLista)
+  }, [buscador || clientes])
+
+  useEffect(() => {
+
+    if(filtro === '') return setListado(clientes)
+    if(filtro === 'saldo') return setListado(clientes.filter(elem => elem.saldo !== 0))
+    if(filtro === 'sinSaldo') return setListado(clientes.filter(elem => elem.saldo === 0))
+    if(filtro === 'INSCRIPTO') return setListado(clientes.filter(elem => elem.condicionIva === 'INSCRIPTO'))
+    if(filtro === 'MONOTRIBUTO') return setListado(clientes.filter(elem => elem.condicionIva === 'MONOTRIBUTO'))
+    if(filtro === 'CONSUMIDOR FINAL') return setListado(clientes.filter(elem => elem.condicionIva === 'CONSUMIDOR FINAL'))
+    if(filtro === 'EXENTO') return setListado(clientes.filter(elem => elem.condicionIva === 'EXENTO'))
+  }, [filtro])
+
+  const exportar = () => {
+    console.log("a")
+  }
 
   return (
     <>
@@ -37,7 +68,7 @@ const Clientes = () => {
             <p className='text-xl'>Clientes</p>
           </div>
 
-          <div className='flex gap-2 items-center hover:bg-amber-500 rounded-sm cursor-pointer p-2'>
+          <div className='flex gap-2 items-center hover:bg-amber-500 rounded-sm cursor-pointer p-2' onClick={exportar}>
             <GoDownload/>
             <p>Exportar</p>
           </div>
@@ -53,7 +84,7 @@ const Clientes = () => {
           <div className='flex items-center gap-5'>
             <div className='flex border-gray-300 rounded-sm border gap-2 items-center bg-white p-2'>
               <GoSearch color='gray'/>
-              <input type="text" placeholder='Buscar Por Nombre, codigo o CUIT' className='p-1 w-[500px]' />
+              <input type="text" placeholder='Buscar Por Nombre, codigo o CUIT' className='p-1 w-[500px]' onChange={(e) => setBuscador(e.target.value)} />
             </div>
 
             <button 
@@ -74,6 +105,7 @@ const Clientes = () => {
                   <p className='py-1 hover:bg-gray-100 cursor-pointer rounded-sm px-1' onClick={() => {setFiltro('INSCRIPTO'), setListFilter(false)}}>Inscriptos</p>
                   <p className='py-1 hover:bg-gray-100 cursor-pointer rounded-sm px-1' onClick={() => {setFiltro('MONOTRIBUTO'), setListFilter(false)}}>Monotributos</p>
                   <p className='py-1 hover:bg-gray-100 cursor-pointer rounded-sm px-1' onClick={() => {setFiltro('CONSUMIDOR FINAL'), setListFilter(false)}}>Consumidor Final</p>
+                  <p className='py-1 hover:bg-gray-100 cursor-pointer rounded-sm px-1' onClick={() => {setFiltro('EXENTO'), setListFilter(false)}}>Exento</p>
                 </div>
               )
             }
@@ -81,7 +113,7 @@ const Clientes = () => {
         </div>
 
         <div>
-          {buttonActive === 'listado' ? <Listaclientes clientes={clientes} setButtonActive={setButtonActive} /> : <HandleCliente setButtonActive={setButtonActive}/>}
+          {buttonActive === 'listado' ? <Listaclientes clientes={listado} setButtonActive={setButtonActive} /> : <HandleCliente setButtonActive={setButtonActive}/>}
         </div>
       </main>
     </>

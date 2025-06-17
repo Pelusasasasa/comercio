@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
 import { useClienteStore } from '../hooks/useClienteStore';
 
 import { GoArrowLeft, GoDownload, GoSearch  } from "react-icons/go";
@@ -9,10 +8,10 @@ import { LuFilter } from "react-icons/lu";
 import { Listaclientes } from '../components/Listaclientes';
 import HandleCliente from '../components/handleCliente';
 import { exportarClientes } from '../helpers/exportarExcel';
+import { Navbar } from '../components/Navbar';
 
 
 const Clientes = () => {
-  const navigate = useNavigate();
 
   const { clientes, traerClientes, isSavingCliente } = useClienteStore();
 
@@ -23,9 +22,7 @@ const Clientes = () => {
   const [buscador, setBuscador] = useState('');
   const [ listado, setListado ] = useState(clientes);
 
-  const handleBack = () => {
-    navigate(-1);
-  };
+
 
   useEffect(() => {
     traerClientes()
@@ -61,19 +58,7 @@ const Clientes = () => {
 
   return (
     <>
-      <nav className='flex justify-between items-center bg-black py-3 text-white px-5'>
-          <div className='gap-2 flex items-center'>
-            <div className='p-2 hover:bg-amber-500 rounded-sm cursor-pointer' onClick={handleBack}>
-              <GoArrowLeft size={20}/>
-            </div>
-            <p className='text-xl'>Clientes</p>
-          </div>
-
-          <div className='flex gap-2 items-center hover:bg-amber-500 rounded-sm cursor-pointer p-2' onClick={exportar}>
-            <GoDownload/>
-            <p>Exportar</p>
-          </div>
-      </nav>
+      <Navbar exportar={exportar} text='clientes'/>
 
       <main className='bg-yellow-50 h-[calc(100vh-64px)]'>
         <div className='flex justify-between mx-5'>

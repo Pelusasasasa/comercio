@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
 
-import Productos from './pages/Productos'
+
 import Clientes from './pages/Clientes'
+import Productos from './pages/Productos'
 
 function App() {
 

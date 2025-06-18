@@ -36,9 +36,7 @@ const validarProducto = [
         .notEmpty().withMessage('El stockMinimo es obligatorio'),
     check('categoria')
         .isString().withMessage('La categoria debe ser un string')
-        .notEmpty().withMessage('La categoria es obligatoria'),
-    check('estado')
-        .isIn(['activo', 'inactivo']).withMessage('El estado debe ser activo o inactivo')
+        .notEmpty().withMessage('La categoria es obligatoria')
 ];
 
 module.exports = {

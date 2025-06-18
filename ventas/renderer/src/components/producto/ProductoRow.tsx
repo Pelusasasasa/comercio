@@ -28,9 +28,9 @@ return (
         <td className="py-2">{codigo}</td>
         <td>{descripcion}</td>
         <td>{precio.toFixed(2)}</td>
-        <td>{marca}</td>
+        <td>{marca.nombre}</td>
         <td>{stock.toFixed(2)}</td>
-        <td>{provedor}</td>
+        <td>{provedor.nombre}</td>
         <td>{codigoFabrica}</td>
         <td>{observaciones}</td>
         <td>

@@ -17,7 +17,7 @@ export const useProductoStore = () => {
     const {productos, productoActive, isSavingProducto, messageErrorProducto} = useSelector((state: RootState) => state.producto);
     const dispatch = useDispatch();
 
-    const traerProductos = async() => {
+    const startTraerProductos = async() => {
         dispatch(savingProducto());
 
         try {
@@ -34,7 +34,7 @@ export const useProductoStore = () => {
         }
     };
 
-    const agregarProducto = async(producto: Producto) => {
+    const startAgregarProducto = async(producto: Producto) => {
         dispatch(savingProducto());
 
         try {
@@ -51,7 +51,7 @@ export const useProductoStore = () => {
         }
     };
 
-    const borrarProducto = async(id: string) => {
+    const startBorrarProducto = async(id: string) => {
         dispatch(savingProducto());
 
         try {
@@ -68,7 +68,7 @@ export const useProductoStore = () => {
         }
     };
     
-    const modificarProducto = async(producto: Producto) => {
+    const startModificarProducto = async(producto: Producto) => {
         dispatch(savingProducto());
 
         try {
@@ -97,10 +97,10 @@ export const useProductoStore = () => {
         messageErrorProducto,
 
         //Metodos
-        traerProductos,
-        agregarProducto,
-        borrarProducto,
-        modificarProducto,
+        startTraerProductos,
+        startAgregarProducto,
+        startBorrarProducto,
+        startModificarProducto,
         setProductoActivo
     }
 }

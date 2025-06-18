@@ -7,7 +7,7 @@ import HandleProducto from "../components/producto/handleProducto";
 
 const Productos = () => {
 
-  const { productos, traerProductos } = useProductoStore();
+  const { productos, startTraerProductos } = useProductoStore();
 
   const [buttonActive, setButtonActive] = useState('listado');
   const [buscador, setBuscador] = useState('');
@@ -15,7 +15,7 @@ const Productos = () => {
   const [listado, setListado] = useState(productos);
 
   useEffect(() => {
-    traerProductos()
+    startTraerProductos()
   }, []);
 
   useEffect(() => {

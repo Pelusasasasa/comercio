@@ -5,6 +5,7 @@ import { productoSlice } from './producto/productoSlice';
 import { marcaSlice } from './marca/marcaSlice';
 import { provedorSlice } from './provedor/provedorSlice';
 import { categoriaSlice } from './categoria/categoriaSlice';
+import { unidadMedidaSlice } from './unidadMedida/unidadMedidaSlice';
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         marca: marcaSlice.reducer,
         producto: productoSlice.reducer,
         provedor: provedorSlice.reducer,
+        unidadMedida: unidadMedidaSlice.reducer,
         usuario: usuarioSlice.reducer
     }
 });

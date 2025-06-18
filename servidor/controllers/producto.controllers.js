@@ -93,7 +93,7 @@ const traerProductoPorId = async(req, res) => {
 
 const traerProductos = async(req, res) => {
     try {
-        const productos = await Producto.find();
+        const productos = await Producto.find().populate('marca', ['_id', 'nombre']).populate('provedor', ['_id', 'nombre']);
 
         res.status(200).json({
             ok: true,

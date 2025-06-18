@@ -18,10 +18,6 @@ export const useClienteStore = () => {
     }) => state.cliente);
     const dispach = useDispatch();
 
-    /*
-        Todos
-            6. IsSavingCliente
-    */
     
             const traerClientes = async() => {
                 dispach(saving());

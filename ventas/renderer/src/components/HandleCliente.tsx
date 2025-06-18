@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { useForm } from '../hooks';
 import { useClienteStore } from '../hooks/useClienteStore';
-import { ClienteFormState } from '../../types/cliente';
+import { ClienteFormState } from '../types/cliente';
 
 interface Props {
     setButtonActive: (arg: string) => void

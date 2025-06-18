@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "concurrently \"npm:dev:electron\" \"npm:dev:render\"",
+    "dev": "concurrently  \"npm:dev:render\" \"npm:dev:electron\"",
     "dev:electron": "electron .",
     "dev:render": "cd renderer && npm run dev"
   },

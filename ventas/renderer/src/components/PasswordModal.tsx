@@ -8,8 +8,6 @@ interface usePasswordStore {
     usuario: {},
     messageErrro?: String,
     isSaving?: Boolean
-
-
 }
 
 
@@ -56,12 +54,12 @@ function PasswordModal({ isOpen, onClose, onValidate }) {
         <input type="password" autoFocus value={password} onKeyDown={handleKeyDown} onChange={(e) => setPassword(e.target.value)} className="border p-2 w-full mb-4 text-center rounded-xl focus:border-gray-200" placeholder="Contraseña" />
         {error && <p className="text-red-500 mb-2">{error}</p>}
         <div className="flex  gap-4 justify-end">
-          <button onClick={() => onClose(false)} className="bg-gray-300 px-4 rounded-md py-2">Cancelar</button>
-          <button onClick={handleValidate} className="bg-yellow-500 px-4 py-2 rounded-md text-white">Aceptar</button>
+          <button onClick={() => onClose(false)} className="bg-gray-300 cursor-pointer hover:bg-gray-400 px-4 rounded-md py-2">Cancelar</button>
+          <button onClick={handleValidate} className="bg-yellow-500 px-4 py-2 rounded-md cursor-pointer hover:bg-yellow-600 text-white">Aceptar</button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default PasswordModal;

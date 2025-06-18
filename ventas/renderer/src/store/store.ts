@@ -4,9 +4,11 @@ import { clienteSlice } from './cliente/clienteSlice';
 import { productoSlice } from './producto/productoSlice';
 import { marcaSlice } from './marca/marcaSlice';
 import { provedorSlice } from './provedor/provedorSlice';
+import { categoriaSlice } from './categoria/categoriaSlice';
 
 export const store = configureStore({
     reducer: {
+        categoria: categoriaSlice.reducer,
         cliente: clienteSlice.reducer,
         marca: marcaSlice.reducer,
         producto: productoSlice.reducer,

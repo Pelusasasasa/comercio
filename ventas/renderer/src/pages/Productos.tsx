@@ -18,6 +18,7 @@ const Productos = () => {
     startTraerProductos()
   }, []);
 
+
   useEffect(() => {
     const nuevaLista = productos.filter(elem => {
       const descripcion = elem.descripcion.toUpperCase();
@@ -48,7 +49,7 @@ const Productos = () => {
           </div>
         </div>
 
-        <div>
+        <div className="bg-yellow-200">
           { buttonActive === 'listado' && (<ListadoProductos setButtonActive={setButtonActive} productos={listado}/>)}
           { buttonActive === 'agregar' && (<HandleProducto setButtonActive={setButtonActive} />)}
         </div>

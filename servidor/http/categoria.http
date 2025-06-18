@@ -9,6 +9,7 @@ POST http://localhost:3000/comercio/categoria
 Content-Type: application/json
 
 {
+    "nombre": "Alarma",
     "descripcion": "Alarmas centrales",
     "activo": true
 }

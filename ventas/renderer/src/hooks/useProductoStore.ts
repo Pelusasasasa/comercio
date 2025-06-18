@@ -72,10 +72,18 @@ export const useProductoStore = () => {
         dispatch(savingProducto());
 
         try {
-            const { data } = await comercioApi.put(`producto/${producto._id}`, producto);
+            const productoSend = {
+                ...producto,
+                marca: typeof producto.marca === 'string' ? producto.marca : (producto.marca as {_id: string})._id ,
+                provedor: typeof producto.provedor === 'string' ? producto.provedor : (producto.provedor as {_id: string})._id,
+                categoria: typeof producto.categoria === 'string' ? producto.categoria : (producto.categoria as {_id: string })._id,
+                unidadMedida: typeof producto.unidadMedida === 'string' ? producto.unidadMedida : (producto.unidadMedida as {_id: string})._id,
+                precio: typeof producto.precio === 'string' ? parseFloat(producto.precio) : producto.precio 
+            }
+            const { data } = await comercioApi.put(`producto/${productoSend._id}`, productoSend);
 
             if(data.ok){
-                dispatch(updateProducto(producto));
+                dispatch(updateProducto(data.producto));
             }else{
                 await Swal.fire('No se pudo modificar el producto', data.msg, 'error');
             }
@@ -102,5 +110,6 @@ export const useProductoStore = () => {
         startBorrarProducto,
         startModificarProducto,
         setProductoActivo
+            
     }
 }

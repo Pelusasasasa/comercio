@@ -6,7 +6,7 @@ export const ListadoProductos = ({productos, setButtonActive}) => {
   return (
     <div className='h-screen mx-2 border border-gray-200 rounded-md'>
         <div className='bg-yellow-100 p-2'>
-            <h3 className='mx-10 my-2 font-medium text-xl'>Total: {Productos.length} Productos</h3>
+            <h3 className='mx-10 my-2 font-medium text-xl'>Total: {productos.length} Productos</h3>
         </div>
         <table className='w-full'>
             <thead>
@@ -19,6 +19,7 @@ export const ListadoProductos = ({productos, setButtonActive}) => {
                     <th className='text-gray-600 text-center'>Provedor</th>
                     <th className='text-gray-600 text-center'>Fabrica</th>
                     <th className='text-gray-600 text-center'>Observaciones</th>
+                    <th className='text-gray-600 text-center'>Acciones</th>
                 </tr>
             </thead>
             <tbody>

@@ -30,9 +30,15 @@ const crearProducto = async(req, res) => {
 
         await producto.save();
 
+        const newProducto = await Producto.findById(producto._id)
+            .populate('marca', ['_id', 'nombre'])
+            .populate('provedor', ['_id', 'nombre'])
+            .populate('categoria', ['_id', 'nombre'])
+            .populate('unidadMedida', ['_id', 'nombre'])
+
         res.status(201).json({
             ok: true,
-            producto
+            producto: newProducto
         });
     } catch (error) {
         console.log(error);
@@ -49,6 +55,12 @@ const modificarProducto = async(req, res) => {
     try {
         const producto = await Producto.findByIdAndUpdate(id, req.body, { new: true});
 
+        const updateProducto = await Producto.findById(id)
+            .populate('marca', ['_id', 'nombre'])
+            .populate('provedor', ['_id', 'nombre'])
+            .populate('categoria', ['_id', 'nombre'])
+            .populate('unidadMedida', ['_id', 'nombre']);
+
         if(!producto) res.status(404).json({
             ok: false,
             msg: 'No se encontro el producto'
@@ -56,7 +68,7 @@ const modificarProducto = async(req, res) => {
 
         res.status(200).json({
             ok: true,
-            producto
+            producto: updateProducto
         });
     } catch (error) {
         console.log(error);
@@ -93,7 +105,11 @@ const traerProductoPorId = async(req, res) => {
 
 const traerProductos = async(req, res) => {
     try {
-        const productos = await Producto.find().populate('marca', ['_id', 'nombre']).populate('provedor', ['_id', 'nombre']);
+        const productos = await Producto.find()
+            .populate('marca', ['_id', 'nombre'])
+            .populate('provedor', ['_id', 'nombre'])
+            .populate('categoria', ['_id', 'nombre'])
+            .populate('unidadMedida', ['_id', 'nombre']);
 
         res.status(200).json({
             ok: true,

@@ -46,9 +46,7 @@ const validarProvedor = [
     check('observaciones')
         .optional()
         .isString().withMessage('La observaciones debe ser un string'),
-    check('activo')
-        .isBoolean().withMessage('El estado debe ser activo o inactivo')
-];
+    ];
 
 module.exports = {
     validarProvedor

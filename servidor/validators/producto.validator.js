@@ -14,9 +14,9 @@ const validarProducto = [
         .optional()
         .isMongoId().withMessage('El marca debe ser un id valido'),
     check('provedor')
-        .optional()
-        .isMongoId().withMessage('El marca debe ser un id valido'),
-    check('costo')
+        .isMongoId().withMessage('El Provedor debe ser un id valido')
+        .optional(),
+        check('costo')
         .isNumeric().withMessage('El costo debe ser un numero')
         .notEmpty().withMessage('El costo es obligatorio'),
     check('precio')

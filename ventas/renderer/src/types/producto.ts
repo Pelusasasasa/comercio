@@ -4,5 +4,14 @@ export interface Producto {
     descripcion: string,
     precio: number,
     stock: number,
-    categori: string
+    categoria: string,
+    codigoFabrica: string,
+    marca: string,
+    provedor: string,
+    unidadMedida: string,
+    costo: number,
+    iva: number,
+    utilidad: number,
+    stockMinimo: number,
+    observaciones: string
 }

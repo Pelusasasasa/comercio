@@ -1,4 +1,5 @@
 const { check } = require("express-validator");
+const { default: mongoose } = require("mongoose");
 
 const validarProducto = [
     check('codigo')
@@ -12,10 +13,20 @@ const validarProducto = [
         .notEmpty().withMessage('La descripcion es obligatoria'),
     check('marca')
         .optional()
-        .isMongoId().withMessage('El marca debe ser un id valido'),
+        .customSanitizer(value => value === '' ? null : value)
+        .custom(value => {
+            if (value === '' || value === null) return true;
+            return mongoose.Types.ObjectId.isValid(value);
+        })
+        .withMessage('El marca debe ser un id valido'),
     check('provedor')
-        .isMongoId().withMessage('El Provedor debe ser un id valido')
-        .optional(),
+        .optional()
+        .customSanitizer(value => value === '' ? null : value)
+        .custom(value => {
+            if (value === '' || value === null) return true;
+            return mongoose.Types.ObjectId.isValid(value);
+        })
+        .withMessage('El Provedor debe ser un id valido'),
         check('costo')
         .isNumeric().withMessage('El costo debe ser un numero')
         .notEmpty().withMessage('El costo es obligatorio'),
@@ -35,8 +46,22 @@ const validarProducto = [
         .isNumeric().withMessage('El stockMinimo debe ser un numero')
         .notEmpty().withMessage('El stockMinimo es obligatorio'),
     check('categoria')
-        .isString().withMessage('La categoria debe ser un string')
-        .notEmpty().withMessage('La categoria es obligatoria')
+    .optional()
+    .customSanitizer(value => value === '' ? null : value)
+    .custom(value => {
+        if (value === '' || value === null) return true;
+        return mongoose.Types.ObjectId.isValid(value);
+    })
+    .withMessage('La categoria debe ser un id valido'),
+    check('unidadMedida')
+    .optional()
+    .customSanitizer(value => value === '' ? null : value)
+    .custom(value => {
+        if (value === '' || value === null) return true;
+        return mongoose.Types.ObjectId.isValid(value);
+    })
+    .withMessage('La Unidad de Medida debe ser un id valido'),
+        
 ];
 
 module.exports = {

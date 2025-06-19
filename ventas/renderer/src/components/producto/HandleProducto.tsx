@@ -35,7 +35,7 @@ const initialState: Producto = {
     precio: 0,
     stock: 0,
     stockMinimo: 0,
-    observaciones: '',
+    detalle: '',
     
 }
 
@@ -46,7 +46,7 @@ const HandleProducto = ({ setButtonActive }): Props => {
     const { provedores } = useProvedorStore();
     const { unidadMedidas } = useUnidadMedidaStore();
 
-    const { codigo, codigoFabrica, descripcion, costo, marca, categoria, provedor, unidadMedida, iva, utilidad, precio, stock, stockMinimo, observaciones, onInputChange, formState} = useForm(productoActive ? productoActive : initialState);
+    const { codigo, codigoFabrica, descripcion, costo, marca, categoria, provedor, unidadMedida, iva, utilidad, precio, stock, stockMinimo, detalle, onInputChange, formState} = useForm(productoActive ? productoActive : initialState);
 
     const agregarProducto = async(e) => {
         e.preventDefault();
@@ -60,7 +60,6 @@ const HandleProducto = ({ setButtonActive }): Props => {
     };
 
     const modificarProducto = async(e) => {
-        
         startModificarProducto(formState);
         setButtonActive('listado');
     }
@@ -72,7 +71,7 @@ const HandleProducto = ({ setButtonActive }): Props => {
             <div className="grid grid-cols-3 gap-5 py-5 bg-white px-5">
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="codigo">Codigo *</label>
-                    <input onChange={onInputChange} value={codigo} className='border border-gray-400 rounded-sm p-1' placeholder='Codigo' type="text" name="codigo" id="codigo" />
+                    <input onChange={onInputChange} disabled={productoActive ? true : false} value={codigo} className={`${productoActive ? 'bg-gray-200' : ''} border border-gray-400 rounded-sm p-1`} placeholder='Codigo' type="text" name="codigo" id="codigo" />
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="codigoFabrica">Fabrica</label>
@@ -86,7 +85,7 @@ const HandleProducto = ({ setButtonActive }): Props => {
 
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="marca">Marca</label>
-                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="marca" value={marca._id} id="marca">
+                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="marca" value={marca?._id} id="marca">
                         <option value="">---Seleccionar Opcion---</option>
                         {marcas.map(elem => (
                             <option value={elem._id} key={elem._id}>{elem.nombre}</option>
@@ -95,7 +94,7 @@ const HandleProducto = ({ setButtonActive }): Props => {
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="categoria">Categoria</label>
-                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="categoria" value={categoria._id} id="categoria">
+                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="categoria" value={categoria?._id} id="categoria">
                         <option value="">---Seleccionar Opcion---</option>
                         {categorias.map(elem => (
                             <option value={elem._id} key={elem._id}>{elem.nombre}</option>
@@ -104,7 +103,7 @@ const HandleProducto = ({ setButtonActive }): Props => {
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="provedor">Provedor</label>
-                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="provedor" value={provedor._id} id="provedor">
+                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="provedor" value={provedor?._id} id="provedor">
                         <option value="">---Seleccionar Opcion---</option>
                         { provedores.map(elem => (
                             <option value={elem._id} key={elem._id}>{elem.nombre}</option>
@@ -113,7 +112,7 @@ const HandleProducto = ({ setButtonActive }): Props => {
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="unidadMedida">Unidad Medida</label>
-                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="unidadMedida" value={unidadMedida._id} id="unidadMedida">
+                    <select onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' name="unidadMedida" value={unidadMedida?._id} id="unidadMedida">
                             <option value="">---Seleccionar Opcion---</option>
                         {unidadMedidas.map(elem => (
                             <option value={elem._id} key={elem._id}>{elem.nombre}</option>
@@ -145,10 +144,16 @@ const HandleProducto = ({ setButtonActive }): Props => {
                     <input onChange={onInputChange} value={stock} className='border border-gray-400 rounded-sm p-1' placeholder='stock' type="number" name="stock" id="stock" />
                 </div>
                 <div className='flex flex-col'>
-                    <label className='font-medium mb-1' htmlFor="stockMinimo">Stock Minimo *</label>
+                    <label className='font-medium mb-1' htmlFor="stockMinimo">Stock Minimo</label>
                     <input onChange={onInputChange} value={stockMinimo} className='border border-gray-400 rounded-sm p-1' placeholder='stockMinimo' type="number" name="stockMinimo" id="stockMinimo" />
                 </div>
             </div>
+
+            <div className='flex flex-col bg-white pb-2'>
+                <label className='font-medium mb-1 mx-5' htmlFor="observaciones">Observaciones</label>
+                <textarea name="detalle" value={detalle} onChange={onInputChange} id="detalle" placeholder="observaciones adicionales del producto" cols={20} rows={5} className="p-2 border-gray-400 border rounded-sm mx-5"></textarea>
+            </div>
+
             <div className="flex justify-end bg-white pb-5 px-2 gap-5">
                 <button className="border border-gray-400 p-2 font-medium rounded-md cursor-pointer hover:bg-gray-100" onClick={() => setButtonActive('listado')}>Cancelar</button>
                 { productoActive ? (

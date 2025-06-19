@@ -26,6 +26,8 @@ const borrarProducto = async(req, res) => {
 
 const crearProducto = async(req, res) => {
     try {
+        
+        delete req.body._id;
         const producto = new Producto(req.body);
 
         await producto.save();
@@ -51,7 +53,6 @@ const crearProducto = async(req, res) => {
 
 const modificarProducto = async(req, res) => {
     const { id } = req.params;
-
     try {
         const producto = await Producto.findByIdAndUpdate(id, req.body, { new: true});
 

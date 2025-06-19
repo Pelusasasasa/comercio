@@ -38,9 +38,9 @@ return (
         <td>{descripcion}</td>
         <td>$ {precio.toFixed(2)}</td>
         <td>
-            <p className="border-blue-500 border rounded-xl bg-blue-100 text-blue-800 mr-2 text-sm">{marca.nombre}</p>
+            <p className={`${marca && 'border-blue-500 border'} rounded-xl bg-blue-100 text-blue-800 mr-2 text-sm`}>{marca?.nombre}</p>
         </td>
-        <td className="text-sm text-gray-600">{provedor.nombre}</td>
+        <td className="text-sm text-gray-600">{provedor?.nombre}</td>
         <td>
             <p className={stockStyles()}>
                 {stock.toFixed(2)}

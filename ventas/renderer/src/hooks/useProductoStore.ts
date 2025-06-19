@@ -74,10 +74,10 @@ export const useProductoStore = () => {
         try {
             const productoSend = {
                 ...producto,
-                marca: typeof producto.marca === 'string' ? producto.marca : (producto.marca as {_id: string})._id ,
-                provedor: typeof producto.provedor === 'string' ? producto.provedor : (producto.provedor as {_id: string})._id,
-                categoria: typeof producto.categoria === 'string' ? producto.categoria : (producto.categoria as {_id: string })._id,
-                unidadMedida: typeof producto.unidadMedida === 'string' ? producto.unidadMedida : (producto.unidadMedida as {_id: string})._id,
+                marca: producto.marca ? typeof producto.marca === 'string' ? producto?.marca : (producto?.marca as {_id: string})._id : null,
+                provedor: producto.provedor ?  typeof producto?.provedor === 'string' ? producto?.provedor : (producto?.provedor as {_id: string})._id : null,
+                categoria: producto.categoria ?  typeof producto?.categoria === 'string' ? producto?.categoria : (producto?.categoria as {_id: string })._id : null,
+                unidadMedida: producto.unidadMedida ? typeof producto?.unidadMedida === 'string' ? producto?.unidadMedida : (producto?.unidadMedida as {_id: string})._id : null,
                 precio: typeof producto.precio === 'string' ? parseFloat(producto.precio) : producto.precio 
             }
             const { data } = await comercioApi.put(`producto/${productoSend._id}`, productoSend);

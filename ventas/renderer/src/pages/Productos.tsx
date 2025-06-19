@@ -23,8 +23,10 @@ const Productos = () => {
     const nuevaLista = productos.filter(elem => {
       const descripcion = elem.descripcion.toUpperCase();
       const codigo = elem.codigo.toUpperCase();
+      const provedor = elem.provedor ? elem.provedor?.nombre.toUpperCase() : ''
+      const marca = elem.marca ? elem.marca?.nombre.toUpperCase() : ''
       
-      return descripcion.includes(buscador.toUpperCase()) || codigo.includes(buscador.toUpperCase())
+      return descripcion.includes(buscador.toUpperCase()) || codigo.includes(buscador.toUpperCase()) || marca.includes(buscador.toUpperCase()) || provedor.includes(buscador.toUpperCase());
     });
     setListado(nuevaLista)
   }, [buscador || productos])

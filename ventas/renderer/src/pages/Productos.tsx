@@ -4,6 +4,7 @@ import { GoSearch } from "react-icons/go";
 import { ListadoProductos } from "../components/producto/ListadoProductos";
 import { useProductoStore } from "../hooks/useProductoStore";
 import HandleProducto from "../components/producto/handleProducto";
+import { Movimientos } from "../components/producto/Movimientos";
 
 const Productos = () => {
 
@@ -54,6 +55,7 @@ const Productos = () => {
         <div className="bg-yellow-200">
           { buttonActive === 'listado' && (<ListadoProductos setButtonActive={setButtonActive} productos={listado}/>)}
           { buttonActive === 'agregar' && (<HandleProducto setButtonActive={setButtonActive} />)}
+          { buttonActive === 'movimiento' && (<Movimientos setButtonActive={setButtonActive} />)}
         </div>
         
       </main>

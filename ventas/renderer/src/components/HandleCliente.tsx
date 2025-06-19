@@ -27,7 +27,7 @@ export interface useCliente {
     modificarCliente: (arg: {}) => void
 }
 
-const HandleCliente = ({setButtonActive}: Props): useCliente  => {
+const HandleCliente = ({setButtonActive}: Props)  => {
     const { agregarCliente, clienteActive, modificarCliente, isSavingCliente } = useClienteStore();
     const {
         codigo,

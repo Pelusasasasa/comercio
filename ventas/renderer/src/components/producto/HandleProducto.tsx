@@ -6,6 +6,11 @@ import { useProvedorStore } from "../../hooks/useProvedorStore";
 import { useUnidadMedidaStore } from "../../hooks/useUnidadMedidaStore";
 import { Producto } from "../../types/producto";
 
+import { Categoria } from "../../types/categoria";
+import { Marca } from "../../types/marca";
+import { Provedor } from "../../types/provedor";
+import { UnidadMedida } from "../../types/unidadMedida";
+
 interface useProductoStoreProps {
     productoActive: Producto | null,
     productos: Producto[],
@@ -25,10 +30,10 @@ const initialState: Producto = {
     codigo: '',
     codigoFabrica: '',
     descripcion: '',
-    marca: '',
-    provedor: '',
-    categoria: '',
-    unidadMedida: '',
+    marca: {_id: '', nombre: '', descripcion: ''},
+    provedor: {_id: '', nombre: ''},
+    categoria: {_id: '', nombre: '', descripcion: '', activo: true},
+    unidadMedida: {_id: '', nombre: '', abreviatura: '', permiteDecimal: false, activo: true, tipo: ''},
     costo: 0,
     iva: 0,
     utilidad: 0,
@@ -36,10 +41,9 @@ const initialState: Producto = {
     stock: 0,
     stockMinimo: 0,
     detalle: '',
-    
 }
 
-const HandleProducto = ({ setButtonActive }): Props => {
+const HandleProducto = ({ setButtonActive }: Props) => {
     const { startAgregarProducto, productoActive, startModificarProducto }: useProductoStoreProps = useProductoStore();
     const { marcas } = useMarcaStore();
     const { categorias } = useCategoriaStore();

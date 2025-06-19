@@ -10,11 +10,11 @@ const validarMovimientoStock  = [
     check('cantidad')
         .isNumeric().withMessage('La cantidad debe ser un número')
         .notEmpty().withMessage('La cantidad es obligatoria'),
-    check('stockAnter')
-        .isString().withMessage('El stock anterior debe ser un string')
+    check('stockAntes')
+        .isNumeric().withMessage('El stock anterior debe ser un numero')
         .notEmpty().withMessage('El stock anterior es obligatorio'),
     check('stockAhora')
-        .isString().withMessage('El stock actual debe ser un string')
+        .isNumeric().withMessage('El stock actual debe ser un numero')
         .notEmpty().withMessage('El stock actual es obligatorio'),
     check('detalle')
         .optional()

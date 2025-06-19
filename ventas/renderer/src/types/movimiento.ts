@@ -1,4 +1,5 @@
 import { Producto } from "./producto";
+import { Usuario } from "./usuario";
 
 export interface Movimiento {
     _id: string,
@@ -9,7 +10,7 @@ export interface Movimiento {
     stockAntes: number,
     stockAhora: number,
     numeroComprobante: string,
-    creadoPor: string,
+    creadoPor: Usuario,
     detalle: string
 
 }

@@ -1,11 +1,12 @@
 const { Router } = require('express');
-const { crearMovimientoStock, borrarMovimientos, modificarMovimiento, traerMovimientosPorProducto, traerMovimientosPorTipoYNumero } = require('../controllers/movimientoStock.controllers');
+const { crearMovimientoStock, borrarMovimientos, modificarMovimiento, traerMovimientosPorProducto, traerMovimientosPorTipoYNumero, traerMovimientos } = require('../controllers/movimientoStock.controllers');
 const { validarMovimientoStock } = require('../validators/movimientoStock.validator');
 const validarCampos = require('../middlewares/validarCampos');
 const router = Router();
 
 
 router.route('')
+    .get(traerMovimientos)
     .post(validarMovimientoStock, validarCampos, crearMovimientoStock)
 router.route('/:id')
     .delete(borrarMovimientos)

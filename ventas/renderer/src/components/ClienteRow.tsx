@@ -20,10 +20,10 @@ export const ClienteRow = ({_id, codigo, nombre, direccion, telefono, dni, condi
   const { borrarCliente, isSavingCliente, setActiveCliente } = useClienteStore();
 
   const condicionStyles:Record<string, string> = {
-    'CONSUMIDOR FINAL':  'border border-gray-300 rounded-lg text-center bg-gray-200',
-    'INSCRIPTO':  'border bg-blue-300 text-blue-700 font-medium rounded-lg text-center',
-    'MONOTRIBUTO':  'border bg-green-300 text-green-700 rounded-lg text-center',
-    'EXENTO':  'border bg-orange-300 text-orange-700 rounded-lg text-center',
+    'CONSUMIDOR FINAL':  'border-gray-500 border rounded-xl bg-gray-100 text-gray-800',
+    'INSCRIPTO':  'border-blue-500 border rounded-xl bg-blue-100 text-blue-800',
+    'MONOTRIBUTO':  'border-green-500 border rounded-xl bg-green-100 text-green-800',
+    'EXENTO':  'border-orange-500 border rounded-xl bg-orange-100 text-orange-800',
   };
 
   const handleDeleteCliente = async () => {
@@ -53,7 +53,6 @@ export const ClienteRow = ({_id, codigo, nombre, direccion, telefono, dni, condi
         <td>{telefono}</td>
         <td>{dni}</td>
         <td>
-            
             <p className={condicionStyles[condicionIva] || ''}>{condicionIva}</p>
         </td>
         <td className={`${saldo === 0 ? 'text-green-600' : 'text-red-600'} text-end`}>{saldo?.toFixed(2)}</td>

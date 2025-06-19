@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useMovimientoStore } from '../../hooks/useMovimientoStore'
+import { MovimientoRow } from './MovimientoRow';
 interface Props {
     setButtonActive: (arg: string) => void
 };
 
 export const Movimientos = ({setButtonActive}: Props) => {
+
+    const { movimientos, traerMovimientos } = useMovimientoStore();
+
+    useEffect(() => {
+        traerMovimientos();
+    }, []);
+
   return (
-    <div className='mx-10 border botder-gray-200'>
+    <div className='mx-10 border botder-gray-200 '>
         <h3 className='text-2xl m-5 font-medium'>Historia de movimientos</h3>
 
         <table className='w-full'>
@@ -23,7 +32,11 @@ export const Movimientos = ({setButtonActive}: Props) => {
                 </tr>
             </thead>
             <tbody>
-                {}
+                {
+                    movimientos.map( movimiento  => (
+                        <MovimientoRow {...movimiento} key={movimiento._id}/>
+                    ))
+                }
             </tbody>
         </table>
     </div>

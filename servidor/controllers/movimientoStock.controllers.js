@@ -65,7 +65,10 @@ const traerMovimientosPorProducto = async(req, res) => {
     const { producto } = req.params;
 
     try {
-        const movimientos = await MovimientoStock.find({producto});
+        const movimientos = await MovimientoStock.find({producto})
+        .populate('producto', 'descripcion')
+        .populate('creadoPor', 'nombre')
+        .sort({_id: -1});
 
         res.status(200).json({
             ok: true,
@@ -104,11 +107,32 @@ const traerMovimientosPorTipoYNumero = async(req, res) => {
     }
 };
 
+const traerMovimientos = async(req, res) => {
+    try {
+        const movimientos = await MovimientoStock.find()
+            .populate('producto', 'descripcion')
+            .populate('creadoPor', 'nombre')
+            .sort({_id: -1})
+
+        res.status(200).json({
+            ok: true,
+            movimientos
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'No se pudo obtener los movimientos, hable con el administrador'
+        })
+    }
+}
+
 
 module.exports = {
     borrarMovimientos,
     crearMovimientoStock,
     modificarMovimiento,
+    traerMovimientos,
     traerMovimientosPorProducto,
     traerMovimientosPorTipoYNumero
 };

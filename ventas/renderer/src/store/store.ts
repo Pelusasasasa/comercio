@@ -7,11 +7,13 @@ import { provedorSlice } from './provedor/provedorSlice';
 import { categoriaSlice } from './categoria/categoriaSlice';
 import { unidadMedidaSlice } from './unidadMedida/unidadMedidaSlice';
 import { movimientoSlice } from './movimiento/movimientosSlice';
+import { compensadaSlice } from './compensada/compensadaSlice';
 
 export const store = configureStore({
     reducer: {
         categoria: categoriaSlice.reducer,
         cliente: clienteSlice.reducer,
+        compensada: compensadaSlice.reducer,
         marca: marcaSlice.reducer,
         movimiento: movimientoSlice.reducer,
         producto: productoSlice.reducer,

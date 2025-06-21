@@ -27,9 +27,18 @@ Content-Type: application/json
 }
 
 ###PUT 
-PUT http://localhost:3000/comercio/movimientoStock/684b8572b959e7e400b047f4
+PUT http://localhost:3000/comercio/movimientoStock/6854154decb1f295ee87c42a
 Content-Type: application/json
 
-{
-    "detalle": "Este es el primer detalle"
-}
+ {
+      "_id": "6854154decb1f295ee87c42a",
+      "producto": "685323884877c5304c9add51",
+      "tipo": "COMPROBANTE",
+      "cantidad": -3,
+      "stockAntes": 6,
+      "stockAhora": 9,
+      "detalle": "",
+      "numeroComprobante": "0001-00000030",
+      "creadoPor": "684c8b934f2e0d9c408e47e2",
+      "fecha": "2025-06-19T13:49:01.783Z"
+    }

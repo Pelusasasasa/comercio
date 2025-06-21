@@ -25,7 +25,7 @@ export const useCompensadaStore = () => {
         dispatch(savingCompensada());
 
         try {
-            const { data } = await comercioApi.post('compensada', compensada);
+            const { data } = await comercioApi.post('cuentaCompensada', compensada);
 
             if(data.ok){
                 dispatch(addCompensada(data.compensada));
@@ -42,7 +42,7 @@ export const useCompensadaStore = () => {
         dispatch(savingCompensada());
 
         try {
-            const { data } = await comercioApi.delete(`compensada/${id}`);
+            const { data } = await comercioApi.delete(`cuentaCompensada/${id}`);
 
             if(data.ok){
                 dispatch(deleteCompensada(id));
@@ -59,7 +59,7 @@ export const useCompensadaStore = () => {
         dispatch(savingCompensada());
 
         try {
-            const { data } = await comercioApi.put(`compensada/${compensada._id}`, compensada);
+            const { data } = await comercioApi.put(`cuentaCompensada/${compensada._id}`, compensada);
 
             if(data.ok){
                     dispatch(updateCompensada(data.compensada));
@@ -72,14 +72,14 @@ export const useCompensadaStore = () => {
         }
     };
 
-    const startTraerCuentaPorCliente = async(id: string) => {
+    const startTraerCuentaPorCliente = async(id: string | '') => {
         dispatch(savingCompensada());
 
         try {
-            const { data } = await comercioApi.get(`compensada/cliente/${id}`);
-
+            const { data } = await comercioApi.get(`cuentaCompensada/cliente/${id}`);
+            console.log(data);
             if(data.ok){
-                dispatch(setCompensadas(data.compensadas));
+                dispatch(setCompensadas(data.cuentas));
             }else{
                 await Swal.fire('No se pudo obtener las compensadas', data.msg, 'error')
             };

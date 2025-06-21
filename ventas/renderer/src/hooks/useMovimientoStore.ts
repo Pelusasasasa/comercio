@@ -108,6 +108,23 @@ export const useMovimientoStore = () => {
 
     };
 
+    const traerMovimientosPorTipoYNumero = async(tipoMovimiento: string, numeroMovimiento: string) => {
+        dispatch(savingMovimiento());
+        try {
+            const { data } = await comercioApi.get(`movimientoStock/tipo/${tipoMovimiento}/numero/${numeroMovimiento}`);
+            console.log(data)
+
+            if(data.ok){
+                dispatch(setMovimientos(data.movimientos));
+            }else{
+                await Swal.fire('Error al cargar los movimientos', data.msg, 'error')
+            }
+        } catch (error) {
+            console.log(error);
+            await Swal.fire('Error al cargar los movimientos', error.response.data?.msg, 'error');
+        }
+    };
+
     return {
         //Atributos
         movimientoActive,
@@ -121,7 +138,8 @@ export const useMovimientoStore = () => {
         startEliminarMovimiento,
         startModificarMovimiento,
         traerMovimientos,
-        traerMovimientosPorProducto
+        traerMovimientosPorProducto,
+        traerMovimientosPorTipoYNumero
 
     }
 }

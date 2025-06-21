@@ -87,7 +87,7 @@ const traerCuentaCompensadaActivaPorCliente = async(req, res) => {
                 {cliente},
                 {saldo: {$ne: 0}}
             ]
-        });
+        }).populate('cliente', 'nombre');
 
         if(!cuentas) return res.status(404).json({
             ok: false,

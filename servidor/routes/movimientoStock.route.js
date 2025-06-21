@@ -13,7 +13,7 @@ router.route('/:id')
     .put(validarMovimientoStock, validarCampos, modificarMovimiento)
 router.route('/producto/:producto')
     .get(traerMovimientosPorProducto)
-router.route('/porTipoYNumero/:tipo/:numeroComprobante')
+router.route('/tipo/:tipo/numero/:numeroComprobante')
     .get(traerMovimientosPorTipoYNumero)
 
 module.exports = router;

@@ -27,6 +27,10 @@ const MovimientoStock = new Schema({
         type: Number,
         required: true
     },
+    precio: {
+        type: Number,
+        required: true
+    },
     detalle: {
         type: String,
         trim: true,

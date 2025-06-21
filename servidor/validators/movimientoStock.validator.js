@@ -24,8 +24,10 @@ const validarMovimientoStock  = [
         .notEmpty().withMessage('El numeroComprobante es obligatorio'),
     check('creadoPor')
         .isMongoId().withMessage('El creadoPor debe ser un id')
-        .notEmpty().withMessage('El creadoPor es obligatorio')
-    
+        .notEmpty().withMessage('El creadoPor es obligatorio'),
+    check('precio')
+        .isNumeric().withMessage('El precio debe ser un numero')
+        .notEmpty().withMessage('El precio es obligatorio')
 ];
 
 

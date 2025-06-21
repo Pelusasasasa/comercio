@@ -70,6 +70,7 @@ const traerMovimientosPorProducto = async(req, res) => {
         .populate('creadoPor', 'nombre')
         .sort({_id: -1});
 
+
         res.status(200).json({
             ok: true,
             movimientos
@@ -87,7 +88,7 @@ const traerMovimientosPorTipoYNumero = async(req, res) => {
     const {numeroComprobante, tipo} = req.params;
     console.log(tipo, numeroComprobante);
     try {
-        const movimientos = await MovimientoStock.findOne({
+        const movimientos = await MovimientoStock.find({
             $and: [
                 {tipo},
                 {numeroComprobante}

@@ -5,7 +5,7 @@ DELETE http://localhost:3000/comercio/cliente/684abe9f7f16faf8ae89a060
 GET http://localhost:3000/comercio/cliente
 
 ###GET ONE
-GET http://localhost:3000/comercio/cliente/684abe9f7f16faf8ae89a060
+GET http://localhost:3000/comercio/cliente/6851718939e2c7b4683fcdaa
 
 ###MODIFICAR CLIENTE
 PUT http://localhost:3000/comercio/cliente/684abeb07f16faf8ae89a064

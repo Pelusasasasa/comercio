@@ -36,7 +36,6 @@ export const useClienteStore = () => {
 
                 try {
                     const { data } = await comercioApi.get(`/cliente/codigo/${codigo}`);
-                    console.log(data);
                     if(data.ok){
                         dispach(getCliente(data.cliente))
                     }else{

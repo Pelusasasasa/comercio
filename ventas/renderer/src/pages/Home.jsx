@@ -1,15 +1,22 @@
 
-import { IoPeopleOutline } from 'react-icons/io5'
-import { BsBoxSeam } from 'react-icons/bs'
-import { FiShoppingCart } from 'react-icons/fi'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { CardMenu } from '../components/CardMenu'
-import { useState } from 'react'
 import PasswordModal from '../components/PasswordModal'
-import { useNavigate } from 'react-router-dom'
+
+import { IoPeopleOutline } from 'react-icons/io5';
+import { BsBoxSeam } from 'react-icons/bs';
+import { FiShoppingCart } from 'react-icons/fi';
+import { GrDocumentText } from "react-icons/gr";
+
+
+
 const cards = [
   { title: 'Ventas', route: '/ventas', icon: <FiShoppingCart size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
   { title: 'Clientes', route: '/clientes', icon: <IoPeopleOutline size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
   { title: 'Productos', route: '/productos', icon: <BsBoxSeam size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Consultar', route: '/consultar', icon: <GrDocumentText size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
 ]
 
 const Home = () => {

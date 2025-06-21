@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 import comercioApi from '../api/comercioApi';
-import { addCliente, deleteCliente, putCliente, saving, setActive, setClientes } from '../store/cliente/clienteSlice';
-import { ClienteFormState } from '../../types/cliente';
+import { addCliente, deleteCliente, getCliente, putCliente, saving, setActive, setClientes } from '../store/cliente/clienteSlice';
+import { ClienteFormState } from '../types/cliente';
 
 
 export const useClienteStore = () => {
@@ -28,6 +28,23 @@ export const useClienteStore = () => {
                     dispach(setClientes(data.clientes))
                 }else{
                     await Swal.fire('No se pudo obtener los clientes', data.msg, 'error')
+                }
+            };
+
+            const traerClientePorCodigo = async(codigo: string) => {
+                dispach(saving());
+
+                try {
+                    const { data } = await comercioApi.get(`/cliente/codigo/${codigo}`);
+                    console.log(data);
+                    if(data.ok){
+                        dispach(getCliente(data.cliente))
+                    }else{
+                        await Swal.fire('No se pudo obtener el cliente', data.msg, 'error')
+        
+                    }
+                } catch (error) {
+                    await Swal.fire('No se pudo obtener el cliente', error.response.data.msg, 'error')
                 }
             };
 
@@ -77,7 +94,6 @@ export const useClienteStore = () => {
                 }
             };
 
-
             const setActiveCliente = async(id) => {
                 dispach(setActive(id))
             };
@@ -91,6 +107,7 @@ export const useClienteStore = () => {
 
         //Metodos
         traerClientes,
+        traerClientePorCodigo,
         agregarCliente,
         borrarCliente,
         modificarCliente,

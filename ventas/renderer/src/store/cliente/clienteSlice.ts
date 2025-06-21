@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ClienteFormState } from '../../../types/cliente';
+import { ClienteFormState } from '../../types/cliente';
 
 interface ClienteState {
     clienteActive: ClienteFormState | null,
@@ -47,6 +47,10 @@ export const clienteSlice = createSlice({
             });
             state.isSavingCliente = false;
             state.clienteActive = null;
+        },
+        getCliente: (state, { payload }: PayloadAction<ClienteFormState>) => {
+            state.clienteActive = payload;
+            state.isSavingCliente = false;
         }
     }
 });
@@ -59,5 +63,6 @@ export const {
     putCliente,
     saving,
     setActive,
-    setClientes
+    setClientes,
+    getCliente
 } = clienteSlice.actions;

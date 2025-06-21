@@ -114,11 +114,36 @@ const traerClientePorId = async(req, res) => {
     };
 };
 
+const traerClientePorCodigo = async(req, res) => {
+    const { codigo } = req.params;
+
+    try {
+        const cliente = await Cliente.findOne({codigo});
+
+        if(!cliente) return res.status(404).json({
+            ok: false,
+            msg: 'No existe el cliente'
+        });
+
+        res.status(200).json({
+            ok: true,
+            cliente
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al traer cliente, hable con el administrador'
+        })
+    };
+};
+
 
 module.exports = {
     borrarCliente,
     crearCliente,
     modificarCliente,
     traerClientes,
-    traerClientePorId
+    traerClientePorId,
+    traerClientePorCodigo
 };

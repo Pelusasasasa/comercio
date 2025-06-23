@@ -9,6 +9,8 @@ import { IoPeopleOutline } from 'react-icons/io5';
 import { BsBoxSeam } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import { GrDocumentText } from "react-icons/gr";
+import { LuReceipt } from "react-icons/lu";
+
 
 
 
@@ -17,6 +19,7 @@ const cards = [
   { title: 'Clientes', route: '/clientes', icon: <IoPeopleOutline size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
   { title: 'Productos', route: '/productos', icon: <BsBoxSeam size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
   { title: 'Consultar', route: '/consultar', icon: <GrDocumentText size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Recibo', route: '/recibo', icon: <LuReceipt size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
 ]
 
 const Home = () => {

@@ -1,13 +1,17 @@
 
 interface Props {
-    type?: string,
+    type?: 'primary' | 'secondary',
     text: string,
-    click: () => void
+    click: () => void,
+    icon:  React.ReactNode
 }
 
-export const Button = ({text, type, click}: Props) => {
+export const Button = ({text, type, click, icon}: Props) => {
     if(type === 'secondary'){
-        return <button onClick={click} className='w-full text-black border border-gray-200 items-center justify-center bg-white text-xs h-7 px-3 rounded-md hover:bg-gray-300 cursor-pointer'>{text}</button>    
+        return <button onClick={click} className='w-full flex  gap-2 text-black border border-gray-200 items-center justify-center bg-white text-xs h-7 px-3 rounded-md hover:bg-gray-300 cursor-pointer'>
+          {icon}
+          {text}
+          </button>    
     }
 
   return (

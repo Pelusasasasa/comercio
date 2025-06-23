@@ -7,6 +7,7 @@ import Clientes from './pages/Clientes'
 import Productos from './pages/Productos'
 import { AppLoader } from './AppLoader'
 import Consultar from './pages/Consultar'
+import { Recibo } from './pages/Recibo'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/clientes' element={<Clientes/>}/>
         <Route path='/productos' element={<Productos/>}/>
         <Route path='/consultar' element={<Consultar/>}/>
+        <Route path='/recibo' element={<Recibo/>}/>
       </Route>
     </Routes>
   )

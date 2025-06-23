@@ -11,5 +11,6 @@ export interface Compensada {
     pagado: number,
     saldo: number,
     observaciones: string,
-    creadoPor: Usuario
+    creadoPor: Usuario,
+    pagadoCalculado?: number, // Este campo es para el cálculo temporal del pago
 }

@@ -19,7 +19,7 @@ Content-Type: application/json
     "producto": "6853f4c1afd809a128aeaee5",
     "tipo": "comprobante",
     "cantidad": 3,
-    "precio": 500,
+    "precio": 4500,
     "stockAntes": 9,
     "stockAhora": 6,
     "detalle": "",

@@ -7,14 +7,14 @@ export const MovList = () => {
     const { movimientos } = useMovimientoStore();
 
     if(movimientos?.length === 0) return (
-        <div className="flex justify-center items-center h-96">
+        <section className="h-[calc(100vh-500px)] my-1 overflow-y-auto flex justify-center items-center bg-white border-gray-400 mx-1 border rounded-lg">
             <p className="text-2xl text-gray-500">No hay movimientos</p>
-        </div>
+        </section>
     );
 
 
   return (
-    <section className="h-[calc(100vh-500px)] overflow-y-auto border-gray-500 border bg-white">
+    <section className="h-[calc(100vh-500px)] my-1 overflow-y-auto bg-white border-gray-400 mx-1 border rounded-lg">
         <h4 className="px-3 bg-yellow-100 py-1 border-b">Movimientos de Productos</h4>
         <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead>

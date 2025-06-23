@@ -18,14 +18,14 @@ const CompensadaList = ({tipoCuenta, setTipoCuenta}: Props) => {
   }, [clienteActive]);
 
   if(compensadas?.length === 0) return (
-    <div className="flex justify-center items-center h-96">
-      <p className="text-2xl text-gray-500">No hay compensadas</p>
-    </div>
+    <section className="h-[calc(100vh-500px)] overflow-y-auto flex justify-center items-center bg-white border-gray-400 mx-1 border rounded-lg">
+      <p className="text-2xl text-gray-500">No hay Compensadas</p>
+    </section>
   );
 
 
   return (    
-    <section className="h-[calc(100vh-500px)] overflow-y-auto bg-white">
+    <section className="h-[calc(100vh-500px)] overflow-y-auto bg-white border-gray-400 mx-1 border rounded-lg">
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead className=''>
           <tr className='transition-colors text-center hover:bg-gray-100 dark:hover:bg-gray-700 bg-gray-100 text-xs text-gray-700 uppercase dark:text-gray-400 h-8'>

@@ -14,7 +14,7 @@ const Consultar = () => {
     <div>
         <Navbar text='Consultar Cuenta' />
 
-        <div className='bg-yellow-50'>
+        <div className='bg-yellow-50 pb-7'>
           <HeaderConsultar setTipoCuenta={setTipoCuenta}/>
           {tipoCuenta === 'compensada' 
             ? (<CompensadaList setTipoCuenta={setTipoCuenta} />)

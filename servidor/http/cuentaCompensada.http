@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
     "fecha": "2025-06-12",
-    "cliente": "684abeb07f16faf8ae89a064",
+    "cliente": "6851718939e2c7b4683fcdaa",
     "tipoComprobante": "Comprobante",
     "numeroComprobante": "0001-00000031",
     "importe": 500,

@@ -86,7 +86,8 @@ const traerCuentaHistoricaPorCliente = async(req, res) => {
     const { cliente } = req.params;
 
     try {
-        const historicas = await CuentaHistorica.find({ cliente });
+        const historicas = await CuentaHistorica.find({ cliente })
+            .populate('cliente', 'nombre');
 
         res.status(200).json({
             ok: true,

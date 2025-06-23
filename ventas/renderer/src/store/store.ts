@@ -8,12 +8,14 @@ import { categoriaSlice } from './categoria/categoriaSlice';
 import { unidadMedidaSlice } from './unidadMedida/unidadMedidaSlice';
 import { movimientoSlice } from './movimiento/movimientosSlice';
 import { compensadaSlice } from './compensada/compensadaSlice';
+import { historicaSlice } from './historica/historicaSlice';
 
 export const store = configureStore({
     reducer: {
         categoria: categoriaSlice.reducer,
         cliente: clienteSlice.reducer,
         compensada: compensadaSlice.reducer,
+        historica: historicaSlice.reducer,
         marca: marcaSlice.reducer,
         movimiento: movimientoSlice.reducer,
         producto: productoSlice.reducer,

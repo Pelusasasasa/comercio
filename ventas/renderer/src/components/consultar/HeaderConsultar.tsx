@@ -2,7 +2,13 @@ import { GoSearch } from "react-icons/go";
 import { useClienteStore } from "../../hooks/useClienteStore";
 import { Button } from "../Button";
 
-export const HeaderConsultar = () => {
+interface Props {
+    tipoCuenta?: string;  
+    setTipoCuenta: (tipoCuenta: string) => void;
+  }
+  
+
+export const HeaderConsultar = ({setTipoCuenta}: Props) => {
     const { clienteActive, traerClientePorCodigo } = useClienteStore();
 
     const handleCliente = (e) => {
@@ -36,8 +42,8 @@ export const HeaderConsultar = () => {
         </div>
 
         <div className="flex px-2 justify-center items-center gap-2 bg-white border border-gray-200 rounded-md py-2 m-2 col-span-1 md:col-span-1   flex-col">
-            <Button text={'Compensada'}/>
-            <Button text={'Historica'} type={'secondary'}/>
+            <Button text={'Compensada'} click={() => setTipoCuenta('compensada')}/>
+            <Button text={'Historica'} type={'secondary'} click={() => setTipoCuenta('historica')}/>
         </div>
     </header>
   )

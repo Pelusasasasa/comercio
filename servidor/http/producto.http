@@ -26,9 +26,16 @@ Content-Type: application/json
 }
 
 ### PUT ONE
-PUT http://localhost:3000/comercio/producto/684c1720f2b2fc34930e18d9
+PUT http://localhost:3000/comercio/producto/6853f4c1afd809a128aeaee5
 Content-Type: application/json
 
 {
-    "activo": false
+    "codigo": "035-019",
+    "costo": 0,
+    "iva": 0,
+    "utilidad": 0,
+    "descripcion": "PRODUCTO NUMERO 1",
+    "precio": 3000,
+    "stock": 100,
+    "stockMinimo": 10
 }

@@ -5,6 +5,7 @@ export interface Movimiento {
     _id: string,
     fecha: string,
     producto: Producto,
+    precio: number,
     tipo: string,
     cantidad: number,
     stockAntes: number,

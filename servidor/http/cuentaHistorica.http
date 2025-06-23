@@ -12,7 +12,7 @@ Content-Type: application/json
     "fecha": "2025-06-12",
     "cliente": "684abe9f7f16faf8ae89a060",
     "tipoComprobante": "Comprobante",
-    "numeroComprobante": "0001-00000030",
+    "numeroComprobante": "0001-00000031",
     "debe": 5000,
     "haber": 0,
     "saldo": 5000,

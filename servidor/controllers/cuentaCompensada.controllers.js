@@ -1,4 +1,25 @@
 const CuentaCompensada = require('../models/CuentaCompensada');
+const { actualizarCompensada } = require('../services/cuentaCompensada.services');
+
+const actualizarCuentaCompensada = async(req, res) => {
+    const { id } = req.params;
+
+    try {
+        const resultado = await actualizarCompensada(id, req.body);
+        console.log(resultado);
+
+        res.status(200).json({
+            ok: true,
+            cuenta: resultado
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'No se pudo actualizar la cuenta compensada, hable con el administrador'
+        })
+    }
+}
 
 const borrarCuentaCompensada = async(req, res) => {
     const { id } = req.params;
@@ -107,6 +128,7 @@ const traerCuentaCompensadaActivaPorCliente = async(req, res) => {
 };
 
 module.exports = {
+    actualizarCuentaCompensada,
     borrarCuentaCompensada,
     crearCuentaCompensada,
     modificarCuentaCompensada,

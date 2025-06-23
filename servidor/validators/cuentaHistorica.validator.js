@@ -9,8 +9,8 @@ const validarCuentaHistorica = [
         .isString().withMessage('El numero de comprobante debe ser un texto'),
     check('debe')
         .isNumeric().withMessage('El debe debe ser un numero'),
-    check('hasta')
-        .isNumeric().withMessage('El hasta debe ser un numero'),
+    check('haber')
+        .isNumeric().withMessage('El haber debe ser un numero'),
     check('saldo')
         .isNumeric().withMessage('El saldo debe ser un numero'),
     check('observaciones')

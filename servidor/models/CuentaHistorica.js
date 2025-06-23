@@ -12,6 +12,7 @@ const CuentaHistorica = new Schema({
     tipoComprobante: {
         type: String,
         required: true,
+        set: value => value.toUpperCase(),
         trim: true
     },
     numeroComprobante: {

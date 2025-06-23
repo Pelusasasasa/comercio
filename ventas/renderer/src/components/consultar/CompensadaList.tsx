@@ -3,14 +3,18 @@ import { useCompensadaStore } from "../../hooks/useCompensadaStore"
 import { useClienteStore } from "../../hooks/useClienteStore";
 import { CompensadaListItem } from "./CompensadaListItem";
 
-const CompensadaList = () => {
+interface Props {
+  tipoCuenta?: string;  
+  setTipoCuenta: (tipoCuenta: string) => void;
+}
+
+const CompensadaList = ({tipoCuenta, setTipoCuenta}: Props) => {
 
   const { compensadas, startTraerCuentaPorCliente } = useCompensadaStore();
   const { clienteActive } = useClienteStore();
 
   useEffect(() => {
     clienteActive && startTraerCuentaPorCliente(clienteActive._id);
-    console.log(compensadas)
   }, [clienteActive]);
 
   if(compensadas?.length === 0) return (

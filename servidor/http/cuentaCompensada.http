@@ -4,18 +4,21 @@ DELETE http://localhost:3000/comercio/cuentaCompensada/
 ###GET FOR CLIENTE
 GET http://localhost:3000/comercio/cuentaCompensada/cliente/6851718939e2c7b4683fcdaa
 
+###POST ACTUALIZAR
+POST http://localhost:3000/comercio/cuentaCompensada/68593a668507c06fc6c6cfc1
+
 ###POST ONE
 POST http://localhost:3000/comercio/cuentaCompensada
 Content-Type: application/json
 
 {
     "fecha": "2025-06-12",
-    "cliente": "6851718939e2c7b4683fcdaa",
+    "cliente": "684abeb07f16faf8ae89a064",
     "tipoComprobante": "Comprobante",
-    "numeroComprobante": "0001-00000030",
-    "importe": 5000,
+    "numeroComprobante": "0001-00000031",
+    "importe": 500,
     "pagado": 0,
-    "saldo": 5000,
+    "saldo": 500,
     "creadoPor": "684abeb07f16faf8ae89a064"
 }
 

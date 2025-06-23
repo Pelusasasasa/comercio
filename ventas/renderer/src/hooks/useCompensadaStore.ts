@@ -89,6 +89,23 @@ export const useCompensadaStore = () => {
         }
     };
 
+    const startActualizarCompensada = async(id: string) => {
+        dispatch(savingCompensada());
+
+        try {
+            const { data } = await comercioApi.post(`cuentaCompensada/${id}`);
+            console.log(data);
+            if(data.ok){
+                dispatch(updateCompensada(data.cuenta));
+            }else{
+                await Swal.fire('No se pudo actualizar la compensada', data.msg, 'error')
+            };
+        } catch (error) {
+            console.log(error);
+            await Swal.fire('No se pudo actualizar la compensada', error.response.data?.msg, 'error')
+        }
+    };
+
     return {
         //Atributos
         compensadaActive,
@@ -98,6 +115,7 @@ export const useCompensadaStore = () => {
 
         //Metodos
         activeCompensada,
+        startActualizarCompensada,
         startAgregarCompensada,
         startEliminarCompensada,
         startModificarCompensada,

@@ -5,7 +5,7 @@ import { useMovimientoStore } from "../../hooks/useMovimientoStore";
 
 
 export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numeroComprobante, importe, pagado, saldo, observaciones}) => {
-    const { activeCompensada } = useCompensadaStore();
+    const { activeCompensada, startActualizarCompensada } = useCompensadaStore();
     const { traerMovimientosPorTipoYNumero } = useMovimientoStore();
 
     const fechaParseada = fecha.slice(0, 10).split('-').reverse().join('/') + ' ' + fecha.slice(11, 16);
@@ -23,7 +23,7 @@ export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numero
           })
         
         if(isConfirmed){
-            console.log('actualizar')
+            startActualizarCompensada(_id);
         }
     };
 
@@ -34,7 +34,7 @@ export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numero
 
 
   return (
-    <tr onClick={handleActiveCompensada} className='bg-white border-b bgTr cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+    <tr onClick={handleActiveCompensada} className='bg-white border-b bgTr cursor-pointer  hover:bg-gray-50'>
         <td className='text-black text-center text-sm py-2'>{fechaParseada}</td>
         <td className='text-black text-center text-sm'>{numeroComprobante}</td>
         <td className='text-black text-center text-sm'>{cliente.nombre}</td>

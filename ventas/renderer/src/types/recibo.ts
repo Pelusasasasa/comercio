@@ -1,13 +1,22 @@
 import { ClienteFormState } from "./cliente";
 import { Usuario } from "./usuario";
 
+export interface ReciboItem {
+    _id: string,
+    importe: number,
+    pagado: number,
+    saldo: number,
+    observaciones: string
+}
+
 export interface Recibo {
-    _id: string;
-    fecha: string;
-    cliente: ClienteFormState,
+    _id?: string;
+    fecha?: string;
+    cliente: ClienteFormState | null;
     importe: number;
-    formaPago: string;
+    medioPago?: string;
+    creadoPor?: string | null;
     observaciones: string;
-    numeroComprobante: string;
-    creadoPor: Usuario;
+    numeroComprobante?: string;
+    items?: ReciboItem[]
 }

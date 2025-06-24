@@ -36,6 +36,10 @@ const Recibo = new Schema({
     activo: {
         type: Boolean,
         default: true
+    },
+    items: {
+        type: Array,
+        default: []
     }
 });
 

@@ -16,7 +16,7 @@ Content-Type: application/json
     "debe": 5000,
     "haber": 0,
     "saldo": 5000,
-    "creadoPor": "684abeb07f16faf8ae89a064"
+    "creadoPor": "684c8b934f2e0d9c408e47e2"
 }
 
 ### PUT ONE

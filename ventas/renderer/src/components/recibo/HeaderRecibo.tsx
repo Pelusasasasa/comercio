@@ -5,9 +5,12 @@ import { useClienteStore } from "../../hooks/useClienteStore";
 import { Button } from "../Button";
 import { GoSearch } from "react-icons/go";
 import { ModalReciboCliente } from "./ModalReciboCliente";
+import { useDispatch } from "react-redux";
+import { clearRecibos } from "../../store/recibo/reciboSlice";
 
 
 export const HeaderRecibo = () => {
+    
     const { clienteActive, traerClientePorCodigo } = useClienteStore();
 
     const [openModal, setOpenModal] = useState(false);

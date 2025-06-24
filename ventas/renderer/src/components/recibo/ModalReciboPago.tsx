@@ -1,20 +1,24 @@
+import { useState } from "react";
+import Swal from "sweetalert2";
+
 import { IoCloseOutline } from "react-icons/io5";
 import { LuCreditCard } from "react-icons/lu";
 import { TbCashBanknote } from "react-icons/tb";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { CiBank } from "react-icons/ci";
-import { useState } from "react";
 import { Button } from "../Button";
-import Swal from "sweetalert2";
+import { useReciboStore } from "../../hooks/useReciboStore";
 
 interface Props {
     setModalReciboPago: React.Dispatch<React.SetStateAction<boolean>>;
+    setChequeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
-export const ModalReciboPago = ({setModalReciboPago}: Props) => {
-
+export const ModalReciboPago = ({setModalReciboPago, setChequeModal}: Props) => {
+    const {reciboActive, startAgregarRecibo} = useReciboStore();
+    
     const [medioActive, setMedioActive] = useState<string | null>(null);    
+    
 
     const hacerRecibo = async() => {
         if(!medioActive){
@@ -23,13 +27,18 @@ export const ModalReciboPago = ({setModalReciboPago}: Props) => {
         };
 
         if(medioActive === 'efectivo'){
-            
+            reciboActive && startAgregarRecibo(reciboActive);
+        };
+
+        if(medioActive === 'cheque'){
+            setChequeModal(true);
+            setModalReciboPago(false);
         }
     }
     
-  return (
-         <div className="fixed inset-0 flex items-center justify-center bg-black/80">
-              <div className="bg-white p-6 rounded shadow-md text-center w-xl">
+return (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/80">
+            <div className="bg-white p-6 rounded shadow-md text-center w-xl">
                 <div className="flex flex-col">
                     <div className="flex justify-between items-center p-4 rounded-md">
                         <div className="flex items-center gap-2">
@@ -46,16 +55,16 @@ export const ModalReciboPago = ({setModalReciboPago}: Props) => {
                     <h3 className="text-start font-medium">Resumen del Recibo</h3>
                     <div className="flex justify-between">
                         <p>Cliente</p>
-                        <p className="font-medium">Zarate LEO</p>
+                        <p className="font-medium">{reciboActive?.cliente?.nombre}</p>
                     </div>
 
                     <div className="flex justify-between">
                         <p>Total a Pagar: </p>
-                        <p className="font-medium text-green-600">$500.00</p>
+                        <p className="font-medium text-green-600">${reciboActive?.importe.toFixed(2)}</p>
                     </div>
                     <div className="flex justify-between">
                         <p>Cuentas Afectadas</p>
-                        <p className="font-medium">1</p>
+                        <p className="font-medium">{reciboActive?.items?.length}</p>
                     </div>
                 </div>
 
@@ -88,6 +97,7 @@ export const ModalReciboPago = ({setModalReciboPago}: Props) => {
                     </div>
                 </div>
               </div>
+              
             </div>
   )
 }

@@ -5,11 +5,13 @@ interface CompensadaState {
     compensadas: Compensada[];
     compensadaActive: Compensada | null;
     isSavingCompensada: boolean;
+    totalPagado: number;
     messageErrorCompensada: string | null;
 };
 
 const initialState: CompensadaState = {
     compensadas: [],
+    totalPagado: 0,
     compensadaActive: null,
     isSavingCompensada: false,
     messageErrorCompensada: null,
@@ -43,6 +45,9 @@ export const compensadaSlice = createSlice({
         setCompensadas: (state, {payload}: PayloadAction<Compensada[]>) => {
             state.compensadas = payload;
             state.isSavingCompensada = false;
+        },
+        calcularTotal: (state) => {
+            state.totalPagado = state.compensadas.reduce((acc, item) => acc+item.pagado, 0);
         }
     }
 });

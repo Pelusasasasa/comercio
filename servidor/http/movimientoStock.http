@@ -16,14 +16,14 @@ POST http://localhost:3000/comercio/movimientoStock
 Content-Type: application/json
 
 {
-    "producto": "6853f4c1afd809a128aeaee5",
+    "producto": "685323884877c5304c9add51",
     "tipo": "comprobante",
-    "cantidad": 3,
-    "precio": 4500,
+    "cantidad": 1,
+    "precio": 5000,
     "stockAntes": 9,
-    "stockAhora": 6,
+    "stockAhora": 8,
     "detalle": "",
-    "numeroComprobante": "0005-00000031",
+    "numeroComprobante": "0001-00000031",
     "creadoPor": "684c8b934f2e0d9c408e47e2"
 }
 

@@ -1,4 +1,5 @@
 const Recibo = require('../models/Recibo');
+const { actualizarNumeroRecibo } = require('../services/numero.services');
 
 const borrarRecibo = async(req, res) => {
     const { id } = req.params;
@@ -28,8 +29,14 @@ const borrarRecibo = async(req, res) => {
 
 const crearRecibo = async(req, res) => {
     try {
+        const numero = await actualizarNumeroRecibo('RECIBO');
+        req.body.numeroComprobante = numero;
+        req.body.creadoPor = '684c8b934f2e0d9c408e47e2';
+
+        
         const recibo = new Recibo(req.body);
         await recibo.save();
+
         res.status(201).json({ 
             ok: true, 
             recibo 

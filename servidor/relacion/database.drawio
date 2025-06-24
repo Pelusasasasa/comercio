@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="AMF_PIOx8q4Wsd7yPMV6" name="Página-1">
-        <mxGraphModel dx="1517" dy="779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="2153" dy="779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -50,7 +50,7 @@
                     <mxGeometry y="50" width="180" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="36" value="&lt;div&gt;Tipo Cuenta&lt;/div&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="180" y="1000" width="180" height="150" as="geometry"/>
+                    <mxGeometry x="310" y="1019" width="180" height="150" as="geometry"/>
                 </mxCell>
                 <mxCell id="37" value="&lt;div&gt;+nombre: String&lt;/div&gt;&lt;div&gt;+tipo: String&lt;/div&gt;&lt;div&gt;+descripcion: String&lt;/div&gt;&lt;div&gt;+activo: Boolean&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;+fechaAlta: Date&lt;/span&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="36" vertex="1">
                     <mxGeometry y="50" width="180" height="100" as="geometry"/>
@@ -253,6 +253,21 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="96" value="N" style="resizable=0;html=1;whiteSpace=wrap;align=right;verticalAlign=bottom;" parent="95" connectable="0" vertex="1">
+                    <mxGeometry x="1" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="Recibo&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="799" width="170" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="98" value="+fecha: Date&lt;div&gt;+cliente: ObjectId&lt;/div&gt;&lt;div&gt;+nro_comprobante: String&lt;/div&gt;&lt;div&gt;+importe: Number&lt;/div&gt;&lt;div&gt;+observaciones: String&lt;/div&gt;&lt;div&gt;+creadoPor: ObjectId&lt;/div&gt;&lt;div&gt;+datalle: stirng&lt;/div&gt;&lt;div&gt;+medioPago: string&lt;/div&gt;&lt;div&gt;+activo: boolean&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="97">
+                    <mxGeometry y="50" width="170" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.994;exitY=0.137;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="82" target="98">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-20" y="775" as="sourcePoint"/>
+                        <mxPoint x="167" y="870" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="100" value="N" style="resizable=0;html=1;whiteSpace=wrap;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="99">
                     <mxGeometry x="1" relative="1" as="geometry"/>
                 </mxCell>
             </root>

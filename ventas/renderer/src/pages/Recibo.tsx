@@ -7,10 +7,16 @@ import { Navbar } from '../components/Navbar'
 import { Button } from '../components/Button';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ModalReciboPago } from '../components/recibo/ModalReciboPago';
 
 export const Recibo = () => {
   const navigate = useNavigate()
   const [pagoRapido, setPagoRapido] = useState<number>(0);
+  const [modalReciboPago, setModalReciboPago] = useState<boolean>(true);
+
+  const aplicarRecibo = () => {
+    console.log("a");
+  }
 
   return (
     <div>
@@ -28,10 +34,11 @@ export const Recibo = () => {
             <div className='flex gap-2 items-center'>
               <p className='whitespace-nowrap'>Total A Pagar: <span className='text-green-500'>{'$ 0.00'}</span></p>
               <Button text='Cancelar Recibo' type='secondary' click={() => navigate(-1)} />
-              <Button text='Aplicar Recibo' click={() => {}} />
+              <Button text='Aplicar Recibo' click={aplicarRecibo} />
             </div>
           </div>
         </div>
+        { modalReciboPago && <ModalReciboPago setModalReciboPago={setModalReciboPago}/>}
     </div>
   )
 }

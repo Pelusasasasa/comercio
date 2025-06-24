@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-export const ReciboListItem = ({fecha, numeroComprobante, tipoComprobante, importe, pagado, saldo, observaciones, pagadoInicial}) => {
-    const [value, setValue] = useState(pagadoInicial)
+export const ReciboListItem = ({fecha, numeroComprobante, tipoComprobante, importe, pagado, saldo, observaciones}) => {
+    const [value, setValue] = useState(pagado)
     
     const fechaParseada = fecha.slice(0, 10).split('-').reverse().join('/') + ' ' + fecha.slice(11, 16);
 
     const styleSaldo = (saldo > 0 ? 'text-red-500' : 'text-black');
 
-    useEffect(() => {
-      setValue(pagadoInicial)
-    }, [pagadoInicial]);
 
   return (
     <tr className='bg-white border-b bgTr cursor-pointer  hover:bg-gray-50'>

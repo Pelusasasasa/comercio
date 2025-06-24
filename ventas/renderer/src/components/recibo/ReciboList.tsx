@@ -13,26 +13,11 @@ const ReciboList = ({pagoRapido}: Props) => {
     const { clienteActive } = useClienteStore();
     const [ compensadasConPago, setCompensadasConPago ] = useState(compensadas)
 
-    const calcularPagos = () => {
-        let restante = pagoRapido;
-
-        return compensadas.map(compensada => {
-            const aPagar = Math.min(restante, compensada.saldo);
-            restante -= aPagar;
-            return {
-                ...compensada,
-                pagadoCalculado: aPagar
-            }
-        })
-    }
 
     useEffect(() => {
         clienteActive && startTraerCuentaPorCliente(clienteActive._id)
     }, [clienteActive]);
 
-    useEffect(() => {
-        setCompensadasConPago(calcularPagos());
-    }, [pagoRapido, compensadas])
 
 
   return (
@@ -52,7 +37,7 @@ const ReciboList = ({pagoRapido}: Props) => {
                 <tbody>
                     {
                         compensadasConPago.map(compensada => (
-                            <ReciboListItem key={compensada._id} {...compensada} pagadoInicial={compensada.pagadoCalculado}/>
+                            <ReciboListItem key={compensada._id} {...compensada} />
                         ))
                     }
                 </tbody>

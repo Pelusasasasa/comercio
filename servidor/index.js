@@ -22,6 +22,7 @@ app.use('/comercio/numero', require('./routes/numero.route'));
 app.use('/comercio/pedido', require('./routes/pedido.route'));
 app.use('/comercio/producto', require('./routes/producto.route'));
 app.use('/comercio/provedor', require('./routes/provedor.route'));
+app.use('/comercio/recibo', require('./routes/recibo.route'));
 app.use('/comercio/tarjeta', require('./routes/tarjeta.route'));
 app.use('/comercio/tipoTarjeta', require('./routes/tipoTarjeta.route'));
 app.use('/comercio/unidadMedida', require('./routes/unidadMedida.route'));

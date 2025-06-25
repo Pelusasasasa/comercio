@@ -10,8 +10,7 @@ import { BsBoxSeam } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import { GrDocumentText } from "react-icons/gr";
 import { LuReceipt } from "react-icons/lu";
-
-
+import { AsideBar } from '../components/AsideBar';
 
 
 const cards = [
@@ -25,7 +24,7 @@ const cards = [
 const Home = () => {
   const navigate = useNavigate();
   
-  const [passwordModal, setPassWordModal] = useState(false);
+  const [passwordModal, setPassWordModal] = useState<Boolean>(false);
   const [targetRoute, setTargetRoute] = useState('');
 
   const handleClick = (route) => {
@@ -35,19 +34,22 @@ const Home = () => {
   };
 
   const validatePassword = () => {
-    console.log(targetRoute);
     navigate(targetRoute);
   }
 
   return (
-    <div className="min-h-screen bg-yellow-50 p-8">
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mx-auto">
-        {cards.map((card) => (
+    <div className="min-h-screen gap-5 bg-yellow-50  flex flex-1 overflow-hidden">
+      <AsideBar/>
+
+      <div className=" flex-1 overflow-auto p-4 ">
+        <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-4'>
+          {cards.map((card) => (
           <CardMenu key={card.title} handleClick={handleClick} title={card.title} icon={card.icon} route={card.route} setPassWordModal={setPassWordModal}/>
         ))}
+        </div>
       </div>
-
-
+      
+      
       { passwordModal && <PasswordModal isOpen={passwordModal} onClose={setPassWordModal} onValidate={validatePassword}/>}
     </div>
   )

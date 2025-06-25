@@ -7,11 +7,12 @@ interface Props {
     buttonText: string,
     buscador: string,
     setBuscador: React.Dispatch<React.SetStateAction<string>>;
-    modal?: (arg: boolean) => void
+    modal?: (arg: boolean) => void,
+    hiddenButton: boolean
     
 }
 
-export const Buscador = ({buscador, placeHolder, buttonText, setBuscador, modal}: Props) => {
+export const Buscador = ({buscador, placeHolder, buttonText, setBuscador, modal, hiddenButton}: Props) => {
 
     const handleClick = () => {
         if(modal){
@@ -25,7 +26,7 @@ export const Buscador = ({buscador, placeHolder, buttonText, setBuscador, modal}
             <GoSearch size={20} className="text-gray-500"/>
             <input type="text" name="buscador" placeholder={placeHolder} onChange={(e) => setBuscador(e.target.value)} value={buscador} id="buscador" className="p-2 w-[500px]" />
         </div>
-        <div>
+        <div className={`${hiddenButton ? 'hidden' : 'block'}`}>
             <Button text={buttonText} click={handleClick}/>
         </div>
     </div>

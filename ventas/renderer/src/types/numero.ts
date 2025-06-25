@@ -3,5 +3,5 @@ export interface Numero {
     tipo: string,
     puntoVenta: number,
     numero: number,
-    prefijo: number
+    prefijo: string
 }

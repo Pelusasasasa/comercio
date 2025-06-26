@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+
 import { useNumeroStore } from "../../hooks"
 import { Numero } from "../../types/numero"
 import { VscEdit } from "react-icons/vsc";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 
 

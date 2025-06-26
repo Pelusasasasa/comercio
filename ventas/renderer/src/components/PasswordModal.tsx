@@ -20,7 +20,6 @@ function PasswordModal({ isOpen, onClose, onValidate }) {
 
   const handleValidate = async() => {
     const result = await startTraerUnUsuario(password);
-    
     if (result) {
       onValidate(result.permiso)
       onClose(true); // contraseña correcta

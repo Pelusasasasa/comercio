@@ -20,7 +20,7 @@ export const store = configureStore({
         historica: historicaSlice.reducer,
         marca: marcaSlice.reducer,
         movimiento: movimientoSlice.reducer,
-        numero: numeroSlice.reducer,
+        numero: numeroSlice.reducer, //Este Store calculo que solamente lo vamos a usar en la seccion de numeros para ver los numeros, luego la modificacion se va  ahacer desde el backend
         producto: productoSlice.reducer,
         provedor: provedorSlice.reducer,
         recibo: reciboSlice.reducer,

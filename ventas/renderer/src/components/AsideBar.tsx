@@ -10,10 +10,10 @@ export const AsideBar = () => {
             <h3 className="text-3xl">Menu</h3>
         </div>
         <nav className="grid gap-1 p-2">
-            <button className="text-start pt-1 pl-1 font-medium cursor-pointer" onClick={() => navigate('numero')}><span className="text-xl">Numeros</span></button>
-            <button className="text-start pt-1 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-xl">Marca</span></button>
-            <button className="text-start pt-1 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-xl">Rubros</span></button>
-            <button className="text-start pt-1 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-xl">Cuentas</span></button>
+            <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('numero')}><span className="text-sm">Numeros</span></button>
+            <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('usuario')}><span className="text-sm">Vendedores</span></button>
+            <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-sm">Rubros</span></button>
+            <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-sm">Cuentas</span></button>
         </nav>
     </aside>
   )

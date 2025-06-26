@@ -14,7 +14,7 @@ interface RootState {
 };
 
 export const useUsuarioStore = () => {
-    const { usuarioActive, isSavingUsuario, messageErrorUsuario } = useSelector((state: RootState) => state.usuario);
+    const { usuarioActive, usuarios, isSavingUsuario, messageErrorUsuario } = useSelector((state: RootState) => state.usuario);
     const dispatch = useDispatch();
 
     const activeUsuario = (id: string) => {
@@ -23,6 +23,8 @@ export const useUsuarioStore = () => {
 
     const startAgregarUsuario = async(usuario: Usuario) => {
         dispatch(savingUsuario());
+        usuario.activo = true;
+        
         try {
             const { data } = await comercioApi.post('usuario', usuario);
 
@@ -41,7 +43,7 @@ export const useUsuarioStore = () => {
         try {
             const { data } = await comercioApi.delete(`usuario/${id}`);
             if(data.ok){
-                dispatch(deleteUsuario(data.usuario));
+                dispatch(deleteUsuario(data.usuario._id));
             }else{
                 await Swal.fire('No se pudo eliminar el usuario', data.msg, 'error');
             }
@@ -102,6 +104,7 @@ export const useUsuarioStore = () => {
     return {
         //Atritubos
         usuarioActive,
+        usuarios,
         isSavingUsuario,
         messageErrorUsuario,
 

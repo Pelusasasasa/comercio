@@ -13,10 +13,10 @@ POST http://localhost:3000/comercio/numero
 Content-Type: application/json
 
 {
-    "tipo": "REMITO",
-    "puntoVenta": 5,
+    "tipo": "COMPROBANTE",
+    "puntoVenta": 1,
     "numero": 0,
-    "prefijo": "RT"
+    "prefijo": "CP"
 
 }
 

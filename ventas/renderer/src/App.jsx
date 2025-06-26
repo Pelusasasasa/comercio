@@ -8,6 +8,7 @@ import Consultar from './pages/Consultar'
 import { Recibo } from './pages/Recibo'
 import Numero from './pages/Numero'
 import './App.css'
+import { Usuario } from './pages/Usuario'
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/consultar' element={<Consultar/>}/>
         <Route path='/recibo' element={<Recibo/>}/>
         <Route path='/numero' element={<Numero/>}/>
+        <Route path='/usuario' element={<Usuario/>}/>
       </Route>
     </Routes>
   )

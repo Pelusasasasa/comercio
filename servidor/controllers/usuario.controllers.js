@@ -25,7 +25,7 @@ const borrarUsuario = async(req, res) => {
 
 const crearUsuario = async(req, res) => {
     const { nombre } = req.body;
-
+    console.log(req.body)
     try {
         const usuarioExiste = await Usuario.findOne({ nombre });
 
@@ -137,11 +137,35 @@ const traerUsuarioPorId = async(req, res) => {
     }
 };
 
+const traerUsuarioPorCodigo = async(req, res) => {
+    const { codigo } = req.params;
+
+    try {
+        const usuario = await Usuario.findOne({ codigo });
+
+        if(!usuario) return res.status(404).json({
+            msg: 'No existe el usuario',
+            ok: false
+        });
+
+        res.status(200).json({
+            usuario,
+            ok: true
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg: 'Error al traer el usuario, Hable con el administrador'
+        })
+    }
+};
+
 module.exports = {
     borrarUsuario,
     crearUsuario,
     modificarUsuario,
     pausarUsuario,
     traerUsuarios,
-    traerUsuarioPorId
+    traerUsuarioPorId,
+    traerUsuarioPorCodigo
 }

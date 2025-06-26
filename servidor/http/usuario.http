@@ -25,5 +25,17 @@ PUT http://localhost:3000/comercio/usuario/684c8b934f2e0d9c408e47e2
 Content-Type: application/json
 
 {
+    "recibo": true,
+    "telefono": "",
+    "email": "",
+    "codigo": "210",
+     "permiso": {
+        "cliente": true,
+        "producto": true,
+        "venta": true,
+        "usuario": true,
+        "recibo": true
+      },
+    "nombre": "AGUSTIN",
     "activo": true
 }

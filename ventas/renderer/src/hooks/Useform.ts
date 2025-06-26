@@ -33,11 +33,22 @@ export const useForm = <T extends Object>(initialForm: T, formValidations: { [K 
 
 
     const onInputChange = ({ target }) => {
-        const { name, value, id } = target;
+        const { name, value, checked, type } = target;
         setFormState({
             ...formState,
-            [name]: value === 'on' ? id : value
+            [name]: type === 'checkbox' ? checked : value
         });
+    }
+
+    const onCheckboxChange = ({target}) => {
+        const {name, checked, id} = target;
+        setFormState({
+            ...formState,
+            permiso:{
+                ...formState.permiso,
+                [id]: checked
+            }
+        })
     }
 
     const onResetForm = () => {
@@ -64,6 +75,7 @@ export const useForm = <T extends Object>(initialForm: T, formValidations: { [K 
         formState,
         onInputChange,
         onResetForm,
+        onCheckboxChange,
 
         ...formValidation,
         isFormValid

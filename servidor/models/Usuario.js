@@ -1,4 +1,4 @@
-const { model, Schema, Types } = require('mongoose');
+const { model, Schema, Types, models } = require('mongoose');
 
 const Usuario = new Schema({
     codigo: {
@@ -22,6 +22,7 @@ const Usuario = new Schema({
             venta: true,
             usuario: true,
             movimientoStock: true,
+            numero: true,
             reporte: true,
             configuracion: true
         }
@@ -30,10 +31,18 @@ const Usuario = new Schema({
         type: Boolean,
         default: true
     },
+    telefono: {
+        type: String,
+        default: ''
+    },
+    email: {
+        type: String,
+        default: ''
+    },
     creadoPor: {
         type: Types.ObjectId,
         ref: 'Usuario',
     }
 });
 
-module.exports = model("Usuario", Usuario);
+module.exports = models.Usuario || model("Usuario", Usuario);

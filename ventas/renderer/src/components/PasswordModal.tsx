@@ -13,16 +13,16 @@ interface usePasswordStore {
 
 function PasswordModal({ isOpen, onClose, onValidate }) {
 
-    const { usuario, messageErrro, isSaving, startGetUsuario } = useUsuarioStore();
+    const { usuarioActive, messageErrorUsuario, isSavingUsuario, startTraerUnUsuario } = useUsuarioStore();
 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleValidate = () => {
-    const result = startGetUsuario(password);
+  const handleValidate = async() => {
+    const result = await startTraerUnUsuario(password);
     
     if (result) {
-      onValidate()
+      onValidate(result.permiso)
       onClose(true); // contraseña correcta
       setPassword('');
       setError('');

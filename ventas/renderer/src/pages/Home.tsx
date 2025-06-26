@@ -11,12 +11,13 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { GrDocumentText } from "react-icons/gr";
 import { LuReceipt } from "react-icons/lu";
 import { AsideBar } from '../components/AsideBar';
+import Swal from 'sweetalert2';
 
 
 const cards = [
-  { title: 'Ventas', route: '/ventas', icon: <FiShoppingCart size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
-  { title: 'Clientes', route: '/clientes', icon: <IoPeopleOutline size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
-  { title: 'Productos', route: '/productos', icon: <BsBoxSeam size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Ventas', route: '/venta', icon: <FiShoppingCart size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Clientes', route: '/cliente', icon: <IoPeopleOutline size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Productos', route: '/producto', icon: <BsBoxSeam size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
   { title: 'Consultar', route: '/consultar', icon: <GrDocumentText size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
   { title: 'Recibo', route: '/recibo', icon: <LuReceipt size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
 ]
@@ -28,13 +29,17 @@ const Home = () => {
   const [targetRoute, setTargetRoute] = useState('');
 
   const handleClick = (route) => {
-    console.log(route);
     setTargetRoute(route);
     setPassWordModal(true);
   };
 
-  const validatePassword = () => {
-    navigate(targetRoute);
+  const validatePassword = async(permisos: object) => {
+  
+    if(permisos[targetRoute.slice(1)]){
+      navigate(targetRoute);
+    }else{
+      await Swal.fire('No tiene permisos para ingresar a la seccion', '' ,'error')
+    }
   }
 
   return (

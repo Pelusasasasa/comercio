@@ -11,6 +11,7 @@ export const AsideBar = () => {
         </div>
         <nav className="grid gap-1 p-2">
             <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('numero')}><span className="text-sm">Numeros</span></button>
+            <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('marca')}><span className="text-sm">Marcas</span></button>
             <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('usuario')}><span className="text-sm">Vendedores</span></button>
             <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-sm">Rubros</span></button>
             <button className="text-start pt-5 pl-1 font-medium cursor-pointer" onClick={() => navigate('')}><span className="text-sm">Cuentas</span></button>

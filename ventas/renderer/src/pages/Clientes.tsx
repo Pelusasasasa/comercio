@@ -11,7 +11,7 @@ import { exportarClientes } from '../helpers/exportarExcel';
 import { Navbar } from '../components/Navbar';
 
 
-const Clientes = () => {
+export const Clientes = () => {
 
   const { clientes, traerClientes, isSavingCliente } = useClienteStore();
 
@@ -104,6 +104,4 @@ const Clientes = () => {
       </main>
     </>
   )
-}
-
-export default Clientes
+};

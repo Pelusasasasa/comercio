@@ -13,6 +13,8 @@ export const Usuario = () => {
     const [addUsuario, setAddUsuario] = useState<boolean>(false);
     const [usuarioFilter, setUsuarioFilter] = useState<user[]>(usuarios);
 
+    //Todo De Estadistica
+
     useEffect(() => {
         startTraerUsuarios();
     }, []);
@@ -23,7 +25,7 @@ export const Usuario = () => {
     }, [buscador, usuarios]);
 
   return (
-    <section>
+    <section className='bg-yellow-50'>
         <Navbar text='Vendedores'/>
 
         <HeaderUsuario buscador={buscador} setBuscador={setBuscador} setAddUsuario={setAddUsuario}/>

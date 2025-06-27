@@ -6,7 +6,7 @@ import { MovList } from '../components/consultar/MovList'
 import { Navbar } from '../components/Navbar'
 import { HistoricaList } from '../components/consultar/HistoricaList'
 
-const Consultar = () => {
+export const Consultar = () => {
 
   const [ tipoCuenta, setTipoCuenta ] = useState('compensada');
 
@@ -25,5 +25,3 @@ const Consultar = () => {
     </div>
   )
 }
-
-export default Consultar

@@ -6,7 +6,7 @@ import { useProductoStore } from "../hooks/useProductoStore";
 import HandleProducto from "../components/producto/handleProducto";
 import { Movimientos } from "../components/movimiento/Movimientos";
 
-const Productos = () => {
+export const Productos = () => {
 
   const { productos, startTraerProductos } = useProductoStore();
 
@@ -62,5 +62,3 @@ const Productos = () => {
     </div>
   )
 }
-
-export default Productos

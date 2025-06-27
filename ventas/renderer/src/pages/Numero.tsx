@@ -5,7 +5,7 @@ import { NumeroList } from '../components/numeros/NumeroList'
 import { useNumeroStore } from '../hooks'
 import { Numero as num } from '../types/numero'
 
-const Numero = () => {
+export const Numero = () => {
 
     const { numeros, startTraerNumeros} = useNumeroStore();
     const [ numerosFiltrados, setNumerosFiltrados ] = useState<Array<num>>(numeros);
@@ -30,5 +30,3 @@ const Numero = () => {
     </main>
   )
 }
-
-export default Numero

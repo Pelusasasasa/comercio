@@ -22,7 +22,7 @@ const cards = [
   { title: 'Recibo', route: '/recibo', icon: <LuReceipt size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
 ]
 
-const Home = () => {
+export const Home = () => {
   const navigate = useNavigate();
   
   const [passwordModal, setPassWordModal] = useState<Boolean>(false);
@@ -58,6 +58,4 @@ const Home = () => {
       { passwordModal && <PasswordModal isOpen={passwordModal} onClose={setPassWordModal} onValidate={validatePassword}/>}
     </div>
   )
-}
-
-export default Home
+};

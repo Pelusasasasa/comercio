@@ -11,6 +11,7 @@ import { compensadaSlice } from './compensada/compensadaSlice';
 import { historicaSlice } from './historica/historicaSlice';
 import { reciboSlice } from './recibo/reciboSlice';
 import { numeroSlice } from './numero/numeroSlice';
+import { remitoSlice } from './remito/remitoSlice';
 
 export const store = configureStore({
     reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
         producto: productoSlice.reducer,
         provedor: provedorSlice.reducer,
         recibo: reciboSlice.reducer,
+        remito: remitoSlice.reducer,
         unidadMedida: unidadMedidaSlice.reducer,
         usuario: usuarioSlice.reducer
     }

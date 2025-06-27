@@ -17,5 +17,6 @@ export interface PermisoUsuario {
     numero: boolean;
     consultar: boolean;
     servicioTecnico: boolean;
+    remito: boolean,
     venta: boolean;
 }

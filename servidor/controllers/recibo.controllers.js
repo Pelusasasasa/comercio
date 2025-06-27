@@ -10,7 +10,7 @@ const borrarRecibo = async(req, res) => {
         if (!recibo) {
             return res.status(404).json({ 
                 ok:false,
-                message: "Recibo no encontrado" });
+                msg: "Recibo no encontrado" });
         };
 
         res.status(200).json({ 
@@ -22,7 +22,7 @@ const borrarRecibo = async(req, res) => {
         console.log(error);
         res.status(500).json({ 
             ok: false, 
-            message: "Error al eliminar el recibo, hable con el administrador"
+            msg: "Error al eliminar el recibo, hable con el administrador"
         });
     }
 };
@@ -45,7 +45,7 @@ const crearRecibo = async(req, res) => {
         console.log(error);
         res.status(500).json({ 
             ok: false, 
-            message: "Error al crear el recibo, hable con el administrador"
+            msg: "Error al crear el recibo, hable con el administrador"
         });
     }
 };
@@ -57,7 +57,7 @@ const modificarRecibo = async(req, res) => {
         const recibo = await Recibo.findByIdAndUpdate(id, req.body, { new: true });
         if(!recibo) return res.status(404).json({ 
             ok: false, 
-            message: "Recibo no encontrado" 
+            msg: "Recibo no encontrado" 
         });
 
         res.status(200).json({ 
@@ -69,7 +69,7 @@ const modificarRecibo = async(req, res) => {
         console.log(error);
         res.status(500).json({ 
             ok: false, 
-            message: "Error al modificar el recibo, hable con el administrador"
+            msg: "Error al modificar el recibo, hable con el administrador"
         });
     }
 };
@@ -89,7 +89,7 @@ const traerRecibos = async(req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false, 
-            message: "Error al obtener los recibos, hable con el administrador"
+            msg: "Error al obtener los recibos, hable con el administrador"
         })
     }
 };
@@ -103,7 +103,7 @@ const traerReciboPorId = async(req, res) => {
             
         if (!recibo) return res.status(404).json({
             ok: false, 
-            message: "Recibo no encontrado"
+            msg: "Recibo no encontrado"
         });
 
         res.status(200).json({
@@ -114,7 +114,7 @@ const traerReciboPorId = async(req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false, 
-            message: "Error al obtener el recibo, hable con el administrador"
+            msg: "Error al obtener el recibo, hable con el administrador"
         });
     }
 }

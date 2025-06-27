@@ -21,6 +21,7 @@ const initialFormState: Usuario = {
         numero: false,
         consultar: false,
         servicioTecnico: false,
+        remito: false,
         venta: false,
     },
     telefono: '',
@@ -131,6 +132,10 @@ export const HandleUsuario = ({setAddUsuario}: Props) => {
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
                         <input type="checkbox" name="permiso" checked={permiso.servicioTecnico}  className="scale-125" id="servicioTecnico" onChange={onCheckboxChange} value={permiso?.servicioTecnico} />
                         <label htmlFor="servicioTecnico" className="font-medium">Servicio Tecnico</label>
+                    </div>
+                    <div className="h-12 flex justify-start items-center gap-2 px-5">
+                        <input type="checkbox" name="permiso" checked={permiso.remito}  className="scale-125" id="remito" onChange={onCheckboxChange} value={permiso?.remito} />
+                        <label htmlFor="remito" className="font-medium">Remito</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
                         <input type="checkbox" name="permiso" checked={permiso.usuario}  className="scale-125" id="usuario" onChange={onCheckboxChange} value={permiso?.usuario} />

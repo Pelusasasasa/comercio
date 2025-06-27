@@ -12,6 +12,7 @@ import {Productos} from './pages/Productos'
 
 import './App.css'
 import Categoria from './pages/Categoria'
+import { Remito } from './pages/Remito'
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/usuario' element={<Usuario/>}/>
         <Route path='/marca' element={<Marca/>}/>
         <Route path='/categoria' element={<Categoria/>}/>
+        <Route path='/remito' element={<Remito/>}/>
       </Route>
     </Routes>
   )

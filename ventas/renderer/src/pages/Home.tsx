@@ -1,25 +1,28 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 import { CardMenu } from '../components/CardMenu'
 import PasswordModal from '../components/PasswordModal'
+import { AsideBar } from '../components/AsideBar';
 
 import { IoPeopleOutline } from 'react-icons/io5';
 import { BsBoxSeam } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import { GrDocumentText } from "react-icons/gr";
 import { LuReceipt } from "react-icons/lu";
-import { AsideBar } from '../components/AsideBar';
-import Swal from 'sweetalert2';
+import { HiOutlineDocumentReport } from "react-icons/hi";
 
 
 const cards = [
-  { title: 'Ventas', route: '/venta', icon: <FiShoppingCart size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
-  { title: 'Clientes', route: '/cliente', icon: <IoPeopleOutline size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
-  { title: 'Productos', route: '/producto', icon: <BsBoxSeam size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
-  { title: 'Consultar', route: '/consultar', icon: <GrDocumentText size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
-  { title: 'Recibo', route: '/recibo', icon: <LuReceipt size={80} color='' className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Ventas', route: '/venta', icon: <FiShoppingCart size={80}  className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Clientes', route: '/cliente', icon: <IoPeopleOutline size={80}  className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Productos', route: '/producto', icon: <BsBoxSeam size={80}  className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Consultar', route: '/consultar', icon: <HiOutlineDocumentReport size={80}  className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Recibo', route: '/recibo', icon: <LuReceipt size={80}  className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
+  { title: 'Remito', route: '/remito', icon: <GrDocumentText size={80}  className='bg-yellow-200 text-orange-400 rounded-full p-3'/> },
 ]
 
 export const Home = () => {

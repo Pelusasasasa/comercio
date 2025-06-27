@@ -18,7 +18,7 @@ const Categoria = new Schema({
         type: Boolean,
         default: true
     },
-    fechaAlta: {
+    fechaCreacion:{
         type: Date,
         default: () => moment().tz('America/Argentina/Buenos_Aires').toDate()
     }

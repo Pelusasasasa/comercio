@@ -13,7 +13,7 @@ POST http://localhost:3000/comercio/marca
 Content-Type: application/json
 
 {
-    "nombre": "Kalop",
+    "nombre": "Kaslssopsssssss",
     "descripcion": "Marca de modulos"
 }
 

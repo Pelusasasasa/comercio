@@ -2,9 +2,10 @@ import { Usuario } from "../../types/usuario"
 import { UsuarioListItem } from "./UsuarioListItem"
 
 interface Props {
-    usuarios: Array<Usuario> | []
+    usuarios: Array<Usuario> | [];
+    setAddUsuario:  React.Dispatch<React.SetStateAction<boolean>>;
 }
-export const UsuarioList = ({usuarios}: Props) => {
+export const UsuarioList = ({usuarios, setAddUsuario}: Props) => {
   return (
     <section className="border border-gray-200 bg-white rounded-sm mx-5 h-[calc(100vh-150px)] overflow-y-auto no-scroll">
         <h3 className="p-5 bg-yellow-100 font-medium text-xl">Total: {usuarios.length}</h3>
@@ -23,7 +24,7 @@ export const UsuarioList = ({usuarios}: Props) => {
             <tbody>
                 {
                     usuarios.map(usuario => (
-                        <UsuarioListItem key={usuario._id} {...usuario}/>
+                        <UsuarioListItem key={usuario._id} {...usuario} setAddUsuario={setAddUsuario}/>
                     ))
                 }
             </tbody>

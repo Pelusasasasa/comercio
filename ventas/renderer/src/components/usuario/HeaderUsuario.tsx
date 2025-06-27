@@ -18,7 +18,7 @@ export const HeaderUsuario = ({buscador, setBuscador, setAddUsuario}: Props) => 
             <button onClick={() => setButtonActive('estadistica')} className={`rounded-sm font-medium cursor-pointer p-2 ${buttonActive === 'estadistica' ? 'bg-white' : 'text-gray-400'}`}>Estadisticas</button>
         </div>
         <Buscador 
-            placeHolder='Buscar Vendedor'
+            placeHolder='Buscar Vendedor por Nombre'
             buttonText='Agergar Vendedor'
             setBuscador={setBuscador}
             buscador={buscador}

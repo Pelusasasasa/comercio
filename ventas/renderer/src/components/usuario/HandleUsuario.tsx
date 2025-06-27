@@ -3,6 +3,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useForm, useUsuarioStore } from "../../hooks";
 import { Button } from "../Button";
 import { Usuario } from "../../types/usuario";
+import { useState } from "react";
 
 interface Props {
     setAddUsuario: (arg: boolean) => void;
@@ -28,16 +29,42 @@ const initialFormState: Usuario = {
 
 
 
-export const AddUsuarioModal = ({setAddUsuario}: Props) => {
-    const { usuarioActive, startAgregarUsuario } = useUsuarioStore();
+export const HandleUsuario = ({setAddUsuario}: Props) => {
+    const { usuarioActive, startAgregarUsuario, startModificarUsuario } = useUsuarioStore();
     
     const { codigo, nombre, telefono, email, permiso, formState, onResetForm, onInputChange, onCheckboxChange} = useForm(usuarioActive ?? initialFormState);
+    const [errores, setErrores] = useState({
+        codigo: '',
+        nombre: ''
+    });
 
     const agregarUsuario = () => {
+
+        if(codigo === '') {
+            setErrores({
+                ...errores,
+                codigo: 'El codigo es obligatorio'
+            });
+            return;
+        };
+
+        if(nombre === '') {
+            setErrores({
+                ...errores,
+                nombre: 'El Nombre es obligatorio'
+            });
+            return;
+        };
+
         startAgregarUsuario(formState);
         setAddUsuario(false);
-    }
+    };
 
+    const modificarUsuario = () => {
+        startModificarUsuario(formState);
+        setAddUsuario(false);
+    }
+    
     return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/80">
       <div className="bg-white p-6 rounded shadow-md text-center w-xl">
@@ -56,10 +83,12 @@ export const AddUsuarioModal = ({setAddUsuario}: Props) => {
             <div className="flex space-y-2 flex-col">
                 <label htmlFor="codigo" className="text-sm font-medium leading-none ">Codigo *</label>
                 <input value={codigo} type="text" name="codigo" id="codigo" placeholder="021" onChange={onInputChange} className="border border-gray-400 rounded-sm p-2 "/>
+                <p className="text-xs text-red-700 m-0 text-start">{errores.codigo ?? errores.codigo}</p>
             </div>
             <div className="flex space-y-2 flex-col">
                 <label htmlFor="nombre" className="text-sm font-medium leading-none ">Nombre *</label>
                 <input value={nombre} type="text" name="nombre" id="nombre" placeholder="Nombre" onChange={onInputChange}  className="border border-gray-400 rounded-sm p-2 "/>
+                <p className="text-xs text-red-700 m-0 text-start">{errores.nombre ?? errores.nombre}</p>
             </div>
 
             <div className="flex space-y-2 flex-col">
@@ -80,31 +109,31 @@ export const AddUsuarioModal = ({setAddUsuario}: Props) => {
                         <label htmlFor="cliente" className="font-medium">Clientes</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"   className="scale-125" id="producto" onChange={onCheckboxChange} value={permiso?.producto}/>
+                        <input type="checkbox" name="permiso" checked={permiso.producto}   className="scale-125" id="producto" onChange={onCheckboxChange} value={permiso?.producto}/>
                         <label htmlFor="producto" className="font-medium">Productos</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"  className="scale-125" id="venta" onChange={onCheckboxChange} value={permiso?.venta} />
+                        <input type="checkbox" name="permiso" checked={permiso.venta}  className="scale-125" id="venta" onChange={onCheckboxChange} value={permiso?.venta} />
                         <label htmlFor="venta" className="font-medium">Ventas</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"  className="scale-125" id="recibo" onChange={onCheckboxChange} value={permiso?.recibo}/>
+                        <input type="checkbox" name="permiso" checked={permiso.recibo}  className="scale-125" id="recibo" onChange={onCheckboxChange} value={permiso?.recibo}/>
                         <label htmlFor="recibo" className="font-medium">Recibos</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"  className="scale-125" id="consultar" onChange={onCheckboxChange} value={permiso?.consultar}/>
+                        <input type="checkbox" name="permiso" checked={permiso.consultar}  className="scale-125" id="consultar" onChange={onCheckboxChange} value={permiso?.consultar}/>
                         <label htmlFor="consultar" className="font-medium">Consultar Cuenta Corriente</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"  className="scale-125" id="numero" onChange={onCheckboxChange} value={permiso?.numero} />
+                        <input type="checkbox" name="permiso" checked={permiso.numero}  className="scale-125" id="numero" onChange={onCheckboxChange} value={permiso?.numero} />
                         <label htmlFor="numero" className="font-medium">Numeros</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"  className="scale-125" id="servicioTecnico" onChange={onCheckboxChange} value={permiso?.servicioTecnico} />
+                        <input type="checkbox" name="permiso" checked={permiso.servicioTecnico}  className="scale-125" id="servicioTecnico" onChange={onCheckboxChange} value={permiso?.servicioTecnico} />
                         <label htmlFor="servicioTecnico" className="font-medium">Servicio Tecnico</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso"  className="scale-125" id="usuario" onChange={onCheckboxChange} value={permiso?.usuario} />
+                        <input type="checkbox" name="permiso" checked={permiso.usuario}  className="scale-125" id="usuario" onChange={onCheckboxChange} value={permiso?.usuario} />
                         <label htmlFor="usuario" className="font-medium">Usuario</label>
                     </div>
                 </div>
@@ -115,8 +144,11 @@ export const AddUsuarioModal = ({setAddUsuario}: Props) => {
         </form>
         <div className="flex gap-4 mt-5 justify-end ml-auto w-xs">
                 <Button type="secondary" text="Cancelar" click={() => setAddUsuario(false)}/>
-                <Button text="Crear Vendedor" click={agregarUsuario}/>
-            </div>
+                {usuarioActive 
+                ? (<Button text="Modificar Vendedor" click={modificarUsuario}/>) 
+                : (<Button text="Crear Vendedor" click={agregarUsuario}/>)
+            }
+        </div>
       </div>
     </div>
   );

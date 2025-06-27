@@ -10,17 +10,25 @@ import { CiMail } from "react-icons/ci";
 
 import Swal from 'sweetalert2';
 
-export const UsuarioListItem = ({_id, codigo, nombre, permiso, telefono, email,  activo, creadoPor}: Usuario) => {
+interface Props extends Usuario {
+    setAddUsuario: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-    const { isSavingUsuario, startEliminarUsuario } = useUsuarioStore()
+export const UsuarioListItem = ({_id, codigo, nombre, permiso, telefono, email,  activo, creadoPor, setAddUsuario}: Props) => {
+
+    const { isSavingUsuario, startEliminarUsuario, activeUsuario} = useUsuarioStore()
 
     const estadoStyle = activo 
         ? 'text-xs text-green-800 bg-green-200 border border-green-600 rounded-full inline-flex px-2 py-1' 
         : 'text-xs text-red-800 bg-red-200 border border-red-600 rounded-full inline-flex px-2 py-1';
 
-    const handleUpdateUsuario = () => {
+        const permisosActivos = Object.keys(permiso).filter(key => permiso[key]);
+        
 
-    };
+    const handleUpdateUsuario = () => {
+        _id && activeUsuario(_id);
+        setAddUsuario(true)
+    };  
 
     const handleDeleteUsuario = async() => {
         const { isConfirmed } = await Swal.fire({
@@ -30,7 +38,7 @@ export const UsuarioListItem = ({_id, codigo, nombre, permiso, telefono, email, 
         });
 
         if(isConfirmed){
-            startEliminarUsuario(_id)
+            _id && startEliminarUsuario(_id)
         }
     };
 
@@ -56,7 +64,13 @@ export const UsuarioListItem = ({_id, codigo, nombre, permiso, telefono, email, 
                 <p className='font-medium'>{email}</p>
             </div>
         </td>
-        <td className=' py-5'>{permiso.cliente && 'Cliente'}</td>
+        <td className=''>
+            <div className='grid grid-cols-3 gap-2 mx-2 w-xs'>
+                {permisosActivos.map(permiso => (
+                    <p key={permiso} className='border-green-600 text-center border text-green-800 bg-green-200 rounded-full px-2 py-1 text-xs'>{permiso}</p>
+                ))}
+            </div>
+        </td>
         <td className=' py-5'>
             <p className={`${estadoStyle}`}>{activo ? 'Activo' : 'Inactivo' }</p>
         </td>

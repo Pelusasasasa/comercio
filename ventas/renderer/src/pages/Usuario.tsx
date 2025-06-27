@@ -4,26 +4,33 @@ import { Navbar } from '../components/Navbar'
 import { HeaderUsuario } from '../components/usuario/HeaderUsuario'
 import { UsuarioList } from '../components/usuario/UsuarioList'
 import { useUsuarioStore } from '../hooks'
-import { AddUsuarioModal } from '../components/usuario/AddUsuarioModal'
+import { HandleUsuario }  from '../components/usuario/HandleUsuario'
+import { Usuario as user } from '../types/usuario'
 
 export const Usuario = () => {
     const { usuarios, startTraerUsuarios } = useUsuarioStore();
     const [buscador, setBuscador] = useState<string>('')
     const [addUsuario, setAddUsuario] = useState<boolean>(false);
+    const [usuarioFilter, setUsuarioFilter] = useState<user[]>(usuarios);
 
     useEffect(() => {
         startTraerUsuarios();
-    }, [])
+    }, []);
+
+
+    useEffect(() => {
+      setUsuarioFilter(usuarios.filter(elem => elem.nombre.toUpperCase().startsWith(buscador.toUpperCase())))
+    }, [buscador, usuarios]);
 
   return (
     <section>
         <Navbar text='Vendedores'/>
 
         <HeaderUsuario buscador={buscador} setBuscador={setBuscador} setAddUsuario={setAddUsuario}/>
-        <UsuarioList usuarios={usuarios}/>
+        <UsuarioList usuarios={usuarioFilter} setAddUsuario={setAddUsuario}/>
 
         {
-          addUsuario && <AddUsuarioModal setAddUsuario={setAddUsuario}/>
+          addUsuario && <HandleUsuario setAddUsuario={setAddUsuario}/>
         }
     </section>
   )

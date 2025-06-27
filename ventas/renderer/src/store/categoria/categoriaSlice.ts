@@ -31,7 +31,8 @@ export const categoriaSlice = createSlice({
             state.categorias = state.categorias.map(elem => 
                 elem._id === payload._id ? payload : elem
             );
-            state.isSavingCategoria = false
+            state.isSavingCategoria = false;
+            state.categoriaActive = null;
         },
         savingCategoria: (state) => {
             state.isSavingCategoria = true

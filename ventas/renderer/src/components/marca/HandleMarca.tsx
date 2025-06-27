@@ -37,6 +37,11 @@ export const HandleMarca = ({setHandleMarca}: Props) => {
     };
 
     const modificarMarca = () => {
+        if(nombre === '') {
+            setError('El Nombre es obligatorio');
+            return;
+        };
+
         startModificarMarca(formState);
         setHandleMarca(false);
     }
@@ -59,7 +64,7 @@ export const HandleMarca = ({setHandleMarca}: Props) => {
             <div className="flex space-y-2 flex-col">
                 <label htmlFor="codigo" className="text-sm font-medium leading-none ">Nombre *</label>
                 <input value={nombre} type="text" name="nombre" id="nombre" placeholder="EJ: PHILIPS" onChange={onInputChange} className="border border-gray-400 rounded-sm p-2 "/>
-                <p className="text-xs text-red-700 m-0 text-start">{error.nombre ?? error.nombre}</p>
+                <p className="text-xs text-red-700 m-0 text-start">{error ?? error}</p>
             </div>
             <div className="flex space-y-2 flex-col">
                 <label htmlFor="descripcion" className="text-sm font-medium leading-none ">Descripcion </label>

@@ -11,6 +11,7 @@ import {Numero} from './pages/Numero'
 import {Productos} from './pages/Productos'
 
 import './App.css'
+import Categoria from './pages/Categoria'
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/numero' element={<Numero/>}/>
         <Route path='/usuario' element={<Usuario/>}/>
         <Route path='/marca' element={<Marca/>}/>
+        <Route path='/categoria' element={<Categoria/>}/>
       </Route>
     </Routes>
   )

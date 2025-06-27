@@ -26,7 +26,7 @@ export const Usuario = () => {
 
   return (
     <section className='bg-yellow-50'>
-        <Navbar text='Vendedores'/>
+        <Navbar text='Gestion Vendedores'/>
 
         <HeaderUsuario buscador={buscador} setBuscador={setBuscador} setAddUsuario={setAddUsuario}/>
         <UsuarioList usuarios={usuarioFilter} setAddUsuario={setAddUsuario}/>

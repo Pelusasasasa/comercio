@@ -7,7 +7,7 @@ import { Marca as marca } from '../types/marca';
 import { HandleMarca } from '../components/marca/HandleMarca';
 
 export const Marca = () => {
-  //TODO Estadisticas
+  //TODO   Estadisticas
   const { marcas } = useMarcaStore()
 
     const [buscador, setBuscador] = useState<string>('');
@@ -22,7 +22,7 @@ export const Marca = () => {
 
   return (
     <section className='bg-yellow-50'>
-        <Navbar text='Marcas'/>
+        <Navbar text='Gestion Marcas'/>
         <HeaderMarca buscador={buscador} setBuscador={setBuscador} setHandleMarca={setHandleMarca}/>
 
         <MarcaList marcas={marcasFiltradas} setHandleMarca={setHandleMarca}/>

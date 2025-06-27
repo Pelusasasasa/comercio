@@ -1,6 +1,7 @@
 
 import { GoArrowLeft, GoDownload } from 'react-icons/go';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useUsuarioStore } from '../hooks/useUsuarioStore';
 
 interface Props {
     exportar?: () => void;
@@ -8,9 +9,18 @@ interface Props {
 }
 
 export const Navbar = ({exportar, text}: Props) => {
-    const navigate = useNavigate();
 
+    const { limpiarUsuarioSlice } = useUsuarioStore();
+
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+  
     const handleBack = () => {
+    
+      if(pathname.slice(1) === 'usuario'){
+        limpiarUsuarioSlice();
+      }
+
         navigate(-1)
     }
 

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Usuario } from '../types/usuario';
-import { addUsuario, deleteUsuario, savingUsuario, setActiveUsuario, setUsuarios, updateUsuario } from '../store/usuario/usuarioSlice';
+import { addUsuario, clearUsuarioSlice, deleteUsuario, savingUsuario, setActiveUsuario, setUsuarios, updateUsuario } from '../store/usuario/usuarioSlice';
 import Swal from 'sweetalert2';
 import comercioApi from '../api/comercioApi';
 
@@ -19,6 +19,10 @@ export const useUsuarioStore = () => {
 
     const activeUsuario = (id: string) => {
         dispatch(setActiveUsuario(id));
+    };
+
+    const limpiarUsuarioSlice = () => {
+        dispatch(clearUsuarioSlice())
     };
 
     const startAgregarUsuario = async(usuario: Usuario) => {
@@ -99,7 +103,9 @@ export const useUsuarioStore = () => {
             console.log(error);
             await Swal.fire('No se pudo obtener el usuario', error?.response?.data?.msg, 'error');
         }
-    }
+    };
+
+    
 
     return {
         //Atritubos
@@ -110,6 +116,7 @@ export const useUsuarioStore = () => {
 
         //Metodos
         activeUsuario,
+        limpiarUsuarioSlice,
         startAgregarUsuario,
         startEliminarUsuario,
         startModificarUsuario,

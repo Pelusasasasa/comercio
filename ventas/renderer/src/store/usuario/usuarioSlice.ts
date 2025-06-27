@@ -44,7 +44,13 @@ export const usuarioSlice = createSlice({
         setUsuarios: (state, { payload }: PayloadAction<Usuario[]>) => {
             state.usuarios = payload;
             state.isSavingUsuario = false
-        }
+        },
+        clearUsuarioSlice: (state) => {
+            state.usuarioActive = null;
+            state.usuarios = [];
+            state.isSavingUsuario = false;
+            state.messageErrorUsuario = null;
+        },
     }
 });
 
@@ -52,6 +58,7 @@ export const usuarioSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
     addUsuario,
+    clearUsuarioSlice,
     deleteUsuario,
     updateUsuario,
     savingUsuario,

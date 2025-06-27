@@ -32,7 +32,8 @@ export const marcaSlice = createSlice({
             state.marcas = state.marcas.map(elem => 
                 elem._id === payload._id ? payload : elem
             );
-            state.isSavingMarca = false
+            state.isSavingMarca = false;
+            state.marcaActive = null;
         },
         savingMarca: (state) => {
             state.isSavingMarca = true

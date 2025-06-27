@@ -1,5 +1,5 @@
 ###DELETE 
-DELETE http://localhost:3000/comercio/numero/684c0d38393fba26d01232f5
+DELETE http://localhost:3000/comercio/numero/685e9ac3a6fd93fcd1738637
 
 ###GET ALL
 GET http://localhost:3000/comercio/numero

@@ -11,9 +11,6 @@ const validarMarca = [
     check('activo')
         .optional()
         .isBoolean().withMessage('El estado debe ser un booleano'),
-    check('fechaCreacion')
-        .optional()
-        .isDate().withMessage('La fecha de creacion debe ser una fecha'),
     check('logo')
         .optional()
         .isString().withMessage('El logo debe ser un texto')

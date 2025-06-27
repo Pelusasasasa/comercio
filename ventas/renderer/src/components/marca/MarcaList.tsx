@@ -1,8 +1,8 @@
 import { MarcaListItem } from "./MarcaListItem";
 
-export const MarcaList = ({marcas}) => {
+export const MarcaList = ({marcas, setHandleMarca}) => {
   return (
-    <section className="border border-gray-200 bg-white rounded-sm mx-5 h-[calc(100vh-150px)] overflow-y-auto no-scroll">
+    <section className="border border-gray-200 bg-white rounded-sm mx-5 h-[calc(100vh-200px)] overflow-y-auto no-scroll">
         <h3 className="p-5 bg-yellow-100 font-medium text-xl">Total: {marcas.length}</h3>
         <table className="w-full">
             <thead>
@@ -18,7 +18,7 @@ export const MarcaList = ({marcas}) => {
             <tbody>
                 {
                     marcas.map(marca => (
-                        <MarcaListItem key={marca._id} {...marca}/>
+                        <MarcaListItem key={marca._id} {...marca} setHandleMarca={setHandleMarca}/>
                     ))
                 }
             </tbody>

@@ -33,6 +33,7 @@ export const usuarioSlice = createSlice({
                 elem._id === payload._id ? payload : elem
             );
             state.isSavingUsuario = false;
+            state.usuarioActive = null;
         },
         savingUsuario: (state) => {
             state.isSavingUsuario = true;

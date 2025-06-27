@@ -7,7 +7,7 @@ import { Marca as marca } from '../types/marca';
 import { HandleMarca } from '../components/marca/HandleMarca';
 
 export const Marca = () => {
-
+  //TODO Estadisticas
   const { marcas } = useMarcaStore()
 
     const [buscador, setBuscador] = useState<string>('');

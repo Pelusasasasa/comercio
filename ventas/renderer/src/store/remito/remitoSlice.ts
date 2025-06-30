@@ -49,6 +49,9 @@ export const remitoSlice = createSlice({
             state.messageErrorRemito = null;
             state.remitoActive = null;
             state.remitos = [];
+        },
+        finishSavingRemito: (state) => {
+            state.isSavingRemito = false
         }
     }
 });
@@ -58,6 +61,7 @@ export const remitoSlice = createSlice({
 export const { 
     addRemito,
     deleteRemito,
+    finishSavingRemito,
     updateRemito,
     savingRemito,
     setActiveRemito,

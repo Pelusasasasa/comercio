@@ -82,11 +82,30 @@ const traerRemitos = async(req, res) => {
             msg: 'No se pudieron obtener los remitos, hable con el administrador'
         })
     }
-}
+};
+
+const traerRemitosActivos = async(req, res) => {
+    try {
+        const remitos = await Remito.find({ pasado: false })
+            .populate('cliente', 'codigo');
+
+        res.status(200).json({
+            ok: true,
+            remitos
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'No se pudieron obtener los remitos, hable con el administrador'
+        })
+    }
+};
 
 module.exports = {
     borrarRemito,
     crearRemito,
     modificarRemito,
     traerRemitos,
+    traerRemitosActivos
 };

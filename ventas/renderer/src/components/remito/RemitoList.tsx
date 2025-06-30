@@ -1,4 +1,5 @@
 import React from 'react'
+import { RemitoListItem } from './RemitoListItem'
 
 export const RemitoList = ({remitos, }) => {
   return (
@@ -7,19 +8,18 @@ export const RemitoList = ({remitos, }) => {
             <table className="w-full">
                 <thead>
                     <tr className="bg-gray-200">
-                        <th className="text-gray-600 text-xs text-start p-2">Nombre</th>
-                        <th className="text-gray-600 text-xs text-start p-2">Descripcion</th>
-                        <th className="text-gray-600 text-xs text-start p-2">Productos</th>
-                        <th className="text-gray-600 text-xs text-start p-2">Fecha Creacion</th>
-                        <th className="text-gray-600 text-xs text-start p-2">Estado</th>
-                        <th className="text-gray-600 text-xs text-start p-2">Acciones</th>
+                        <th className="text-gray-600 text-xs text-start p-2">Fecha</th>
+                        <th className="text-gray-600 text-xs text-start p-2">Cod Cliente</th>
+                        <th className="text-gray-600 text-xs text-start p-2">Cliente</th>
+                        <th className="text-gray-600 text-xs text-start p-2">Numero Remito</th>
+                        <th className="text-gray-600 text-xs text-start p-2">Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        // remitos.map(marca => (
-                            
-                        // ))
+                        remitos.map(remito => (
+                            <RemitoListItem {...remito} key={remito._id}/>    
+                        ))
                     }
                 </tbody>
             </table>

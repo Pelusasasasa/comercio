@@ -13,11 +13,12 @@ const Remito = new Schema({
   nombreCliente: {
     type: String,
     require: true,
-    set: value => CSSFontFeatureValuesRule.toUpperCase()
+    set: value => value.toUpperCase()
   },
   tipoComprobante: {
     type: String,
     require: true,
+    set: value => value.toUpperCase()
   },
   numeroComprobante: {
     type: String,
@@ -35,6 +36,9 @@ const Remito = new Schema({
     type: Types.ObjectId,
     ref: 'Usuario',
     require: true
+  },
+  fechaCancelacion: {
+    type: Date,
   }
 });
 

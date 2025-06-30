@@ -1,20 +1,23 @@
-import { useCompensadaStore } from "../../hooks/useCompensadaStore";
+
+import { useState } from "react";
 import { useMovimientoStore } from "../../hooks/useMovimientoStore";
 import { MovListItem } from "./MovListItem";
+import { HandleMovimientoProducto } from "./HandleMovimientoProducto";
 
 export const MovList = () => {
 
     const { movimientos } = useMovimientoStore();
+    const [handleMovimiento, setHandleMovimiento] = useState<boolean>(true);
 
     if(movimientos?.length === 0) return (
-        <section className="h-[calc(100vh-500px)] my-1 overflow-y-auto flex justify-center items-center bg-white border-gray-400 mx-1 border rounded-lg">
+        <section className="border border-gray-200 bg-white rounded-sm mx-5 h-[calc(70vh-200px)] overflow-y-auto no-scroll flex justify-center items-center mt-5">
             <p className="text-2xl text-gray-500">No hay movimientos</p>
         </section>
     );
 
 
   return (
-    <section className="h-[calc(100vh-500px)] my-1 overflow-y-auto bg-white border-gray-400 mx-1 border rounded-lg">
+    <section className="border border-gray-200 bg-white rounded-sm mx-5 h-[calc(70vh-200px)] overflow-y-auto no-scroll mt-5">
         <h4 className="px-3 bg-yellow-100 py-1 border-b">Movimientos de Productos</h4>
         <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
         <thead>
@@ -33,6 +36,7 @@ export const MovList = () => {
             ))
         }</tbody>
     </table>
+        {handleMovimiento ?? <HandleMovimientoProducto/>}
     </section>
   )
 }

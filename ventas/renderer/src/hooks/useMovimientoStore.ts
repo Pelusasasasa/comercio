@@ -112,7 +112,6 @@ export const useMovimientoStore = () => {
         dispatch(savingMovimiento());
         try {
             const { data } = await comercioApi.get(`movimientoStock/tipo/${tipoMovimiento}/numero/${numeroMovimiento}`);
-            console.log(data)
 
             if(data.ok){
                 dispatch(setMovimientos(data.movimientos));

@@ -1,4 +1,7 @@
-#GET ALLL
+###DELETE ONE
+DELETE http://localhost:3000/comercio/remito/68629125d455b6721df65279
+
+###GET ALLL
 GET http://localhost:3000/comercio/remito
 
 ###POST One
@@ -6,9 +9,9 @@ POST http://localhost:3000/comercio/remito
 Content-Type: application/json
 
 {
-    "cliente": "684abeb07f16faf8ae89a064",
+    "cliente": "6851718939e2c7b4683fcdaa",
     "nombreCliente": "Ojeda Sofia",
     "tipoComprobante": "REMITO",
-    "numeroComprobante": "RT-0001-00000001",
-    "pasado": false
+    "numeroComprobante": "RT-0001-00000003",
+    "pasado": true
 }

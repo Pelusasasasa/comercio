@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import CompensadaList from '../components/consultar/CompensadaList'
 import { HeaderConsultar } from '../components/consultar/HeaderConsultar'
-import { MovList } from '../components/consultar/MovList'
+import { MovList } from '../components/movimiento/MovList'
 import { Navbar } from '../components/Navbar'
 import { HistoricaList } from '../components/consultar/HistoricaList'
 

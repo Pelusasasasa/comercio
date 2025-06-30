@@ -3,10 +3,21 @@ import { Navbar } from '../components/Navbar'
 import { HeaderRemito } from '../components/remito/HeaderRemito'
 import { RemitoList } from '../components/remito/RemitoList'
 import { useRemitoStore } from '../hooks'
+import { Remito as remito } from '../types/remito'
+import { MovList } from '../components/movimiento/MovList'
 
 export const Remito = () => {
-  const { remitos, startTraerRemitosAtivos } = useRemitoStore()
+  const { remitos, startTraerRemitosAtivos } = useRemitoStore();
   const [buscador, setBuscador] = useState<string>('');
+  const [remitosFiltrados, setRemitosFiltrados] = useState<remito[]>([]);
+
+  useEffect(() => {
+    setRemitosFiltrados(remitos.filter(remito => (
+         remito?.cliente?.codigo?.toString().startsWith(buscador.toUpperCase()) 
+      || remito.nombreCliente.startsWith(buscador.toUpperCase()) 
+      || remito.numeroComprobante.includes(buscador.toUpperCase())
+    )));
+  }, [buscador, remitos]);
 
   useEffect(() => {
     startTraerRemitosAtivos();
@@ -18,7 +29,8 @@ export const Remito = () => {
 
       <HeaderRemito buscador={buscador} setBuscador={setBuscador}/>
 
-      <RemitoList remitos={remitos}/>
+      <RemitoList remitos={remitosFiltrados}/>
+      <MovList/>
     </section>
   )
 }

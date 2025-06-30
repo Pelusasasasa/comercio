@@ -1,13 +1,23 @@
 import { GoCalendar, GoPerson } from "react-icons/go"
 import { Remito } from "../../types/remito"
+import { useMovimientoStore, useRemitoStore } from "../../hooks";
 
-interface Props extends Remito {
+export const RemitoListItem = ({_id, fecha, cliente, nombreCliente, tipoComprobante, numeroComprobante, observaciones}: Remito) => {
 
-}
+    const {traerMovimientosPorTipoYNumero } = useMovimientoStore();
+    const { activeRemito, remitoActive, remitosParaCuentaCorriente, startAgregarRemitoParaCTACTE} = useRemitoStore();
 
-export const RemitoListItem = ({fecha, cliente, nombreCliente, tipoComprobante, numeroComprobante, observaciones}: Remito) => {
+    const traerMovimientos = () => {
+        traerMovimientosPorTipoYNumero('REMITO', numeroComprobante);
+        _id && activeRemito(_id)
+    };
+
+    const agregarRemitoACuentaCorriente = () => {
+        _id && startAgregarRemitoParaCTACTE(_id)
+    };
+
   return (
-    <tr className="bg-white hover:bg-yellow-50 border border-gray-200 rounded-sm hover:cursor-pointer">
+    <tr className={`bg-white hover:bg-yellow-50 border border-gray-200 rounded-sm hover:cursor-pointer ${remitoActive?._id === _id ? 'bg-yellow-100' : ''} `} onClick={traerMovimientos}>
         <td className="py-2">
             <div className="flex gap-2 items-center">
                 <GoCalendar className="text-gray-500"/>
@@ -32,6 +42,12 @@ export const RemitoListItem = ({fecha, cliente, nombreCliente, tipoComprobante, 
         </td>
 
         <td>{observaciones}</td>
+
+        <td>
+            <div className="flex p-2">
+                <input type="checkbox" name={_id} id={_id} className="scale-125" onClick={agregarRemitoACuentaCorriente}/>
+            </div>
+        </td>
     </tr>
   )
-}
+};

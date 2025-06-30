@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Remito } from "../types/remito";
-import { addRemito, deleteRemito, finishSavingRemito, savingRemito, setActiveRemito, setRemitos, updateRemito } from "../store/remito/remitoSlice";
-import Swal from "sweetalert2";
+
 import comercioApi from "../api/comercioApi";
+
+import { addRemito, addRemitosCTACTE, deleteRemito, finishSavingRemito, savingRemito, setActiveRemito, setRemitos, updateRemito } from "../store/remito/remitoSlice";
+import { Remito } from "../types/remito";
+
+import Swal from "sweetalert2";
 
 interface RootState {
     remito: {
@@ -10,11 +13,12 @@ interface RootState {
         remitoActive: Remito | null;
         isSavingRemito: boolean;
         messageErrorRemito: string | null;
+        remitosParaCuentaCorriente: Remito[]
     }
 }
 
 export const useRemitoStore = () => {
-    const {remitoActive, remitos, isSavingRemito, messageErrorRemito } = useSelector((state: RootState) => state.remito);
+    const {remitoActive, remitos, isSavingRemito, messageErrorRemito, remitosParaCuentaCorriente } = useSelector((state: RootState) => state.remito);
     const dispatch = useDispatch();
     
     const activeRemito = (id: string) => {
@@ -96,6 +100,29 @@ export const useRemitoStore = () => {
         }
     };
 
+    const startTraerRemitosNoActivos = async() => {
+        dispatch(savingRemito());
+        try {
+            const { data } = await comercioApi.get('/remito/remitoNoActivo');
+            if(data.ok){
+                dispatch(setRemitos(data.remitos));
+            }else{
+                await Swal.fire('No se pudo obtener los remitos no activos', data.msg, 'error');
+            }
+        } catch (error) {
+            console.log(error)
+            await Swal.fire('No se pudo obtener los remitos no activos', error?.response?.data?.msg, 'error');
+        }finally{
+            dispatch(finishSavingRemito())
+        }
+    };
+
+    const startAgregarRemitoParaCTACTE = async(id: string) => {
+        dispatch(savingRemito());
+
+        dispatch(addRemitosCTACTE(id))
+    };
+
 
     return {
         //Atributos
@@ -103,12 +130,15 @@ export const useRemitoStore = () => {
         remitoActive,
         isSavingRemito,
         messageErrorRemito,
+        remitosParaCuentaCorriente,
 
         //Metodos
         activeRemito,
         startAgregarRemito,
         startBorrarRemito,
         startModificarRemito,
-        startTraerRemitosAtivos
+        startTraerRemitosAtivos,
+        startTraerRemitosNoActivos,
+        startAgregarRemitoParaCTACTE
     }
 };

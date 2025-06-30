@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Buscador } from '../Buscador'
+import { useRemitoStore } from '../../hooks';
 
 interface Props {
-    buscador: string,
-    setBuscador: React.Dispatch<React.SetStateAction<string>>
+    buscador: string;
+    setBuscador: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const HeaderRemito = ({buscador, setBuscador}: Props) => {
 
+    const {startTraerRemitosNoActivos, startTraerRemitosAtivos} = useRemitoStore();
     const [buttonActive, setButtonActive] = useState<string>('Sin Pasar');
+
+    useEffect(() => {
+        if(buttonActive === 'Pasado'){
+            startTraerRemitosNoActivos();
+        }else{
+            startTraerRemitosAtivos()
+        }
+    }, [buttonActive])
 
     const pasarACuentaCorriente = () => {
         console.log("a")
@@ -26,7 +36,7 @@ export const HeaderRemito = ({buscador, setBuscador}: Props) => {
             buttonText='Pasar a Cta. Cte.'
             buscador={buscador}
             setBuscador={setBuscador}
-            hiddenButton={false}
+            hiddenButton={buttonActive === 'Pasado' ? true : false}
             modal={pasarACuentaCorriente}
             />
     </div>

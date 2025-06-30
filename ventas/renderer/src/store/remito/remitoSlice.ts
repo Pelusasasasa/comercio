@@ -4,12 +4,14 @@ import { Remito } from '../../types/remito';
 interface RemitoState {
     remitoActive: Remito | null;
     remitos: Remito[];
+    remitosParaCuentaCorriente: Remito[];
     isSavingRemito: boolean;
     messageErrorRemito: string | null;
 };
 
 const initialState: RemitoState = {
     remitos: [],
+    remitosParaCuentaCorriente: [],
     remitoActive: null,
     isSavingRemito: false,
     messageErrorRemito: null
@@ -52,6 +54,11 @@ export const remitoSlice = createSlice({
         },
         finishSavingRemito: (state) => {
             state.isSavingRemito = false
+        },
+        addRemitosCTACTE: (state, {payload}: PayloadAction<string>) => {
+            const remito = state.remitos.find(elem => elem._id === payload);
+            remito && state.remitosParaCuentaCorriente.push(remito);
+            state.isSavingRemito = false;
         }
     }
 });
@@ -60,6 +67,7 @@ export const remitoSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
     addRemito,
+    addRemitosCTACTE,
     deleteRemito,
     finishSavingRemito,
     updateRemito,

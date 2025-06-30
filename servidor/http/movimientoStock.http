@@ -17,13 +17,13 @@ Content-Type: application/json
 
 {
     "producto": "685323884877c5304c9add51",
-    "tipo": "comprobante",
+    "tipo": "REMITO",
     "cantidad": 1,
     "precio": 5000,
     "stockAntes": 9,
     "stockAhora": 8,
     "detalle": "",
-    "numeroComprobante": "0001-00000031",
+    "numeroComprobante": "RT-0001-00000001",
     "creadoPor": "684c8b934f2e0d9c408e47e2"
 }
 

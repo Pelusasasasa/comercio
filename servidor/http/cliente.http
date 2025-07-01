@@ -7,6 +7,9 @@ GET http://localhost:3000/comercio/cliente
 ###GET ONE
 GET http://localhost:3000/comercio/cliente/6851718939e2c7b4683fcdaa
 
+###GET POR BUSQUEDA
+GET http://localhost:3000/comercio/cliente/busqueda/00000000
+
 ###MODIFICAR CLIENTE
 PUT http://localhost:3000/comercio/cliente/684abeb07f16faf8ae89a064
 Content-Type: application/json

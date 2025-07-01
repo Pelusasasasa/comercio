@@ -6,9 +6,9 @@ export interface ClienteFormState  {
     telefono: string,
     direccion: string,
     localidad: string,
-    email: string,
+    email?: string,
     condicionCuenta: string,
     condicionIva: string,
-    observaciones: string,
+    observaciones?: string,
     saldo?: number
 };

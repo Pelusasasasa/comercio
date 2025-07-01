@@ -138,6 +138,33 @@ const traerClientePorCodigo = async(req, res) => {
     };
 };
 
+const traerClientesPorBusqueda = async(req, res) => {
+    const { text } = req.params;
+
+    try {
+        const clientes = await Cliente.find({ 
+            $or: [
+                {nombre: new RegExp(text, 'i')},
+                {codigo: isNaN(text) ? undefined : Number(text)},
+                {dni: new RegExp(text, 'i')}
+            ]
+        });
+
+
+        res.status(200).json({
+            ok: true,
+            clientes
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al traer cliente, hable con el administrador'
+        })
+    };
+
+}
+
 
 module.exports = {
     borrarCliente,
@@ -145,5 +172,6 @@ module.exports = {
     modificarCliente,
     traerClientes,
     traerClientePorId,
-    traerClientePorCodigo
+    traerClientePorCodigo,
+    traerClientesPorBusqueda
 };

@@ -1,18 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Venta } from '../../types/venta';
+import { ClienteFormState } from '../../types/cliente';
 
 interface VentaState {
     ventaActive: Venta | null;
     ventas: Venta[];
     isSavingVenta: boolean;
     messageErrorVenta: string | null;
+    clienteActivo: ClienteFormState | null;
+    clientes: ClienteFormState[];
 };
 
 const initialState: VentaState = {
     ventas: [], 
+    clientes: [],
     ventaActive: null,
     isSavingVenta: false,
-    messageErrorVenta: null
+    messageErrorVenta: null,
+    clienteActivo: null
+    
 }
 
 export const ventaSlice = createSlice({
@@ -50,7 +56,14 @@ export const ventaSlice = createSlice({
         },
         finishSavingVenta: (state) => {
             state.isSavingVenta = false
+        },
+        setClienteActive: (state, { payload }: PayloadAction<ClienteFormState>) => {
+            state.clienteActivo = payload;
+        },
+        setClientes: (state, { payload }: PayloadAction<ClienteFormState[]>) => {
+            state.clientes = payload
         }
+        
     }
 });
 
@@ -64,5 +77,8 @@ export const {
     savingVenta,
     setActiveVenta,
     setVentas,
-    clearVentas
+    clearVentas,
+
+    setClienteActive,
+    setClientes,
 } = ventaSlice.actions;

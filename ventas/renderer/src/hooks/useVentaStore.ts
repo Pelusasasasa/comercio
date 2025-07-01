@@ -1,21 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Venta } from "../types/venta";
-import { addVenta, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setVentas, updateVenta } from "../store/venta/ventaSlice";
+import { addVenta, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setClienteActive, setClientes, setVentas, updateVenta } from "../store/venta/ventaSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
+import { ClienteFormState } from "../types/cliente";
 
 interface RootState {
     venta: {
-        ventas: Venta[],
-        ventaActive: Venta | null,
-        isSavingVenta: boolean,
-        messageErrorVenta: string | null
+        ventas: Venta[];
+        ventaActive: Venta | null;
+        isSavingVenta: boolean;
+        messageErrorVenta: string | null;
+        clientes: ClienteFormState[];
+        clienteActivo: ClienteFormState | null;
     }
 }
 
 export const useVentaStore = () => {
 
-    const { isSavingVenta, ventas, messageErrorVenta, ventaActive} = useSelector((state: RootState) => state.venta);
+    const { isSavingVenta, ventas, messageErrorVenta, ventaActive, clienteActivo, clientes} = useSelector((state: RootState) => state.venta);
     const dispatch = useDispatch();
 
     const startAgregarVenta = async(venta: Venta) => {
@@ -109,18 +112,56 @@ export const useVentaStore = () => {
         }
     };
 
+    const startTraerClienteParaVenta = async(id: string) => {
+        try {
+            const { data } = await comercioApi.get(`cliente/codigo/${id}`);
+
+            if(data.ok){
+                dispatch(setClienteActive(data.cliente))
+            }else{
+                await Swal.fire('No se pudo obtener el cliente', data.msg, 'error')
+            }
+        } catch (error) {
+            console.log(error);
+            await Swal.fire('No se pudo obtener el cliente', error.response?.data?.msg, 'error');
+        }
+    };
+    
+    const startTraerClientesParaVentas = async(text: string) => {
+        dispatch(savingVenta())
+
+        try {
+            const { data } = await comercioApi.get(`cliente/busqueda/${text}`);
+
+            if(data.ok){
+                dispatch(setClientes(data.clientes));
+            }else{
+                await Swal.fire('No se pudo obtener los clientes', data.msg, 'error');
+            }
+        } catch (error) {
+            console.log(error);
+            await Swal.fire('No se pudo obtener los clientes', error.response?.data?.msg, 'error');
+        }
+    }
+
     return {
         //Atributos
         ventaActive,
         ventas,
         isSavingVenta,
         messageErrorVenta,
+        clienteActivo,
+        clientes,
 
         //Metodos
         startAgregarVenta,
         startBorrarVenta,
         startModificarVenta,
         startTraerVentaPorId,
-        startTraerVentas
+        startTraerVentas,
+
+        //Aux
+        startTraerClienteParaVenta,
+        startTraerClientesParaVentas
     }
 }

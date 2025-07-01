@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navbar } from '../components/Navbar';
 import { HeaderCategoria } from '../components/categoria/HeaderCategoria';
 import { HandleCategoria } from '../components/categoria/HandleCategoria';
@@ -6,7 +6,7 @@ import { useCategoriaStore } from '../hooks/useCategoriaStore';
 import { CategoriaList } from '../components/categoria/CategoriaList';
 import { Categoria as cat } from '../types/categoria';
 
-const Categoria = () => {
+export const Categoria = () => {
     const { categorias } = useCategoriaStore();
     //TODO ESTADISTICA
 
@@ -31,6 +31,4 @@ const Categoria = () => {
         {handleCategoria && <HandleCategoria setHandleCategoria={setHandleCategoria}/>}
     </section>
   )
-}
-
-export default Categoria
+};

@@ -1,20 +1,19 @@
 import { Route, Routes } from 'react-router-dom'
 
 import { AppLoader } from './AppLoader'
+import { Categoria } from './pages/Categoria'
+import { Clientes } from './pages/Clientes'
+import { Consultar } from './pages/Consultar'
+import { Home } from './pages/Home'
 import { Marca } from './pages/Marca'
+import { Numero } from './pages/Numero'
+import { Productos } from './pages/Productos'
 import { Recibo } from './pages/Recibo'
+import { Remito } from './pages/Remito'
 import { Usuario } from './pages/Usuario'
-import {Clientes} from './pages/Clientes'
-import {Consultar} from './pages/Consultar'
-import {Home} from './pages/Home'
-import {Numero} from './pages/Numero'
-import {Productos} from './pages/Productos'
+import { Venta } from './pages/Venta'
 
 import './App.css'
-import Categoria from './pages/Categoria'
-import { Remito } from './pages/Remito'
-
-
 
 function App() {
 
@@ -31,6 +30,7 @@ function App() {
         <Route path='/marca' element={<Marca/>}/>
         <Route path='/categoria' element={<Categoria/>}/>
         <Route path='/remito' element={<Remito/>}/>
+        <Route path='/Venta' element={<Venta/>}/>
       </Route>
     </Routes>
   )

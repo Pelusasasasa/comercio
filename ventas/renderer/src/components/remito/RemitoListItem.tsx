@@ -2,7 +2,7 @@ import { GoCalendar, GoPerson } from "react-icons/go"
 import { Remito } from "../../types/remito"
 import { useMovimientoStore, useRemitoStore } from "../../hooks";
 
-export const RemitoListItem = ({_id, fecha, cliente, nombreCliente, tipoComprobante, numeroComprobante, observaciones}: Remito) => {
+export const RemitoListItem = ({_id, fecha, cliente, nombreCliente, tipoComprobante, pasado, numeroComprobante, observaciones}: Remito) => {
 
     const {traerMovimientosPorTipoYNumero } = useMovimientoStore();
     const { activeRemito, remitoActive, remitosParaCuentaCorriente, startAgregarRemitoParaCTACTE} = useRemitoStore();
@@ -44,9 +44,9 @@ export const RemitoListItem = ({_id, fecha, cliente, nombreCliente, tipoComproba
         <td>{observaciones}</td>
 
         <td>
-            <div className="flex p-2">
+            { !pasado && <div className="flex p-2">
                 <input type="checkbox" name={_id} id={_id} className="scale-125" onClick={agregarRemitoACuentaCorriente}/>
-            </div>
+            </div>}
         </td>
     </tr>
   )

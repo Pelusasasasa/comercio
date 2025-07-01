@@ -22,6 +22,7 @@ export const HeaderRemito = ({buscador, setBuscador}: Props) => {
 
     const pasarACuentaCorriente = () => {
         console.log("a")
+        //TODO Pasar a Cuenta Corriente
     }
 
   return (

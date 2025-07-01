@@ -7,7 +7,7 @@ export const MovListItem = ({_id, producto, cantidad, precio}) => {
   const { isSavingMovimiento } = useMovimientoStore();
 
   const handleUpdateMovimiento = () => {
-    
+    //TODO Modificar Movimiento
   }
 
   return (

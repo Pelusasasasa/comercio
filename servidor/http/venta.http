@@ -1,0 +1,32 @@
+###DELETE ONE
+DELETE http://localhost:3000/comercio/venta/
+
+### GET ALL 
+GET http://localhost:3000/comercio/venta
+
+###GET ONE
+GET http://localhost:3000/comercio/venta/6863cc5d3ec178ae8ec47008
+
+
+###POST ONE
+POST http://localhost:3000/comercio/venta
+Content-Type: application/json
+
+{
+    "codigoCliente": "684abeb07f16faf8ae89a064",
+    "precio": 30000,
+    "descuento": 0,
+    "tipoComprobante": "CONTADO",
+    "numeroComprobante": "CT-0001-00000001",
+    "factura": false
+
+}
+
+
+###PUT ONE
+PUT http://localhost:3000/comercio/venta/684abeb07f16faf8ae89a064
+Content-Type: application/json
+
+{
+    "precio": 3000
+}

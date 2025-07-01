@@ -28,6 +28,7 @@ app.use('/comercio/recibo', require('./routes/recibo.route'));
 app.use('/comercio/remito', require('./routes/remito.route'));
 app.use('/comercio/tarjeta', require('./routes/tarjeta.route'));
 app.use('/comercio/tipoTarjeta', require('./routes/tipoTarjeta.route'));
+app.use('/comercio/venta', require('./routes/venta.route'));
 app.use('/comercio/unidadMedida', require('./routes/unidadMedida.route'));
 app.use('/comercio/usuario', require('./routes/usuario.route'));
 

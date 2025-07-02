@@ -10,5 +10,5 @@ export interface ClienteFormState  {
     condicionCuenta: string,
     condicionIva: string,
     observaciones?: string,
-    saldo?: number
+    saldo?: number | 0
 };

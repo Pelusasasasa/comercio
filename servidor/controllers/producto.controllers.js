@@ -125,6 +125,29 @@ const traerProductos = async(req, res) => {
     }
 };
 
+const traerProductosPorBusqueda = async(req, res) => {
+    const { text } = req.params;
+    try {
+        const productos = await Producto.find({
+            $or: [
+                {codigo: new RegExp(text, 'i')},
+                {descripcion: new RegExp(text, 'i')},
+            ]
+        }).populate('marca', 'nombre').populate('categoria', 'nombre');
+
+        res.status(200).json({
+            ok: true,
+            productos
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'No se pudo obtener los productos, hable con el adminstrador'
+        })
+    }
+}
+
 
 module.exports = {
     borrarProducto,
@@ -132,4 +155,5 @@ module.exports = {
     modificarProducto,
     traerProductoPorId,
     traerProductos,
+    traerProductosPorBusqueda
 }

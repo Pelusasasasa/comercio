@@ -3,6 +3,12 @@ import { Marca } from "./marca";
 import { Provedor } from "./provedor";
 import { UnidadMedida } from "./unidadMedida";
 
+
+export interface ProductoActivo extends Producto {
+    cantidad: number | 1
+}
+
+
 export interface Producto {
     _id: string,
     codigo: string,

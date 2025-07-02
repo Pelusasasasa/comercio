@@ -1,8 +1,20 @@
 import React, { useState } from 'react'
 import { Button } from '../Button'
 import { useNavigate } from 'react-router-dom'
+import { useVentaStore } from '../../hooks/useVentaStore'
+import { useForm } from '../../hooks/Useform'
+
+
+const initialState = { 
+    precio: 0
+}
 
 export const BotonesVenta = () => {
+
+    const { ventaActive } = useVentaStore()
+
+    const { precio, onInputChange } = useForm(ventaActive ?? initialState)
+
     const navigate = useNavigate();
 
     const [impresion, setImpresion] = useState<boolean>(true);
@@ -44,8 +56,8 @@ return (
 
                 <div className='flex items-center gap-4'>
                     <div className='flex gap-2 items-center'>
-                        <label htmlFor="total" className='text-sm font-bold text-[#8B4513]'>Total</label>
-                        <input type="number" name="total" id="total" className='font-bold border w-[150px] border-gray-400 bg-white rounded-lg px-2 py-1' />
+                        <label htmlFor="precio" className='text-sm font-bold text-[#8B4513]'>Total</label>
+                        <input type="number" name="precio" id="precio" value={precio} onChange={onInputChange} className='font-bold border w-[150px] border-gray-400 bg-white rounded-lg px-2 py-1' />
                     </div>
 
                     <div className='flex gap-2 items-center'>

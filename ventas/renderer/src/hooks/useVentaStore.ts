@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Venta } from "../types/venta";
-import { addVenta, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setClienteActive, setClientes, setVentas, updateVenta } from "../store/venta/ventaSlice";
+import { addProductoAVentaActiva, addVenta, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateVenta } from "../store/venta/ventaSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 import { ClienteFormState } from "../types/cliente";
+import { Producto, ProductoActivo } from "../types/producto";
 
 interface RootState {
     venta: {
@@ -12,13 +13,15 @@ interface RootState {
         isSavingVenta: boolean;
         messageErrorVenta: string | null;
         clientes: ClienteFormState[];
+        productos: Producto[];
         clienteActivo: ClienteFormState | null;
+        productoActivo: ProductoActivo | null;
     }
 }
 
 export const useVentaStore = () => {
 
-    const { isSavingVenta, ventas, messageErrorVenta, ventaActive, clienteActivo, clientes} = useSelector((state: RootState) => state.venta);
+    const { isSavingVenta, ventas, messageErrorVenta, ventaActive, clienteActivo, clientes, productos, productoActivo} = useSelector((state: RootState) => state.venta);
     const dispatch = useDispatch();
 
     const startAgregarVenta = async(venta: Venta) => {
@@ -142,7 +145,58 @@ export const useVentaStore = () => {
             console.log(error);
             await Swal.fire('No se pudo obtener los clientes', error.response?.data?.msg, 'error');
         }
+    };
+
+    const startTraerProductoParaVenta = async(id: string) => {
+        try {
+            const { data } = await comercioApi.get(`producto/${id}`);
+
+            if(data.ok){
+                data.producto.cantidad = 1;
+                dispatch(setProductoActive(data.producto))
+            }else{
+                await Swal.fire('No se pudo obtener el producto', data.msg, 'error')
+            }
+        } catch (error) {
+            console.log(error);
+            await Swal.fire('No se pudo obtener el producto', error.response?.data?.msg, 'error')
+        }
     }
+
+    const startTraerProductosParaVentas = async(text: string) => {
+      dispatch(savingVenta());
+
+      try {
+        const { data } = await comercioApi.get(`producto/busqueda/${text}`);
+
+        if(data.ok){
+            dispatch(setProductos(data.productos));
+        }else{
+            await Swal.fire('No se pudo obtener los productos', data.msg, 'error');
+        }
+      } catch (error) {
+        console.log(error)
+        await Swal.fire('No se pudo obtener los productos', error.response?.data?.msg, 'error')
+      }
+    };
+
+    const startClearClientesParaVentas = async() => {
+        dispatch(setClientes([]))
+    };
+
+    const startClearProductosParaVentas = async() => {
+        dispatch(setProductos([]))
+    };
+
+    const startAgregarProductoAVentaActiva = async(producto: ProductoActivo, cantidad: string) => {
+        const productoModificado = {...producto, cantidad: parseFloat(cantidad)}
+        dispatch(addProductoAVentaActiva(productoModificado))
+    };
+    
+    const startDeleteProductoAVentaActiva = async(id: string) => {
+        dispatch(deleteProductoAVentaActiva(id));
+    }
+
 
     return {
         //Atributos
@@ -152,6 +206,8 @@ export const useVentaStore = () => {
         messageErrorVenta,
         clienteActivo,
         clientes,
+        productos,
+        productoActivo,
 
         //Metodos
         startAgregarVenta,
@@ -159,9 +215,17 @@ export const useVentaStore = () => {
         startModificarVenta,
         startTraerVentaPorId,
         startTraerVentas,
+        
 
         //Aux
         startTraerClienteParaVenta,
-        startTraerClientesParaVentas
+        startTraerClientesParaVentas,
+        startClearClientesParaVentas,
+
+        startTraerProductoParaVenta,
+        startTraerProductosParaVentas,
+        startClearProductosParaVentas,
+        startAgregarProductoAVentaActiva,
+        startDeleteProductoAVentaActiva
     }
 }

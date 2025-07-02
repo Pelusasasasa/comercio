@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Venta } from '../../types/venta';
 import { ClienteFormState } from '../../types/cliente';
-import { Producto, ProductoActivo } from '../../types/producto';
+import { ProductoActivo } from '../../types/producto';
 
 interface VentaState {
     ventaActive: Venta | null;
@@ -13,7 +13,7 @@ interface VentaState {
     productoActivo: ProductoActivo | null;
 
     clientes: ClienteFormState[];
-    productos: Producto[]
+    productos: ProductoActivo[];
 };
 
 const initialState: VentaState = {
@@ -21,14 +21,30 @@ const initialState: VentaState = {
     clientes: [],
     productos: [],
 
-    ventaActive: null,
+    ventaActive: {
+        productos: [],
+        fecha: '',
+        precio: 0,
+        codigoCliente: '',
+        factura: false,
+        numeroComprobante: '',
+        tipoComprobante: '',
+        descuento: 0,
+    },
     clienteActivo: null,
     productoActivo: null,
 
     isSavingVenta: false,
     messageErrorVenta: null,
-    
-    
+};
+
+const calculartotal = (arreglo: ProductoActivo[]): number => {
+    //Funcion para calcular el total de el precio de los productos * la cantidad
+    let total = arreglo.reduce((acc, item) => {
+        return acc + (item.precio * item.cantidad)
+    }, 0);
+
+    return total;
 }
 
 export const ventaSlice = createSlice({
@@ -77,42 +93,49 @@ export const ventaSlice = createSlice({
         setProductoActive: (state, { payload }: PayloadAction<ProductoActivo>) => {
             state.productoActivo = payload;
         },
-        setProductos: (state, { payload }: PayloadAction<Producto[]>) => {
+        setProductos: (state, { payload }: PayloadAction<ProductoActivo[]>) => {
             state.productos = payload;
             state.isSavingVenta = false;
         },
 
         addProductoAVentaActiva: (state, { payload }: PayloadAction<ProductoActivo>) => {
-            if(state.ventaActive){
-                const producto = state.ventaActive.productos.find(elem => elem._id === payload._id) as ProductoActivo;
-                if(producto){
-                    producto.cantidad = (producto.cantidad) + (payload.cantidad);
-                }else{
-                    state.ventaActive?.productos.push(payload)
-                }
-            }else{
-                state.ventaActive = {
-                    productos: [],
-                    fecha: '',
-                    precio: 0,
-                    codigoCliente: '',
-                    factura: false,
-                    numeroComprobante: '',
-                    tipoComprobante: '',
-                    descuento: 0,
-                }
-                state.ventaActive.productos = [];
-                state.ventaActive?.productos.push(payload)
-            }
 
+            if (!state.ventaActive) return;
+            const index = state.ventaActive?.productos.findIndex(elem => elem._id === payload._id);
+
+            if(index !== -1){
+                const producto = state.ventaActive?.productos[index];
+                const cantidadAnterior = producto.cantidad || 0;
+                const cantidadNueva = payload.cantidad  || 0;
+                state.ventaActive.productos[index] = {
+                    ...producto,
+                    cantidad: cantidadAnterior + cantidadNueva,
+                };
+            }else{
+                state.ventaActive.productos.push({
+                    ...payload,
+                    cantidad: payload.cantidad || 1
+                }) ;
+            };
+             
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
             state.productoActivo = null;
         },
 
         deleteProductoAVentaActiva: (state, { payload }: PayloadAction<string>) => {
-            if(state.ventaActive){
-                state.ventaActive.productos = state.ventaActive?.productos.filter(elem => elem._id !== payload);
-            }
+            if(!state.ventaActive) return;
+
+            state.ventaActive.productos = state.ventaActive?.productos.filter(elem => elem._id !== payload);
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
         },
+
+        activeProductoVenta: (state, {payload}: PayloadAction<string>) => {
+            console.log(payload)
+            if(!state.ventaActive?.productos) return;
+
+            state.productoActivo = state.ventaActive?.productos.find(elem => elem._id === payload);
+            
+        }
         
     }
 });
@@ -132,7 +155,8 @@ export const {
     setActiveVenta,
     setVentas,
     clearVentas,
-
+    
+    activeProductoVenta,
     setClienteActive,
     setClientes,
     setProductoActive,

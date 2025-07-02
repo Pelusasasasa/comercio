@@ -1,5 +1,5 @@
 import { ClienteFormState } from "./cliente";
-import { Producto } from "./producto";
+import { Producto, ProductoActivo } from "./producto";
 
 export interface Venta {
     _id?: string;
@@ -10,5 +10,5 @@ export interface Venta {
     numeroComprobante: string;
     tipoComprobante: string;
     descuento: number;
-    productos: Producto[];
+    productos: ProductoActivo[];
 }

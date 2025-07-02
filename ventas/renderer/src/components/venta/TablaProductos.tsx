@@ -1,8 +1,12 @@
+import React, { ReactElement, SetStateAction } from "react";
 import { useVentaStore } from "../../hooks/useVentaStore";
 import { ProductoItem } from "./ProductoItem";
 
+interface Props {
+    setModalModificarProducto: React.Dispatch<SetStateAction<Boolean>>
+}
 
-export const TablaProductos = () => {
+export const TablaProductos = ({setModalModificarProducto}: Props) => {
 
     const { ventaActive } = useVentaStore();
 
@@ -31,7 +35,7 @@ export const TablaProductos = () => {
             <tbody>
                 {
                     ventaActive?.productos.map(producto => (
-                        <ProductoItem key={producto._id}  {...producto}/>
+                        <ProductoItem key={producto._id}  {...producto} cantidad={'1'} setModalModificarProducto={setModalModificarProducto}/>
                     ))
                 }
             </tbody>

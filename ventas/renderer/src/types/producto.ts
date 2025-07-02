@@ -15,14 +15,14 @@ export interface Producto {
     descripcion: string,
     precio: number,
     stock: number,
-    categoria: Categoria,
+    categoria?: string,
     codigoFabrica: string,
-    marca: Marca,
-    provedor: Provedor,
-    unidadMedida: UnidadMedida,
+    marca?: string,
+    provedor?: string,
+    unidadMedida?: string,
     costo: number,
     iva: number,
     utilidad: number,
-    stockMinimo: number,
-    detalle: string
+    stockMinimo?: number,
+    detalle?: string
 }

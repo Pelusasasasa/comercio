@@ -27,6 +27,9 @@ const validarCliente = [
     check('condicionCuenta')
         .optional()
         .isIn(['CONTADO', 'CORRIENTE']).withMessage('Condición de cuenta inválida'),
+    check('tipoCuenta')
+        .isString().withMessage('El tipoCuenta debe ser un texto')
+        .isIn(['NORMAL', 'INSTALADOR']).withMessage('ipo Cuenta inválida'),
     check('condicionIva')
         .optional()
         .isIn(['INSCRIPTO', 'MONOTRIBUTO', 'EXENTO', 'CONSUMIDOR FINAL'])

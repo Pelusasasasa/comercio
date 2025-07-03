@@ -33,10 +33,10 @@ export const Productos = () => {
   }, [buscador || productos])
 
   return (
-    <div>
+    <div className="">
       <Navbar text={'productos'}/>
 
-      <main className="bg-yellow-50 h-[calc(100vh)]">
+      <main className="bg-chocolate h-[calc(100vh-60px)]">
 
         <div className="flex justify-between mx-5">
           <div className="bg-gray-100 flex gap-2 rounded-sm px-2 py-1 my-3">
@@ -52,7 +52,7 @@ export const Productos = () => {
           </div>
         </div>
 
-        <div>
+        <div className="">
           { buttonActive === 'listado' && (<ListadoProductos setButtonActive={setButtonActive} productos={listado}/>)}
           { buttonActive === 'agregar' && (<HandleProducto setButtonActive={setButtonActive} />)}
           { buttonActive === 'movimiento' && (<Movimientos setButtonActive={setButtonActive} />)}

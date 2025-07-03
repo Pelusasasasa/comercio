@@ -59,6 +59,11 @@ const Cliente = new Schema({
             trim: true,
             set: value => value.toUpperCase()
         },
+        tipoCuenta: {
+            type: String,
+            enum: ['NORMAL', 'INSTALADOR'],
+            require: true
+        },
         activo: {
             type: Boolean,
             default: true

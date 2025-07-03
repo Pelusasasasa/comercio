@@ -14,7 +14,7 @@ export const Movimientos = ({setButtonActive}: Props) => {
     }, []);
 
   return (
-    <div className='mx-10 border botder-gray-200 '>
+    <div className='mx-2 border border-gray-200 min-h-[calc(100vh-150px)] bg-white'>
         <h3 className='text-2xl m-5 font-medium'>Historia de movimientos</h3>
 
         <table className='w-full'>

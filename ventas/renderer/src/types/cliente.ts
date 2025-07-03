@@ -9,6 +9,10 @@ export interface ClienteFormState  {
     email?: string,
     condicionCuenta: string,
     condicionIva: string,
+    tipoCuenta: string,
     observaciones?: string,
     saldo?: number | 0
 };
+
+
+export interface Cliente extends Omit<ClienteFormState, '_id'>{}

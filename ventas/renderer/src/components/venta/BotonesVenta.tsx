@@ -11,7 +11,7 @@ const initialState = {
 
 export const BotonesVenta = () => {
 
-    const { ventaActive } = useVentaStore()
+    const { ventaActive, clienteActivo } = useVentaStore();
 
     const { precio, onInputChange } = useForm(ventaActive ?? initialState)
 
@@ -42,10 +42,14 @@ return (
                             <label htmlFor="contado" className='text-sm font-bold text-[#8b4513]'>Contado</label>
                         </div>
 
-                        <div className='flex items-center gap-2'>
-                            <input className='scale-125' type="radio" name="tipoComprobante" id="cuentaCorriente" />
-                            <label htmlFor="cuentaCorriente" className='text-sm font-bold text-[#8b4513]'>Cuenta Corriente</label>
-                        </div>
+                        {
+                            clienteActivo?.condicionCuenta === 'CORRIENTE' && (
+                                <div className='flex items-center gap-2'>
+                                    <input className='scale-125' type="radio" name="tipoComprobante" id="cuentaCorriente" />
+                                    <label htmlFor="cuentaCorriente" className='text-sm font-bold text-[#8b4513]'>Cuenta Corriente</label>
+                                </div>
+                            )
+                        }
 
                         <div className='flex items-center gap-2'>
                             <input className='scale-125' type="radio" name="tipoComprobante" id="remito" />

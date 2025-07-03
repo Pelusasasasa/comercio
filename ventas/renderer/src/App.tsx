@@ -13,7 +13,6 @@ import { Remito } from './pages/Remito'
 import { Usuario } from './pages/Usuario'
 import { Venta } from './pages/Venta'
 
-import './App.css'
 
 function App() {
 

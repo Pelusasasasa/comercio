@@ -69,10 +69,10 @@ const HandleProducto = ({ setButtonActive }: Props) => {
     }
 
   return (
-    <div className="mx-10 border border-gray-200">
-        <h3 className="text-2xl m-5 font-medium">{productoActive ? 'Modificar Producto' : 'Agregar Producto'}</h3>
-        <form onSubmit={agregarProducto}>
-            <div className="grid grid-cols-3 gap-5 py-5 bg-white px-5">
+    <div className="m-2 min-h-[calc(100vh-150px)]">
+        <h3 className="text-2xl p-5 bg-chocolate-200">{productoActive ? 'Modificar Producto' : 'Agregar Producto'}</h3>
+        <form onSubmit={agregarProducto} className="border-gray-200 border rounded-sm">
+            <div className="grid grid-cols-3 gap-5 bg-white px-5">
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="codigo">Codigo *</label>
                     <input onChange={onInputChange} disabled={productoActive ? true : false} value={codigo} className={`${productoActive ? 'bg-gray-200' : ''} border border-gray-400 rounded-sm p-1`} placeholder='Codigo' type="text" name="codigo" id="codigo" />
@@ -151,14 +151,16 @@ const HandleProducto = ({ setButtonActive }: Props) => {
                     <label className='font-medium mb-1' htmlFor="stockMinimo">Stock Minimo</label>
                     <input onChange={onInputChange} value={stockMinimo} className='border border-gray-400 rounded-sm p-1' placeholder='stockMinimo' type="number" name="stockMinimo" id="stockMinimo" />
                 </div>
+
+                <div className='flex flex-col col-span-3 bg-white pb-2'>
+                    <label className='font-medium mb-1' htmlFor="observaciones">Observaciones</label>
+                    <textarea name="detalle" value={detalle} onChange={onInputChange} id="detalle" placeholder="observaciones adicionales del producto" cols={10} rows={2} className="p-2 border-gray-400 border rounded-sm"></textarea>
+                </div>
             </div>
 
-            <div className='flex flex-col bg-white pb-2'>
-                <label className='font-medium mb-1 mx-5' htmlFor="observaciones">Observaciones</label>
-                <textarea name="detalle" value={detalle} onChange={onInputChange} id="detalle" placeholder="observaciones adicionales del producto" cols={20} rows={5} className="p-2 border-gray-400 border rounded-sm mx-5"></textarea>
-            </div>
 
-            <div className="flex justify-end bg-white pb-5 px-2 gap-5">
+
+            <div className="flex justify-end bg-white p-2 gap-5">
                 <button className="border border-gray-400 p-2 font-medium rounded-md cursor-pointer hover:bg-gray-100" onClick={() => setButtonActive('listado')}>Cancelar</button>
                 { productoActive ? (
                     <button type="button" onClick={modificarProducto} className="rounded-md p-2 font-medium cursor-pointer bg-yellow-500 text-gray-600 hover:bg-yellow-600">Modificar Producto</button>

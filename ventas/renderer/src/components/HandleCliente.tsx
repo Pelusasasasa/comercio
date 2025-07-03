@@ -1,14 +1,13 @@
  import Swal from 'sweetalert2';
 import { useForm } from '../hooks';
 import { useClienteStore } from '../hooks/useClienteStore';
-import { ClienteFormState } from '../types/cliente';
+import { Cliente, ClienteFormState } from '../types/cliente';
 
 interface Props {
     setButtonActive: (arg: string) => void
 }
 
-const initialFormState: ClienteFormState = {
-    _id: '',
+const initialFormState: Cliente = {
     codigo: '',
     nombre: '',
     dni: '',
@@ -17,13 +16,14 @@ const initialFormState: ClienteFormState = {
     localidad: '',
     email: '',
     condicionCuenta: 'CONTADO',
+    tipoCuenta:'NORMAL',
     condicionIva: 'CONSUMIDOR FINAL',
     observaciones: '',
 };
 
 export interface useCliente {
     agregarCliente: (arg: {}) => void,
-    clienteActive: ClienteFormState,
+    clienteActive: Cliente,
     modificarCliente: (arg: {}) => void
 }
 
@@ -39,11 +39,12 @@ const HandleCliente = ({setButtonActive}: Props)  => {
         email, 
         condicionCuenta, 
         condicionIva, 
+        tipoCuenta = 'NORMAL',
         observaciones, 
         formState, 
         onInputChange, 
         onResetForm
-    } = useForm<ClienteFormState>(clienteActive ? clienteActive : initialFormState);
+    } = useForm<Cliente>(clienteActive ? clienteActive : initialFormState);
     
     const cargarCliente = async(e) => {
         e.preventDefault();
@@ -64,10 +65,10 @@ const HandleCliente = ({setButtonActive}: Props)  => {
 
 
   return (
-    <div className='mx-10 border border-gray-200'>
-        <h3 className='text-2xl m-5'>{clienteActive ? 'Modificar Cliente' : 'Agregar Nuevo Cliente'}</h3>
-        <form onSubmit={cargarCliente} className=''>
-            <div className='grid grid-cols-2 gap-5 py-5 bg-white px-5'>
+    <div className='mx-2 border border-gray-100 rounded-sm bg-white min-h-[calc(100vh-150px)]'>
+        <h3 className='text-2xl p-5 bg-chocolate-200 '>{clienteActive ? 'Modificar Cliente' : 'Agregar Nuevo Cliente'}</h3>
+        <form onSubmit={cargarCliente} className='h-full'>
+            <div className='grid grid-cols-2 gap-5 py-5 px-5'>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="codigo">Codigo *</label>
                     <input onChange={onInputChange} value={codigo} className='border border-gray-200 rounded-sm p-1' placeholder='Codigo' type="number" name="codigo" id="codigo" />
@@ -122,12 +123,20 @@ const HandleCliente = ({setButtonActive}: Props)  => {
                 </div>
 
                 <div className='flex flex-col'>
+                    <label className='font-medium mb-1' htmlFor="tipoCuenta">Tipo Cuenta</label>
+                    <select onChange={onInputChange} value={tipoCuenta} className='p-1 border border-gray-200 rounded-md' name="tipoCuenta" id="tipoCuenta">
+                        <option value="NORMAL">Normal</option>
+                        <option value="INSTALADOR">Instalador</option>
+                    </select>
+                </div>
+
+                <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="observaciones">Observaciones</label>
                     <textarea onChange={onInputChange} value={observaciones} className='border border-gray-200 rounded-sm' placeholder='Observaciones' name="observaciones" id="observaciones"></textarea>
                 </div>
             </div>
 
-            <div className='flex justify-end p-5 gap-5 bg-white'>
+            <div className='flex justify-end items-end gap-5 bg-white'>
                 <button type='button' onClick={() => setButtonActive('listado')} className='border rounded-lg hover:bg-gray-100 cursor-pointer p-2 font-medium bg-white border-gray-200'>Cancelar</button>
                 {
                     clienteActive 

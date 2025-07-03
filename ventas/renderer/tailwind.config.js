@@ -1,13 +1,9 @@
-module.exports = {
+export default {
+    content: [
+    "./src/**/*.{js,ts,jsx,tsx}", // Asegurate que los paths apunten a tus archivos
+    ],
     theme: {
         extend: {
-            colors: {
-                textOrange: '#8B4513'
-            },
-            backgroundColor: {
-                'tr': '#FEF9C3'
-            },
-            
         }
     }
 }

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+    --color-chocolate: #dbbf8b;
+    --color-chocolate-200: #e9d3ac
+}
+
 .bgTr:hover{
     background-color: #f8f2af;
 }

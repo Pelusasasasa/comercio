@@ -60,7 +60,7 @@ export const Clientes = () => {
     <>
       <Navbar exportar={exportar} text='clientes'/>
 
-      <main className='bg-yellow-50 h-[calc(100vh-64px)]'>
+      <main className='bg-chocolate h-[calc(100vh-64px)]'>
         <div className='flex justify-between mx-5'>
           <div className='bg-gray-100 flex gap-2 rounded-sm px-2 py-1 my-3'>
             <button onClick={() => setButtonActive('listado')} className={`rounded-sm font-medium cursor-pointer p-2 ${buttonActive === 'listado' ? 'bg-white' : 'text-gray-400'}`}>Listado de Clientes</button>
@@ -68,7 +68,7 @@ export const Clientes = () => {
           </div>
 
           <div className='flex items-center gap-5'>
-            <div className='flex border-gray-300 rounded-sm border gap-2 items-center bg-white p-2'>
+            <div className='flex border-gray-300 bg-white items-center rounded-sm border gap-2 items-cente p-2'>
               <GoSearch color='gray'/>
               <input type="text" placeholder='Buscar Por Nombre, codigo o CUIT' className='p-1 w-[500px]' onChange={(e) => setBuscador(e.target.value)} />
             </div>
@@ -82,7 +82,7 @@ export const Clientes = () => {
             </button>
             {
               listFilter && (
-                <div className='bg-white px-2 border border-gray-200 rounded-sm absolute right-0 top-32'>
+                <div className=' px-2 border border-gray-200 rounded-sm absolute right-0 top-32'>
                   <h3 className='py-1 font-medium'>Filtar Por</h3>
                   <hr />
                   <p className='py-1 hover:bg-gray-100 cursor-pointer rounded-sm px-1' onClick={() => {setFiltro(''), setListFilter(false)}}>Todos Los Clientes</p>

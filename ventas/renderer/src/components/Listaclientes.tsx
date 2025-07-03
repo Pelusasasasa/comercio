@@ -3,10 +3,8 @@ import { ClienteRow } from './ClienteRow'
 
 export const Listaclientes = ({clientes, setButtonActive}) => {
   return (
-    <div className='h-screen mx-2 border border-gray-200 rounded-md'>
-        <div className='bg-yellow-100 p-2'>
-            <h3 className='mx-10 my-2 font-medium text-xl'>Total: {clientes.length} Clientes</h3>
-        </div>
+    <div className='min-h-[calc(100vh-150px)] mx-2 border bg-white border-gray-200 rounded-md'>
+        <h3 className='text-2xl p-5 bg-chocolate-200'>Total: {clientes.length} Clientes</h3>
         <table className='w-full'>
             <thead>
                 <tr className='bg-gray-100'>

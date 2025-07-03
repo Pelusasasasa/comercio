@@ -8,9 +8,9 @@ export const ListadoProductos = ({productos, setButtonActive}) => {
     const [modalMov, setModalMov] = useState(false);
 
   return (
-    <div className='mx-2 border border-gray-200 rounded-md'>
-        <div className='bg-yellow-100 p-2'>
-            <h3 className='mx-10 my-2 font-medium text-xl'>Total: {productos.length} Productos</h3>
+    <div className='mx-2 border border-gray-200 rounded-md min-h-[calc(100vh-150px)] bg-white'>
+        <div className='bg-chocolate-200 p-2'>
+            <h3 className='text-2xl p-5 bg-chocolate-200'>Total: {productos.length} Productos</h3>
         </div>
         <table className='w-full'>
             <thead>

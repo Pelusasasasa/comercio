@@ -10,7 +10,7 @@ export interface ProductoActivo extends Producto {
 
 
 export interface Producto {
-    _id: string,
+    _id?: string,
     codigo: string,
     descripcion: string,
     precio: number,

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Venta } from "../types/venta";
-import { activeProductoVenta, addProductoAVentaActiva, addVenta, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateVenta } from "../store/venta/ventaSlice";
+import { activeProductoVenta, addProductoAVentaActiva, addVenta, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 import { ClienteFormState } from "../types/cliente";
@@ -199,7 +199,11 @@ export const useVentaStore = () => {
 
     const startActivarProductoDeVentas = async(id: string) => {
         dispatch(activeProductoVenta(id))
-    }
+    };
+
+    const startModficarProductoDeVenta = async(producto: ProductoActivo) => {
+        dispatch(updateProductoVenta(producto));
+    };
 
 
     return {
@@ -226,11 +230,12 @@ export const useVentaStore = () => {
         startTraerClientesParaVentas,
         startClearClientesParaVentas,
 
+        startActivarProductoDeVentas,
+        startAgregarProductoAVentaActiva,
+        startClearProductosParaVentas,
+        startDeleteProductoAVentaActiva,
+        startModficarProductoDeVenta,
         startTraerProductoParaVenta,
         startTraerProductosParaVentas,
-        startClearProductosParaVentas,
-        startAgregarProductoAVentaActiva,
-        startDeleteProductoAVentaActiva,
-        startActivarProductoDeVentas
     }
 }

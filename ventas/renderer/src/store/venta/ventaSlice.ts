@@ -130,12 +130,25 @@ export const ventaSlice = createSlice({
         },
 
         activeProductoVenta: (state, {payload}: PayloadAction<string>) => {
-            console.log(payload)
             if(!state.ventaActive?.productos) return;
-
-            state.productoActivo = state.ventaActive?.productos.find(elem => elem._id === payload);
             
-        }
+            const index = state.ventaActive?.productos.findIndex(elem => elem._id === payload);
+            if(index === -1 )return;
+
+            state.productoActivo =  state.ventaActive.productos[index];
+            
+        },
+
+        updateProductoVenta: (state, { payload }: PayloadAction<ProductoActivo>) => {
+            if(!state.ventaActive) return;
+            
+            state.ventaActive.productos = state.ventaActive?.productos.map(elem =>
+                elem._id === payload._id ? payload : elem
+            );
+
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
+            state.productoActivo = null;
+        },
         
     }
 });
@@ -161,4 +174,6 @@ export const {
     setClientes,
     setProductoActive,
     setProductos,
+    updateProductoVenta,
+
 } = ventaSlice.actions;

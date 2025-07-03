@@ -10,7 +10,6 @@ interface Props extends Producto {
 }
 
 export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, setModalModificarProducto}: Props) => {
-
   const { startDeleteProductoAVentaActiva, startActivarProductoDeVentas } = useVentaStore();
   
   const deleteProducto = () => {
@@ -18,7 +17,7 @@ export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, s
   };
 
   const putProducto = () => {
-    startActivarProductoDeVentas(_id);
+    _id && startActivarProductoDeVentas(_id);
     setModalModificarProducto(true);
   };
 

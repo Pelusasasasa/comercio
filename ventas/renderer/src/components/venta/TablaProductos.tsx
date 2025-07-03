@@ -1,6 +1,7 @@
-import React, { ReactElement, SetStateAction } from "react";
+import React, { ReactElement, SetStateAction, useEffect, useState } from "react";
 import { useVentaStore } from "../../hooks/useVentaStore";
 import { ProductoItem } from "./ProductoItem";
+import { ProductoActivo } from "../../types/producto";
 
 interface Props {
     setModalModificarProducto: React.Dispatch<SetStateAction<Boolean>>
@@ -9,7 +10,6 @@ interface Props {
 export const TablaProductos = ({setModalModificarProducto}: Props) => {
 
     const { ventaActive } = useVentaStore();
-
 
     if(ventaActive?.productos.length === 0) return(
         <section className="border border-gray-200 bg-white rounded-sm mx-2 h-[calc(70vh-200px)] overflow-y-auto no-scroll flex justify-center items-center">
@@ -34,8 +34,9 @@ export const TablaProductos = ({setModalModificarProducto}: Props) => {
             </thead>
             <tbody>
                 {
+
                     ventaActive?.productos.map(producto => (
-                        <ProductoItem key={producto._id}  {...producto} cantidad={'1'} setModalModificarProducto={setModalModificarProducto}/>
+                        <ProductoItem key={producto._id}  {...producto} cantidad={producto.cantidad.toString() ?? '1'} setModalModificarProducto={setModalModificarProducto}/>
                     ))
                 }
             </tbody>

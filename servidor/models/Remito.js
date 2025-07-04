@@ -5,16 +5,22 @@ const Remito = new Schema({
     type: Date,
     default: Date.now
   },
-  cliente: {
+  codigoCliente: {
     type: Types.ObjectId,
     require: true,
     ref: 'Cliente'
   },
-  nombreCliente: {
-    type: String,
-    require: true,
-    set: value => value.toUpperCase()
-  },
+  datosClientes: {
+      nombre: String,
+      direccion: String,
+      telefono: String,
+      dni: String,
+      condicionIva: {
+        type: String,
+        enum: ['CONSUMIDOR FINAL', 'INSCRIPTO', 'MONOTRIBUTO', 'EXENTO'],
+        default: 'CONSUMIDOR FINAL'
+      }
+    },
   tipoComprobante: {
     type: String,
     require: true,

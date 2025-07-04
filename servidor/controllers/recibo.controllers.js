@@ -1,5 +1,5 @@
 const Recibo = require('../models/Recibo');
-const { actualizarNumeroRecibo } = require('../services/numero.services');
+const { actualizarNumero } = require('../services/numero.services');
 
 const borrarRecibo = async(req, res) => {
     const { id } = req.params;
@@ -29,7 +29,7 @@ const borrarRecibo = async(req, res) => {
 
 const crearRecibo = async(req, res) => {
     try {
-        const numero = await actualizarNumeroRecibo('RECIBO');
+        const numero = await actualizarNumero('RECIBO');
         req.body.numeroComprobante = numero;
         req.body.creadoPor = '684c8b934f2e0d9c408e47e2';
 

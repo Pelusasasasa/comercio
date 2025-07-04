@@ -53,7 +53,12 @@ const Venta = new Schema({
     factura: {
         type: Boolean,
         required: true,
-    }
+    },
+    creadoPor: {
+        type: Types.ObjectId,
+        ref: 'Usuario',
+        require: true
+    },
     
 
 });

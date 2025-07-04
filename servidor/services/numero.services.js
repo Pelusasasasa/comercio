@@ -1,6 +1,6 @@
 const Numero = require("../models/Numero");
 
-const actualizarNumeroRecibo = async(tipo) => {
+const actualizarNumero = async(tipo) => {
     
     try {
         const numero = await Numero.findOneAndUpdate(
@@ -8,8 +8,7 @@ const actualizarNumeroRecibo = async(tipo) => {
             { $inc: { numero: 1}},
             {new:true, upsert: true}
         );
-        console.log(numero)
-        return numero.numero
+        return numero
 
     } catch (error) {
         console.log(error);
@@ -17,5 +16,5 @@ const actualizarNumeroRecibo = async(tipo) => {
 };
 
 module.exports = {
-    actualizarNumeroRecibo
+    actualizarNumero
 }

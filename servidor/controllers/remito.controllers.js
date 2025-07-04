@@ -1,4 +1,5 @@
 const Remito = require('../models/Remito');
+const { actualizarNumero } = require('../services/numero.services');
 
 const borrarRemito = async(req, res) => {
     try {
@@ -25,6 +26,8 @@ const borrarRemito = async(req, res) => {
 
 const crearRemito = async(req, res) => {
     try {
+        const numero = await actualizarNumero('REMITO');
+        req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8, '0')}`;
         const remito = new Remito(req.body);
         await remito.save();
 
@@ -87,7 +90,7 @@ const traerRemitos = async(req, res) => {
 const traerRemitosActivos = async(req, res) => {
     try {
         const remitos = await Remito.find({ pasado: false })
-            .populate('cliente', 'codigo');
+            .populate('codigoCliente', ['codigo', 'nombre']);
 
         res.status(200).json({
             ok: true,

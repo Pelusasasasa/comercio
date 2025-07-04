@@ -79,7 +79,6 @@ export const useClienteStore = () => {
             };
 
             const modificarCliente = async(cliente) => {
-                console.log(cliente)
                 dispach(saving());
                 try {
                     const { data } = await comercioApi.put(`cliente/${cliente._id}`, cliente);

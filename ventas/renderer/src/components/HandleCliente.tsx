@@ -8,7 +8,7 @@ interface Props {
 }
 
 const initialFormState: Cliente = {
-    codigo: '',
+    codigo: 0,
     nombre: '',
     dni: '',
     telefono: '',

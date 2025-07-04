@@ -20,8 +20,8 @@ const initialState: ClienteFormState = {
 }
 
 export const HeaderCliente = () => {
-    const { clienteActivo, startTraerClientesParaVentas, startClearClientesParaVentas, clientes, startLimpiarClienteActivo } = useVentaStore()
-    const { codigo, nombre, dni, telefono, direccion, localidad, condicionCuenta, tipoCuenta, observaciones, condicionIva, saldo,  onInputChange, setFormState } = useForm(clienteActivo ?? initialState);
+    const { clienteActivo, startTraerClientesParaVentas, startClearClientesParaVentas, clientes, startModificarClienteActivo } = useVentaStore()
+    const { codigo, nombre, dni, telefono, direccion, localidad, condicionCuenta, tipoCuenta, observaciones, condicionIva, saldo,  onInputChange, formState } = useForm(clienteActivo ?? initialState);
 
     const [bandera, setBandera] = useState<boolean>(false);
 
@@ -34,7 +34,11 @@ export const HeaderCliente = () => {
             setBandera(false)
         };
         
-    }, [codigo])
+    }, [codigo]);
+
+    useEffect(() => {
+        startModificarClienteActivo(formState);
+    }, [nombre, dni, telefono, direccion, localidad, condicionCuenta, tipoCuenta, observaciones, condicionIva])
 
   return (
     <main className="rounded-lg m-2 text-card-foreground shadow-sm mb-2 bg-[#E8D4B0] border-2 border-[#8B4513]">
@@ -65,8 +69,8 @@ export const HeaderCliente = () => {
                 <input className={`border border-gray-400  rounded-lg px-2 py-1 ${clienteActivo?.codigo !== 1 ? 'bg-gray-200' : 'bg-white'}`} type="text" disabled name="saldo" id="saldo" placeholder="35000" value={saldo || 0} onChange={onInputChange}/>
             </div>
             <div className="flex flex-col">
-                <label className="text-sm font-bold text-[#8B4513]" htmlFor="lista">Lista</label>
-                <select name="lista" id="lista" className="border border-gray-400 bg-white rounded-sm px-2 py-1" value={tipoCuenta} onChange={onInputChange} >
+                <label className="text-sm font-bold text-[#8B4513]" htmlFor="tipoCuenta">Lista</label>
+                <select name="tipoCuenta" id="tipoCuenta" className="border border-gray-400 bg-white rounded-sm px-2 py-1" value={tipoCuenta} onChange={onInputChange} >
                     <option value="NORMAL">Normal</option>
                     <option value="INSTALADOR">Instalador</option>
                 </select>

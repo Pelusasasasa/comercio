@@ -13,8 +13,8 @@ export const Remito = () => {
 
   useEffect(() => {
     setRemitosFiltrados(remitos.filter(remito => (
-         remito?.cliente?.codigo?.toString().startsWith(buscador.toUpperCase()) 
-      || remito.nombreCliente.startsWith(buscador.toUpperCase()) 
+      remito?.codigoCliente?.codigo?.toString().startsWith(buscador.toUpperCase()) 
+      || remito?.datosCliente?.nombre.startsWith(buscador.toUpperCase()) 
       || remito.numeroComprobante.includes(buscador.toUpperCase())
     )));
   }, [buscador, remitos]);

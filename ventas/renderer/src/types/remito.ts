@@ -1,15 +1,24 @@
+import { Producto } from "./producto";
+
 export interface Remito {
     _id?: string
     fecha: string;
-    cliente: Cliente;
-    nombreCliente: string;
+    codigoCliente: Cliente;
+    datosCliente?: Cliente;
     numeroComprobante: string;
     tipoComprobante: string;
     observaciones: string;
     pasado: boolean;
-    creadoPor: string
+    creadoPor?: string;
 }
 
 interface Cliente {
-    codigo: string
+    codigo: number,
+    nombre: string,
+    
+}
+
+export interface RemitoFormState extends Omit<Remito, 'codigoCliente'>{
+    codigoCliente: string,
+    productos?: Producto[]
 }

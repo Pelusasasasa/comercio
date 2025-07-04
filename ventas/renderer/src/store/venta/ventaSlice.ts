@@ -98,6 +98,17 @@ export const ventaSlice = createSlice({
             state.clienteActivo = payload;
         },
 
+        putCliente: (state, { payload }: PayloadAction<ClienteFormState>) => {
+
+            if(!state.clienteActivo) return;
+
+            state.clienteActivo = {
+                ...payload,
+                _id: state.clienteActivo._id,
+                
+            }
+        },
+
         setClientes: (state, { payload }: PayloadAction<ClienteFormState[]>) => {
             state.clientes = payload;
             state.isSavingVenta = false;
@@ -202,6 +213,8 @@ export const {
     setProductoActive,
     setProductos,
     updateProductoVenta,
+    putCliente,
     putNumeroSerie,
+    
 
 } = ventaSlice.actions;

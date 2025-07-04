@@ -2,7 +2,7 @@ import { GoCalendar, GoPerson } from "react-icons/go"
 import { Remito } from "../../types/remito"
 import { useMovimientoStore, useRemitoStore } from "../../hooks";
 
-export const RemitoListItem = ({_id, fecha, cliente, nombreCliente, tipoComprobante, pasado, numeroComprobante, observaciones}: Remito) => {
+export const RemitoListItem = ({_id, fecha, codigoCliente, pasado, numeroComprobante, observaciones}: Remito) => {
 
     const {traerMovimientosPorTipoYNumero } = useMovimientoStore();
     const { activeRemito, remitoActive, remitosParaCuentaCorriente, startAgregarRemitoParaCTACTE} = useRemitoStore();
@@ -27,13 +27,13 @@ export const RemitoListItem = ({_id, fecha, cliente, nombreCliente, tipoComproba
         <td className="py-2">
             <div className="flex gap-2 items-center">
                 <GoPerson className="text-gray-500"/>
-                <p>{cliente.codigo}</p>
+                <p>{codigoCliente?.codigo}</p>
             </div>
         </td>
         <td className="py-2">
             <div className="flex gap-2 items-center">
                 <GoPerson className="text-gray-500"/>
-                <p>{nombreCliente}</p>
+                <p>{codigoCliente?.nombre}</p>
             </div>
         </td>
 

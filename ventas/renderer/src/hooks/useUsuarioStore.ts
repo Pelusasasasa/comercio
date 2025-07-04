@@ -17,7 +17,7 @@ export const useUsuarioStore = () => {
     const { usuarioActive, usuarios, isSavingUsuario, messageErrorUsuario } = useSelector((state: RootState) => state.usuario);
     const dispatch = useDispatch();
 
-    const activeUsuario = (id: string) => {
+    const activeUsuario = (id: Usuario) => {
         dispatch(setActiveUsuario(id));
     };
 

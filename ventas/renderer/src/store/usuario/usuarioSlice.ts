@@ -38,8 +38,8 @@ export const usuarioSlice = createSlice({
         savingUsuario: (state) => {
             state.isSavingUsuario = true;
         },
-        setActiveUsuario: (state, {payload}: PayloadAction<string>) => {
-            state.usuarioActive = state.usuarios.find(elem => elem._id === payload) || null;
+        setActiveUsuario: (state, {payload}: PayloadAction<Usuario>) => {
+            state.usuarioActive = payload;
         },
         setUsuarios: (state, { payload }: PayloadAction<Usuario[]>) => {
             state.usuarios = payload;

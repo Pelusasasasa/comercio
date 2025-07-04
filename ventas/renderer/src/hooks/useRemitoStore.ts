@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import comercioApi from "../api/comercioApi";
 
 import { addRemito, addRemitosCTACTE, deleteRemito, finishSavingRemito, savingRemito, setActiveRemito, setRemitos, updateRemito } from "../store/remito/remitoSlice";
-import { Remito } from "../types/remito";
+import { Remito, RemitoFormState } from "../types/remito";
 
 import Swal from "sweetalert2";
 
@@ -25,7 +25,7 @@ export const useRemitoStore = () => {
         dispatch(setActiveRemito(id))
     };
 
-    const startAgregarRemito = async(remito: Remito) => {
+    const startAgregarRemito = async(remito: RemitoFormState) => {
         dispatch(savingRemito());
 
         try {
@@ -123,7 +123,6 @@ export const useRemitoStore = () => {
         dispatch(addRemitosCTACTE(id))
     };
 
-
     return {
         //Atributos
         remitos,
@@ -140,5 +139,5 @@ export const useRemitoStore = () => {
         startTraerRemitosAtivos,
         startTraerRemitosNoActivos,
         startAgregarRemitoParaCTACTE
-    }
+    };
 };

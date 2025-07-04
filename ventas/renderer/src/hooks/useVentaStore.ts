@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Venta } from "../types/venta";
-import { activeProductoVenta, addProductoAVentaActiva, addVenta, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
+import { activeProductoVenta, addProductoAVentaActiva, addVenta, clearClienteActivo, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, putNumeroSerie, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 import { ClienteFormState } from "../types/cliente";
@@ -205,6 +205,14 @@ export const useVentaStore = () => {
         dispatch(updateProductoVenta(producto));
     };
 
+    const startModificarNumeroSerie = async(id: string, text: string) => {
+        dispatch(putNumeroSerie({text, id}))
+    };
+
+    const startLimpiarClienteActivo = () => {
+        dispatch(clearClienteActivo());
+    };
+
 
     return {
         //Atributos
@@ -229,6 +237,7 @@ export const useVentaStore = () => {
         startTraerClienteParaVenta,
         startTraerClientesParaVentas,
         startClearClientesParaVentas,
+        startLimpiarClienteActivo,
 
         startActivarProductoDeVentas,
         startAgregarProductoAVentaActiva,
@@ -237,5 +246,6 @@ export const useVentaStore = () => {
         startModficarProductoDeVenta,
         startTraerProductoParaVenta,
         startTraerProductosParaVentas,
+        startModificarNumeroSerie,
     }
 }

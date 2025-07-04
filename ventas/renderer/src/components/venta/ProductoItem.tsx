@@ -7,11 +7,15 @@ import { useVentaStore } from '../../hooks/useVentaStore';
 interface Props extends Producto {
   cantidad?: string;
   setModalModificarProducto: React.Dispatch<SetStateAction<Boolean>>;
-}
+};
 
 export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, setModalModificarProducto}: Props) => {
-  const { startDeleteProductoAVentaActiva, startActivarProductoDeVentas } = useVentaStore();
+  const { startDeleteProductoAVentaActiva, startActivarProductoDeVentas, startModificarNumeroSerie } = useVentaStore();
   
+  const handleNumeroSerie = (e) => {
+    _id && startModificarNumeroSerie(_id, e.target.value)
+  };
+
   const deleteProducto = () => {
     _id && startDeleteProductoAVentaActiva(_id);
   };
@@ -38,7 +42,7 @@ export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, s
         </div>
       </td>
       <td>
-        <textarea className="border border-gray-300 rounded-sm w-full text-xs px-2" rows={3} name="" id="">Nro Series...</textarea>
+        <textarea onChange={handleNumeroSerie} className="border border-gray-300 rounded-sm w-full text-xs px-2" rows={3} name="" id="">Nro Series...</textarea>
       </td>
     </tr>
   )

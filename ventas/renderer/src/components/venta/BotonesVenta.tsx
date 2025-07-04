@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../Button'
 import { useNavigate } from 'react-router-dom'
 import { useVentaStore } from '../../hooks/useVentaStore'
 import { useForm } from '../../hooks/Useform'
+import Swal from 'sweetalert2'
 
 
 const initialState = { 
@@ -17,8 +18,20 @@ export const BotonesVenta = () => {
 
     const navigate = useNavigate();
 
+    const [tipoVenta, setTipoVenta] = useState<string>('');
     const [impresion, setImpresion] = useState<boolean>(true);
     const [dolar, setDolar] = useState<boolean>(false);
+
+    useEffect(() => {
+        console.log(tipoVenta);
+    }, [tipoVenta])
+    
+    const realizarVenta = async() => {
+        if(!clienteActivo) await Swal.fire('No se pudo realizar la venta', 'Se necesita de un cliente', 'error');
+
+        if(ventaActive?.productos.length === 0) await Swal.fire('No se pudo realizar la venta', 'Se necesita de un producto', 'error');
+        
+    };
 
 return (
     <main className='rounded-lg border-2 border-[#8B4513] bg-[#E8D4B0] shadow-sm m-2'>
@@ -33,26 +46,26 @@ return (
 
                     <div className='flex gap-2'>
                         <div className='flex items-center gap-2'>
-                            <input className='scale-125' type="radio" name="tipoComprobante" id="presupuesto" />
+                            <input className='scale-125' type="radio" name="tipoComprobante" id="presupuesto" onChange={() => setTipoVenta('presupuesto')}/>
                             <label htmlFor="presupuesto" className='text-sm font-bold text-[#8b4513]'>Presupuesto</label>
                         </div>
 
                         <div className='flex items-center gap-2'>
-                            <input className='scale-125' type="radio" name="tipoComprobante" id="contado" />
+                            <input className='scale-125' type="radio" name="tipoComprobante" id="contado" onChange={() => setTipoVenta('contado')}/>
                             <label htmlFor="contado" className='text-sm font-bold text-[#8b4513]'>Contado</label>
                         </div>
 
                         {
                             clienteActivo?.condicionCuenta === 'CORRIENTE' && (
                                 <div className='flex items-center gap-2'>
-                                    <input className='scale-125' type="radio" name="tipoComprobante" id="cuentaCorriente" />
+                                    <input className='scale-125' type="radio" name="tipoComprobante" id="cuentaCorriente" onChange={() => setTipoVenta('cuentaCorriente')}/>
                                     <label htmlFor="cuentaCorriente" className='text-sm font-bold text-[#8b4513]'>Cuenta Corriente</label>
                                 </div>
                             )
                         }
 
                         <div className='flex items-center gap-2'>
-                            <input className='scale-125' type="radio" name="tipoComprobante" id="remito" />
+                            <input className='scale-125' type="radio" name="tipoComprobante" id="remito" onChange={() => setTipoVenta('remito')}/>
                             <label htmlFor="remito" className='text-sm font-bold text-[#8b4513]'>Remito</label>
                         </div>
                     </div>
@@ -87,7 +100,7 @@ return (
 
                 <div className='flex gap-5'>
                     <Button type='secondary'  text='Cancelar' click={() =>  navigate(-1)} className='h-10 text-xl'/>
-                    <Button text='Facturar' click={() => navigate(-1)} className='h-10 text-xl'/>
+                    <Button text='Facturar' click={realizarVenta} className='h-10 text-xl'/>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 export interface ClienteFormState  {
     _id: string,
-    codigo: string,
+    codigo: number,
     nombre: string,
     dni: string,
     telefono: string,

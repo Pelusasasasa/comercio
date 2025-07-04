@@ -13,7 +13,7 @@ export const CardProductoVenta = ({_id, codigo, descripcion, marca, categoria, s
 
     const clickCard = () => {
       setBandera(true);
-      startTraerProductoParaVenta(_id);
+      _id && startTraerProductoParaVenta(_id);
       startClearProductosParaVentas();
       pasarFoco();
     };

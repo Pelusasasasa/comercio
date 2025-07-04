@@ -3,6 +3,11 @@ import { Venta } from '../../types/venta';
 import { ClienteFormState } from '../../types/cliente';
 import { ProductoActivo } from '../../types/producto';
 
+interface NumeroSerie {
+    text: string;
+    id: string;
+}
+
 interface VentaState {
     ventaActive: Venta | null;
     ventas: Venta[];
@@ -74,25 +79,34 @@ export const ventaSlice = createSlice({
             state.ventas = payload;
             state.isSavingVenta = false
         },
+
+        clearClienteActivo: (state) => {
+            state.clienteActivo = null;
+        },
+
         clearVentas: (state) => {
             state.isSavingVenta = false;
             state.ventas = [];
             state.ventaActive = null;
             state.messageErrorVenta = null;
         },
+
         finishSavingVenta: (state) => {
             state.isSavingVenta = false
         },
         setClienteActive: (state, { payload }: PayloadAction<ClienteFormState>) => {
             state.clienteActivo = payload;
         },
+
         setClientes: (state, { payload }: PayloadAction<ClienteFormState[]>) => {
             state.clientes = payload;
             state.isSavingVenta = false;
         },
+
         setProductoActive: (state, { payload }: PayloadAction<ProductoActivo>) => {
             state.productoActivo = payload;
         },
+
         setProductos: (state, { payload }: PayloadAction<ProductoActivo[]>) => {
             state.productos = payload;
             state.isSavingVenta = false;
@@ -150,6 +164,17 @@ export const ventaSlice = createSlice({
             state.productoActivo = null;
         },
         
+        putNumeroSerie: (state, { payload }: PayloadAction<NumeroSerie>) => {
+            if(!state.ventaActive)return;
+
+            const { text, id } = payload;
+
+            const index = state.ventaActive?.productos.findIndex(elem => elem._id === id);
+
+            if(index === -1 ) return;
+
+            state.ventaActive.productos[index].nroSerie = text;
+        },
     }
 });
 
@@ -159,6 +184,9 @@ export const {
     addVenta,
     addProductoAVentaActiva,
 
+    clearClienteActivo,
+    clearVentas,
+
     deleteVenta,
     deleteProductoAVentaActiva,
 
@@ -167,13 +195,13 @@ export const {
     savingVenta,
     setActiveVenta,
     setVentas,
-    clearVentas,
-    
+
     activeProductoVenta,
     setClienteActive,
     setClientes,
     setProductoActive,
     setProductos,
     updateProductoVenta,
+    putNumeroSerie,
 
 } = ventaSlice.actions;

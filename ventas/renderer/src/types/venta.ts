@@ -1,5 +1,5 @@
-import { ClienteFormState } from "./cliente";
-import { Producto, ProductoActivo } from "./producto";
+
+import { ProductoActivo } from "./producto";
 
 export interface Venta {
     _id?: string;

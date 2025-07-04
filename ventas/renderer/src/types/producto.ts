@@ -24,5 +24,6 @@ export interface Producto {
     iva: number,
     utilidad: number,
     stockMinimo?: number,
-    detalle?: string
+    detalle?: string,
+    nroSerie: string
 }

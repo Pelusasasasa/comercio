@@ -23,7 +23,7 @@ const validarCliente = [
         .optional(),
     check('saldo')
         .optional()
-        .isFloat({ min: 0 }).withMessage('El saldo no puede ser negativo'),
+        .isNumeric().withMessage('El saldo debe ser un numero'),
     check('condicionCuenta')
         .optional()
         .isIn(['CONTADO', 'CORRIENTE']).withMessage('Condición de cuenta inválida'),

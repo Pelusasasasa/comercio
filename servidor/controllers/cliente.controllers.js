@@ -74,7 +74,7 @@ const modificarCliente = async(req, res) => {
 
 const traerClientes = async(req, res) => {
     try {
-        const clientes = await Cliente.find();
+        const clientes = await Cliente.find().sort({codigo: 1});
 
         res.status(200).json({
             ok: true,
@@ -118,7 +118,7 @@ const traerClientePorCodigo = async(req, res) => {
     const { codigo } = req.params;
 
     try {
-        const cliente = await Cliente.findOne({codigo});
+        const cliente = await Cliente.findOne({codigo}).sort({codigo: 1});
 
         if(!cliente) return res.status(404).json({
             ok: false,
@@ -148,7 +148,7 @@ const traerClientesPorBusqueda = async(req, res) => {
                 {codigo: isNaN(text) ? undefined : Number(text)},
                 {dni: new RegExp(text, 'i')}
             ]
-        });
+        }).sort({codigo: 1});
 
 
         res.status(200).json({

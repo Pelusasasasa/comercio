@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../Button'
-import { useNavigate } from 'react-router-dom'
+import { Route, useNavigate } from 'react-router-dom'
 import { useVentaStore } from '../../hooks/useVentaStore'
 import { useForm } from '../../hooks/Useform'
 import Swal from 'sweetalert2'
@@ -15,7 +15,7 @@ const initialState = {
 
 export const BotonesVenta = () => {
 
-    const { ventaActive, clienteActivo } = useVentaStore();
+    const { ventaActive, clienteActivo, startReiniciarState } = useVentaStore();
     const { usuarioActive } = useUsuarioStore();
     
     const { startAgregarRemito } = useRemitoStore();
@@ -29,17 +29,26 @@ export const BotonesVenta = () => {
     const [dolar, setDolar] = useState<boolean>(false);
     
     const realizarVenta = async() => {
-        if(!clienteActivo) await Swal.fire('No se pudo realizar la venta', 'Se necesita de un cliente', 'error');
+        if(!clienteActivo) return await Swal.fire('No se pudo realizar la venta', 'Se necesita de un cliente', 'error');
 
-        if(ventaActive?.productos.length === 0) await Swal.fire('No se pudo realizar la venta', 'Se necesita de un producto', 'error');
+        if(ventaActive?.productos.length === 0) return await Swal.fire('No se pudo realizar la venta', 'Se necesita de un producto', 'error');
         
-        if(tipoVenta === '') await Swal.fire('No se pudo realizar la venta', 'Se necesita de un tipo de venta', 'error');
+        if(tipoVenta === '') return await Swal.fire('No se pudo realizar la venta', 'Se necesita de un tipo de venta', 'error');
 
         if(tipoVenta === 'remito'){
             const remito =  (ventaActive && clienteActivo && usuarioActive) && recompilarInfoRemito(ventaActive, clienteActivo, usuarioActive);
             remito && startAgregarRemito(remito);
         };
+
+        startReiniciarState();
+        navigate(-1);
     };
+
+    const cancelarVenta = () => {
+        startReiniciarState();
+        navigate(-1);
+    };
+
 
 return (
     <main className='rounded-lg border-2 border-[#8B4513] bg-[#E8D4B0] shadow-sm m-2'>
@@ -107,7 +116,7 @@ return (
                 </div>
 
                 <div className='flex gap-5'>
-                    <Button type='secondary'  text='Cancelar' click={() =>  navigate(-1)} className='h-10 text-xl'/>
+                    <Button type='secondary'  text='Cancelar' click={cancelarVenta} className='h-10 text-xl'/>
                     <Button text='Facturar' click={realizarVenta} className='h-10 text-xl'/>
                 </div>
             </div>

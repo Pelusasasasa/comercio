@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Venta } from "../types/venta";
-import { activeProductoVenta, addProductoAVentaActiva, addVenta, clearClienteActivo, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, putCliente, putNumeroSerie, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
+import { activeProductoVenta, addProductoAVentaActiva, addVenta, clearClienteActivo, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, putCliente, putNumeroSerie, resetState, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 import { ClienteFormState } from "../types/cliente";
@@ -113,6 +113,10 @@ export const useVentaStore = () => {
         }finally{
             dispatch(finishSavingVenta())
         }
+    };
+
+    const startReiniciarState = async() => {
+        dispatch(resetState());
     };
 
     const startTraerClienteParaVenta = async(id: string) => {
@@ -230,27 +234,24 @@ export const useVentaStore = () => {
         productoActivo,
 
         //Metodos
-        startAgregarVenta,
-        startBorrarVenta,
-        startModificarVenta,
-        startTraerVentaPorId,
-        startTraerVentas,
-        
-
-        //Aux
-        startTraerClienteParaVenta,
-        startTraerClientesParaVentas,
-        startClearClientesParaVentas,
-        startLimpiarClienteActivo,
-        startModificarClienteActivo,
-
         startActivarProductoDeVentas,
         startAgregarProductoAVentaActiva,
+        startAgregarVenta,
+        startBorrarVenta,
+        startClearClientesParaVentas,
         startClearProductosParaVentas,
         startDeleteProductoAVentaActiva,
+        startLimpiarClienteActivo,
         startModficarProductoDeVenta,
+        startModificarClienteActivo,
+        startModificarNumeroSerie,
+        startModificarVenta,
+        startReiniciarState,
+        startTraerClienteParaVenta,
+        startTraerClientesParaVentas,
         startTraerProductoParaVenta,
         startTraerProductosParaVentas,
-        startModificarNumeroSerie,
+        startTraerVentaPorId,
+        startTraerVentas,
     }
 }

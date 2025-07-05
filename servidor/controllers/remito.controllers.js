@@ -1,6 +1,7 @@
 const Remito = require('../models/Remito');
 const { cargarMovimientos } = require('../services/movimientoStock.services');
 const { actualizarNumero } = require('../services/numero.services');
+const { cambiarStock } = require('../services/producto.services');
 
 const borrarRemito = async(req, res) => {
     try {
@@ -34,7 +35,10 @@ const crearRemito = async(req, res) => {
         if (!okMovimiento) return res.status(400).json({
             ok: false,
             msg: 'No se pudo cargar los moviminetos de stock del remito, hable con el administrador'
-        })
+        });
+
+        const cambioStock = await cambiarStock(req.body.productos);
+        console.log(cambioStock)
 
         
         const remito = new Remito(req.body);

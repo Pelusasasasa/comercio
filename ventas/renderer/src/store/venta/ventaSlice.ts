@@ -56,73 +56,7 @@ export const ventaSlice = createSlice({
     name: 'venta',
     initialState,
     reducers: {
-        addVenta: (state, { payload }: PayloadAction<Venta>) => {
-            state.ventas.push(payload);
-            state.isSavingVenta = false
-        },
-        deleteVenta: (state, {payload}: PayloadAction<string>) => {
-            state.ventas = state.ventas.filter(elem => elem._id !== payload);
-            state.isSavingVenta = false
-        },
-        updateVenta: (state, {payload}: PayloadAction<Venta>) => {
-            state.ventas = state.ventas.map(elem => 
-                elem._id === payload._id ? payload : elem
-            );
-        },
-        savingVenta: (state) => {
-            state.isSavingVenta = true;
-        },
-        setActiveVenta: (state, { payload }: PayloadAction<string>) => {
-            state.ventaActive = state.ventas.find(elem => elem._id === payload) || null;
-        },
-        setVentas: (state, { payload }: PayloadAction<Venta[]>) => {
-            state.ventas = payload;
-            state.isSavingVenta = false
-        },
-
-        clearClienteActivo: (state) => {
-            state.clienteActivo = null;
-        },
-
-        clearVentas: (state) => {
-            state.isSavingVenta = false;
-            state.ventas = [];
-            state.ventaActive = null;
-            state.messageErrorVenta = null;
-        },
-
-        finishSavingVenta: (state) => {
-            state.isSavingVenta = false
-        },
-        setClienteActive: (state, { payload }: PayloadAction<ClienteFormState>) => {
-            state.clienteActivo = payload;
-        },
-
-        putCliente: (state, { payload }: PayloadAction<ClienteFormState>) => {
-
-            if(!state.clienteActivo) return;
-
-            state.clienteActivo = {
-                ...payload,
-                _id: state.clienteActivo._id,
-                
-            }
-        },
-
-        setClientes: (state, { payload }: PayloadAction<ClienteFormState[]>) => {
-            state.clientes = payload;
-            state.isSavingVenta = false;
-        },
-
-        setProductoActive: (state, { payload }: PayloadAction<ProductoActivo>) => {
-            state.productoActivo = payload;
-        },
-
-        setProductos: (state, { payload }: PayloadAction<ProductoActivo[]>) => {
-            state.productos = payload;
-            state.isSavingVenta = false;
-        },
-
+        
         addProductoAVentaActiva: (state, { payload }: PayloadAction<ProductoActivo>) => {
 
             if (!state.ventaActive) return;
@@ -142,16 +76,8 @@ export const ventaSlice = createSlice({
                     cantidad: payload.cantidad || 1
                 }) ;
             };
-             
             state.ventaActive.precio = calculartotal(state.ventaActive.productos);
             state.productoActivo = null;
-        },
-
-        deleteProductoAVentaActiva: (state, { payload }: PayloadAction<string>) => {
-            if(!state.ventaActive) return;
-
-            state.ventaActive.productos = state.ventaActive?.productos.filter(elem => elem._id !== payload);
-            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
         },
 
         activeProductoVenta: (state, {payload}: PayloadAction<string>) => {
@@ -164,17 +90,48 @@ export const ventaSlice = createSlice({
             
         },
 
-        updateProductoVenta: (state, { payload }: PayloadAction<ProductoActivo>) => {
-            if(!state.ventaActive) return;
-            
-            state.ventaActive.productos = state.ventaActive?.productos.map(elem =>
-                elem._id === payload._id ? payload : elem
-            );
-
-            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
-            state.productoActivo = null;
+        addVenta: (state, { payload }: PayloadAction<Venta>) => {
+            state.ventas.push(payload);
+            state.isSavingVenta = false
         },
-        
+
+        clearClienteActivo: (state) => {
+            state.clienteActivo = null;
+        },
+
+        clearVentas: (state) => {
+            state.isSavingVenta = false;
+            state.ventas = [];
+            state.ventaActive = null;
+            state.messageErrorVenta = null;
+        },
+
+        deleteProductoAVentaActiva: (state, { payload }: PayloadAction<string>) => {
+            if(!state.ventaActive) return;
+
+            state.ventaActive.productos = state.ventaActive?.productos.filter(elem => elem._id !== payload);
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
+        },
+
+        deleteVenta: (state, {payload}: PayloadAction<string>) => {
+            state.ventas = state.ventas.filter(elem => elem._id !== payload);
+            state.isSavingVenta = false
+        },
+
+        finishSavingVenta: (state) => {
+            state.isSavingVenta = false
+        },
+
+        putCliente: (state, { payload }: PayloadAction<ClienteFormState>) => {
+            if(!state.clienteActivo) return;
+
+            state.clienteActivo = {
+                ...payload,
+                _id: state.clienteActivo._id,
+                
+            }
+        },
+
         putNumeroSerie: (state, { payload }: PayloadAction<NumeroSerie>) => {
             if(!state.ventaActive)return;
 
@@ -186,35 +143,85 @@ export const ventaSlice = createSlice({
 
             state.ventaActive.productos[index].nroSerie = text;
         },
+
+        resetState: (state) => {
+            return initialState;
+        },
+
+        savingVenta: (state) => {
+            state.isSavingVenta = true;
+        },
+
+        setActiveVenta: (state, { payload }: PayloadAction<string>) => {
+            state.ventaActive = state.ventas.find(elem => elem._id === payload) || null;
+        },
+
+        setVentas: (state, { payload }: PayloadAction<Venta[]>) => {
+            state.ventas = payload;
+            state.isSavingVenta = false
+        },
+
+        setClienteActive: (state, { payload }: PayloadAction<ClienteFormState>) => {
+            state.clienteActivo = payload;
+        },
+
+        setClientes: (state, { payload }: PayloadAction<ClienteFormState[]>) => {
+            state.clientes = payload;
+            state.isSavingVenta = false;
+        },
+        
+        setProductoActive: (state, { payload }: PayloadAction<ProductoActivo>) => {
+            state.productoActivo = payload;
+        },
+        
+        setProductos: (state, { payload }: PayloadAction<ProductoActivo[]>) => {
+            state.productos = payload;
+            state.isSavingVenta = false;
+        },
+
+        updateVenta: (state, {payload}: PayloadAction<Venta>) => {
+            state.ventas = state.ventas.map(elem => 
+                elem._id === payload._id ? payload : elem
+            );
+        },
+        
+        updateProductoVenta: (state, { payload }: PayloadAction<ProductoActivo>) => {
+            if(!state.ventaActive) return;
+            
+            state.ventaActive.productos = state.ventaActive?.productos.map(elem =>
+                elem._id === payload._id ? payload : elem
+            );
+
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
+            state.productoActivo = null;
+        },
+        
+
     }
 });
 
 
 // Action creators are generated for each case reducer function
 export const { 
-    addVenta,
+    activeProductoVenta,
     addProductoAVentaActiva,
-
+    addVenta,
     clearClienteActivo,
     clearVentas,
-
-    deleteVenta,
     deleteProductoAVentaActiva,
-
+    deleteVenta,
     finishSavingVenta,
-    updateVenta,
+    putCliente,
+    putNumeroSerie,
+    resetState,
     savingVenta,
     setActiveVenta,
-    setVentas,
-
-    activeProductoVenta,
     setClienteActive,
     setClientes,
     setProductoActive,
     setProductos,
+    setVentas,
     updateProductoVenta,
-    putCliente,
-    putNumeroSerie,
-    
+    updateVenta,
 
 } = ventaSlice.actions;

@@ -1,7 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import ComprobanteA5 from './impresion/ComprobanteA5';
 
-
+console.log("a")
 window.electronAPI.onRenderComprobante((venta) => {
   const container = document.getElementById('root');
 

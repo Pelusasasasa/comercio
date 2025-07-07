@@ -23,18 +23,18 @@ app.whenReady().then(() => {
 });
 
 ipcMain.handle('imprimir-comprobante', async(e, venta) => {
+    console.log(venta)
     const win  = new BrowserWindow({
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-
-    await win.loadURL(`file://${__dirname}/renderer/print.html`);
-
+    await win.loadURL('http://localhost:5173/impresion');
+    
 
     win.webContents.on('did-finish-load', () => {
+        console.log(venta)
         win.webContents.send('render-comprobante', venta);
-
         setTimeout(() => {
             // win.webContents.print({silent: true}, () => win.close());
         }, 1000)

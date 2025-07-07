@@ -1,17 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { usuarioSlice } from './usuario/usuarioSlice';
-import { clienteSlice } from './cliente/clienteSlice';
-import { productoSlice } from './producto/productoSlice';
-import { marcaSlice } from './marca/marcaSlice';
-import { provedorSlice } from './provedor/provedorSlice';
 import { categoriaSlice } from './categoria/categoriaSlice';
-import { unidadMedidaSlice } from './unidadMedida/unidadMedidaSlice';
-import { movimientoSlice } from './movimiento/movimientosSlice';
+import { clienteSlice } from './cliente/clienteSlice';
 import { compensadaSlice } from './compensada/compensadaSlice';
+import { configureStore } from '@reduxjs/toolkit';
 import { historicaSlice } from './historica/historicaSlice';
-import { reciboSlice } from './recibo/reciboSlice';
+import { marcaSlice } from './marca/marcaSlice';
+import { movimientoSlice } from './movimiento/movimientosSlice';
 import { numeroSlice } from './numero/numeroSlice';
+import { productoSlice } from './producto/productoSlice';
+import { provedorSlice } from './provedor/provedorSlice';
+import { reciboSlice } from './recibo/reciboSlice';
 import { remitoSlice } from './remito/remitoSlice';
+import { unidadMedidaSlice } from './unidadMedida/unidadMedidaSlice';
+import { usuarioSlice } from './usuario/usuarioSlice';
 import { ventaSlice } from './venta/ventaSlice';
 
 export const store = configureStore({

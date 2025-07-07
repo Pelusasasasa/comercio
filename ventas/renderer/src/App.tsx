@@ -12,10 +12,10 @@ import { Recibo } from './pages/Recibo'
 import { Remito } from './pages/Remito'
 import { Usuario } from './pages/Usuario'
 import { Venta } from './pages/Venta'
+import ComprobanteA5 from './impresion/ComprobanteA5'
 
 
 function App() {
-
   return (
     <Routes>
       <Route element={<AppLoader/>}>
@@ -29,7 +29,8 @@ function App() {
         <Route path='/marca' element={<Marca/>}/>
         <Route path='/categoria' element={<Categoria/>}/>
         <Route path='/remito' element={<Remito/>}/>
-        <Route path='/Venta' element={<Venta/>}/>
+        <Route path='/venta' element={<Venta/>}/>
+        <Route path='/impresion' element={<ComprobanteA5/>}/>
       </Route>
     </Routes>
   )

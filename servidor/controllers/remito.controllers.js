@@ -30,23 +30,26 @@ const crearRemito = async(req, res) => {
     try {
         const numero = await actualizarNumero('REMITO');
         req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8, '0')}`;
-        const okMovimiento = await cargarMovimientos(req.body.productos, 'REMITO', req.body.numeroComprobante, req.body.creadoPor);
+        const movimiento = await cargarMovimientos(req.body.productos, 'REMITO', req.body.numeroComprobante, req.body.creadoPor);
 
-        if (!okMovimiento) return res.status(400).json({
+        if (!movimiento.ok) return res.status(400).json({
             ok: false,
             msg: 'No se pudo cargar los moviminetos de stock del remito, hable con el administrador'
         });
 
         const cambioStock = await cambiarStock(req.body.productos);
-        console.log(cambioStock)
 
+        if(!cambioStock.ok) return;
         
         const remito = new Remito(req.body);
         await remito.save();
 
+        const nuevoRemito = await Remito.findById(remito._id).populate('codigoCliente', ['nombre', 'dni', 'condicionIva', 'domicilio', 'direccion', 'codigo']);
+        nuevoRemito.movimientos = movimiento.movimientos;
+
         res.status(201).json({
             ok: true,
-            remito
+            remito: nuevoRemito
         })
     } catch (error) {
         console.log(error);

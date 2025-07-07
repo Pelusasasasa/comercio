@@ -1,0 +1,34 @@
+###DELETE
+DELETE http://localhost:3000/comercio/presupuesto/686be3abc9dc9f261d705eda
+
+
+###GET For Date
+GET http://localhost:3000/comercio/presupuesto/porFecha/2025-05-07/2025-05-08
+
+###GET FOR ID
+GET http://localhost:3000/comercio/presupuesto/686bea7085e415ecb497b4f0
+
+###POST ONE
+POST http://localhost:3000/comercio/presupuesto
+Content-Type: application/json
+
+{
+    "fecha":"05/07/2025",
+    "codigoCliente": "6851718939e2c7b4683fcdaa",
+    "tipoComprobante": "PRESUPUESTO",
+    "precio": 15000
+    
+}
+
+### PUT ONE
+
+PUT http://localhost:3000/comercio/presupuesto/686bea7085e415ecb497b4f0
+Content-Type: application/json
+
+{
+    "fecha":"05/07/2025",
+    "codigoCliente": "6851718939e2c7b4683fcdaa",
+    "tipoComprobante": "PRESUPUESTO",
+    "precio": 13000
+    
+}

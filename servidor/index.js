@@ -22,6 +22,7 @@ app.use('/comercio/marca', require('./routes/marca.route'));
 app.use('/comercio/movimientoStock', require('./routes/movimientoStock.route'));
 app.use('/comercio/numero', require('./routes/numero.route'));
 app.use('/comercio/pedido', require('./routes/pedido.route'));
+app.use('/comercio/presupuesto', require('./routes/presupuesto.route'));
 app.use('/comercio/producto', require('./routes/producto.route'));
 app.use('/comercio/provedor', require('./routes/provedor.route'));
 app.use('/comercio/recibo', require('./routes/recibo.route'));

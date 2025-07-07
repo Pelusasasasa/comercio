@@ -33,6 +33,7 @@ export const useRemitoStore = () => {
 
             if(data.ok){
                 dispatch(addRemito(data.remito));
+                return data.remito;
             }else{
                 await Swal.fire('No se pudo cargar el remito', data.msg, 'error');
             }

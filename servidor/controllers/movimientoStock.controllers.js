@@ -40,7 +40,6 @@ const crearMovimientoStock = async(req, res) => {
 
 const modificarMovimiento = async(req, res) => {
     const { id } = req.params;
-    console.log(id);
     try {
         const movimiento = await MovimientoStock.findByIdAndUpdate(id, req.body, {new: true});
 
@@ -87,7 +86,6 @@ const traerMovimientosPorProducto = async(req, res) => {
 
 const traerMovimientosPorTipoYNumero = async(req, res) => {
     const {numeroComprobante, tipo} = req.params;
-    console.log(tipo, numeroComprobante);
     try {
         const movimientos = await MovimientoStock.find({
             $and: [

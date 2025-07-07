@@ -1,12 +1,16 @@
 import { useState } from 'react'
-import { Button } from '../Button'
 import { Route, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+
+import { Button } from '../Button'
+
 import { useVentaStore } from '../../hooks/useVentaStore'
 import { useForm } from '../../hooks/Useform'
-import Swal from 'sweetalert2'
-import { recompilarInfoRemito } from '../../helpers/recompilarInfoRemito'
 import { useRemitoStore } from '../../hooks/useRemitoStore'
 import { useUsuarioStore } from '../../hooks/useUsuarioStore'
+
+import { recompilarInfoRemito } from '../../helpers/recompilarInfoRemito'
+
 
 
 const initialState = { 
@@ -17,7 +21,6 @@ export const BotonesVenta = () => {
 
     const { ventaActive, clienteActivo, startReiniciarState } = useVentaStore();
     const { usuarioActive } = useUsuarioStore();
-    
     const { startAgregarRemito } = useRemitoStore();
 
     const { precio, onInputChange } = useForm(ventaActive ?? initialState)
@@ -37,8 +40,11 @@ export const BotonesVenta = () => {
 
         if(tipoVenta === 'remito'){
             const remito =  (ventaActive && clienteActivo && usuarioActive) && recompilarInfoRemito(ventaActive, clienteActivo, usuarioActive);
-            remito && startAgregarRemito(remito);
-        };
+            const respuesta = remito && await startAgregarRemito(remito);
+            console.log(respuesta)
+            window.electronAPI.imprimirComprobante(respuesta)
+        };  
+        
 
         startReiniciarState();
         navigate(-1);

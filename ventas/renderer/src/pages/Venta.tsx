@@ -21,8 +21,7 @@ export const Venta = () => {
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    
-    window.electronAPI.imprimirComprobante({});
+
     
     return () => {
       document.removeEventListener('keydown', handleKeyDown);

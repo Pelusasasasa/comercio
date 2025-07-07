@@ -1,6 +1,7 @@
 const MovimientoStock = require("../models/MovimientoStock");
 
 const cargarMovimientos = async(productos, tipo, numero, usuario) => {
+    let movimientos = [];
     try {
         for await(let producto of productos){
             const mov = {};
@@ -17,9 +18,11 @@ const cargarMovimientos = async(productos, tipo, numero, usuario) => {
 
             const movimineto = new MovimientoStock(mov);
             await movimineto.save();
+            movimientos.push(movimineto);
         };
         return {
-            ok: true
+            ok: true,
+            movimientos
         }
     } catch (error) {
         console.log(error);

@@ -1,3 +1,4 @@
+import { ProductoItem } from '../components/impresion/ProductoItem';
 import { ClienteFormState } from '../types/cliente';
 import { Producto } from '../types/producto';
 
@@ -50,9 +51,44 @@ const ComprobanteA5 = ({fecha, cliente, productos, numeroComprobante = 'RT-0001-
             </div>
 
             <div>
-                {cliente.dni.length > 8 : `C.U.I.T ${}`}
+                {cliente.dni.length > 8 ? `C.U.I.T ${cliente.dni}` : `D.N.I ${cliente.dni}`}
             </div>
 
+            <div className='grid grid-cols-2'>
+                <div>
+                    <p>Domicilio: </p>
+                    <p>REPETTO 3345 - Chajari</p>
+                </div>
+                <p>
+                    Cond I.V.A: RESPONSABLE INSCRIPTO
+                </p>
+            </div>
+        </main>
+
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Codigo</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Iva %</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {productos.map(elem => (
+                        <ProductoItem key={elem._id} {...elem}/>
+                    ))}
+                </tbody>
+            </table>
+        </main>
+
+        <main>
+            <p>Subtotal: {}</p>
+            <p>Descuento: {}</p>
+            <p>Total: {}</p>
         </main>
     </section>
   )

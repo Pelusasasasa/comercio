@@ -9,7 +9,7 @@ import { useForm } from '../../hooks/Useform'
 import { useRemitoStore } from '../../hooks/useRemitoStore'
 import { useUsuarioStore } from '../../hooks/useUsuarioStore'
 
-import { recompilarInfoRemito } from '../../helpers/recompilarInfoRemito'
+import { recompilarInfoRemito } from '../../helpers/recompilarInfoVenta'
 
 
 
@@ -41,9 +41,13 @@ export const BotonesVenta = () => {
         if(tipoVenta === 'remito'){
             const remito =  (ventaActive && clienteActivo && usuarioActive) && recompilarInfoRemito(ventaActive, clienteActivo, usuarioActive);
             const respuesta = remito && await startAgregarRemito(remito);
-            console.log(respuesta)
-            window.electronAPI.imprimirComprobante(respuesta)
-        };  
+            // console.log(respuesta)
+            // window.electronAPI.imprimirComprobante(respuesta)
+        }; 
+
+        if(tipoVenta === 'presupuesto'){
+            const presupuesto = (ventaActive && clienteActivo && usuarioActive) && 
+        }
         
 
         startReiniciarState();

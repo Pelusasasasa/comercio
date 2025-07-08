@@ -34,7 +34,8 @@ export const recompilarInfoPresupuesto = (venta: Venta, cliente: ClienteFormStat
         observaciones: '',
         precio: venta.precio,
         descuento: venta.descuento,
-        creadoPor: usuario._id
+        creadoPor: usuario._id,
+        productos: venta.productos
     };
 
     return presupuesto

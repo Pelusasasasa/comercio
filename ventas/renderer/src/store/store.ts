@@ -13,6 +13,7 @@ import { remitoSlice } from './remito/remitoSlice';
 import { unidadMedidaSlice } from './unidadMedida/unidadMedidaSlice';
 import { usuarioSlice } from './usuario/usuarioSlice';
 import { ventaSlice } from './venta/ventaSlice';
+import { presupuestoSlice } from './presupuesto/presupuestoSlice';
 
 export const store = configureStore({
     reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
         marca: marcaSlice.reducer,
         movimiento: movimientoSlice.reducer,
         numero: numeroSlice.reducer, //Este Store calculo que solamente lo vamos a usar en la seccion de numeros para ver los numeros, luego la modificacion se va  ahacer desde el backend
+        presupuesto: presupuestoSlice.reducer,
         producto: productoSlice.reducer,
         provedor: provedorSlice.reducer,
         recibo: reciboSlice.reducer,

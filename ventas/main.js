@@ -10,6 +10,7 @@ const crearVentana = () => {
     });
 
     ventanaPrincipal.maximize();
+    ventanaPrincipal.setMenuBarVisibility(false)
 
     ventanaPrincipal.loadURL('http://localhost:5173');
 };

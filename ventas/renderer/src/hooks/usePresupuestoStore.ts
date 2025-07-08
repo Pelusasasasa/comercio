@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Presupuesto } from "../types/presupuesto"
+import { Presupuesto, PresupuestoFormState } from "../types/presupuesto"
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
-import { deletePresupuesto, setPresupuestoActive, setPresupuestos, updatePresupuesto } from "../store/presupuesto/presupuestoSlice";
+import { addPresupuesto, deletePresupuesto, setPresupuestoActive, setPresupuestos, updatePresupuesto } from "../store/presupuesto/presupuestoSlice";
 
 interface RootState {
     presupuesto: {
@@ -33,12 +33,12 @@ export const usePresupuestoStore = () => {
         }
     };
 
-    const startAgregarPresupuesto = async(presupuesto: Presupuesto) => {
+    const startAgregarPresupuesto = async(presupuesto: PresupuestoFormState) => {
         try {
             const { data } = await comercioApi.post('presupuesto', presupuesto);
-
+            console.log(data);
             if(data.ok){
-                dispatch(data.presupuesto)
+                dispatch(addPresupuesto(data.presupuesto))
             }else{
                 await Swal.fire('No se pudo Agregar el presupuesto', data.msg, 'error')
             }

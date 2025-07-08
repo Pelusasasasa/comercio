@@ -14,6 +14,8 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { GrDocumentText } from "react-icons/gr";
 import { LuReceipt } from "react-icons/lu";
 import { HiOutlineDocumentReport } from "react-icons/hi";
+import { Navbar } from '../components/Navbar';
+import { NavbarPrincipal } from '../components/NavbarPrincipal';
 
 
 const cards = [
@@ -46,7 +48,10 @@ export const Home = () => {
   }
 
   return (
-    <div className="min-h-screen gap-5 bg-yellow-50  flex flex-1 overflow-hidden">
+    <div>
+      <NavbarPrincipal/>
+      <div className="min-h-screen gap-5 bg-yellow-50  flex flex-1 overflow-hidden">
+      
       <AsideBar/>
 
       <div className=" flex-1 overflow-auto p-4 ">
@@ -59,6 +64,7 @@ export const Home = () => {
       
       
       { passwordModal && <PasswordModal isOpen={passwordModal} onClose={setPassWordModal} onValidate={validatePassword}/>}
+    </div>
     </div>
   )
 };

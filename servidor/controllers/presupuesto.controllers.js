@@ -2,6 +2,7 @@ const Presupuesto = require("../models/Presupuesto");
 const { cargarMovimientos } = require("../services/movimientoStock.services");
 const { actualizarNumero } = require("../services/numero.services");
 
+
 const borrarPresupuesto = async(req, res) => {
     const { id } = req.params;
     try {
@@ -29,12 +30,12 @@ const crearPresupuesto = async(req, res) => {
     try {
         const numero = await actualizarNumero('PRESUPUESTO');
         req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8,'0')}`;
-        // const movimiento = await cargarMovimientos(req.body.productos, 'PRESUPUESTO', req.body.numeroComprobante, req.body.creadoPor);
+        const movimiento = await cargarMovimientos(req.body.productos, 'PRESUPUESTO', req.body.numeroComprobante, req.body.creadoPor);
 
-        // if(!movimiento.ok) return res.status(400).json({
-        //     ok: false,
-        //     msg: 'No se pudo cargar los movimientos de stock del presupusto, hable con el administrador'
-        // });
+        if(!movimiento.ok) return res.status(400).json({
+            ok: false,
+            msg: 'No se pudo cargar los movimientos de stock del presupusto, hable con el administrador'
+        });
 
         const presupuesto = new Presupuesto(req.body);
         await presupuesto.save();

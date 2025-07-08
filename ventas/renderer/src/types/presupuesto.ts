@@ -18,5 +18,5 @@ export interface Presupuesto {
 
 export interface PresupuestoFormState extends Omit<Presupuesto, 'codigoCliente'>{
     codigoCliente: string;
-    productos?: Producto
+    productos?: Producto[]
 }

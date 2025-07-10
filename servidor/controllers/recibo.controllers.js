@@ -19,7 +19,7 @@ const borrarRecibo = async(req, res) => {
         });
         
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({ 
             ok: false, 
             msg: "Error al eliminar el recibo, hable con el administrador"
@@ -42,7 +42,7 @@ const crearRecibo = async(req, res) => {
             recibo 
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({ 
             ok: false, 
             msg: "Error al crear el recibo, hable con el administrador"
@@ -66,7 +66,7 @@ const modificarRecibo = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({ 
             ok: false, 
             msg: "Error al modificar el recibo, hable con el administrador"
@@ -86,7 +86,7 @@ const traerRecibos = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false, 
             msg: "Error al obtener los recibos, hable con el administrador"
@@ -111,7 +111,7 @@ const traerReciboPorId = async(req, res) => {
             recibo
         });
     }catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false, 
             msg: "Error al obtener el recibo, hable con el administrador"

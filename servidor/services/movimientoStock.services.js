@@ -25,7 +25,7 @@ const cargarMovimientos = async(productos, tipo, numero, usuario) => {
             movimientos
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         return error
         
     }

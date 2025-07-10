@@ -6,14 +6,13 @@ const actualizarCuentaCompensada = async(req, res) => {
 
     try {
         const resultado = await actualizarCompensada(id, req.body);
-        console.log(resultado);
 
         res.status(200).json({
             ok: true,
             cuenta: resultado
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo actualizar la cuenta compensada, hable con el administrador'
@@ -36,7 +35,7 @@ const borrarCuentaCompensada = async(req, res) => {
             cuenta
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Hable con el administrador'
@@ -68,7 +67,7 @@ const crearCuentaCompensada = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo cargar la cuenta Compensada, hable con el administrador'
@@ -92,7 +91,7 @@ const modificarCuentaCompensada = async(req, res) => {
             cuenta
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se puedo modificar la cuenta compensada, hable con el administrador'

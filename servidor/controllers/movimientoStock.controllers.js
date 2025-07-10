@@ -30,7 +30,7 @@ const crearMovimientoStock = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Hable con el administrador'
@@ -53,7 +53,7 @@ const modificarMovimiento = async(req, res) => {
             movimiento
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modificar los movimientos '
@@ -76,7 +76,7 @@ const traerMovimientosPorProducto = async(req, res) => {
             movimientos
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los movimientos, hable con el administrador'
@@ -101,7 +101,7 @@ const traerMovimientosPorTipoYNumero = async(req, res) => {
             movimientos
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los movimientos, hable con el administador'
@@ -121,7 +121,7 @@ const traerMovimientos = async(req, res) => {
             movimientos
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los movimientos, hable con el administrador'

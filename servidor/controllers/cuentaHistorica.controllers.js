@@ -16,7 +16,7 @@ const borrarCuentaHistorica = async(req, res) => {
             historica
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).sjon({
             ok: false,
             msg: 'No se pudo borrar la cuenta historica, Hable con el administrador'
@@ -48,7 +48,7 @@ const crearCuentaHistorica = async(req, res) => {
             historica
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
 
         res.status(500).json({
             ok: false,
@@ -74,7 +74,7 @@ const modifcarCuentaHistorica = async(req, res) => {
             historica
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modificar la historica, Por favor hable con el administrador'
@@ -94,7 +94,7 @@ const traerCuentaHistoricaPorCliente = async(req, res) => {
             historicas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener la historica, Por favor hable con el administrador'

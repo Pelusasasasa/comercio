@@ -8,6 +8,7 @@ const Presupuesto = new Schema({
     codigoCliente: {
         type: Types.ObjectId,
         required: true,
+        ref: 'Cliente',
         trim: true
     },
     datosClientes: {

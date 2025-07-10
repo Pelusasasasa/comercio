@@ -16,7 +16,7 @@ const borrarPedido = async(req, res) => {
             pedido
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).sjon({
             ok: true,
             msg: 'No se pudo borrar el pedido, hable con el administrador'
@@ -35,7 +35,7 @@ const crearPedido = async(req, res) => {
             pedido
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: true,
             msg: 'No se pudo cargar el pedido, hable con el administrador'
@@ -58,7 +58,7 @@ const modificarPedido = async(req, res) => {
             pedido
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg:  "No se pudo modificar el pedido, hable con el administrador"
@@ -75,7 +75,7 @@ const traerPedidos = async(req, res) => {
             pedidos
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo cargar el pedido, hable con el administrador'
@@ -94,7 +94,7 @@ const traerPedidosPorEstado = async(req, res) => {
             pedidos
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se puedo obtener los pedidos por el estado, hable con el administrador'

@@ -17,7 +17,7 @@ const crearCategoria = async(req, res) => {
             categoria
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
 
         res.status(500).json({
             ok: false,
@@ -43,7 +43,7 @@ const eliminarcategoria = async(req, res) => {
             categoria: categoriaEliminada
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error en el servidor al eliminar la categoria, hablar con el adminstrador'
@@ -67,7 +67,7 @@ const modificarCategoria = async(req, res) => {
             categoria: categoriaModificada
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error en el servidor al modificar la categoria, hablar con el adminstrador'
@@ -95,7 +95,7 @@ const pausarCategoria = async(req, res) => {
             categoria
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
 
         res.status(500).json({
             ok: false,
@@ -113,7 +113,7 @@ const traerCategoriasActivas = async(req, res) => {
             categorias
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error en el servidor al traer las categorias, hablar con el adminstrador'
@@ -139,7 +139,7 @@ const traerCategoriaPorId = async(req, res) => {
             categoria
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error en el servidor al traer la categoria, hablar con el adminstrador'

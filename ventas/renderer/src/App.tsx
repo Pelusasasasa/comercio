@@ -13,6 +13,7 @@ import { Remito } from './pages/Remito'
 import { Usuario } from './pages/Usuario'
 import { Venta } from './pages/Venta'
 import ComprobanteA5 from './impresion/ComprobanteA5'
+import { Listados } from './pages/Listados'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path='/remito' element={<Remito/>}/>
         <Route path='/venta' element={<Venta/>}/>
         <Route path='/impresion' element={<ComprobanteA5/>}/>
+        <Route path='/listado' element={<Listados/>}/>
       </Route>
     </Routes>
   )

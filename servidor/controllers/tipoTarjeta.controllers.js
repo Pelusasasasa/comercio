@@ -17,7 +17,7 @@ const borrarTipoTarjeta = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al eliminar el tipo de Tarjeta, Por favor hable con el administrador'
@@ -44,7 +44,7 @@ const crearTipoTarjeta = async(req, res) => {
             tipoTarjeta
         });
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al cargar la tarjeta, Por favor hable con el administrador'
@@ -69,7 +69,7 @@ const modificarTipoTarjeta = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al modificar el tipo de Tarjeta, Por favor hable con el administrador'
@@ -87,7 +87,7 @@ const traerNombres = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer los tipos de Tarjeta, Por favor hable con el administrador'
@@ -107,7 +107,7 @@ const traerTipoTarjetas = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer los tipos de Tarjeta, Por favor hable con el administrador'
@@ -132,7 +132,7 @@ const traerTipoTarjeta = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer el tipo de Tarjeta, Por favor hable con el administrador'
@@ -161,7 +161,7 @@ const pausarTipoTarjeta = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al pausar el tipo de Tarjeta, Por favor hable con el administrador'

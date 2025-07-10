@@ -18,7 +18,7 @@ const borrarMarca = async(req, res) => {
         });
         
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al borrar marca'
@@ -37,7 +37,7 @@ const cargarMarca = async (req, res) => {
             marca
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al cargar marca'
@@ -50,7 +50,6 @@ const modificarMarca = async(req, res) => {
 
     try {
         const marca = await Marca.findByIdAndUpdate(id, req.body, {new: true});
-        console.log(marca)
         if(!marca) return res.status(404).json({
             ok: false,
             msg: 'Marca no encontrada'
@@ -61,7 +60,7 @@ const modificarMarca = async(req, res) => {
             marca
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
 
         res.status(500).json({
             ok: false,
@@ -79,7 +78,7 @@ const traerMarcas = async(req, res) => {
             marcas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer las marcas, hable con el administrador'
@@ -96,7 +95,7 @@ const traerMarcasActivas = async(req, res) => {
             marcas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer las marcas, hable con el administrador'
@@ -123,7 +122,7 @@ const cambiarActivoMarca = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al cambiar el estado de la marca, hable con el administrador'

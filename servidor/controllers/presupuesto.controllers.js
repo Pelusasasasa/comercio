@@ -18,7 +18,7 @@ const borrarPresupuesto = async(req, res) => {
             presupuesto
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo borrar el presupuesto, hable con el administrador'
@@ -46,7 +46,7 @@ const crearPresupuesto = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
 
         res.status(500).json({
             ok: false,
@@ -69,7 +69,7 @@ const modificarPresupuesto = async(req, res) => {
                 presupuesto
             })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modificar el presupuesto, hable con el administrador'
@@ -79,21 +79,21 @@ const modificarPresupuesto = async(req, res) => {
 
 const traerPresupuestosPorFecha = async(req, res) => {
     const { desde, hasta} = req.params;
-    console.log({desde, hasta})
     try {
         const presupuestos = await Presupuesto.find({
             $and: [
                 {fecha: {$gte: new Date(desde)}},
                 {fecha: {$lte: new Date(hasta + "T23:59:59.000Z")}}
             ]
-        });
-
+        })
+        .populate('codigoCliente', ['codigo', 'nombre']);
         res.status(200).json({
             ok: true,
             presupuestos
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        (error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los presupuestos, hable con el administrador'
@@ -111,7 +111,7 @@ const traerPresupuestoPorId = async(req, res) => {
             presupuesto
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener presupuesto, hable con el administrador'

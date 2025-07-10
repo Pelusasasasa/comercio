@@ -19,7 +19,7 @@ const cambiarStock = async(productos) => {
             productosCambiados.push(producto);
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         ok = false;
         return {
             ok: false,

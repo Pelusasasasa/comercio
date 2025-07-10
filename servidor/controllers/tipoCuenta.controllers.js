@@ -16,7 +16,7 @@ const borrarTipoCuenta = async(req, res) => {
             tipoCuenta
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo borrar el tipo de cuenta, Hable con el administrador'
@@ -45,7 +45,7 @@ const cargarTipoCuenta = async(req, res) => {
         });
         
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Hable con el administrador'
@@ -69,7 +69,7 @@ const modificarTipoCuenta = async(req, res) => {
             tipoCuenta
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modificar el tipo de cuenta, Hable con el administrador'
@@ -86,7 +86,7 @@ const traerTipoCuentas = async(req, res) => {
             tipoCuentas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los tipos de cuentas, Hable con el administrador'
@@ -104,7 +104,7 @@ const traerTipoCuentaPorId = async(req, res) => {
             tipoCuentas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los tipos de cuentas, Hable con el administrador'
@@ -121,7 +121,7 @@ const traerNombres = async(req, res) => {
             tipoCuentas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los nombres de los tipos de cuentas, Hable con el administrador'

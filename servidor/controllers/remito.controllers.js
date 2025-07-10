@@ -18,7 +18,7 @@ const borrarRemito = async(req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al borrar el remito, hable con el administrador'
@@ -52,7 +52,7 @@ const crearRemito = async(req, res) => {
             remito: nuevoRemito
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al crear el recibo, hable con el administrador'
@@ -78,7 +78,7 @@ const modificarRemito = async(req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al modificar el remito, hable con el administrador'
@@ -95,7 +95,7 @@ const traerRemitos = async(req, res) => {
             remitos
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudieron obtener los remitos, hable con el administrador'
@@ -113,7 +113,7 @@ const traerRemitosActivos = async(req, res) => {
             remitos
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudieron obtener los remitos, hable con el administrador'
@@ -131,7 +131,7 @@ const traerRemitosNoActivos = async(req, res) => {
             remitos
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudieron obtener los remitos, hable con el administrador'

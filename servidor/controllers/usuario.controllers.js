@@ -16,7 +16,7 @@ const borrarUsuario = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al eliminar el usuario, Hable con el administrador'
         })
@@ -25,7 +25,6 @@ const borrarUsuario = async(req, res) => {
 
 const crearUsuario = async(req, res) => {
     const { nombre } = req.body;
-    console.log(req.body)
     try {
         const usuarioExiste = await Usuario.findOne({ nombre });
 
@@ -42,7 +41,7 @@ const crearUsuario = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al crear el usuario, Hable con el administrador'
         })
@@ -65,7 +64,7 @@ const modificarUsuario = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al modificar el usuario, Hable con el administrador'
         })
@@ -91,7 +90,7 @@ const pausarUsuario = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al pausar el usuario, Hable con el administrador'
         })
@@ -107,7 +106,7 @@ const traerUsuarios = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al traer los usuarios, Hable con el administrador'
         })
@@ -130,7 +129,7 @@ const traerUsuarioPorId = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al traer el usuario, Hable con el administrador'
         })
@@ -153,7 +152,7 @@ const traerUsuarioPorCodigo = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             msg: 'Error al traer el usuario, Hable con el administrador'
         })

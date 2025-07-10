@@ -17,7 +17,7 @@ const borrarProvedor = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status({
             ok: false,
             msg: 'Error al borrar el provedor, hable con el administrador'
@@ -45,7 +45,7 @@ const crearProvedor = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al crear el provedor, hable con el administrador'
@@ -70,7 +70,7 @@ const modificarProvedor = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al modificar el provedor, hable con el administrador'
@@ -88,7 +88,7 @@ const traerProvedores = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al traer los provedores, hable con el administrador'
@@ -113,7 +113,7 @@ const traerProvedorPorId = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al traer el provedor, hable con el administrador'
@@ -131,7 +131,7 @@ const traerNombres = async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al traer los provedores, hable con el administrador'

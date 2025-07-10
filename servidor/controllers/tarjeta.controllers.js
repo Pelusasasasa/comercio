@@ -16,7 +16,7 @@ const borrarTarjeta = async(req, res) => {
             tarjeta
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al borrar tarjeta, hable con el administrador'
@@ -35,7 +35,7 @@ const crearTarjeta = async(req, res) => {
         });
         
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al crear tarjeta, hable con el administrador'
@@ -59,7 +59,7 @@ const modificarTarjeta = async(req, res) => {
             tarjeta
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al modificar tarjeta, hable con el administrador'
@@ -76,7 +76,7 @@ const traerTarjetas = async(req, res) => {
             tarjetas
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer tarjetas, hable con el administrador'
@@ -100,7 +100,7 @@ const traerTarjetaPorId = async(req, res) => {
             tarjeta
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer tarjeta, hable con el administrador'

@@ -16,7 +16,7 @@ const borrarCheque = async(req, res) => {
             ok: true
         })
     } catch (error) {
-        console.log(error)
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'Error al eliminar el cheque, hable con el administrador'
@@ -35,7 +35,7 @@ const crearCheque = async(req, res) => {
             cheque
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al cargar Cheque, hable con el administrador'
@@ -59,7 +59,7 @@ const modificarCheque = async(req, res) => {
             cheque
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
 
         res.status(500).json({
             ok: false,
@@ -77,7 +77,7 @@ const traerCheques = async(req, res) => {
             cheques
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer los cheque, hable con el administador'
@@ -101,7 +101,7 @@ const traerChequePorId = async(req, res) => {
             cheque
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer el cheque, hable con el administrador'

@@ -11,7 +11,7 @@ const actualizarNumero = async(tipo) => {
         return numero
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
     }
 };
 

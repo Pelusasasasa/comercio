@@ -5,7 +5,7 @@ export const AsideBar = () => {
     const navigate = useNavigate();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 w-64 transform border-r border-gray-200 bg-gray-100 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 -translate-x-full">
+    <aside className="fixed inset-y-0 left-0 z-40 w-64 transform border-r border-gray-200 bg-gray-100 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 -translate-x-full">
         <div className="flex h-14 items-center border-b border-gray-200 px-14 lg:h-[61px] static">
             <h3 className="text-3xl">Menu</h3>
         </div>

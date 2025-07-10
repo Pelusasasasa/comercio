@@ -15,7 +15,7 @@ const borrarNumero = async(req, res) => {
             numero
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo borrar el numero, hable con el administrador'
@@ -34,7 +34,7 @@ const crearNumero = async(req, res) => {
             numero
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo crear el numero, hable con el administrador'
@@ -57,7 +57,7 @@ const modificarNumero = async(req, res) => {
             numero
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modificar el numero, hable con el administrador'
@@ -74,7 +74,7 @@ const traerNumeros = async(req, res) => {
             numeros
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los numeros, hable con el administrador'
@@ -98,7 +98,7 @@ const traerNumeroPorTipo = async(req, res) => {
             numero
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             ok: false
         })

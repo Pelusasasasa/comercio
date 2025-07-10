@@ -16,7 +16,7 @@ const borrarProducto = async(req, res) => {
             producto
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo eliminar el producto, hable con el administrador'
@@ -43,7 +43,7 @@ const crearProducto = async(req, res) => {
             producto: newProducto
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo cargar el producto, hable con el administrador'
@@ -72,7 +72,7 @@ const modificarProducto = async(req, res) => {
             producto: updateProducto
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo Modificar el producto, hable con el administrador'
@@ -96,7 +96,7 @@ const traerProductoPorId = async(req, res) => {
             producto
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).sjon({
             ok: false,
             msg: 'No se pudo obtener el producto, hable con el administrador'
@@ -117,7 +117,7 @@ const traerProductos = async(req, res) => {
             productos
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los productos, hable conm el administrador'
@@ -140,7 +140,7 @@ const traerProductosPorBusqueda = async(req, res) => {
             productos
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo obtener los productos, hable con el adminstrador'

@@ -16,7 +16,7 @@ const borrarUnidadMedidad = async(req, res) => {
             unidadMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al borrar unidad de Medida, hable con el administrador'
@@ -36,7 +36,7 @@ const crearUnindadMedida = async(req, res) => {
             unidadMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al cargar unidad de Medida, hable con el administrador'
@@ -60,7 +60,7 @@ const modificarUnidadMedida = async(req, res) => {
             unidadMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al modificar unidad de Medida, hable con el administrador'
@@ -88,7 +88,7 @@ const pausarUnidadMedida = async(req, res) => {
             unidadMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al pausar unidad de Medida, hable con el administrador'
@@ -106,7 +106,7 @@ const traerUnidadesMedida = async(req, res) => {
             unidadesMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer unidades de Medida, hable con el administrador'
@@ -131,7 +131,7 @@ const traerUnidadesMedidaPorId = async(req, res) => {
             unidadMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer unidad de Medida, hable con el administrador'
@@ -148,7 +148,7 @@ const traerNombres = async(req, res) => {
             unidadesMedida
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer unidades de Medida, hable con el administrador'

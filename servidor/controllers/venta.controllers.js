@@ -15,7 +15,7 @@ const borrarVenta = async(req, res) => {
             venta
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo borrar la venta, hable con el administrador'
@@ -35,7 +35,7 @@ const agregarVenta = async(req, res) => {
             venta
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo cargar la venta, Hable con el administrador'
@@ -59,7 +59,7 @@ const modificarVenta = async(req, res) => {
             venta
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modificar la venta, hable con el administrador'
@@ -77,7 +77,7 @@ const traerVentaPorId = async(req, res) => {
             venta
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo encontrar la venta, hable con el administrador'
@@ -94,7 +94,7 @@ const traerVentas = async(req, res) => {
             ventas
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo encontrar las ventas, hable con el administrador'

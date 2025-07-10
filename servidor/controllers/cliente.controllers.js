@@ -16,7 +16,7 @@ const borrarCliente = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al borrar el cliente, hable con el administrador'
@@ -36,7 +36,7 @@ const crearCliente = async(req, res) => {
             cliente
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo cargar el cliente, hable con el administrador'
@@ -62,7 +62,7 @@ const modificarCliente = async(req, res) => {
         })
         
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo modioficar el cliente, hable con el administrador'
@@ -81,7 +81,7 @@ const traerClientes = async(req, res) => {
             clientes
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'No se pudo Obtener los clientes, hable con el administrador'
@@ -106,7 +106,7 @@ const traerClientePorId = async(req, res) => {
             cliente
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer cliente, hable con el administrador'
@@ -130,7 +130,7 @@ const traerClientePorCodigo = async(req, res) => {
             cliente
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer cliente, hable con el administrador'
@@ -156,7 +156,7 @@ const traerClientesPorBusqueda = async(req, res) => {
             clientes
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);;
         res.status(500).json({
             ok: false,
             msg: 'Error al traer cliente, hable con el administrador'

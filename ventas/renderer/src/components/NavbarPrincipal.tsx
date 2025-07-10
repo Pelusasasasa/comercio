@@ -11,17 +11,26 @@ import { toISOStringUTCMinus3 } from "../helpers";
 
 export const NavbarPrincipal = () => {
   const navigate = useNavigate();
-  const { startTraerListado } = useListadoStore();
+  const { startTraerListado, startActivarTipo } = useListadoStore();
 
   const [desplegarListado, setDesplegarListado] = useState<Boolean>(false);
 
   const navegarAListadoContado = (e) => {
+    startActivarTipo('contado')
     const fecha = toISOStringUTCMinus3(new Date());
     startTraerListado('contado', `${fecha}`, `${fecha}`);
     navigate('/listado');
   };
 
+  const navegarAListadoCorriente = (e) => {
+    startActivarTipo('cuentaCorriente')
+    const fecha = toISOStringUTCMinus3(new Date());
+    startTraerListado('cuentaCorriente', `${fecha}`, `${fecha}`);
+    navigate('/listado');
+  };
+
   const navegarAListadoPresupuesto = (e) => {
+    startActivarTipo('presupuesto')
     const fecha = toISOStringUTCMinus3(new Date());
     startTraerListado('presupuesto', `${fecha}`, `${fecha}`);
     navigate('/listado');
@@ -50,7 +59,7 @@ export const NavbarPrincipal = () => {
                 <FiCreditCard size={15} className="text-black"/>
                 <p className="text-black">Contado</p>
               </div>
-              <div  className="border px-2 rounded-sm flex gap-4 items-center hover:border hover:border-rounede-lg hover:cursor-pointer hover:border-black">
+              <div onClick={navegarAListadoCorriente}  className="border px-2 rounded-sm flex gap-4 items-center hover:border hover:border-rounede-lg hover:cursor-pointer hover:border-black">
                 <HiOutlineDocumentChartBar size={15} className="text-black"/>
                 <p className="text-black">Cuenta Corriente</p>
               </div>

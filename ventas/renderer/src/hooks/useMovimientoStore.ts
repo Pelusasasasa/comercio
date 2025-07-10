@@ -115,12 +115,15 @@ export const useMovimientoStore = () => {
 
             if(data.ok){
                 dispatch(setMovimientos(data.movimientos));
+                return data.movimientos;
             }else{
-                await Swal.fire('Error al cargar los movimientos', data.msg, 'error')
+                await Swal.fire('Error al cargar los movimientos', data.msg, 'error');
+                return [];
             }
         } catch (error) {
             console.log(error);
             await Swal.fire('Error al cargar los movimientos', error.response.data?.msg, 'error');
+            return [];
         }
     };
 

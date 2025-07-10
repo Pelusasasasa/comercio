@@ -1,19 +1,33 @@
+import { useEffect, useState } from "react";
 import { useListadoStore } from "../../hooks/useListadoStore";
 import { ListadoItem } from "./ListadoItem";
+import { Presupuesto } from "../../types/presupuesto";
 
+interface Props {
+    buscador: string
+}
 
-export const ListadoList = () => {
+export const ListadoList = ({buscador = ''}: Props) => {
 
     const { listado } = useListadoStore();
+    const [listadoFiltrado, setListadoFiltrado] = useState<Presupuesto[]>(listado);
+
+    useEffect(() => {
+        setListadoFiltrado( listado.filter(elem => (
+                elem.numeroComprobante.startsWith(buscador.toUpperCase())
+            ||  elem.codigoCliente.nombre.startsWith(buscador.toUpperCase())
+        )));
+    }, [buscador || listado]);
 
   return (
     <section className='min-h-[calc(100vh-150px)] mx-2 border bg-white border-gray-200 rounded-md mt-2'>
-        <h3 className='text-2xl p-5 bg-chocolate-200'>Total: 7 Presupuestos</h3>
+        <h3 className='text-2xl p-5 bg-chocolate-200'>Total: {listado.length} Presupuestos</h3>
         <table className='w-full'>
             <thead>
                 <tr className='bg-gray-200'>
                     <th className='text-gray-600 text-xs text-start p-2'>Fecha</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Numero</th>
+                    <th className='text-gray-600 text-xs text-start p-2'>Cod Cliente</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Cliente</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Importe</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Observaciones</th>
@@ -21,7 +35,7 @@ export const ListadoList = () => {
                 </tr>
             </thead>
             <tbody>
-                { listado.map(elem => (
+                { listadoFiltrado.map(elem => (
                     <ListadoItem key={elem._id} {...elem}/>
                 ))}
             </tbody>

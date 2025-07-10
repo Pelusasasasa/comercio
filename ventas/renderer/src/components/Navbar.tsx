@@ -2,6 +2,7 @@
 import { GoArrowLeft, GoDownload } from 'react-icons/go';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useUsuarioStore } from '../hooks/useUsuarioStore';
+import { useListadoStore } from '../hooks/useListadoStore';
 
 interface Props {
     exportar?: () => void;
@@ -11,6 +12,7 @@ interface Props {
 export const Navbar = ({exportar, text}: Props) => {
 
     const { limpiarUsuarioSlice } = useUsuarioStore();
+    const { limpiarStore } = useListadoStore()
 
     const navigate = useNavigate();
     const { pathname } = useLocation();
@@ -19,6 +21,10 @@ export const Navbar = ({exportar, text}: Props) => {
     
       if(pathname.slice(1) === 'usuario'){
         limpiarUsuarioSlice();
+      }
+
+      if(pathname.slice(1) === 'listado'){
+        limpiarStore();
       }
 
         navigate(-1)

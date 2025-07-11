@@ -11,4 +11,6 @@ export interface Venta {
     tipoComprobante: string;
     descuento: number;
     productos: ProductoActivo[];
+    observaciones?: string;
+    creadoPor?: string;
 }

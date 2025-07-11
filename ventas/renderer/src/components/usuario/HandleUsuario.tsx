@@ -106,39 +106,39 @@ export const HandleUsuario = ({setAddUsuario}: Props) => {
                 <p className="font-medium text-start">Permisos de Acceso</p>
                 <div className="grid grid-cols-2 bg-gray-100 rounded-sm border border-gray-300">
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input value={permiso?.cliente} checked={permiso.cliente} onChange={onCheckboxChange} type="checkbox" name="permiso" id="cliente" className="scale-125" />
+                        <input value={permiso?.cliente} checked={permiso?.cliente} onChange={onCheckboxChange} type="checkbox" name="permiso" id="cliente" className="scale-125" />
                         <label htmlFor="cliente" className="font-medium">Clientes</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.producto}   className="scale-125" id="producto" onChange={onCheckboxChange} value={permiso?.producto}/>
+                        <input type="checkbox" name="permiso" checked={permiso?.producto}   className="scale-125" id="producto" onChange={onCheckboxChange} value={permiso?.producto}/>
                         <label htmlFor="producto" className="font-medium">Productos</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.venta}  className="scale-125" id="venta" onChange={onCheckboxChange} value={permiso?.venta} />
+                        <input type="checkbox" name="permiso" checked={permiso?.venta}  className="scale-125" id="venta" onChange={onCheckboxChange} value={permiso?.venta} />
                         <label htmlFor="venta" className="font-medium">Ventas</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.recibo}  className="scale-125" id="recibo" onChange={onCheckboxChange} value={permiso?.recibo}/>
+                        <input type="checkbox" name="permiso" checked={permiso?.recibo}  className="scale-125" id="recibo" onChange={onCheckboxChange} value={permiso?.recibo}/>
                         <label htmlFor="recibo" className="font-medium">Recibos</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.consultar}  className="scale-125" id="consultar" onChange={onCheckboxChange} value={permiso?.consultar}/>
+                        <input type="checkbox" name="permiso" checked={permiso?.consultar}  className="scale-125" id="consultar" onChange={onCheckboxChange} value={permiso?.consultar}/>
                         <label htmlFor="consultar" className="font-medium">Consultar Cuenta Corriente</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.numero}  className="scale-125" id="numero" onChange={onCheckboxChange} value={permiso?.numero} />
+                        <input type="checkbox" name="permiso" checked={permiso?.numero}  className="scale-125" id="numero" onChange={onCheckboxChange} value={permiso?.numero} />
                         <label htmlFor="numero" className="font-medium">Numeros</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.servicioTecnico}  className="scale-125" id="servicioTecnico" onChange={onCheckboxChange} value={permiso?.servicioTecnico} />
+                        <input type="checkbox" name="permiso" checked={permiso?.servicioTecnico}  className="scale-125" id="servicioTecnico" onChange={onCheckboxChange} value={permiso?.servicioTecnico} />
                         <label htmlFor="servicioTecnico" className="font-medium">Servicio Tecnico</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.remito}  className="scale-125" id="remito" onChange={onCheckboxChange} value={permiso?.remito} />
+                        <input type="checkbox" name="permiso" checked={permiso?.remito}  className="scale-125" id="remito" onChange={onCheckboxChange} value={permiso?.remito} />
                         <label htmlFor="remito" className="font-medium">Remito</label>
                     </div>
                     <div className="h-12 flex justify-start items-center gap-2 px-5">
-                        <input type="checkbox" name="permiso" checked={permiso.usuario}  className="scale-125" id="usuario" onChange={onCheckboxChange} value={permiso?.usuario} />
+                        <input type="checkbox" name="permiso" checked={permiso?.usuario}  className="scale-125" id="usuario" onChange={onCheckboxChange} value={permiso?.usuario} />
                         <label htmlFor="usuario" className="font-medium">Usuario</label>
                     </div>
                 </div>

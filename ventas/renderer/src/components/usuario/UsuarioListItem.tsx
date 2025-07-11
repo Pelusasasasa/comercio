@@ -26,7 +26,7 @@ export const UsuarioListItem = ({_id, codigo, nombre, permiso, telefono, email, 
         
 
     const handleUpdateUsuario = () => {
-        _id && activeUsuario(_id);
+        _id && activeUsuario({_id, codigo, nombre, permiso, telefono, email, activo});
         setAddUsuario(true)
     };  
 

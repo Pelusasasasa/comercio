@@ -1,4 +1,5 @@
 const Venta = require('../models/Venta');
+const { actualizarNumero } = require('../services/numero.services');
 
 const borrarVenta = async(req, res) => {
     const { id } = req.params;
@@ -24,8 +25,10 @@ const borrarVenta = async(req, res) => {
 };
 
 const agregarVenta = async(req, res) => {
-
     try {
+        const numero = await actualizarNumero('CONTADO');
+        req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8,'0')}`;
+
         const venta = new Venta(req.body);
 
         await venta.save();

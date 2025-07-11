@@ -9,7 +9,7 @@ import { useForm } from '../../hooks/Useform'
 import { useRemitoStore } from '../../hooks/useRemitoStore'
 import { useUsuarioStore } from '../../hooks/useUsuarioStore'
 
-import { recompilarInfoPresupuesto, recompilarInfoRemito } from '../../helpers/recompilarInfoVenta'
+import { recompilarInfoContado, recompilarInfoPresupuesto, recompilarInfoRemito } from '../../helpers/recompilarInfoVenta'
 import { usePresupuestoStore } from '../../hooks/usePresupuestoStore'
 
 
@@ -20,7 +20,7 @@ const initialState = {
 
 export const BotonesVenta = () => {
 
-    const { ventaActive, clienteActivo, startReiniciarState } = useVentaStore();
+    const { ventaActive, clienteActivo, startReiniciarState, startAgregarVenta } = useVentaStore();
     const { usuarioActive } = useUsuarioStore();
     const { startAgregarRemito } = useRemitoStore();
     const { startAgregarPresupuesto } = usePresupuestoStore();
@@ -55,6 +55,12 @@ export const BotonesVenta = () => {
             const presupuesto = (ventaActive && clienteActivo && usuarioActive) && recompilarInfoPresupuesto(ventaActive, clienteActivo, usuarioActive);
             console.log(presupuesto);
             presupuesto && await startAgregarPresupuesto(presupuesto)
+        };
+
+        if(tipoVenta === 'contado'){
+            const contado = (ventaActive && clienteActivo && usuarioActive) && recompilarInfoContado(ventaActive, clienteActivo, usuarioActive);
+            console.log(contado);
+            contado && await startAgregarVenta(contado);
         }
         
 

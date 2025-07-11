@@ -39,4 +39,21 @@ export const recompilarInfoPresupuesto = (venta: Venta, cliente: ClienteFormStat
     };
 
     return presupuesto
-}
+};
+
+export const recompilarInfoContado = (venta: Venta, cliente: ClienteFormState, usuario: Usuario) => {
+    const contado: Venta = {
+        fecha: `${new Date}`,
+        tipoComprobante: 'CONTADO',
+        codigoCliente: cliente._id,
+        precio: venta.precio,
+        numeroComprobante: '',
+        descuento: venta.descuento,
+        observaciones: '',
+        productos: venta.productos,
+        creadoPor: usuario._id,
+        factura: venta.factura
+    };
+
+    return contado;
+};

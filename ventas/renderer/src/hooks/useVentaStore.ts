@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Venta } from "../types/venta";
-import { activeProductoVenta, addProductoAVentaActiva, addVenta, clearClienteActivo, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, putCliente, putNumeroSerie, resetState, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
+import { activeProductoVenta, addProductoAVentaActiva, addVenta, clearClienteActivo, deleteProductoAVentaActiva, deleteVenta, finishSavingVenta, putCliente, putNumeroSerie, refreshTotal, resetState, savingVenta, setActiveVenta, setClienteActive, setClientes, setProductoActive, setProductos, setVentas, updateProductoVenta, updateVenta } from "../store/venta/ventaSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 import { ClienteFormState } from "../types/cliente";
@@ -23,6 +23,10 @@ export const useVentaStore = () => {
 
     const { isSavingVenta, ventas, messageErrorVenta, ventaActive, clienteActivo, clientes, productos, productoActivo} = useSelector((state: RootState) => state.venta);
     const dispatch = useDispatch();
+
+    const recalcularTotal = async() => {
+        dispatch(refreshTotal())
+    }
 
     const startAgregarVenta = async(venta: Venta) => {
         dispatch(savingVenta());
@@ -234,6 +238,7 @@ export const useVentaStore = () => {
         productoActivo,
 
         //Metodos
+        recalcularTotal,
         startActivarProductoDeVentas,
         startAgregarProductoAVentaActiva,
         startAgregarVenta,

@@ -33,8 +33,8 @@ export const ProductoRow = ({_id, codigo, descripcion, precio, marca, stock, sto
 
     const stockStyles = () => {
 
-        if(0 === stock) return 'border-red-500 border rounded-xl bg-red-100 text-red-800'
-        if(stockMinimo > stock) return 'border-yellow-500 border rounded-xl bg-yellow-100 text-yellow-800'
+        if(0 > stock) return 'border-red-500 border rounded-xl bg-red-100 text-red-800'
+        if(stockMinimo >= stock) return 'border-yellow-500 border rounded-xl bg-yellow-100 text-yellow-800'
         if(stockMinimo < stock) return 'border-green-500 border rounded-xl bg-green-100 text-green-800'
     };
     

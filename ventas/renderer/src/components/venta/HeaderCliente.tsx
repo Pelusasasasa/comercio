@@ -20,7 +20,7 @@ const initialState: ClienteFormState = {
 }
 
 export const HeaderCliente = () => {
-    const { clienteActivo, startTraerClientesParaVentas, startClearClientesParaVentas, clientes, startModificarClienteActivo } = useVentaStore()
+    const { clienteActivo, startTraerClientesParaVentas, startClearClientesParaVentas, clientes, startModificarClienteActivo, recalcularTotal } = useVentaStore()
     const { codigo, nombre, dni, telefono, direccion, localidad, condicionCuenta, tipoCuenta, observaciones, condicionIva, saldo,  onInputChange, formState } = useForm(clienteActivo ?? initialState);
 
     const [bandera, setBandera] = useState<boolean>(false);
@@ -35,6 +35,10 @@ export const HeaderCliente = () => {
         };
         
     }, [codigo]);
+
+    useEffect(() => {
+        recalcularTotal();
+    }, [clienteActivo]) 
 
     useEffect(() => {
         startModificarClienteActivo(formState);

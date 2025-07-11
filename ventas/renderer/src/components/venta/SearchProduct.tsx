@@ -45,7 +45,7 @@ export const SearchProduct = () => {
         }
     }
 
-  return (
+return (
     <form className="m-2 rounded-lg text-card-foreground shadow-sm mb-2 bg-[#E8D4B0] border-2 border-[#8B4513]">
         <div className="grid grid-cols-6 gap-2 p-2">
             <div className="flex flex-col">

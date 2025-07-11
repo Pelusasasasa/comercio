@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Venta } from '../../types/venta';
 import { ClienteFormState } from '../../types/cliente';
 import { ProductoActivo } from '../../types/producto';
+import { obtenerPrecioVenta } from '../../helpers/obtenerPrecioVenta';
 
 interface NumeroSerie {
     text: string;
@@ -43,10 +44,11 @@ const initialState: VentaState = {
     messageErrorVenta: null,
 };
 
-const calculartotal = (arreglo: ProductoActivo[]): number => {
+const calculartotal = (arreglo: ProductoActivo[], tipo: string): number => {
     //Funcion para calcular el total de el precio de los productos * la cantidad
     let total = arreglo.reduce((acc, item) => {
-        return acc + (item.precio * item.cantidad)
+        let precio = (tipo === 'INSTALADOR' ? item.cantidad * obtenerPrecioVenta({costo: item.costo, costoDolar: item.costoDolar, iva: item.iva}) : item.precio * item.cantidad)
+        return acc + precio;
     }, 0);
 
     return total;
@@ -76,7 +78,7 @@ export const ventaSlice = createSlice({
                     cantidad: payload.cantidad || 1
                 }) ;
             };
-            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos, state.clienteActivo?.tipoCuenta ?? '');
             state.productoActivo = null;
         },
 
@@ -110,7 +112,7 @@ export const ventaSlice = createSlice({
             if(!state.ventaActive) return;
 
             state.ventaActive.productos = state.ventaActive?.productos.filter(elem => elem._id !== payload);
-            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos, state.clienteActivo?.tipoCuenta ?? '');
         },
 
         deleteVenta: (state, {payload}: PayloadAction<string>) => {
@@ -142,6 +144,12 @@ export const ventaSlice = createSlice({
             if(index === -1 ) return;
 
             state.ventaActive.productos[index].nroSerie = text;
+        },
+
+        refreshTotal: (state) => {
+            if(!state.ventaActive) return;
+
+            state.ventaActive.precio = calculartotal(state.ventaActive?.productos, state.clienteActivo?.tipoCuenta ?? '')
         },
 
         resetState: (state) => {
@@ -192,7 +200,7 @@ export const ventaSlice = createSlice({
                 elem._id === payload._id ? payload : elem
             );
 
-            state.ventaActive.precio = calculartotal(state.ventaActive.productos);
+            state.ventaActive.precio = calculartotal(state.ventaActive.productos, state.clienteActivo?.tipoCuenta ?? '');
             state.productoActivo = null;
         },
         
@@ -213,6 +221,7 @@ export const {
     finishSavingVenta,
     putCliente,
     putNumeroSerie,
+    refreshTotal,
     resetState,
     savingVenta,
     setActiveVenta,

@@ -1,15 +1,12 @@
+import { useEffect, useRef } from "react";
 import Swal from "sweetalert2";
+import { Producto } from "../../types/producto";
+
 import { useForm, useMarcaStore } from "../../hooks";
 import { useCategoriaStore } from "../../hooks/useCategoriaStore";
 import { useProductoStore } from "../../hooks/useProductoStore"
 import { useProvedorStore } from "../../hooks/useProvedorStore";
 import { useUnidadMedidaStore } from "../../hooks/useUnidadMedidaStore";
-import { Producto } from "../../types/producto";
-
-import { Categoria } from "../../types/categoria";
-import { Marca } from "../../types/marca";
-import { Provedor } from "../../types/provedor";
-import { UnidadMedida } from "../../types/unidadMedida";
 
 interface useProductoStoreProps {
     productoActive: Producto | null,
@@ -19,7 +16,7 @@ interface useProductoStoreProps {
     startModificarProducto: (arg: Producto) => void,
     startTraerProductos: () => void,
     setProductoActivo: (arg: string) => void
-}
+};
 
 interface Props {
     setButtonActive: (arg: string) => void
@@ -35,13 +32,15 @@ const initialState: Producto = {
     categoria: {_id: '', nombre: '', descripcion: '', activo: true},
     unidadMedida: {_id: '', nombre: '', abreviatura: '', permiteDecimal: false, activo: true, tipo: ''},
     costo: 0,
+    costoDolar: 0,
     iva: 0,
+    costoIva: 0,
     utilidad: 0,
     precio: 0,
     stock: 0,
     stockMinimo: 0,
     detalle: '',
-}
+};
 
 const HandleProducto = ({ setButtonActive }: Props) => {
     const { startAgregarProducto, productoActive, startModificarProducto }: useProductoStoreProps = useProductoStore();
@@ -50,7 +49,49 @@ const HandleProducto = ({ setButtonActive }: Props) => {
     const { provedores } = useProvedorStore();
     const { unidadMedidas } = useUnidadMedidaStore();
 
-    const { codigo, codigoFabrica, descripcion, costo, marca, categoria, provedor, unidadMedida, iva, utilidad, precio, stock, stockMinimo, detalle, onInputChange, formState} = useForm(productoActive ? productoActive : initialState);
+    const { codigo, codigoFabrica, descripcion, costo, costoDolar, costoIva, marca, categoria, provedor, unidadMedida, iva, utilidad, precio, stock, stockMinimo, detalle, onInputChange, formState} = useForm(productoActive ? productoActive : initialState);
+    const costoRef = useRef<HTMLInputElement>(null);
+    const costoDolarRef = useRef<HTMLInputElement>(null);
+    const ivaRef = useRef<HTMLSelectElement>(null);
+    const utilidadRef = useRef<HTMLInputElement>(null);
+    const precioFinalRef = useRef<HTMLInputElement>(null);
+
+    const apretarEnter = (e) => {
+        if(e.key === 'Enter'){
+            console.log(e.target.value)
+            if(e.target.id === 'costo'){
+                ivaRef.current?.focus();
+            };
+            
+            if(e.target.id === 'iva'){
+                e.preventDefault()
+                utilidadRef.current?.focus();
+            };
+
+            if(e.target.id === 'utilidad'){
+                precioFinalRef.current?.focus();
+                if(precioFinalRef.current){
+                    precioFinalRef.current.value = (parseFloat(costoIva) + (parseFloat(costoIva) * parseFloat(utilidad) / 100)).toFixed(2);
+                }
+            };
+        }
+    };
+
+    useEffect(() => {
+        const costoNumero = parseFloat(costo) || 0;
+        const ivaNumero = parseFloat(iva) || 0;
+        const nuevoCostoIva = (costoNumero + costoNumero * ivaNumero / 100).toFixed(2);
+        
+        onInputChange({target: {name: 'costoIva', value: nuevoCostoIva}} as React.ChangeEvent<HTMLInputElement>);
+    }, [costo, iva]);
+
+    useEffect(() => {
+        const costoIvaNumero = parseFloat(costoIva) || 0;
+        const utilidadNumero = parseFloat(utilidad) || 0;
+        const nuevoPrecio = (costoIvaNumero + costoIvaNumero * utilidadNumero / 100);
+        onInputChange({target: {name: 'precio', value: nuevoPrecio.toFixed(2)}} as React.ChangeEvent<HTMLInputElement>);
+    }, [utilidad]);
+
 
     const agregarProducto = async(e) => {
         e.preventDefault();
@@ -66,15 +107,15 @@ const HandleProducto = ({ setButtonActive }: Props) => {
     const modificarProducto = async(e) => {
         startModificarProducto(formState);
         setButtonActive('listado');
-    }
+    };
 
-  return (
+return (
     <div className="m-2 min-h-[calc(100vh-150px)]">
         <h3 className="text-2xl p-5 bg-chocolate-200">{productoActive ? 'Modificar Producto' : 'Agregar Producto'}</h3>
-        <form onSubmit={agregarProducto} className="border-gray-200 border rounded-sm">
-            <div className="grid grid-cols-3 gap-5 bg-white px-5">
-                <div className='flex flex-col'>
-                    <label className='font-medium mb-1' htmlFor="codigo">Codigo *</label>
+        <form className="border-gray-200 border rounded-sm">
+            <div className="grid grid-cols-4 gap-5 bg-white px-5">
+                <div className='flex flex-col col-span-2'>
+                    <label className='font-medium mb-1 ' htmlFor="codigo">Codigo *</label>
                     <input onChange={onInputChange} disabled={productoActive ? true : false} value={codigo} className={`${productoActive ? 'bg-gray-200' : ''} border border-gray-400 rounded-sm p-1`} placeholder='Codigo' type="text" name="codigo" id="codigo" />
                 </div>
                 <div className='flex flex-col'>
@@ -83,6 +124,11 @@ const HandleProducto = ({ setButtonActive }: Props) => {
                 </div>
 
                 <div className='flex flex-col'>
+                    <label className='font-medium mb-1' htmlFor="dolar">Dolar</label>
+                    <input onChange={onInputChange} className='border border-gray-400 rounded-sm p-1 bg-gray-300' placeholder='Dolar' type="text" name="dolar" id="dolar" disabled  />
+                </div>
+
+                <div className='flex flex-col col-span-4'>
                     <label className='font-medium mb-1' htmlFor="descripcion">Descripcion *</label>
                     <input onChange={onInputChange} value={descripcion} className='border border-gray-400 rounded-sm p-1' placeholder='Descripcion' type="text" name="descripcion" id="descripcion" />
                 </div>
@@ -125,23 +171,31 @@ const HandleProducto = ({ setButtonActive }: Props) => {
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="costo">Costo *</label>
-                    <input onChange={onInputChange} value={costo} className='border border-gray-400 rounded-sm p-1' placeholder='costo' type="number" name="costo" id="costo" />
+                    <input onChange={onInputChange} value={costo} className='border border-gray-400 rounded-sm p-1' onKeyDown={apretarEnter} ref={costoRef} placeholder='costo' type="number" name="costo" id="costo" />
+                </div>
+                <div className='flex flex-col'>
+                    <label className='font-medium mb-1' htmlFor="costoDolar">Costo Dolar*</label>
+                    <input onChange={onInputChange} value={costoDolar} className='border border-gray-400 rounded-sm p-1' onKeyDown={apretarEnter} ref={costoDolarRef} placeholder='costoDolar' type="number" name="costoDolar" id="costoDolar" />
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="iva">Iva (%)*</label>
-                    <select name="iva" id="iva" onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' value={iva}>
+                    <select name="iva" id="iva" onChange={onInputChange} className='p-1 border border-gray-400 rounded-md' onKeyDown={apretarEnter} ref={ivaRef} value={iva}>
                         <option value="0">0%</option>
                         <option value="10.5">10.5%</option>
                         <option value="21">21%</option>
                     </select>
                 </div>
                 <div className='flex flex-col'>
+                    <label className='font-medium mb-1' htmlFor="costoIva">Costo + Iva</label>
+                    <input onChange={onInputChange} value={costoIva} className='border border-gray-400 rounded-sm p-1 bg-gray-300' placeholder='costoIva' disabled type="number" name="costoIva" id="costoIva" />
+                </div>
+                <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="utilidad">Utilidad (%)*</label>
-                    <input onChange={onInputChange} value={utilidad} className='border border-gray-400 rounded-sm p-1' placeholder='utilidad' type="number" name="utilidad" id="utilidad" />
+                    <input onChange={onInputChange} value={utilidad} className='border border-gray-400 rounded-sm p-1' onKeyDown={apretarEnter} ref={utilidadRef} placeholder='utilidad' type="number" name="utilidad" id="utilidad" />
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="precio">Precio Final *</label>
-                    <input onChange={onInputChange} value={precio} className='border border-gray-400 rounded-sm p-1' placeholder='precio' type="number" name="precio" id="precio" />
+                    <input onChange={onInputChange} value={precio} className='border border-gray-400 rounded-sm p-1'  ref={precioFinalRef} placeholder='precio' type="number" name="precio" id="precio" />
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="stock">Stock Inicial *</label>
@@ -152,23 +206,22 @@ const HandleProducto = ({ setButtonActive }: Props) => {
                     <input onChange={onInputChange} value={stockMinimo} className='border border-gray-400 rounded-sm p-1' placeholder='stockMinimo' type="number" name="stockMinimo" id="stockMinimo" />
                 </div>
 
-                <div className='flex flex-col col-span-3 bg-white pb-2'>
+                <div className='flex flex-col col-span-4 bg-white pb-2'>
                     <label className='font-medium mb-1' htmlFor="observaciones">Observaciones</label>
                     <textarea name="detalle" value={detalle} onChange={onInputChange} id="detalle" placeholder="observaciones adicionales del producto" cols={10} rows={2} className="p-2 border-gray-400 border rounded-sm"></textarea>
                 </div>
             </div>
-
-
-
-            <div className="flex justify-end bg-white p-2 gap-5">
-                <button className="border border-gray-400 p-2 font-medium rounded-md cursor-pointer hover:bg-gray-100" onClick={() => setButtonActive('listado')}>Cancelar</button>
-                { productoActive ? (
-                    <button type="button" onClick={modificarProducto} className="rounded-md p-2 font-medium cursor-pointer bg-yellow-500 text-gray-600 hover:bg-yellow-600">Modificar Producto</button>
-                ) :
-                ( <button type="submit" className="rounded-md p-2 font-medium cursor-pointer bg-yellow-500 text-gray-600 hover:bg-yellow-600">Agregar Producto</button> )}
-                
-            </div>
         </form>
+
+        <div className="flex justify-end bg-white p-2 gap-5">
+            <button className="border border-gray-400 p-2 font-medium rounded-md cursor-pointer hover:bg-gray-100" onClick={() => setButtonActive('listado')}>Cancelar</button>
+            { 
+            productoActive 
+                ? (<button type="button" onClick={modificarProducto} className="rounded-md p-2 font-medium cursor-pointer bg-yellow-500 text-gray-600 hover:bg-yellow-600">Modificar Producto</button>)
+                : ( <button type="button" onClick={agregarProducto} className="rounded-md p-2 font-medium cursor-pointer bg-yellow-500 text-gray-600 hover:bg-yellow-600">Agregar Producto</button> )
+            }
+                
+        </div>
     </div>
   )
 }

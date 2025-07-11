@@ -21,9 +21,11 @@ export interface Producto {
     provedor?: Provedor,
     unidadMedida?: UnidadMedida,
     costo: number,
+    costoDolar: number,
     iva: number,
+    costoIva?: number,
     utilidad: number,
     stockMinimo?: number,
     detalle?: string,
-    nroSerie: string
+    nroSerie?: string
 }

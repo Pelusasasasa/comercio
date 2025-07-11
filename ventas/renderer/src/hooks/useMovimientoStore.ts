@@ -90,7 +90,7 @@ export const useMovimientoStore = () => {
    
     };
 
-    const traerMovimientosPorProducto = async(idProducto: string) => {
+    const traerMovimientosPorProducto = async(idProducto: string | undefined) => {
         dispatch(savingMovimiento());
 
         try {

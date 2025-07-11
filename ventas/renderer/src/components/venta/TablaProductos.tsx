@@ -17,7 +17,7 @@ export const TablaProductos = ({setModalModificarProducto}: Props) => {
         </section>
     )
 
-  return (
+return (
     <section className="border border-gray-200 bg-white rounded-sm mx-2 h-[calc(70vh-200px)] overflow-y-auto no-scroll">
         <table className="w-full">
             <thead className="">
@@ -42,5 +42,5 @@ export const TablaProductos = ({setModalModificarProducto}: Props) => {
             </tbody>
         </table>
     </section>
-  )
+)
 }

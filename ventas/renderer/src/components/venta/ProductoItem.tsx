@@ -1,16 +1,24 @@
-import React, { SetStateAction } from 'react'
+import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Producto } from '../../types/producto'
 import { VscEdit } from 'react-icons/vsc';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useVentaStore } from '../../hooks/useVentaStore';
+import { obtenerPrecioVenta } from '../../helpers/obtenerPrecioVenta';
 
 interface Props extends Producto {
   cantidad?: string;
   setModalModificarProducto: React.Dispatch<SetStateAction<Boolean>>;
 };
 
-export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, setModalModificarProducto}: Props) => {
-  const { startDeleteProductoAVentaActiva, startActivarProductoDeVentas, startModificarNumeroSerie } = useVentaStore();
+export const ProductoItem = ({_id, codigo, descripcion, cantidad, costo, costoDolar, iva, precio, setModalModificarProducto}: Props) => {
+  const { startDeleteProductoAVentaActiva, startActivarProductoDeVentas, startModificarNumeroSerie, clienteActivo } = useVentaStore();
+
+  const [precioRef, setPrecioRef] = useState<number>(0);
+
+  useEffect(() => {
+    setPrecioRef(clienteActivo?.tipoCuenta === 'INSTALADOR' ?  obtenerPrecioVenta({costo, costoDolar, iva}) : precio);
+  }, [clienteActivo])
+  
   
   const handleNumeroSerie = (e) => {
     _id && startModificarNumeroSerie(_id, e.target.value)
@@ -33,8 +41,8 @@ export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, s
         {descripcion}
       </td>
       <td>{iva}</td>
-      <td className="py-2">{precio.toFixed(2)}</td>
-      <td className="py-2">{(precio * (cantidad ? parseFloat(cantidad) : 1)).toFixed(2)}</td>
+      <td className="py-2">{precioRef.toFixed(2)}</td>
+      <td className="py-2">{(precioRef * (cantidad ? parseFloat(cantidad) : 1)).toFixed(2)}</td>
       <td>
         <div className="flex items-center justify-around h-full">
           <VscEdit size={20} onClick={putProducto} className={`rounded-sm text-gray-600 cursor-pointer hover:bg-gray-400 `}/>
@@ -42,7 +50,7 @@ export const ProductoItem = ({_id, codigo, descripcion, cantidad, iva, precio, s
         </div>
       </td>
       <td>
-        <textarea onChange={handleNumeroSerie} className="border border-gray-300 rounded-sm w-full text-xs px-2" rows={3} name="" id="">Nro Series...</textarea>
+        <textarea onChange={handleNumeroSerie} className="border border-gray-300 rounded-sm w-full text-xs px-2" rows={3} name="" id="" defaultValue='Nro Series...'></textarea>
       </td>
     </tr>
   )

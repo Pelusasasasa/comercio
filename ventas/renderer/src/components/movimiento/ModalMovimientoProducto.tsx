@@ -12,13 +12,13 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
   const { productoActive } = useProductoStore();
 
   useEffect(() => {
-    traerMovimientosPorProducto(productoActive ? productoActive._id : '');
+    productoActive && traerMovimientosPorProducto(productoActive?._id);
   }, [])
   
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black/80'>
-      <div className='bg-white p-6 rounded shadow-md text-center w-5xl'>
+      <div className='bg-white p-6 rounded shadow-md text-center w-5xl max-h-[80vh] overflow-y-auto'>
         <div className='flex-col flex items-start'>
           <div className='flex justify-between w-full'>
             <h3 className='font-medium text-xl'>Movimiento de {productoActive?.descripcion}</h3>
@@ -26,7 +26,7 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
           </div>
           <p className='text-gray-700 '>Historial completo de movimientos de stock para este producto.</p>
         </div>
-        <table className='w-full mt-5'>
+          <table className='w-full mt-5'>
           <thead>
             <tr className='border-gray-200 pb-2 border-b-2'>
               <th className='text-gray-600 text-center text-sm font-medium'>Fecha</th>
@@ -41,7 +41,7 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
           </thead>
           <tbody>
             {
-               movimientos.map(mov => (
+              movimientos.map(mov => (
                 <tr className='text-center text-sm' key={mov._id}>
                   <td className='py-2'>{mov.fecha.slice(0, 10).split('-', 3).reverse().join('/') + " " + mov.fecha.slice(11,16)}</td>
                   <td>{mov.tipo}</td>
@@ -52,7 +52,7 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
                   <td>{mov.creadoPor.nombre}</td>
                   <td>{mov.detalle}</td>
                 </tr>
-               ))
+              ))
             }
           </tbody>
         </table>

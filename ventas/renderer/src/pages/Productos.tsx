@@ -52,7 +52,7 @@ export const Productos = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="bg-chocolate">
           { buttonActive === 'listado' && (<ListadoProductos setButtonActive={setButtonActive} productos={listado}/>)}
           { buttonActive === 'agregar' && (<HandleProducto setButtonActive={setButtonActive} />)}
           { buttonActive === 'movimiento' && (<Movimientos setButtonActive={setButtonActive} />)}

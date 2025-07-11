@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { useMovimientoStore, useProductoStore } from '../../hooks'
+import { trasnsformarHoraMenos3 } from '../../helpers'
 
 interface Props {
   setModalMov: (arg: boolean) => void
@@ -43,7 +44,7 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
             {
               movimientos.map(mov => (
                 <tr className='text-center text-sm' key={mov._id}>
-                  <td className='py-2'>{mov.fecha.slice(0, 10).split('-', 3).reverse().join('/') + " " + mov.fecha.slice(11,16)}</td>
+                  <td className='py-2'>{trasnsformarHoraMenos3(mov.fecha)}</td>
                   <td>{mov.tipo}</td>
                   <td>{mov.cantidad.toFixed(2)}</td>
                   <td>{mov.stockAntes.toFixed(2)}</td>

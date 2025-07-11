@@ -16,9 +16,9 @@ export const NavbarPrincipal = () => {
   const [desplegarListado, setDesplegarListado] = useState<Boolean>(false);
 
   const navegarAListadoContado = (e) => {
-    startActivarTipo('contado')
+    startActivarTipo('CONTADO')
     const fecha = toISOStringUTCMinus3(new Date());
-    startTraerListado('contado', `${fecha}`, `${fecha}`);
+    startTraerListado('CONTADO', `${fecha}`, `${fecha}`);
     navigate('/listado');
   };
 

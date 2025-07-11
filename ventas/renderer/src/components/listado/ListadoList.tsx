@@ -9,7 +9,7 @@ interface Props {
 
 export const ListadoList = ({buscador = ''}: Props) => {
 
-    const { listado } = useListadoStore();
+    const { listado, type } = useListadoStore();
     const [listadoFiltrado, setListadoFiltrado] = useState<Presupuesto[]>(listado);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export const ListadoList = ({buscador = ''}: Props) => {
 
   return (
     <section className='min-h-[calc(100vh-150px)] mx-2 border bg-white border-gray-200 rounded-md mt-2'>
-        <h3 className='text-2xl p-5 bg-chocolate-200'>Total: {listado.length} Presupuestos</h3>
+        <h3 className='text-2xl p-5 bg-chocolate-200'>Total: {listado.length} {type}</h3>
         <table className='w-full'>
             <thead>
                 <tr className='bg-gray-200'>
@@ -30,6 +30,7 @@ export const ListadoList = ({buscador = ''}: Props) => {
                     <th className='text-gray-600 text-xs text-start p-2'>Cod Cliente</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Cliente</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Importe</th>
+                    <th className='text-gray-600 text-xs text-start p-2'>Tipo Cliente</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Observaciones</th>
                     <th className='text-gray-600 text-xs text-start p-2'>Acciones</th>
                 </tr>

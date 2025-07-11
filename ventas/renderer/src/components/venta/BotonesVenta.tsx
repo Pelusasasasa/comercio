@@ -64,8 +64,8 @@ export const BotonesVenta = () => {
         }
         
 
-        // startReiniciarState();
-        // navigate(-1);
+        startReiniciarState();
+        navigate(-1);
     };
 
     const cancelarVenta = () => {

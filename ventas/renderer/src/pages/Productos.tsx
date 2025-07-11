@@ -34,7 +34,7 @@ export const Productos = () => {
 
   return (
     <div className="">
-      <Navbar text={'productos'}/>
+      <Navbar text={'Productos'}/>
 
       <main className="bg-chocolate h-[calc(100vh-60px)]">
 

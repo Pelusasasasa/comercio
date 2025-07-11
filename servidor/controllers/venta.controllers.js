@@ -1,5 +1,7 @@
 const Venta = require('../models/Venta');
+const { cargarMovimientos } = require('../services/movimientoStock.services');
 const { actualizarNumero } = require('../services/numero.services');
+const { cambiarStock } = require('../services/producto.services');
 
 const borrarVenta = async(req, res) => {
     const { id } = req.params;
@@ -26,8 +28,21 @@ const borrarVenta = async(req, res) => {
 
 const agregarVenta = async(req, res) => {
     try {
-        const numero = await actualizarNumero('CONTADO');
+        const numero = await actualizarNumero(req.body.tipoComprobante);
         req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8,'0')}`;
+        const movimiento = await cargarMovimientos(req.body.productos, req.body.tipoComprobante, req.body.numeroComprobante, req.body.creadoPor, req.body.tipoCliente)
+
+        if(!movimiento.ok) return res.status(400).json({
+            ok: false,
+            msg: 'No se pudo cargar los movimientos de stock de la venta, hable con el administrador'
+        });
+
+        const cambioStock = await cambiarStock(req.body.productos);
+
+        if(!cambioStock.ok) return res.status(400).json({
+            ok: false,
+            msg: 'No se pudo descontar el stock de los productos de la venta, hable con el administrador'
+        });
 
         const venta = new Venta(req.body);
 
@@ -105,10 +120,37 @@ const traerVentas = async(req, res) => {
     }
 };
 
+const traerVentasPorTipoYFecha = async(req, res) => {
+    const { type, desde, hasta} = req.params;
+    try {
+        const ventas = await Venta.find({
+            $and: [
+                {tipoComprobante: type},
+                {fecha: {$gte: new Date(desde)}},
+                {fecha: {$lte: new Date(hasta + "T23:59:59.000Z")}}
+            ]
+        })
+        .populate('codigoCliente', ['nombre', 'codigo']);
+
+        res.status(200).json({
+            ok: true,
+            ventas
+        });
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'No se pudo encontrar las ventas, hable con el administrador'
+        })
+    }
+}
+
 module.exports = {
     borrarVenta,
     agregarVenta,
     modificarVenta,
     traerVentaPorId,
-    traerVentas
+    traerVentas,
+    traerVentasPorTipoYFecha
 };

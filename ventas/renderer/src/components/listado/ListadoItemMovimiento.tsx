@@ -16,8 +16,8 @@ export const ListadoItemMovimiento = ({fecha, producto, numeroComprobante, canti
             <td>{producto.codigo}</td>
             <td>{producto.descripcion}</td>
             <td>{cantidad.toFixed(2)}</td>
-            <td>{precio.toFixed(2)}</td>
-            <td>{(precio * cantidad).toFixed(2)}</td>
+            <td>$ {precio.toFixed(2)}</td>
+            <td>$ {(precio * cantidad).toFixed(2)}</td>
             
         </tr>
     </>

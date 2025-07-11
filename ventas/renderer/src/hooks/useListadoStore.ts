@@ -13,17 +13,31 @@ export const useListadoStore = () => {
     };
 
     const startTraerListado = async(type: string, desde: string, hasta: string) => {
-        if(type === 'presupuesto' && desde && hasta){
-            try {
-                const { data } = await comercioApi.get(`presupuesto/porFecha/${desde}/${hasta}`);
-                if(data.ok){
-                    dispatch(setListados(data.presupuestos))
-                }else{
-                    await Swal.fire('No se pudo obtener los presupuestos', data.msg, 'error');
+        if(desde && hasta){
+            if(type === 'presupuesto'){
+                try {
+                    const { data } = await comercioApi.get(`presupuesto/porFecha/${desde}/${hasta}`);
+                    if(data.ok){
+                        dispatch(setListados(data.presupuestos))
+                    }else{
+                        await Swal.fire('No se pudo obtener los presupuestos', data.msg, 'error');
+                    }
+                } catch (error) {
+                    console.log(error);
+                    await Swal.fire('No se pudo obtener los presupuestos', error.response?.data?.msg, 'error');
                 }
-            } catch (error) {
-                console.log(error);
-                await Swal.fire('No se pudo obtener los presupuestos', error.response?.data?.msg, 'error');
+            }else if(type === 'CONTADO'){
+                try {
+                    const { data } = await comercioApi.get(`venta/forTypeAndFecha/${type}/${desde}/${hasta}`);
+                    if(data.ok){
+                        dispatch(setListados(data.ventas));
+                    }else{
+                        await Swal.fire('No se pudo obtener las ventas', data.msg, 'error');
+                    }
+                } catch (error) {
+                    console.log(error);
+                    await Swal.fire('No se pudo obtener las ventas', error.response?.data?.msg, 'error');
+                }
             }
         }
 

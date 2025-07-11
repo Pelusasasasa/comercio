@@ -7,6 +7,7 @@ export interface Venta {
     codigoCliente: string;
     precio: number;
     factura: boolean;
+    tipoCliente: string | 'NORMAL' | 'INSTALADOR',
     numeroComprobante: string;
     tipoComprobante: string;
     descuento: number;

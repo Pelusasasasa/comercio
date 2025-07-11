@@ -46,6 +46,7 @@ export const recompilarInfoContado = (venta: Venta, cliente: ClienteFormState, u
         fecha: `${new Date}`,
         tipoComprobante: 'CONTADO',
         codigoCliente: cliente._id,
+        tipoCliente: cliente.tipoCuenta,
         precio: venta.precio,
         numeroComprobante: '',
         descuento: venta.descuento,

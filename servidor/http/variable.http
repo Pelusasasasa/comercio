@@ -1,0 +1,28 @@
+###DELETE ONE
+DELETE http://localhost:3000/comercio/variable/6874315673df0b91abc127d6
+
+### GET ALL
+GET http://localhost:3000/comercio/variable
+
+### GET BY ID
+GET http://localhost:3000/comercio/variable/68743078605551fffeb804d5
+
+###GET FOR CLAVE
+GET http://localhost:3000/comercio/variable/clave/DOLAR
+
+###PUT ONE
+PUT http://localhost:3000/comercio/variable/68743078605551fffeb804d5
+Content-Type: application/json
+
+{
+    "valor": 20.5
+}
+
+### POST ONE
+POST http://localhost:3000/comercio/variable
+Content-Type: application/json
+
+{
+    "clave": "STOCK_MINIMO",
+    "valor": 20.5
+}

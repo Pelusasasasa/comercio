@@ -32,6 +32,7 @@ app.use('/comercio/tipoTarjeta', require('./routes/tipoTarjeta.route'));
 app.use('/comercio/venta', require('./routes/venta.route'));
 app.use('/comercio/unidadMedida', require('./routes/unidadMedida.route'));
 app.use('/comercio/usuario', require('./routes/usuario.route'));
+app.use('/comercio/variable', require('./routes/variable.route'));
 
 app.listen(PORT, () => {
     console.log(`Servidor cooriendo en el puerto ${PORT}`);

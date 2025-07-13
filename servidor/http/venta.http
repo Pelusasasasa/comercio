@@ -7,6 +7,8 @@ GET http://localhost:3000/comercio/venta
 ###GET ONE
 GET http://localhost:3000/comercio/venta/6863cc5d3ec178ae8ec47008
 
+###GET FOR TYPE AND DATE
+GET http://localhost:3000/comercio/venta/forTypeAndFecha/CONTADO/2025-07-11/2025-07-11
 
 ###POST ONE
 POST http://localhost:3000/comercio/venta

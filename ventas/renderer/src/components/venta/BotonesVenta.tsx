@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
@@ -32,6 +32,10 @@ export const BotonesVenta = () => {
     const [tipoVenta, setTipoVenta] = useState<string>('');
     const [impresion, setImpresion] = useState<boolean>(true);
     const [dolar, setDolar] = useState<boolean>(false);
+
+    useEffect(() => {
+        console.log(clienteActivo?.tipoCuenta)
+    }, [clienteActivo])
     
     const realizarVenta = async() => {
         if(!clienteActivo) return await Swal.fire('No se pudo realizar la venta', 'Se necesita de un cliente', 'error');
@@ -60,8 +64,8 @@ export const BotonesVenta = () => {
         }
         
 
-        // startReiniciarState();
-        // navigate(-1);
+        startReiniciarState();
+        navigate(-1);
     };
 
     const cancelarVenta = () => {

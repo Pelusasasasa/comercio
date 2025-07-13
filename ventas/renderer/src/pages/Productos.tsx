@@ -34,7 +34,7 @@ export const Productos = () => {
 
   return (
     <div className="">
-      <Navbar text={'productos'}/>
+      <Navbar text={'Productos'}/>
 
       <main className="bg-chocolate h-[calc(100vh-60px)]">
 
@@ -52,7 +52,7 @@ export const Productos = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="bg-chocolate">
           { buttonActive === 'listado' && (<ListadoProductos setButtonActive={setButtonActive} productos={listado}/>)}
           { buttonActive === 'agregar' && (<HandleProducto setButtonActive={setButtonActive} />)}
           { buttonActive === 'movimiento' && (<Movimientos setButtonActive={setButtonActive} />)}

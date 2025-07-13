@@ -33,6 +33,10 @@ const Producto = new Schema({
         type: Number,
         default: 0
     },
+    costoDolar: {
+        type: Number,
+        default: 0
+    },
     iva: {
         type: Number,
         default: 0

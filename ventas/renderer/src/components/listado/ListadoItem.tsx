@@ -8,7 +8,7 @@ import { ListadoItemMovimiento } from './ListadoItemMovimiento';
 import { Movimiento } from '../../types/movimiento';
 
 
-export const ListadoItem = ({fecha, numeroComprobante, tipoComprobante, codigoCliente, precio, observaciones}: Presupuesto) => {
+export const ListadoItem = ({fecha, numeroComprobante, tipoComprobante, codigoCliente, precio, observaciones, tipoCliente}: Presupuesto) => {
 
     const { traerMovimientosPorTipoYNumero } = useMovimientoStore();
     const [movimientos, setMovimientos ] = useState<Movimiento[]>([]);
@@ -21,7 +21,6 @@ export const ListadoItem = ({fecha, numeroComprobante, tipoComprobante, codigoCl
 
         fetchMovimientos();
     }, [])
-    
   return (
     <>
         <tr className='font-bold'>
@@ -29,7 +28,8 @@ export const ListadoItem = ({fecha, numeroComprobante, tipoComprobante, codigoCl
             <td>{numeroComprobante}</td>
             <td>{codigoCliente.codigo.toString().padStart(4, '0')}</td>
             <td>{codigoCliente.nombre}</td>
-            <td>{precio.toFixed(2)}</td>
+            <td>$ {precio.toFixed(2)}</td>
+            <td>{tipoCliente}</td>
             <td>{observaciones}</td>
             <td>
                 <div className='flex gap-5'>

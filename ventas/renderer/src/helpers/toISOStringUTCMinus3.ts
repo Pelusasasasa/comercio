@@ -14,5 +14,5 @@ export const trasnsformarHoraMenos3 = (fecha: string): string => {
     const hora = String(fechaActual.getHours()).padStart(2, '0');
     const minutos = String(fechaActual.getMinutes()).padStart(2, '0');
     const segundos = String(fechaActual.getSeconds()).padStart(2, '0');
-    return `${año}-${mes}-${dia} - ${hora}:${minutos}:${segundos}`
+    return `${dia}/${mes}/${año} ${hora}:${minutos}:${segundos}`
 };

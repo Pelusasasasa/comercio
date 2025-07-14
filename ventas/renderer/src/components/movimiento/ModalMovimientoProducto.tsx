@@ -14,12 +14,12 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
 
   useEffect(() => {
     productoActive && traerMovimientosPorProducto(productoActive?._id);
-  }, [])
+  }, []);
   
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black/80'>
-      <div className='bg-white p-6 rounded shadow-md text-center w-5xl max-h-[80vh] overflow-y-auto'>
+      <div className='bg-white p-6 rounded shadow-md text-center w-full mx-10 max-h-[80vh] overflow-y-auto'>
         <div className='flex-col flex items-start'>
           <div className='flex justify-between w-full'>
             <h3 className='font-medium text-xl'>Movimiento de {productoActive?.descripcion}</h3>
@@ -32,12 +32,14 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
             <tr className='border-gray-200 pb-2 border-b-2'>
               <th className='text-gray-600 text-center text-sm font-medium'>Fecha</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Tipo</th>
+              <th className='text-gray-600 text-center text-sm font-medium'>Cod. Cliente</th>
+              <th className='text-gray-600 text-center text-sm font-medium'>Cliente</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Cantidad</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Stock Anter</th>
               <th className='text-gray-600 text-center text-sm font-medium'>stock Ahora</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Comprobante</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Usuario</th>
-              <th className='text-gray-600 text-center text-sm font-medium'>Observacion</th>
+              <th className='text-gray-600 text-center text-sm font-medium'>Nro_Serie</th>
             </tr>
           </thead>
           <tbody>
@@ -46,12 +48,14 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
                 <tr className='text-center text-sm' key={mov._id}>
                   <td className='py-2'>{trasnsformarHoraMenos3(mov.fecha)}</td>
                   <td>{mov.tipo}</td>
+                  <td>{mov.codigoCliente.codigo.toString().padStart(4, '0')}</td>
+                  <td>{mov.codigoCliente.nombre}</td>
                   <td>{mov.cantidad.toFixed(2)}</td>
                   <td>{mov.stockAntes.toFixed(2)}</td>
                   <td>{mov.stockAhora.toFixed(2)}</td>
                   <td>{mov.numeroComprobante}</td>
                   <td>{mov.creadoPor.nombre}</td>
-                  <td>{mov.detalle}</td>
+                  <td><textarea className='border border-gray-300 rounded-lg px-1' name="" id="">{mov.nroSerie}</textarea></td>
                 </tr>
               ))
             }

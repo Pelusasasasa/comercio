@@ -10,6 +10,10 @@ const MovimientoStock = new Schema({
         ref: 'Producto',
         required: true
     },
+    codigoCliente: {
+        type: Types.ObjectId,
+        ref: 'Cliente',
+    },
     tipo: {
         type: String,
         required: true,
@@ -31,7 +35,7 @@ const MovimientoStock = new Schema({
         type: Number,
         required: true
     },
-    detalle: {
+    nroSerie: {
         type: String,
         trim: true,
         set: value => value.toUpperCase()

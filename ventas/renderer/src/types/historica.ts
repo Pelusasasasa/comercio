@@ -4,7 +4,7 @@ import { Usuario } from "./usuario";
 export interface Historica {
     _id: string;
     fecha: string,
-    cliente: ClienteFormState,
+    codigoCliente: ClienteFormState,
     tipoComprobante: string,
     numeroComprobante: string,
     debe: number,

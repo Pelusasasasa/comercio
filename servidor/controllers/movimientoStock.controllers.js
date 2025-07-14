@@ -67,6 +67,7 @@ const traerMovimientosPorProducto = async(req, res) => {
     try {
         const movimientos = await MovimientoStock.find({producto})
         .populate('producto', 'descripcion')
+        .populate('codigoCliente', ['nombre', 'codigo'])
         .populate('creadoPor', 'nombre')
         .sort({_id: -1});
 
@@ -94,6 +95,7 @@ const traerMovimientosPorTipoYNumero = async(req, res) => {
             ]
         })
         .populate('producto', ['descripcion', 'codigo'])
+        .populate('codigoCliente', ['nombre', 'codigo'])
         .populate('creadoPor', 'nombre');
 
         res.status(200).json({
@@ -113,6 +115,7 @@ const traerMovimientos = async(req, res) => {
     try {
         const movimientos = await MovimientoStock.find()
             .populate('producto', 'descripcion')
+            .populate('codigoCliente', ['nombre', 'codigo'])
             .populate('creadoPor', 'nombre')
             .sort({_id: -1})
 

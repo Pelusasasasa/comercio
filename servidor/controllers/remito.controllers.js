@@ -30,7 +30,7 @@ const crearRemito = async(req, res) => {
     try {
         const numero = await actualizarNumero('REMITO');
         req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8, '0')}`;
-        const movimiento = await cargarMovimientos(req.body.productos, 'REMITO', req.body.numeroComprobante, req.body.creadoPor);
+        const movimiento = await cargarMovimientos(req.body.productos, 'REMITO', req.body.numeroComprobante, req.body.creadoPor, req.body.tipoCliente, req.body.codigoCliente);
 
         if (!movimiento.ok) return res.status(400).json({
             ok: false,

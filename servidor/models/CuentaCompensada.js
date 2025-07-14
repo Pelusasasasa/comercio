@@ -34,6 +34,7 @@ const CuentaCompensada = new Schema({
     },
     observaciones: {
         type: String,
+        set: value => value.toUpperCase(),
     },
     creadoPor: {
         type: Types.ObjectId,

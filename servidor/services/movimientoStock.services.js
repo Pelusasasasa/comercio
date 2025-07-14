@@ -1,7 +1,7 @@
 const { obtenerPrecio } = require("../helpers/obtenerPrecio");
 const MovimientoStock = require("../models/MovimientoStock");
 
-const cargarMovimientos = async(productos, tipo, numero, usuario, tipoCliente) => {
+const cargarMovimientos = async(productos, tipo, numero, usuario, tipoCliente, codigoCliente) => {
     let movimientos = [];
     try {
         for await(let producto of productos){
@@ -11,12 +11,14 @@ const cargarMovimientos = async(productos, tipo, numero, usuario, tipoCliente) =
             mov.fecha = new Date();
             mov.producto = producto._id;
             mov.tipo = tipo;
+            mov.codigoCliente = codigoCliente;
             mov.cantidad = producto.cantidad;
             mov.stockAntes = producto.stock;
             mov.stockAhora = producto.stock - producto.cantidad;
             mov.precio = precio;
             mov.numeroComprobante = numero;
             mov.creadoPor = usuario;
+            mov.nroSerie = producto.nroSerie ?? '';
 
 
             const movimineto = new MovimientoStock(mov);

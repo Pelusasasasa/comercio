@@ -104,10 +104,10 @@ const traerCuentaCompensadaActivaPorCliente = async(req, res) => {
     try {
         const cuentas = await CuentaCompensada.find({
             $and: [
-                {cliente},
+                {codigoCliente: cliente},
                 {saldo: {$ne: 0}}
             ]
-        }).populate('cliente', 'nombre');
+        }).populate('codigoCliente', 'nombre');
 
         if(!cuentas) return res.status(404).json({
             ok: false,

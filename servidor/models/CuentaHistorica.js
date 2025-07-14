@@ -5,7 +5,7 @@ const CuentaHistorica = new Schema({
         type: Date,
         default: Date.now
     },
-    cliente: {
+    codigoCliente: {
         type: Types.ObjectId,
         ref: 'Cliente'
     },
@@ -34,6 +34,7 @@ const CuentaHistorica = new Schema({
     },
     observaciones: {
         type: String,
+        set: value => value.toUpperCase(),
     },
     creadoPor: {
         type: Types.ObjectId,

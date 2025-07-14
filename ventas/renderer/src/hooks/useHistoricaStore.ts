@@ -80,7 +80,6 @@ export const useHistoricaStore = () => {
 
         try {
             const { data } = await comercioApi.get(`cuentaHistorica/cliente/${idCliente}`);
-
             if (data.ok) {
                 dispatch(setHistoricas(data.historicas));
             } else {

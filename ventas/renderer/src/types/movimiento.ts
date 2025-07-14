@@ -1,3 +1,4 @@
+import { Cliente } from "./cliente";
 import { Producto } from "./producto";
 import { Usuario } from "./usuario";
 
@@ -5,6 +6,7 @@ export interface Movimiento {
     _id: string,
     fecha: string,
     producto: Producto,
+    codigoCliente: Cliente,
     precio: number,
     tipo: string,
     cantidad: number,
@@ -12,6 +14,6 @@ export interface Movimiento {
     stockAhora: number,
     numeroComprobante: string,
     creadoPor: Usuario,
-    detalle: string
+    nroSerie: string
 
 }

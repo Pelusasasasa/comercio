@@ -11,10 +11,10 @@ export const Consultar = () => {
   const [ tipoCuenta, setTipoCuenta ] = useState('compensada');
 
   return (
-    <div>
+    <div className='bg-chocolate'>
         <Navbar text='Consultar Cuenta' />
 
-        <div className='bg-yellow-50 pb-7'>
+        <div className='pb-7'>
           <HeaderConsultar setTipoCuenta={setTipoCuenta}/>
           {tipoCuenta === 'compensada' 
             ? (<CompensadaList setTipoCuenta={setTipoCuenta} />)

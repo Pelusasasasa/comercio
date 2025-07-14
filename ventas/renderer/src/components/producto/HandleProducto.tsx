@@ -53,6 +53,7 @@ const HandleProducto = ({ setButtonActive }: Props) => {
     const costoRef = useRef<HTMLInputElement>(null);
     const costoDolarRef = useRef<HTMLInputElement>(null);
     const ivaRef = useRef<HTMLSelectElement>(null);
+    const costoIvaRef = useRef<HTMLInputElement>(null);
     const utilidadRef = useRef<HTMLInputElement>(null);
     const precioFinalRef = useRef<HTMLInputElement>(null);
 
@@ -70,6 +71,7 @@ const HandleProducto = ({ setButtonActive }: Props) => {
 
             if(e.target.id === 'utilidad'){
                 precioFinalRef.current?.focus();
+                onInputChange({target: {name: 'precio', value: calcularPrecioFinal()}} as React.ChangeEvent<HTMLInputElement>);
                 if(precioFinalRef.current){
                     precioFinalRef.current.value = (parseFloat(costoIva) + (parseFloat(costoIva) * parseFloat(utilidad) / 100)).toFixed(2);
                 }
@@ -77,19 +79,23 @@ const HandleProducto = ({ setButtonActive }: Props) => {
         }
     };
 
+    const calcularPrecioFinal = () => {
+        const costoIvaNumero = parseFloat(costoIvaRef.current!.value) || 0;
+        const utilidadNumero = parseFloat(utilidadRef.current!.value) || 0;
+        const nuevoPrecio = (costoIvaNumero + costoIvaNumero * utilidadNumero / 100);
+        return nuevoPrecio.toFixed(2);
+    };
+
     useEffect(() => {
         const costoNumero = parseFloat(costo) || 0;
         const ivaNumero = parseFloat(iva) || 0;
         const nuevoCostoIva = (costoNumero + costoNumero * ivaNumero / 100).toFixed(2);
-        
+        costoIvaRef.current!.value = nuevoCostoIva;
         onInputChange({target: {name: 'costoIva', value: nuevoCostoIva}} as React.ChangeEvent<HTMLInputElement>);
     }, [costo, iva]);
 
     useEffect(() => {
-        const costoIvaNumero = parseFloat(costoIva) || 0;
-        const utilidadNumero = parseFloat(utilidad) || 0;
-        const nuevoPrecio = (costoIvaNumero + costoIvaNumero * utilidadNumero / 100);
-        onInputChange({target: {name: 'precio', value: nuevoPrecio.toFixed(2)}} as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({target: {name: 'precio', value: calcularPrecioFinal()}} as React.ChangeEvent<HTMLInputElement>);
     }, [utilidad]);
 
 
@@ -187,7 +193,7 @@ return (
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="costoIva">Costo + Iva</label>
-                    <input onChange={onInputChange} value={costoIva} className='border border-gray-400 rounded-sm p-1 bg-gray-300' placeholder='costoIva' disabled type="number" name="costoIva" id="costoIva" />
+                    <input onChange={onInputChange} value={costoIva} className='border border-gray-400 rounded-sm p-1 bg-gray-300' placeholder='costoIva' ref={costoIvaRef} disabled type="number" name="costoIva" id="costoIva" />
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="utilidad">Utilidad (%)*</label>

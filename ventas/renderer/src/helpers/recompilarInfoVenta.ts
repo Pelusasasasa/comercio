@@ -70,7 +70,7 @@ export const recompilarInfoCuentaCorriente = (venta: Venta, cliente: ClienteForm
         precio: venta.precio,
         numeroComprobante: '',
         descuento: venta.descuento,
-        observaciones: '',
+        observaciones: cliente.observaciones,
         productos: venta.productos,
         creadoPor: usuario._id,
         factura: venta.factura

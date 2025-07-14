@@ -2,9 +2,10 @@ import { TfiReload } from "react-icons/tfi";
 import Swal from "sweetalert2";
 import { useCompensadaStore } from "../../hooks/useCompensadaStore";
 import { useMovimientoStore } from "../../hooks/useMovimientoStore";
+import { trasnsformarHoraMenos3 } from "../../helpers";
 
 
-export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numeroComprobante, importe, pagado, saldo, observaciones}) => {
+export const CompensadaListItem = ({_id, fecha, codigoCliente, tipoComprobante, numeroComprobante, importe, pagado, saldo, observaciones}) => {
     const { activeCompensada, startActualizarCompensada } = useCompensadaStore();
     const { traerMovimientosPorTipoYNumero } = useMovimientoStore();
 
@@ -20,7 +21,7 @@ export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numero
             title: '¿Estas seguro de actualizar esta compensada?',
             showCancelButton: true,
             confirmButtonText: 'Si',
-          })
+        })
         
         if(isConfirmed){
             startActualizarCompensada(_id);
@@ -35,9 +36,9 @@ export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numero
 
   return (
     <tr onClick={handleActiveCompensada} className='bg-white border-b bgTr cursor-pointer  hover:bg-gray-50'>
-        <td className='text-black text-center text-sm py-2'>{fechaParseada}</td>
+        <td className='text-black text-center text-sm py-2'>{trasnsformarHoraMenos3(fecha)}</td>
         <td className='text-black text-center text-sm'>{numeroComprobante}</td>
-        <td className='text-black text-center text-sm'>{cliente.nombre}</td>
+        <td className='text-black text-center text-sm'>{codigoCliente.nombre}</td>
         <td className='text-black text-center text-sm'>
             <p className={tipoComprobanteStyle()}>{tipoComprobante}</p>
         </td>
@@ -46,7 +47,9 @@ export const CompensadaListItem = ({_id, fecha, cliente, tipoComprobante, numero
         <td className='text-black text-center text-sm'>{saldo?.toFixed(2)}</td>
         <td className='text-black text-center text-sm'>{observaciones}</td>
         <td>
-            <TfiReload size={15} className="text-black hover:text-gray-500" onClick={handleUpdate}/>
+            <div className="flex justify-center">
+                <TfiReload size={15} className="text-black hover:text-gray-500" onClick={handleUpdate}/>
+            </div>
         </td>
     </tr>
   )

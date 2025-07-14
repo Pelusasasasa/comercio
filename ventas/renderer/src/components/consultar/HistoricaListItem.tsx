@@ -1,8 +1,7 @@
 import React from 'react'
+import { trasnsformarHoraMenos3 } from '../../helpers';
 
-export const HistoricaListItem = ({fecha, numeroComprobante, cliente, tipoComprobante, debe, haber, saldo, observaciones}) => {
-
-    const fechaParseada = fecha.slice(0, 10).split('-').reverse().join('/') + ' ' + fecha.slice(11, 16);
+export const HistoricaListItem = ({fecha, numeroComprobante, codigoCliente, tipoComprobante, debe, haber, saldo, observaciones}) => {
 
     const tipoComprobanteStyle = () => {
         if(tipoComprobante === 'Recibo') return 'text-green-700 border bg-green-100 border-green-500 rounded-lg px-2 py-1';
@@ -12,9 +11,9 @@ export const HistoricaListItem = ({fecha, numeroComprobante, cliente, tipoCompro
 
   return (
     <tr className='bg-white border-b bgTr cursor-pointer  hover:bg-gray-50'>
-      <td className='text-black text-center text-sm py-2'>{fechaParseada}</td>
+      <td className='text-black text-center text-sm py-2'>{trasnsformarHoraMenos3(fecha)}</td>
       <td className='text-black text-center text-sm py-2'>{numeroComprobante}</td>
-        <td className='text-black text-center text-sm py-2'>{cliente.nombre}</td>
+        <td className='text-black text-center text-sm py-2'>{codigoCliente.nombre}</td>
       <td className='text-black text-center text-sm'>
             <p className={tipoComprobanteStyle()}>{tipoComprobante}</p>
       </td>

@@ -9,8 +9,9 @@ import { useForm } from '../../hooks/Useform'
 import { useRemitoStore } from '../../hooks/useRemitoStore'
 import { useUsuarioStore } from '../../hooks/useUsuarioStore'
 
-import { recompilarInfoContado, recompilarInfoPresupuesto, recompilarInfoRemito } from '../../helpers/recompilarInfoVenta'
+import { recompilarInfoContado, recompilarInfoCuentaCorriente, recompilarInfoPresupuesto, recompilarInfoRemito } from '../../helpers/recompilarInfoVenta'
 import { usePresupuestoStore } from '../../hooks/usePresupuestoStore'
+import { useVariableStore } from '../../hooks/useVariableStore'
 
 
 
@@ -20,6 +21,7 @@ const initialState = {
 
 export const BotonesVenta = () => {
 
+    const { startTraerDolar, variableActive } = useVariableStore();
     const { ventaActive, clienteActivo, startReiniciarState, startAgregarVenta } = useVentaStore();
     const { usuarioActive } = useUsuarioStore();
     const { startAgregarRemito } = useRemitoStore();
@@ -34,10 +36,12 @@ export const BotonesVenta = () => {
     const [dolar, setDolar] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(clienteActivo?.tipoCuenta)
-    }, [clienteActivo])
+        startTraerDolar()
+    }, []);
+
     
     const realizarVenta = async() => {
+        
         if(!clienteActivo) return await Swal.fire('No se pudo realizar la venta', 'Se necesita de un cliente', 'error');
 
         if(ventaActive?.productos.length === 0) return await Swal.fire('No se pudo realizar la venta', 'Se necesita de un producto', 'error');
@@ -58,11 +62,15 @@ export const BotonesVenta = () => {
         };
 
         if(tipoVenta === 'contado'){
-            const contado = (ventaActive && clienteActivo && usuarioActive) && recompilarInfoContado(ventaActive, clienteActivo, usuarioActive);
-            console.log(contado);
+            const contado = (ventaActive && clienteActivo && usuarioActive) && recompilarInfoContado(ventaActive, clienteActivo, usuarioActive, variableActive?.valor as number ?? 0);
             contado && await startAgregarVenta(contado);
+        };
+
+        if(tipoVenta === 'cuentaCorriente'){
+            const cuentaCorriente = (ventaActive && clienteActivo && usuarioActive) && recompilarInfoCuentaCorriente(ventaActive, clienteActivo, usuarioActive, variableActive?.valor as number ?? 0);
+            console.log(cuentaCorriente);
+            // cuentaCorriente && await startAgregarVenta(cuentaCorriente);
         }
-        
 
         startReiniciarState();
         navigate(-1);

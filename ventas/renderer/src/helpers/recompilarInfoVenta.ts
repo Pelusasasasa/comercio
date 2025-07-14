@@ -1,8 +1,8 @@
-import { Cliente, ClienteFormState } from "../types/cliente"
+import { Cliente, ClienteFormState } from "../types/cliente";
 import { PresupuestoFormState } from "../types/presupuesto";
 import { Remito, RemitoFormState } from "../types/remito";
 import { Usuario } from "../types/usuario";
-import { Venta } from "../types/venta"
+import { Venta } from "../types/venta";
 
 
 export const recompilarInfoRemito = (venta: Venta, cliente: ClienteFormState, usuario: Usuario) => {
@@ -41,12 +41,32 @@ export const recompilarInfoPresupuesto = (venta: Venta, cliente: ClienteFormStat
     return presupuesto
 };
 
-export const recompilarInfoContado = (venta: Venta, cliente: ClienteFormState, usuario: Usuario) => {
+export const recompilarInfoContado = (venta: Venta, cliente: ClienteFormState, usuario: Usuario, dolar: number) => {
     const contado: Venta = {
         fecha: `${new Date}`,
         tipoComprobante: 'CONTADO',
         codigoCliente: cliente._id,
         tipoCliente: cliente.tipoCuenta,
+        dolar: dolar,
+        precio: venta.precio,
+        numeroComprobante: '',
+        descuento: venta.descuento,
+        observaciones: '',
+        productos: venta.productos,
+        creadoPor: usuario._id,
+        factura: venta.factura
+    };
+
+    return contado;
+};
+
+export const recompilarInfoCuentaCorriente = (venta: Venta, cliente: ClienteFormState, usuario: Usuario, dolar: number) => {
+    const contado: Venta = {
+        fecha: `${new Date}`,
+        tipoComprobante: 'CORRIENTE',
+        codigoCliente: cliente._id,
+        tipoCliente: cliente.tipoCuenta,
+        dolar: dolar,
         precio: venta.precio,
         numeroComprobante: '',
         descuento: venta.descuento,

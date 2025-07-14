@@ -32,6 +32,10 @@ const Venta = new Schema({
         type: Number,
         required: true,
     },
+    dolar: {
+        type: Number,
+        default: 0
+    },
     tipoComprobante: {
         type: String,
         trim: true,

@@ -6,6 +6,7 @@ export interface Venta {
     fecha: string;
     codigoCliente: string;
     precio: number;
+    dolar: number;
     factura: boolean;
     tipoCliente: string | 'NORMAL' | 'INSTALADOR',
     numeroComprobante: string;

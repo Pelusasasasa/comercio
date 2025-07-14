@@ -26,7 +26,7 @@ const actualizarCompensada = async (id, data) => {
         };
         historicaSaldo = historica.saldo - compensada.saldo;
 
-        const cliente = await Cliente.findOne({_id: compensada.cliente});
+        const cliente = await Cliente.findOne({_id: compensada.codigoCliente});
         if (!cliente) {
             throw new Error("Cliente no encontrado");
         };
@@ -70,6 +70,32 @@ const actualizarCompensada = async (id, data) => {
 
 };
 
+const crearCompensada = async (data) => {
+    const { codigoCliente, tipoComprobante, numeroComprobante, precio, observaciones, creadoPor } = data;
+    try {
+        const compensada = {};
+        compensada.codigoCliente = codigoCliente;
+        compensada.tipoComprobante = tipoComprobante;
+        compensada.numeroComprobante = numeroComprobante;
+        compensada.importe = precio;
+        compensada.pagado = 0;
+        compensada.saldo = precio;
+        compensada.observaciones = observaciones || '';
+        compensada.creadoPor = creadoPor;
+
+        await CuentaCompensada.create(compensada);
+        return {
+            ok: true,
+            compensada
+        }
+    } catch (error) {
+        console.log(error);
+
+        throw new Error("Error al crear la cuenta compensada");
+    }
+}
+
 module.exports = {
-    actualizarCompensada
+    actualizarCompensada,
+    crearCompensada
 }

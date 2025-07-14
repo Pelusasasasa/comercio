@@ -1,4 +1,7 @@
 const Venta = require('../models/Venta');
+const { modificarSaldoCliente } = require('../services/cliente.services');
+const { crearCompensada } = require('../services/cuentaCompensada.services');
+const { crearHistorica } = require('../services/cuentaHistorica.services');
 const { cargarMovimientos } = require('../services/movimientoStock.services');
 const { actualizarNumero } = require('../services/numero.services');
 const { cambiarStock } = require('../services/producto.services');
@@ -43,6 +46,25 @@ const agregarVenta = async(req, res) => {
             ok: false,
             msg: 'No se pudo descontar el stock de los productos de la venta, hable con el administrador'
         });
+        console.log(req.body.tipoComprobante);
+        if(req.body.tipoComprobante === 'CORRIENTE'){
+            const compensada = await crearCompensada(req.body);
+            
+
+            if(!compensada.ok) return res.status(400).json({
+                ok: false,
+                msg: 'No se pudo agregar la cuenta compensada, hable con el administrador'
+            });
+
+            const historica = await crearHistorica(req.body);
+
+            if(!historica.ok) return res.status(400).json({
+                ok: false,
+                msg: 'No se pudo crear la cuenta histórica, hable con el administrador'
+            });
+
+            const saldo = await modificarSaldoCliente(req.body.codigoCliente, req.body.precio);
+        };
 
         const venta = new Venta(req.body);
 

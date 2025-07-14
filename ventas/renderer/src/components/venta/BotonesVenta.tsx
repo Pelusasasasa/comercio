@@ -68,8 +68,7 @@ export const BotonesVenta = () => {
 
         if(tipoVenta === 'cuentaCorriente'){
             const cuentaCorriente = (ventaActive && clienteActivo && usuarioActive) && recompilarInfoCuentaCorriente(ventaActive, clienteActivo, usuarioActive, variableActive?.valor as number ?? 0);
-            console.log(cuentaCorriente);
-            // cuentaCorriente && await startAgregarVenta(cuentaCorriente);
+            cuentaCorriente && await startAgregarVenta(cuentaCorriente);
         }
 
         startReiniciarState();

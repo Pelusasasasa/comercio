@@ -58,13 +58,13 @@ const HandleProducto = ({ setButtonActive }: Props) => {
 
     const apretarEnter = (e) => {
         if(e.key === 'Enter'){
-            console.log(e.target.value)
+            
             if(e.target.id === 'costo'){
                 ivaRef.current?.focus();
             };
             
             if(e.target.id === 'iva'){
-                e.preventDefault()
+                e.preventDefault();
                 utilidadRef.current?.focus();
             };
 

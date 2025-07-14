@@ -5,7 +5,7 @@ const CuentaCompensada = new Schema({
         type: Date,
         default: Date.now
     },
-    cliente: {
+    codigoCliente: {
         type: Types.ObjectId,
         ref: 'Cliente'
     },

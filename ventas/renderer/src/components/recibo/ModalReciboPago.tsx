@@ -55,7 +55,7 @@ return (
                     <h3 className="text-start font-medium">Resumen del Recibo</h3>
                     <div className="flex justify-between">
                         <p>Cliente</p>
-                        <p className="font-medium">{reciboActive?.cliente?.nombre}</p>
+                        <p className="font-medium">{reciboActive?.codigoCliente?.nombre}</p>
                     </div>
 
                     <div className="flex justify-between">

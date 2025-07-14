@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Recibo } from "../types/recibo";
-import { addRecibo, deleteRecibo, savingRecibo, setReciboActive, setRecibos } from "../store/recibo/reciboSlice";
+import { addRecibo, deleteRecibo, resetReciboSlice, savingRecibo, setReciboActive, setRecibos } from "../store/recibo/reciboSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 
@@ -21,7 +21,11 @@ export const useReciboStore = () => {
 
     const activeRecibo = (recibo: Recibo) => {
         dispatch(setReciboActive(recibo));
-    }
+    };
+
+    const reiniciarReciboState = () => {
+        dispatch(resetReciboSlice());
+    };
 
     const startAgregarRecibo = async(recibo: Recibo) => {
         dispatch(savingRecibo());
@@ -98,6 +102,7 @@ export const useReciboStore = () => {
 
         //Metodos
         activeRecibo,
+        reiniciarReciboState,
         startAgregarRecibo,
         startEliminarRecibo,
         startModiifcarRecibo,

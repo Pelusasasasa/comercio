@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Compensada } from "../types/compensada";
-import { addCompensada, deleteCompensada, savingCompensada, setActiveCompensada, setCompensadas, updateCompensada } from "../store/compensada/compensadaSlice";
+import { addCompensada, deleteCompensada, resetCompensadaSlice, savingCompensada, setActiveCompensada, setCompensadas, updateCompensada } from "../store/compensada/compensadaSlice";
 import comercioApi from "../api/comercioApi";
 import Swal from "sweetalert2";
 
@@ -19,6 +19,10 @@ export const useCompensadaStore = () => {
 
     const activeCompensada = (id: string) => {
         dispatch(setActiveCompensada(id));
+    };
+
+    const reiniciarCompensadaState = () => {
+        dispatch(resetCompensadaSlice());
     };
 
     const startAgregarCompensada = async(compensada: Compensada) => {
@@ -115,6 +119,7 @@ export const useCompensadaStore = () => {
 
         //Metodos
         activeCompensada,
+        reiniciarCompensadaState,
         startActualizarCompensada,
         startAgregarCompensada,
         startEliminarCompensada,

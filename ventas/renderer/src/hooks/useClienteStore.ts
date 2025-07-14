@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 import comercioApi from '../api/comercioApi';
-import { addCliente, deleteCliente, getCliente, putCliente, saving, setActive, setClientes } from '../store/cliente/clienteSlice';
+import { addCliente, deleteCliente, getCliente, putCliente, resetClienteSlice, saving, setActive, setClientes } from '../store/cliente/clienteSlice';
 import { ClienteFormState } from '../types/cliente';
 
 
@@ -17,9 +17,8 @@ export const useClienteStore = () => {
         }
     }) => state.cliente);
     const dispach = useDispatch();
-
     
-            const traerClientes = async() => {
+    const traerClientes = async() => {
                 dispach(saving());
 
                 const { data } = await comercioApi.get('/cliente');
@@ -29,9 +28,13 @@ export const useClienteStore = () => {
                 }else{
                     await Swal.fire('No se pudo obtener los clientes', data.msg, 'error')
                 }
-            };
+    };
 
-            const traerClientePorCodigo = async(codigo: string) => {
+    const reiniciarClienteState= () => {
+        dispach(resetClienteSlice());
+    };
+
+    const traerClientePorCodigo = async(codigo: string) => {
                 dispach(saving());
 
                 try {
@@ -45,11 +48,11 @@ export const useClienteStore = () => {
                 } catch (error) {
                     await Swal.fire('No se pudo obtener el cliente', error.response.data.msg, 'error')
                 }
-            };
+    };
 
-            const agregarCliente = async(cliente) => {
-                try {
-                    const { data } = await comercioApi.post('/cliente', cliente);
+    const agregarCliente = async(cliente) => {
+        try {
+        const { data } = await comercioApi.post('/cliente', cliente);
 
                     if(data.ok){
                         dispach(addCliente( data.cliente ));
@@ -60,9 +63,9 @@ export const useClienteStore = () => {
                     console.log(error.response);
                     await Swal.fire('Error al cargar Cliente', error.response.data.msg, 'error')
                 }
-            };
+    };
 
-            const borrarCliente = async(id) => {
+    const borrarCliente = async(id) => {
                 dispach(saving());
                 try {
                     const { data } = await comercioApi.delete(`cliente/${id}`);
@@ -76,9 +79,9 @@ export const useClienteStore = () => {
                     console.log(error.response);
                     await Swal.fire('No se pudo eliminar cliente', error.response.data.msg, 'error')
                 }
-            };
+    };
 
-            const modificarCliente = async(cliente) => {
+    const modificarCliente = async(cliente) => {
                 dispach(saving());
                 try {
                     const { data } = await comercioApi.put(`cliente/${cliente._id}`, cliente);
@@ -91,11 +94,11 @@ export const useClienteStore = () => {
                     console.log(error);
                     Swal.fire('No se pudo modificar el cliente', error.response.data.msg, 'error')
                 }
-            };
+    };
 
-            const setActiveCliente = async(id) => {
+    const setActiveCliente = async(id) => {
                 dispach(setActive(id))
-            };
+    };
 
     return {
         //Atributos
@@ -105,6 +108,7 @@ export const useClienteStore = () => {
         messageErrorCliente,
 
         //Metodos
+        reiniciarClienteState,
         traerClientes,
         traerClientePorCodigo,
         agregarCliente,

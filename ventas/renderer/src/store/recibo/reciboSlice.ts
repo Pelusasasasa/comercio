@@ -67,6 +67,9 @@ export const reciboSlice = createSlice({
             state.reciboActive.items = action.payload;
         },
         updateItemRecibo: (state, action: PayloadAction<ReciboItem>) => {
+
+            if(!state.reciboActive.items) return;
+
             const index = state.reciboActive.items.findIndex(item => item._id === action.payload._id);
 
             if(index === -1){
@@ -80,7 +83,11 @@ export const reciboSlice = createSlice({
             };
         },
         calcularTotal: (state) => {
+            if(!state.reciboActive.items) return;
             state.totalPagado = state.reciboActive.items.reduce((total, item) => total + item.pagado, 0);
+        },
+        resetReciboSlice: (state) => {
+            return initialState;
         }
     }
 });
@@ -89,13 +96,14 @@ export const reciboSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {  
     addRecibo,
-    deleteRecibo,
-    savingRecibo,
-    setRecibos,
-    setReciboActive,
-    updateRecibo,
+    calcularTotal,
     clearRecibos,
+    deleteRecibo,
+    resetReciboSlice,
+    savingRecibo,
     setItemsRecibos,
+    setReciboActive,
+    setRecibos,
     updateItemRecibo,
-    calcularTotal
+    updateRecibo,
 } = reciboSlice.actions;

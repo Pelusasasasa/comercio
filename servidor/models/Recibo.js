@@ -5,7 +5,7 @@ const Recibo = new Schema({
         type: Date,
         default: Date.now
     },
-    cliente: {
+    codigoCliente: {
         type: Schema.Types.ObjectId,
         ref: "Cliente",
         required: true

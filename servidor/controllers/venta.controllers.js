@@ -46,7 +46,7 @@ const agregarVenta = async(req, res) => {
             ok: false,
             msg: 'No se pudo descontar el stock de los productos de la venta, hable con el administrador'
         });
-        console.log(req.body.tipoComprobante);
+
         if(req.body.tipoComprobante === 'CORRIENTE'){
             const compensada = await crearCompensada(req.body);
             
@@ -64,6 +64,11 @@ const agregarVenta = async(req, res) => {
             });
 
             const saldo = await modificarSaldoCliente(req.body.codigoCliente, req.body.precio);
+
+            if(!saldo.ok) return res.status(400).json({
+                ok: false,
+                msg: 'No se pudo modificar el saldo del cliente, hable con el administrador'
+            });
         };
 
         const venta = new Venta(req.body);

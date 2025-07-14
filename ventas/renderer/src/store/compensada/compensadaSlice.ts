@@ -36,6 +36,9 @@ export const compensadaSlice = createSlice({
             );
             state.isSavingCompensada = false;
         },
+        resetCompensadaSlice: (state) => {
+            return initialState;
+        },
         savingCompensada: (state) => {
             state.isSavingCompensada = true;
         },
@@ -58,6 +61,7 @@ export const {
     addCompensada,
     deleteCompensada,
     updateCompensada,
+    resetCompensadaSlice,
     savingCompensada,
     setActiveCompensada,
     setCompensadas

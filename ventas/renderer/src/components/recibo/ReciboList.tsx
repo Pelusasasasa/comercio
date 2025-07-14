@@ -15,7 +15,7 @@ const ReciboList = () => {
     }, [clienteActive]);
 
 return (
-        <section className="h-[calc(100vh-300px)] overflow-y-auto bg-white border-gray-300 mx-1 border rounded-lg">
+        <section className="h-[calc(100vh-250px)] overflow-y-auto bg-white border-gray-300 mx-1 border rounded-lg">
             <h3 className="bg-yellow-100 font-medium p-2">Cuentas Pediente de Pago</h3>
             <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
                 <thead className=''>

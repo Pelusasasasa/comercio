@@ -12,7 +12,7 @@ export interface ReciboItem {
 export interface Recibo {
     _id?: string;
     fecha?: string;
-    cliente: ClienteFormState | null;
+    codigoCliente: ClienteFormState | null;
     importe: number;
     medioPago?: string;
     creadoPor?: string | null;

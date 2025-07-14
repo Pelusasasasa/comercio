@@ -1,4 +1,5 @@
 const Recibo = require('../models/Recibo');
+const { modificarSaldoCliente } = require('../services/cliente.services');
 const { actualizarNumero } = require('../services/numero.services');
 
 const borrarRecibo = async(req, res) => {
@@ -30,9 +31,9 @@ const borrarRecibo = async(req, res) => {
 const crearRecibo = async(req, res) => {
     try {
         const numero = await actualizarNumero('RECIBO');
-        req.body.numeroComprobante = numero;
-        req.body.creadoPor = '684c8b934f2e0d9c408e47e2';
+        req.body.numeroComprobante = `${numero.prefijo}-${numero.puntoVenta.toString().padStart(4, '0')}-${numero.numero.toString().padStart(8,'0')}`;
 
+        const saldo = await modificarSaldoCliente(req.body.codigoCliente, req.body.importe);
         
         const recibo = new Recibo(req.body);
         await recibo.save();

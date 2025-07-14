@@ -24,6 +24,9 @@ export const clienteSlice = createSlice({
             state.clientes.push(payload);
             state.isSavingCliente = false;
         },
+        resetClienteSlice: (state) => {
+            return initialState;
+        },
         saving: (state) => {
             state.isSavingCliente = true;
         },
@@ -60,9 +63,10 @@ export const clienteSlice = createSlice({
 export const { 
     addCliente,
     deleteCliente,
+    getCliente,
     putCliente,
+    resetClienteSlice,
     saving,
     setActive,
     setClientes,
-    getCliente
 } = clienteSlice.actions;

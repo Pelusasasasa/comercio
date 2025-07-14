@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Movimiento } from "../types/movimiento"
-import { addMovimiento, deleteMovimiento, savingMovimiento, setActiveMovimiento, setMovimientos, updateMovimiento } from "../store/movimiento/movimientosSlice";
+import { addMovimiento, deleteMovimiento, resetMovimientoSlice, savingMovimiento, setActiveMovimiento, setMovimientos, updateMovimiento } from "../store/movimiento/movimientosSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
 
@@ -19,6 +19,10 @@ export const useMovimientoStore = () => {
 
     const activeMovimiento = (id: string) => {
         dispatch(setActiveMovimiento(id));
+    };
+
+    const reiniciarMovimientoState = () => {
+        dispatch(resetMovimientoSlice());
     };
 
     const startAgregarMovimento = async(movimiento: Movimiento) => {
@@ -136,6 +140,7 @@ export const useMovimientoStore = () => {
 
         //Metodos
         activeMovimiento,
+        reiniciarMovimientoState,
         startAgregarMovimento,
         startEliminarMovimiento,
         startModificarMovimiento,

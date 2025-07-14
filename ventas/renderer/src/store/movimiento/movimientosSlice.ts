@@ -27,6 +27,9 @@ export const movimientoSlice = createSlice({
             state.movimientos = state.movimientos.filter(elem => elem._id !== payload);
             state.isSavingMovimiento = false
         },
+        resetMovimientoSlice: (state) => {
+            return initialState;
+        },
         updateMovimiento: (state, { payload }: PayloadAction<Movimiento>) => {
             state.movimientos = state.movimientos.map(elem => 
                 elem._id === payload._id ? payload : elem
@@ -51,6 +54,7 @@ export const movimientoSlice = createSlice({
 export const { 
     addMovimiento,
     deleteMovimiento,
+    resetMovimientoSlice,
     updateMovimiento,
     savingMovimiento,
     setActiveMovimiento,

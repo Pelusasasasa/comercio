@@ -14,9 +14,9 @@ export const ModalReciboCliente = ({ setOpenModal }) => {
         return 'text-green-600'
     };
 
-  return (
-     <div className="fixed inset-0 flex items-center justify-center bg-black/80">
-          <div className="bg-white p-6 rounded shadow-md text-center w-xl">
+return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/80">
+        <div className="bg-white p-6 rounded shadow-md text-center w-xl">
             <div>
                 <div className='flex justify-between mb-4'>
                     <div className='flex items-center gap-2 mb-4'>

@@ -85,7 +85,7 @@ export const Recibo = () => {
             </div>
           </div>
         { modalReciboPago && <ModalReciboPago setChequeModal={setChequeModal} setModalReciboPago={setModalReciboPago}/>}
-        {chequeModal && <ChequeModal/>}
+        {chequeModal && <ChequeModal setChequeModal={setChequeModal} setModalReciboPago={setModalReciboPago}/>}
     </div>
   )
 }

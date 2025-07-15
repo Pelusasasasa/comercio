@@ -27,7 +27,7 @@ const borrarCheque = async(req, res) => {
 const crearCheque = async(req, res) => {
     try {
         const cheque = new Cheque(req.body);
-
+        console.log(req.body)
         await cheque.save();
 
         res.status(201).json({

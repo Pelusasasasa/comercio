@@ -1,4 +1,4 @@
-import { useState } from "react";
+    import { useState } from "react";
 import Swal from "sweetalert2";
 
 import { IoCloseOutline } from "react-icons/io5";
@@ -92,12 +92,11 @@ return (
                     </div>
 
                     <div className=" flex justify-end gap-2 mt-4 w-xs ml-auto">
-                        <Button text="Cancelar" type="secondary" click={() => setModalReciboPago(false)}/>
-                        <Button text="Confirmar Recibo" click={hacerRecibo}/>
+                        <Button text="Cancelar" className="h-10 border-gray-400" type="secondary" click={() => setModalReciboPago(false)}/>
+                        <Button text="Confirmar Recibo" className="h-10" click={hacerRecibo}/>
                     </div>
                 </div>
-              </div>
-              
             </div>
-  )
+            </div>
+)
 }

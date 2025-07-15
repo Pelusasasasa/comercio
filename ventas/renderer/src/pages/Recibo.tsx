@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CgCalculator } from "react-icons/cg";
 
@@ -21,14 +21,21 @@ export const Recibo = () => {
   const navigate = useNavigate();
 
   const { usuarioActive } = useUsuarioStore();
-  const { reiniciarCompensadaState } = useCompensadaStore();
+  const { reiniciarCompensadaState, compensadas } = useCompensadaStore();
   const { totalPagado, activeRecibo, reciboActive, reiniciarReciboState  } = useReciboStore();
   const { clienteActive, reiniciarClienteState } = useClienteStore();
 
   const [modalReciboPago, setModalReciboPago] = useState<boolean>(false);
-  const [chequeModal, setChequeModal] = useState<boolean>(false);
+  const [chequeModal, setChequeModal] = useState<boolean>(false); 
+  const [pagoRapido, setPagoRapido] = useState<number>(0);
+  const [aceptarDisabled, setAceptarDisabled] = useState<boolean>(true);
+
+  const handlePagoRapidoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setPagoRapido(isNaN(value) ? 0 : value);
+  };
   
-  const aplicarRecibo = () => {
+  const aplicarRecibo = () => { 
     activeRecibo({
       codigoCliente: clienteActive,
       importe: totalPagado,
@@ -45,7 +52,18 @@ export const Recibo = () => {
     reiniciarClienteState();
     reiniciarCompensadaState();
     navigate(-1)
-  }
+  };
+
+  useEffect(() => {
+    // pagoRapidoCompensadas(pagoRapido);
+  }, [pagoRapido])
+
+  useEffect(() => {
+    if(totalPagado !== 0){
+      setAceptarDisabled(false);
+    }
+  }, [totalPagado])
+
 
   return (
     <div className='bg-chocolate h-screen flex flex-col'>
@@ -57,13 +75,13 @@ export const Recibo = () => {
             <div className='flex gap-2 items-center'>
               <CgCalculator size={40} className='text-yellow-500'/>
               <p className='font-medium whitespace-nowrap'>Pago Rapido: </p>
-              <input type="number" name="pagoRapido"  id="pagoRapido" className='border bg-white border-gray-200 rounded-sm p-2' placeholder='Ingrese Importe'/>
+              <input type="number" onChange={handlePagoRapidoChange} name="pagoRapido"  id="pagoRapido" value={pagoRapido} className='border bg-white border-gray-200 rounded-sm p-2' placeholder='Ingrese Importe'/>
             </div>
 
             <div className='flex gap-2 items-center'>
               <p className='whitespace-nowrap'>Total A Pagar: <span className='text-green-500'>$ {totalPagado.toFixed(2)}</span></p>
               <Button text='Cancelar Recibo' type='secondary' click={cancelarRecibo}/>
-              <Button text='Aplicar Recibo' click={aplicarRecibo} className='h-12'/>
+              <Button text='Aplicar Recibo' click={aplicarRecibo} disabled={aceptarDisabled} className={`h-12 ${aceptarDisabled ? 'opacity-25' : ''}`}/>
             </div>
           </div>
         { modalReciboPago && <ModalReciboPago setChequeModal={setChequeModal} setModalReciboPago={setModalReciboPago}/>}

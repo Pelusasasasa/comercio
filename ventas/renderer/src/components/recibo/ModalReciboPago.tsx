@@ -93,7 +93,7 @@ return (
 
                     <div className=" flex justify-end gap-2 mt-4 w-xs ml-auto">
                         <Button text="Cancelar" type="secondary" click={() => setModalReciboPago(false)}/>
-                        <Button text="Confirmar Pedido" click={hacerRecibo}/>
+                        <Button text="Confirmar Recibo" click={hacerRecibo}/>
                     </div>
                 </div>
               </div>

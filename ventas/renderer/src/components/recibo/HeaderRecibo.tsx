@@ -34,10 +34,7 @@ return (
     <header className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8">
         <div className="flex bg-white m-2 flex-col border border-gray-200 rounded-md py-2 md:col-span-2">
             <label className="font-medium text-sm px-2" htmlFor="">Buscar Cliente</label>
-            <div className="flex gap-2 items-center px-2">
-                <input type="text" value={clienteCodigo} onChange={(e) => setClienteCodigo(e.target.value)} onKeyDown={handleCliente} autoFocus className="border flex-1 border-gray-200 rounded-md text-center p-1"/>
-                <GoSearch onClick={searchCliente} className="bg-yellow-400 p-1 text-white rounded-md cursor-pointer hover:bg-yellow-500" size={30}/>
-            </div>
+            <input type="text" value={clienteCodigo} onChange={(e) => setClienteCodigo(e.target.value)} onKeyDown={handleCliente} autoFocus className="border flex-1 border-gray-200 rounded-md text-center p-1"/>
         </div>
 
         <div className="flex bg-white m-2 flex-col border border-gray-200 rounded-md py-2 col-span-2 md:col-span-2 lg:col-span-4">

@@ -30,7 +30,6 @@ export const HandleCategoria = ({setHandleCategoria}: Props) => {
       setError('El nombre es Obligatorio');
       return;
     };
-    console.log(formState)
     startAgregarCategoria(formState);
     setHandleCategoria(false);
   };

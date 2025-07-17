@@ -25,6 +25,7 @@ return (
                     <th>Tipo Comprobante</th>
                     <th>Importe</th>
                     <th>Pagado</th>
+                    <th>Pagado Actual</th>
                     <th>Saldo</th>
                 </tr>
                 </thead>

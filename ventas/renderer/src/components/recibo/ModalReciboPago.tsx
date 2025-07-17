@@ -8,6 +8,8 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { CiBank } from "react-icons/ci";
 import { Button } from "../Button";
 import { useReciboStore } from "../../hooks/useReciboStore";
+import { useNavigate } from "react-router-dom";
+import { useClienteStore, useCompensadaStore } from "../../hooks";
 
 interface Props {
     setModalReciboPago: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +18,10 @@ interface Props {
 };
 
 export const ModalReciboPago = ({setModalReciboPago, setChequeModal, setTarjetaModal}: Props) => {
-    const {reciboActive, startAgregarRecibo} = useReciboStore();
+    const navigate = useNavigate();
+    const {reciboActive, startAgregarRecibo, reiniciarReciboState} = useReciboStore();
+    const {reiniciarClienteState} = useClienteStore();
+    const { reiniciarCompensadaState } = useCompensadaStore();
     
     const [medioActive, setMedioActive] = useState<string | null>(null);    
     
@@ -29,6 +34,11 @@ export const ModalReciboPago = ({setModalReciboPago, setChequeModal, setTarjetaM
 
         if(medioActive === 'efectivo'){
             reciboActive && startAgregarRecibo(reciboActive);
+            reiniciarReciboState();
+            reiniciarClienteState();
+            reiniciarCompensadaState();
+            navigate(-1);
+            
         };
 
         if(medioActive === 'cheque'){

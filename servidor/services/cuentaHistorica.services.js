@@ -6,8 +6,6 @@ const crearHistorica = async (data) => {
 
         const ultimaHistorica = await CuentaHistorica.findOne({ codigoCliente }).sort({ fecha: -1 });
 
-        
-
         const historica = {};
         historica.codigoCliente = codigoCliente;
         historica.tipoComprobante = tipoComprobante;

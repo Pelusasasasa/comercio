@@ -67,7 +67,6 @@ export const reciboSlice = createSlice({
             state.reciboActive.items = action.payload;
         },
         updateItemRecibo: (state, action: PayloadAction<ReciboItem>) => {
-
             if(!state.reciboActive.items) return;
 
             const index = state.reciboActive.items.findIndex(item => item._id === action.payload._id);

@@ -70,6 +70,15 @@ const actualizarCompensada = async (id, data) => {
 
 };
 
+const modificarcompensada = async(compensadas) => {
+    for(let cuenta of compensadas){
+        const compensada = await CuentaCompensada.findById(cuenta._id);
+        compensada.pagado += cuenta.pagado;
+        compensada.saldo = cuenta.saldo
+        await compensada.save();
+    };
+}
+
 const crearCompensada = async (data) => {
     const { codigoCliente, tipoComprobante, numeroComprobante, precio, observaciones, creadoPor } = data;
     try {
@@ -93,9 +102,10 @@ const crearCompensada = async (data) => {
 
         throw new Error("Error al crear la cuenta compensada");
     }
-}
+};
 
 module.exports = {
     actualizarCompensada,
+    modificarcompensada,
     crearCompensada
 }

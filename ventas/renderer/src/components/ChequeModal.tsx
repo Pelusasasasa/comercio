@@ -6,6 +6,7 @@ import { toISOStringUTCMinus3 } from "../helpers";
 import { Cheque } from "../types/cheque";
 import { useState } from "react";
 import { useChequeStore } from "../hooks/useChequeStore";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     setModalReciboPago?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,7 +29,7 @@ const initialState: Cheque = {
 }
 
 export const ChequeModal = ({setModalReciboPago, setChequeModal}: Props ) => {
-
+    const navigate = useNavigate();
     const { reciboActive, startAgregarRecibo } = useReciboStore();
     const { startAgregarCheque } = useChequeStore();
 
@@ -43,13 +44,19 @@ export const ChequeModal = ({setModalReciboPago, setChequeModal}: Props ) => {
         };
     };
 
-    const hacerRecibo = () => {
+    const hacerRecibo = async() => {
         setEnviado(true)
 
-        if(numero === '' || banco === '' || importe  === '' || codigoCliente  === '' || fechaDeposito  === '' || fechaRecibido === '') return;
+        if(numero === '' || !numero || !banco || !fechaDeposito || banco === '' || importe  === '' || codigoCliente  === '' || fechaDeposito  === '' || fechaRecibido === '') return;
 
-        reciboActive && startAgregarRecibo(reciboActive);
-        startAgregarCheque(formState as Cheque);
+        const reciboOK = reciboActive && startAgregarRecibo(reciboActive);
+        if(!reciboOK) return;
+
+        const chequeOk = await startAgregarCheque(formState as Cheque);
+
+        if(!chequeOk) return;
+
+        navigate('/')
     };
 return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/80">
@@ -61,7 +68,7 @@ return (
                         <h3 className="text-xl font-medium">Detalles del Cheque</h3>
                         </div>
             
-                    <IoCloseOutline size={20} className="hover:border hover:border-gray-500 cursor-pointer rounded-sm"/>
+                    <IoCloseOutline onClick={volverAtras} size={20} className="hover:border hover:border-gray-500 cursor-pointer rounded-sm"/>
                 </div>
                     <p className="text-gray-600 text-start">Complete los datos específicos del medio de pago seleccionado</p>
             </div>

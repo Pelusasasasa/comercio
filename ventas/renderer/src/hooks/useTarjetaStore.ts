@@ -5,7 +5,7 @@ import comercioApi from "../api/comercioApi"
 export const useTarjetaStore = () => {
 
     const startAgregarTarjeta = async(tarjeta) => {
-        const {codigoCliente, ...resto} = tarjeta;
+        const {codigoCliente, items, ...resto} = tarjeta;
 
         const nuevaTarjeta: Tarjeta = {
             ...resto,

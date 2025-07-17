@@ -3,7 +3,7 @@ const Cliente = require("../models/Cliente");
 const modificarSaldoCliente = async(codigo, precio) => {
     try {
         const cliente = await Cliente.findById(codigo);
-
+        
         if(!cliente){
             return {
                 ok: false,
@@ -11,7 +11,7 @@ const modificarSaldoCliente = async(codigo, precio) => {
             }
         };
 
-        cliente.saldo += precio;
+        cliente.saldo -= precio;
         await cliente.save();
 
         return {

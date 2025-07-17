@@ -7,25 +7,24 @@ import Swal from 'sweetalert2';
 
 
 export const ReciboListItem = ({_id, fecha, numeroComprobante, tipoComprobante, importe, pagado, saldo, observaciones}: Compensada) => {
-    const [value, setValue] = useState<string>(`${pagado}`);
+    const [value, setValue] = useState<string>(`${0}`);
     const dispatch = useDispatch();
 
     const styleSaldo = (saldo > 0 ? 'text-red-500' : 'text-black');
 
     useEffect(() => {
-      if(parseFloat(value) > saldo){
+      if(parseFloat(value) > parseFloat(saldo.toFixed(2))){
         Swal.fire('El importe pagado no puede ser mayor al saldo', '', 'error');
         setValue(`0.00`)
         return;
       };
-      dispatch(updateItemRecibo({ _id, importe, pagado: parseFloat(value), saldo: (importe - parseFloat(value)), observaciones}));
+      dispatch(updateItemRecibo({ _id, importe, pagado: parseFloat(value), saldo: (importe - pagado - parseFloat(value)), observaciones}));
       dispatch(calcularTotal());
     }, [value])
 
     const handleValor = (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value ? e.target.value : value)
     }
-
 
   return (
     <tr className='bg-white border-b bgTr cursor-pointer  hover:bg-gray-50'>
@@ -34,6 +33,7 @@ export const ReciboListItem = ({_id, fecha, numeroComprobante, tipoComprobante, 
       <td className='text-black text-center text-sm py-2'>{numeroComprobante}</td>
       <td className='text-black text-center text-sm py-2'>{tipoComprobante}</td>
       <td className='text-black text-center text-sm py-2'>$ {importe.toFixed(2)}</td>
+      <td className='text-black text-center text-sm py-2'>$ {pagado.toFixed(2)}</td>
       <td className='text-black text-center text-sm py-2'>
           <input type="string" placeholder='0.00' value={value} onChange={handleValor}  className='border border-gray-300 rounded-md p-1 text-end' />
       </td>

@@ -25,6 +25,7 @@ const borrarTarjeta = async(req, res) => {
 };
 
 const crearTarjeta = async(req, res) => {
+    console.log(req.body)
     try {
         const tarjeta = new Tarjeta(req.body);
         await tarjeta.save();

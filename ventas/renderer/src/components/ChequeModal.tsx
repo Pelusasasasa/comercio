@@ -49,7 +49,6 @@ export const ChequeModal = ({setModalReciboPago, setChequeModal}: Props ) => {
         if(numero === '' || banco === '' || importe  === '' || codigoCliente  === '' || fechaDeposito  === '' || fechaRecibido === '') return;
 
         reciboActive && startAgregarRecibo(reciboActive);
-        console.log(formState)
         startAgregarCheque(formState as Cheque);
     };
 return (

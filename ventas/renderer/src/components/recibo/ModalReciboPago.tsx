@@ -12,9 +12,10 @@ import { useReciboStore } from "../../hooks/useReciboStore";
 interface Props {
     setModalReciboPago: React.Dispatch<React.SetStateAction<boolean>>;
     setChequeModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setTarjetaModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ModalReciboPago = ({setModalReciboPago, setChequeModal}: Props) => {
+export const ModalReciboPago = ({setModalReciboPago, setChequeModal, setTarjetaModal}: Props) => {
     const {reciboActive, startAgregarRecibo} = useReciboStore();
     
     const [medioActive, setMedioActive] = useState<string | null>(null);    
@@ -32,8 +33,27 @@ export const ModalReciboPago = ({setModalReciboPago, setChequeModal}: Props) => 
 
         if(medioActive === 'cheque'){
             setChequeModal(true);
-            setModalReciboPago(false);
         }
+
+        if(medioActive === 'tarjeta'){
+            setTarjetaModal(true);
+        };
+
+        if(medioActive === 'transferencia'){
+            const {isConfirmed, value} = await Swal.fire({
+                title: 'Monto de la transferencia?',
+                input: 'number',
+                inputValue: reciboActive?.importe || 0,
+                showCancelButton: true,
+                confirmButtonText: 'Aceptar'
+            });
+
+            if(isConfirmed){
+                reciboActive && startAgregarRecibo(reciboActive);
+            }
+        };
+
+        setModalReciboPago(false);
     }
     
 return (

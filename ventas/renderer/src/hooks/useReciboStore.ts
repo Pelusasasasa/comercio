@@ -33,6 +33,9 @@ export const useReciboStore = () => {
             const { data } = await comercioApi.post('/recibo', recibo);
             if(data.ok){
                 dispatch(addRecibo(data.recibo));
+                return {
+                    ok: true
+                }
             }else{
                 await Swal.fire('No se pudo agregar el recibo', data.msg, 'error');
             };

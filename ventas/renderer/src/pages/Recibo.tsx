@@ -16,6 +16,7 @@ import { ModalReciboPago } from '../components/recibo/ModalReciboPago';
 import { Navbar } from '../components/Navbar'
 import ReciboList from '../components/recibo/ReciboList'
 import { useCompensadaStore } from '../hooks/useCompensadaStore';
+import { TarjetaModal } from '../components/TarjetaModal';
 
 export const Recibo = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export const Recibo = () => {
 
   const [modalReciboPago, setModalReciboPago] = useState<boolean>(false);
   const [chequeModal, setChequeModal] = useState<boolean>(false); 
+  const [tarjetaModal, setTarjetaModal] = useState<boolean>(false); 
   const [pagoRapido, setPagoRapido] = useState<number>(0);
   const [aceptarDisabled, setAceptarDisabled] = useState<boolean>(true);
 
@@ -84,8 +86,9 @@ export const Recibo = () => {
               <Button text='Aplicar Recibo' click={aplicarRecibo} disabled={aceptarDisabled} className={`h-12 ${aceptarDisabled ? 'opacity-25' : ''}`}/>
             </div>
           </div>
-        { modalReciboPago && <ModalReciboPago setChequeModal={setChequeModal} setModalReciboPago={setModalReciboPago}/>}
+        { modalReciboPago && <ModalReciboPago setChequeModal={setChequeModal} setTarjetaModal={setTarjetaModal} setModalReciboPago={setModalReciboPago} />}
         {chequeModal && <ChequeModal setChequeModal={setChequeModal} setModalReciboPago={setModalReciboPago}/>}
+        {tarjetaModal && <TarjetaModal setTarjetaModal={setTarjetaModal}  setModalReciboPago={setModalReciboPago}/>}
     </div>
   )
 }

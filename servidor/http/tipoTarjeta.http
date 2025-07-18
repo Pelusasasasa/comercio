@@ -16,8 +16,9 @@ POST http://localhost:3000/comercio/tipoTarjeta
 Content-Type: application/json
 
 {
-    "nombre": "VISA",
-    "tipo": "CREDITO"
+    "nombre": "MASTERCARD",
+    "tipo": "CREDITO",
+    "activo": true
 }
 
 

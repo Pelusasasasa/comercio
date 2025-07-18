@@ -81,7 +81,6 @@ export const useCompensadaStore = () => {
 
         try {
             const { data } = await comercioApi.get(`cuentaCompensada/cliente/${id}`);
-            console.log(data);
             if(data.ok){
                 dispatch(setCompensadas(data.cuentas));
             }else{

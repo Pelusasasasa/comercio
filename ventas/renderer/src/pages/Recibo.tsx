@@ -41,7 +41,6 @@ export const Recibo = () => {
     activeRecibo({
       codigoCliente: clienteActive,
       importe: totalPagado,
-      medioPago: 'EFECTIVO',
       observaciones: '',
       items: reciboActive?.items,
       creadoPor: usuarioActive?._id,

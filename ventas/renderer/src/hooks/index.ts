@@ -15,3 +15,5 @@ export * from './useRemitoStore'
 export * from './useTarjetaStore'
 export * from './useUsuarioStore'
 export * from './useVentaStore'
+export * from './useTiposTarjetaStore'
+

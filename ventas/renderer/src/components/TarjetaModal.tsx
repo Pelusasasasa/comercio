@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { IoCloseOutline, IoDocumentTextOutline } from "react-icons/io5";
 
@@ -6,7 +6,7 @@ import { Tarjeta } from "../types/tarjeta";
 
 import { useForm } from "../hooks/Useform";
 import { useReciboStore } from "../hooks/useReciboStore";
-import { useTarjetaStore } from "../hooks";
+import { useClienteStore, useCompensadaStore, useTarjetaStore, useTiposTarjetaStore } from "../hooks";
 
 import { Button } from "./Button";
 
@@ -27,11 +27,24 @@ const initialState: Tarjeta = {
 
 export const TarjetaModal = ({setTarjetaModal, setModalReciboPago}: Props) => {
   const navigate = useNavigate()
-  const {reciboActive, startAgregarRecibo} = useReciboStore();
+  const {reciboActive, startAgregarRecibo, reiniciarReciboState} = useReciboStore();
+  const {reiniciarClienteState} = useClienteStore();
+  const {reiniciarCompensadaState} = useCompensadaStore();
+
+
   const { startAgregarTarjeta } = useTarjetaStore();
+  const {tipos, startTraerTiposTarjetas} = useTiposTarjetaStore();
 
   const {codigoCliente, importe, tipoComprobante, tipoTarjeta, cuotas, recargo, creadoPor, onInputChange, formState} = useForm(reciboActive || initialState);
   const [enviado, setEnviado] = useState<boolean>(false);
+
+  useEffect(() => {
+    startTraerTiposTarjetas();
+  }, []);
+
+  useEffect(() => {
+    console.log(tipos);
+  }, [tipos])
 
   const volverAtras = () => {
     setTarjetaModal(false);
@@ -44,13 +57,16 @@ export const TarjetaModal = ({setTarjetaModal, setModalReciboPago}: Props) => {
     if(importe === '' || tipoTarjeta === '' || !tipoTarjeta) return;
 
 
-    const reciboOk = reciboActive && await startAgregarRecibo(reciboActive);
+    const reciboOk = reciboActive && await startAgregarRecibo(reciboActive, 'TARJETA');
     if(!reciboOk) return; 
     
     const tarjetaOK = await startAgregarTarjeta(formState as Tarjeta);
 
     if(!tarjetaOK) return;
 
+    reiniciarReciboState();
+    reiniciarClienteState();
+    reiniciarCompensadaState();
     navigate('/');
     
   };
@@ -79,7 +95,9 @@ export const TarjetaModal = ({setTarjetaModal, setModalReciboPago}: Props) => {
                   <label htmlFor="tipoTarjeta" className="text-start font-medium">Tipo Tarjeta *</label>
                   <select name="tipoTarjeta" id="tipoTarjeta" onChange={onInputChange} value={tipoTarjeta} className="border border-gray-300 rouneded-sm p-2">
                     <option value="">---Seleccionar Una Opcion---</option>
-                    <option value="684c7d7076ceac859fd8b046">VISA DEBITO</option>
+                    {tipos.map(tipo => (
+                      <option value={tipo._id} key={tipo._id}>{tipo.nombre}</option>
+                    ))}
                   </select>
                   { ( !tipoTarjeta && enviado) && <p className="text-red-600 text-xs">El tipo de Tarjeta es Obligatorio</p>}
               </div>

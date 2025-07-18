@@ -7,6 +7,7 @@ import { Cheque } from "../types/cheque";
 import { useState } from "react";
 import { useChequeStore } from "../hooks/useChequeStore";
 import { useNavigate } from "react-router-dom";
+import { useClienteStore, useCompensadaStore } from "../hooks";
 
 interface Props {
     setModalReciboPago?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,7 +31,10 @@ const initialState: Cheque = {
 
 export const ChequeModal = ({setModalReciboPago, setChequeModal}: Props ) => {
     const navigate = useNavigate();
-    const { reciboActive, startAgregarRecibo } = useReciboStore();
+    const { reciboActive, startAgregarRecibo, reiniciarReciboState } = useReciboStore();
+    const {reiniciarClienteState} = useClienteStore();
+    const {reiniciarCompensadaState} = useCompensadaStore();
+
     const { startAgregarCheque } = useChequeStore();
 
     const [enviado, setEnviado ] = useState<Boolean>(false);
@@ -49,13 +53,15 @@ export const ChequeModal = ({setModalReciboPago, setChequeModal}: Props ) => {
 
         if(numero === '' || !numero || !banco || !fechaDeposito || banco === '' || importe  === '' || codigoCliente  === '' || fechaDeposito  === '' || fechaRecibido === '') return;
 
-        const reciboOK = reciboActive && startAgregarRecibo(reciboActive);
+        const reciboOK = reciboActive && startAgregarRecibo(reciboActive, 'CHEQUE');
         if(!reciboOK) return;
 
         const chequeOk = await startAgregarCheque(formState as Cheque);
 
         if(!chequeOk) return;
-
+        reiniciarReciboState();
+        reiniciarClienteState();
+        reiniciarCompensadaState();
         navigate('/')
     };
 return (
@@ -82,7 +88,7 @@ return (
 
                 <div className="flex flex-col">
                     <label className="text-start font-medium" htmlFor="fechaDeposito">Fecha de Vencimiento *</label>
-                    <input onChange={onInputChange} className="border border-gray-300 rounded-sm p-2" type="date" name="fechaDeposito" id="fechaDeposito" value={fechaDeposito}/>
+                    <input onChange={onInputChange} className="border border-gray-300 rounded-sm p-2" type="date" name="fechaDeposito" id="fechaDeposito" value={fechaDeposito ?? ''}/>
                     { ( !fechaDeposito && enviado) && <p className="text-red-600 text-xs">La fecha de Vecimiento es Obligatoria</p>}
                 </div>
 
@@ -100,7 +106,7 @@ return (
 
                 <div className="flex flex-col">
                     <label className="text-start font-medium" htmlFor="banco">Banco *</label>
-                    <input onChange={onInputChange} className="border border-gray-300 rounded-sm p-2" type="text" name="banco" id="banco" value={banco} />
+                    <input onChange={onInputChange} className="border border-gray-300 rounded-sm p-2" type="text" name="banco" id="banco" value={banco ?? ''} />
                     { ( !banco && enviado) && <p className="text-red-600 text-xs">El banco es Obligatoria</p>}
                 </div>
 

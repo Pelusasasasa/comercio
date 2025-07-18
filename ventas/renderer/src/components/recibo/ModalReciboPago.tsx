@@ -33,7 +33,7 @@ export const ModalReciboPago = ({setModalReciboPago, setChequeModal, setTarjetaM
         };
 
         if(medioActive === 'efectivo'){
-            reciboActive && startAgregarRecibo(reciboActive);
+            reciboActive && startAgregarRecibo(reciboActive, 'EFECTIVO');
             reiniciarReciboState();
             reiniciarClienteState();
             reiniciarCompensadaState();
@@ -59,7 +59,11 @@ export const ModalReciboPago = ({setModalReciboPago, setChequeModal, setTarjetaM
             });
 
             if(isConfirmed){
-                reciboActive && startAgregarRecibo(reciboActive);
+                reciboActive && startAgregarRecibo(reciboActive, 'TRANSFERENCIA');
+                reiniciarReciboState();
+                reiniciarClienteState();
+                reiniciarCompensadaState();
+                navigate(-1);
             }
         };
 

@@ -16,6 +16,7 @@ import { ventaSlice } from './venta/ventaSlice';
 import { presupuestoSlice } from './presupuesto/presupuestoSlice';
 import { listadoSlice } from './listado/listadoSlice';
 import { variableSlice } from './variable/variableSlice';
+import { tipoTarjetaSlice } from './tipoTarjeta/tipoTarjetaSlice';
 
 export const store = configureStore({
     reducer: {
@@ -32,6 +33,7 @@ export const store = configureStore({
         provedor: provedorSlice.reducer,
         recibo: reciboSlice.reducer,
         remito: remitoSlice.reducer,
+        tipoTarjeta: tipoTarjetaSlice.reducer,
         unidadMedida: unidadMedidaSlice.reducer,
         usuario: usuarioSlice.reducer,
         variable: variableSlice.reducer,

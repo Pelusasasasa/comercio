@@ -27,10 +27,12 @@ export const useReciboStore = () => {
         dispatch(resetReciboSlice());
     };
 
-    const startAgregarRecibo = async(recibo: Recibo) => {
+    const startAgregarRecibo = async(recibo: Recibo, medioPago: string) => {
         dispatch(savingRecibo());
         try{
-            const { data } = await comercioApi.post('/recibo', recibo);
+            const nuevoRecibo = {...recibo, medioPago: medioPago}
+
+            const { data } = await comercioApi.post('/recibo', nuevoRecibo);
             if(data.ok){
                 dispatch(addRecibo(data.recibo));
                 return {

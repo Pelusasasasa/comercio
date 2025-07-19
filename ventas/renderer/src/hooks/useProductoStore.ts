@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addProducto, deleteProducto, savingProducto, setProductoActive, setProductos, updateProducto } from '../store/producto/productoSlice';
+import { addProducto, clearProductoActive, deleteProducto, resetProductSlice, savingProducto, setProductoActive, setProductos, updateProducto } from '../store/producto/productoSlice';
 import { Producto } from '../types/producto';
 import Swal from 'sweetalert2';
 import comercioApi from '../api/comercioApi';
@@ -16,6 +16,14 @@ interface RootState {
 export const useProductoStore = () => {
     const {productos, productoActive, isSavingProducto, messageErrorProducto} = useSelector((state: RootState) => state.producto);
     const dispatch = useDispatch();
+
+    const limpiarProductoActivo = () => {
+        dispatch(clearProductoActive());
+    };
+
+    const renicirialStore = () => {
+        dispatch(resetProductSlice());
+    };
 
     const startTraerProductos = async() => {
         dispatch(savingProducto());
@@ -105,6 +113,8 @@ export const useProductoStore = () => {
         messageErrorProducto,
 
         //Metodos
+        limpiarProductoActivo,
+        renicirialStore,
         startTraerProductos,
         startAgregarProducto,
         startBorrarProducto,

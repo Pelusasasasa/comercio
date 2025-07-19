@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import { Producto } from "../../types/producto";
 
@@ -7,6 +7,7 @@ import { useCategoriaStore } from "../../hooks/useCategoriaStore";
 import { useProductoStore } from "../../hooks/useProductoStore"
 import { useProvedorStore } from "../../hooks/useProvedorStore";
 import { useUnidadMedidaStore } from "../../hooks/useUnidadMedidaStore";
+import { useVariableStore } from "../../hooks/useVariableStore";
 
 interface useProductoStoreProps {
     productoActive: Producto | null,
@@ -48,6 +49,10 @@ const HandleProducto = ({ setButtonActive }: Props) => {
     const { categorias } = useCategoriaStore();
     const { provedores } = useProvedorStore();
     const { unidadMedidas } = useUnidadMedidaStore();
+
+    const { startTraerDolar, variableActive } = useVariableStore();
+
+    const [enviado, setEnviado] = useState<boolean>(false);
 
     const { codigo, codigoFabrica, descripcion, costo, costoDolar, costoIva, marca, categoria, provedor, unidadMedida, iva, utilidad, precio, stock, stockMinimo, detalle, onInputChange, formState} = useForm(productoActive ? productoActive : initialState);
     const costoRef = useRef<HTMLInputElement>(null);
@@ -98,12 +103,21 @@ const HandleProducto = ({ setButtonActive }: Props) => {
         onInputChange({target: {name: 'precio', value: calcularPrecioFinal()}} as React.ChangeEvent<HTMLInputElement>);
     }, [utilidad]);
 
+    useEffect(() => {
+        startTraerDolar();
+    }, []);
+
 
     const agregarProducto = async(e) => {
         e.preventDefault();
+        setEnviado(true);
 
-        if(codigo === '') return await Swal.fire('Error', 'El campo codigo es obligatorio', 'error');
-        if(descripcion === '') return await Swal.fire('Error', 'El campo descripcion es obligatorio', 'error');
+        if(codigo === '') return 
+        if(descripcion === '') return 
+        if(costo === '') return 
+        if(costoDolar === '') return 
+        if(utilidad === '') return 
+        if(precio === '') return 
 
         startAgregarProducto(formState as Producto);
 
@@ -123,6 +137,7 @@ return (
                 <div className='flex flex-col col-span-2'>
                     <label className='font-medium mb-1 ' htmlFor="codigo">Codigo *</label>
                     <input onChange={onInputChange} disabled={productoActive ? true : false} value={codigo} className={`${productoActive ? 'bg-gray-200' : ''} border border-gray-400 rounded-sm p-1`} placeholder='Codigo' type="text" name="codigo" id="codigo" />
+                    { ( !codigo && enviado) && <p className="text-red-600 text-xs">El Codigo es Obligatorio</p>}
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="codigoFabrica">Fabrica</label>
@@ -131,12 +146,13 @@ return (
 
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="dolar">Dolar</label>
-                    <input onChange={onInputChange} className='border border-gray-400 rounded-sm p-1 bg-gray-300' placeholder='Dolar' type="text" name="dolar" id="dolar" disabled  />
+                    <input onChange={onInputChange} className='border border-gray-400 rounded-sm p-1 bg-gray-300' placeholder='Dolar' type="number" value={(variableActive && variableActive.clave === 'DOLAR') ? `${variableActive.valor}` : '0.00'} name="dolar" id="dolar" disabled  />
                 </div>
 
                 <div className='flex flex-col col-span-4'>
                     <label className='font-medium mb-1' htmlFor="descripcion">Descripcion *</label>
                     <input onChange={onInputChange} value={descripcion} className='border border-gray-400 rounded-sm p-1' placeholder='Descripcion' type="text" name="descripcion" id="descripcion" />
+                    { ( !descripcion && enviado) && <p className="text-red-600 text-xs">La descripcion es Obligatoria</p>}
                 </div>
 
                 <div className='flex flex-col'>
@@ -178,10 +194,12 @@ return (
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="costo">Costo *</label>
                     <input onChange={onInputChange} value={costo} className='border border-gray-400 rounded-sm p-1' onKeyDown={apretarEnter} ref={costoRef} placeholder='costo' type="number" name="costo" id="costo" />
+                    { ( costo === '' && enviado) && <p className="text-red-600 text-xs">El Costo es Obligatorio</p>}
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="costoDolar">Costo Dolar*</label>
                     <input onChange={onInputChange} value={costoDolar} className='border border-gray-400 rounded-sm p-1' onKeyDown={apretarEnter} ref={costoDolarRef} placeholder='costoDolar' type="number" name="costoDolar" id="costoDolar" />
+                    { ( costoDolar === '' && enviado) && <p className="text-red-600 text-xs">El Costo Dolar es Obligatorio</p>}
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="iva">Iva (%)*</label>
@@ -198,10 +216,12 @@ return (
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="utilidad">Utilidad (%)*</label>
                     <input onChange={onInputChange} value={utilidad} className='border border-gray-400 rounded-sm p-1' onKeyDown={apretarEnter} ref={utilidadRef} placeholder='utilidad' type="number" name="utilidad" id="utilidad" />
+                    { ( utilidad === '' && enviado) && <p className="text-red-600 text-xs">La utilidad es Obligatoria</p>}
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="precio">Precio Final *</label>
                     <input onChange={onInputChange} value={precio} className='border border-gray-400 rounded-sm p-1'  ref={precioFinalRef} placeholder='precio' type="number" name="precio" id="precio" />
+                    { ( precio === '' && enviado) && <p className="text-red-600 text-xs">El Precio es Obligatorio</p>}
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="stock">Stock Inicial *</label>

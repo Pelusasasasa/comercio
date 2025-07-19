@@ -1,9 +1,11 @@
 import { RiDeleteBin5Line } from "react-icons/ri"
 import { VscEdit } from "react-icons/vsc"
 import { GoHistory } from "react-icons/go";
+import { IoMdAdd } from "react-icons/io";
 
 import Swal from "sweetalert2";
 import { useProductoStore } from "../../hooks/useProductoStore";
+import { useState } from "react";
 
 interface Props {
     _id: string,
@@ -24,11 +26,11 @@ interface Props {
     observaciones: string,
     setButtonActive: (value: string) => void;
     setModalMov: (value: boolean) => void;
+    setModalAddMovimiento: (value: boolean) => void;
     modalMov: (value: string) => void;
 };
 
-
-export const ProductoRow = ({_id, codigo, descripcion, precio, marca, stock, stockMinimo, provedor, codigoFabrica, observaciones, setButtonActive, setModalMov} : Props) => {
+export const ProductoRow = ({_id, codigo, descripcion, precio, marca, stock, stockMinimo, provedor, codigoFabrica, observaciones, setButtonActive, setModalMov, setModalAddMovimiento} : Props) => {
     const { startBorrarProducto, setProductoActivo } = useProductoStore();
 
     const stockStyles = () => {
@@ -55,15 +57,24 @@ export const ProductoRow = ({_id, codigo, descripcion, precio, marca, stock, sto
         setButtonActive('agregar');
     };
 
+    const addMovimiento = async() => {
+        setProductoActivo(_id)
+        setModalAddMovimiento(true);
+    }
+
     const handleMovimiento = async() => {   
         setProductoActivo(_id)
         setModalMov(true);
     };
 
 return (
-    <tr className="text-center bg-white bgTr border border-gray-200 rounded-sm">
+    <tr className="text-center bg-white bgTr border border-gray-200 rounded-sm cursor-pointer">
         <td className="py-2">{codigo}</td>
-        <td>{descripcion}</td>
+        <td>
+            <div className=" flex justify-center" >
+                <p className="w-xl">{descripcion}</p>
+            </div>
+        </td>
         <td>$ {precio.toFixed(2)}</td>
         <td>
             <p className={`${marca && 'border-blue-500 border'} rounded-xl bg-blue-100 text-blue-800 mr-2 text-sm`}>{marca?.nombre}</p>
@@ -78,6 +89,7 @@ return (
         <td>{observaciones}</td>
         <td>
             <div className="flex items-center justify-around h-full">
+                <IoMdAdd  onClick={addMovimiento} size={20} className={`rounded-sm text-green-600 cursor-pointer hover:text-green-400`}/>
                 <GoHistory  onClick={handleMovimiento} size={20} className={`rounded-sm text-gray-600 cursor-pointer hover:bg-gray-400`}/>
                 <VscEdit onClick={handleUpdate} size={20}  className={`rounded-sm text-gray-600 cursor-pointer hover:bg-gray-400`}/>
                 <RiDeleteBin5Line size={20} onClick={handleDelete} className={`rounded-sm hover:text-gray-600 cursor-pointer text-red-600 hover:bg-gray-400`}/>

@@ -25,6 +25,9 @@ export const productoSlice = createSlice({
             state.productos?.push(payload);
             state.isSavingProducto = false;
         },
+        resetProductSlice: (state) => {
+            return initialState
+        },
         savingProducto: (state) => {
             state.isSavingProducto = true;
             state.messageErrorProducto = null;
@@ -66,6 +69,7 @@ export const productoSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
     addProducto,
+    resetProductSlice,
     savingProducto,
     setProductoActive,
     setProductos,

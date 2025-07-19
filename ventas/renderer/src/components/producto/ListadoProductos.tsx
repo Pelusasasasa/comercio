@@ -2,10 +2,12 @@
 import { useState } from 'react';
 import { ProductoRow } from './ProductoRow'
 import { ModalMovimientoProducto } from '../movimiento/ModalMovimientoProducto';
+import { AddMovimiento } from '../movimiento/AddMovimiento';
 
 export const ListadoProductos = ({productos, setButtonActive}) => {
 
-    const [modalMov, setModalMov] = useState(false);
+    const [modalMov, setModalMov] = useState<boolean>(false);
+    const [modalAddMovimiento, setModalAddMovimiento] = useState<boolean>(false);
 
   return (
     <div className='mx-2 border border-gray-200 rounded-md min-h-[calc(100vh-150px)] bg-white'>
@@ -29,14 +31,15 @@ export const ListadoProductos = ({productos, setButtonActive}) => {
             <tbody>
                 {
                     productos.map(producto => (
-                        <ProductoRow key={producto._id} {...producto} setButtonActive={setButtonActive} modalMov={modalMov} setModalMov={setModalMov}/>
+                        <ProductoRow key={producto._id} {...producto} setButtonActive={setButtonActive} modalMov={modalMov} setModalMov={setModalMov} setModalAddMovimiento={setModalAddMovimiento}/>
                     ))
                 }
             </tbody>
         </table>
-        {
-            modalMov && <ModalMovimientoProducto  setModalMov={setModalMov}/>
-        }
+
+        {   modalMov && <ModalMovimientoProducto  setModalMov={setModalMov}/>   }
+        {   modalAddMovimiento && <AddMovimiento  setModalAddMovimiento={setModalAddMovimiento}/>   }   
+
     </div>
   )
 }

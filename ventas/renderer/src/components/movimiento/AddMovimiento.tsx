@@ -1,6 +1,6 @@
 import { IoMdAdd } from "react-icons/io"
 import { IoClose } from "react-icons/io5"
-import { useForm, useProductoStore } from "../../hooks"
+import { useForm, useMovimientoStore, useProductoStore, useUsuarioStore } from "../../hooks"
 import { Movimiento, MovimientoAdd } from "../../types/movimiento"
 import { useEffect, useState } from "react"
 import { Button } from "../Button"
@@ -13,7 +13,7 @@ const initialState: MovimientoAdd = {
     tipo: '',
     cantidad: 0,
     stockAntes: 0,
-    numeroComprobante: '',
+    numeroComprobante: '0000',
     nroSerie: '',
     creadoPor: '',
     stockAhora: 0,
@@ -22,20 +22,47 @@ const initialState: MovimientoAdd = {
 
 export const AddMovimiento = ({ setModalAddMovimiento }: Props) => {
     const { productoActive, limpiarProductoActivo} = useProductoStore();
+    const { usuarioActive } = useUsuarioStore();
+    const { startAgregarMovimento } = useMovimientoStore();
     const [mov, setMov] = useState<MovimientoAdd>({...initialState, producto: productoActive?.descripcion, stockAntes: productoActive?.stock});
 
-    useEffect(() => {
-        setMov({...initialState, producto: productoActive?.descripcion, stockAntes: productoActive?.stock})
-    }, [productoActive])
+    const [enviado, setEnviado] = useState<boolean>(false);
 
-    const { tipo, producto, cantidad, stockAntes, numeroComprobante, onInputChange} = useForm(mov || initialState);
+    useEffect(() => {
+        setMov({...initialState, producto: productoActive?._id, stockAntes: productoActive?.stock, numeroComprobante: '0000'})
+    }, [productoActive]);
+
+    const { tipo, cantidad, stockAntes, numeroComprobante, nroSerie, onInputChange, formState} = useForm(mov || initialState);
+    
+    useEffect(() => {
+        let valueAux = (tipo === 'RESTA' ? parseFloat(stockAntes) - parseFloat(cantidad) : parseFloat(stockAntes) + parseFloat(cantidad)).toFixed(2)
+
+       onInputChange({target:{name: 'stockAhora',value: valueAux}} as React.ChangeEvent<HTMLInputElement>) 
+    }, [cantidad]);
+
 
     const cancelar = () => {
         limpiarProductoActivo()
         setModalAddMovimiento(false);
     };
 
-    const agregarMovimientoStock = () => {
+    const agregarMovimientoStock = async() => {
+        setEnviado(true);
+
+        if(tipo === '' || cantidad === '' || numeroComprobante === '') return;
+
+        const mov = {
+            ...formState,
+            precio: 0,
+            creadoPor: usuarioActive?._id
+        };
+        
+        const ok = await startAgregarMovimento(mov);
+
+        if(ok){
+            limpiarProductoActivo()
+            setModalAddMovimiento(false);
+        }
 
     }
 
@@ -58,21 +85,24 @@ return (
             <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col mt-5">
                     <label htmlFor="" className="mb-1 text-start font-semibold">Producto * </label>
-                    <input disabled onChange={onInputChange} value={producto} type="text" name="producto" id="producto" className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1 bg-gray-200" placeholder="Productos"/>
+                    <input disabled onChange={onInputChange} value={productoActive?.descripcion} type="text" className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1 bg-gray-200" placeholder="Productos"/>
                 </div>
 
                 <div className="flex flex-col mt-5">
                     <label htmlFor="tipo" className="mb-1 text-start font-semibold">Tipo de Movimiento * </label>
                     <select onChange={onInputChange}  name="tipo" value={tipo} id="tipo" className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1">
+                        <option value="">---Seleccionar una opcion</option>
                         <option value="COMPRA">Compra (+)</option>
                         <option value="SUMA">Suma (+)</option>
                         <option value="RESTA">Resta (-)</option>
                     </select>
+                    {!tipo && enviado && <p className="text-red-600">El tipo es obligatorio</p>}
                 </div>
 
                 <div className="flex flex-col mt-5">
                     <label htmlFor="cantidad" className="mb-1 text-start font-semibold">Cantidad * </label>
                     <input onChange={onInputChange} type="number" value={cantidad} name="cantidad" id="cantidad" className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1" placeholder="Ej: 10"/>
+                    {cantidad === '' && enviado && <p className="text-red-600">La cantidad es obligatoria</p>}
                 </div>
 
                 <div className="flex flex-col mt-5">
@@ -83,11 +113,14 @@ return (
                 <div className="flex flex-col mt-5">
                     <label htmlFor="numeroComprobante" className="mb-1 text-start font-semibold">Numero de Factura</label>
                     <input onChange={onInputChange} type="text" name="numeroComprobante" value={numeroComprobante} id="numeroComprobante" className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1" placeholder="Productos"/>
+                    {numeroComprobante === '' && enviado && <p className="text-red-600">El numero Comprobante no puede estar vacio</p>}
                 </div>
 
                 <div className="flex flex-col mt-5">
                     <label htmlFor="" className="mb-1 text-start font-semibold">Numero de Series</label>
-                    <input onChange={onInputChange} type="text" name="" id="" className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1" placeholder="Productos"/>
+                    <textarea onChange={onInputChange} name="nroSerie" id="nroSerie" value={nroSerie} className="border rounded-sm border-gray-300 placeholder:text-gray-600 px-2 py-1" placeholder="Productos">
+                        
+                    </textarea>
                 </div>
             </form>
 

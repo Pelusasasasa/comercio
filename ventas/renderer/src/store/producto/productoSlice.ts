@@ -39,16 +39,6 @@ export const productoSlice = createSlice({
         setProductos: (state, { payload }: PayloadAction<Producto[]>) => {
             state.productos = payload;
         },
-        updateProducto: (state, { payload }: PayloadAction<Producto>) => {
-            state.productos = state.productos.map(producto => {
-                if (producto._id === payload._id) {
-                    return payload;
-                }
-                return producto;
-            });
-            state.isSavingProducto = false;
-            state.productoActive = null;
-        },
         deleteProducto: (state, { payload }: PayloadAction<string>) => {
             state.productos = state.productos.filter(producto => producto._id !== payload);
         },
@@ -60,7 +50,25 @@ export const productoSlice = createSlice({
         },
         clearMessageErrorProducto: (state) => {
             state.messageErrorProducto = null;
-        }
+        },
+        updateStock: (state, {payload}: PayloadAction<{ _id: string, stock: number}>) => {
+            state.productos.map(elem => {
+                if(elem._id === payload._id){
+                    elem.stock = payload.stock;
+                }
+                return elem
+            })
+        },
+        updateProducto: (state, { payload }: PayloadAction<Producto>) => {
+            state.productos = state.productos.map(producto => {
+                if (producto._id === payload._id) {
+                    return payload;
+                }
+                return producto;
+            });
+            state.isSavingProducto = false;
+            state.productoActive = null;
+        },
        
     }
 });
@@ -69,13 +77,14 @@ export const productoSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
     addProducto,
+    clearMessageErrorProducto,
+    clearProductoActive,
+    clearProductos,
+    deleteProducto,
     resetProductSlice,
     savingProducto,
     setProductoActive,
     setProductos,
     updateProducto,
-    deleteProducto,
-    clearProductoActive,
-    clearProductos,
-    clearMessageErrorProducto
+    updateStock,
 } = productoSlice.actions;

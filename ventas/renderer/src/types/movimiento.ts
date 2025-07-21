@@ -25,5 +25,5 @@ export interface MovimientoAdd {
     stockAhora: number;
     numeroComprobante: string;
     nroSerie: string;
-    creadoPor: string;
+    creadoPor?: string;
 }

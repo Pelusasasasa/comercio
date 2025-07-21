@@ -35,9 +35,9 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
               <th className='text-gray-600 text-center text-sm font-medium'>Cod. Cliente</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Cliente</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Cantidad</th>
-              <th className='text-gray-600 text-center text-sm font-medium'>Stock Anter</th>
-              <th className='text-gray-600 text-center text-sm font-medium'>stock Ahora</th>
-              <th className='text-gray-600 text-center text-sm font-medium'>Comprobante</th>
+              <th className='text-gray-600 text-center text-sm font-medium'>Stock Antes</th>
+              <th className='text-gray-600 text-center text-sm font-medium'>Stock Ahora</th>
+              <th className='text-gray-600 text-center text-sm font-medium'>Nro° Comprobante</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Usuario</th>
               <th className='text-gray-600 text-center text-sm font-medium'>Nro_Serie</th>
             </tr>
@@ -46,10 +46,10 @@ export const ModalMovimientoProducto = ({ setModalMov }: Props) => {
             {
               movimientos.map(mov => (
                 <tr className='text-center text-sm' key={mov._id}>
-                  <td className='py-2'>{trasnsformarHoraMenos3(mov.fecha)}</td>
+                  <td className='py-2'>{trasnsformarHoraMenos3(mov.fecha || '')}</td>
                   <td>{mov.tipo}</td>
-                  <td>{mov.codigoCliente.codigo.toString().padStart(4, '0')}</td>
-                  <td>{mov.codigoCliente.nombre}</td>
+                  <td>{mov.codigoCliente?.codigo.toString().padStart(4, '0')}</td>
+                  <td>{mov.codigoCliente?.nombre}</td>
                   <td>{mov.cantidad.toFixed(2)}</td>
                   <td>{mov.stockAntes.toFixed(2)}</td>
                   <td>{mov.stockAhora.toFixed(2)}</td>

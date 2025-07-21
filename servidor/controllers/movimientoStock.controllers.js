@@ -1,4 +1,5 @@
 const MovimientoStock = require('../models/MovimientoStock');
+const { modificarStock } = require('../services/producto.services');
 
 const borrarMovimientos = async(req, res) => {
     const { id } = req.params;
@@ -21,12 +22,20 @@ const borrarMovimientos = async(req, res) => {
 
 const crearMovimientoStock = async(req, res) => {
     try {
-        const movimineto = new MovimientoStock(req.body);
-        await movimineto.save();
+
+        const result = await modificarStock(req.body.producto, req.body.stockAhora);
+
+        if(!result.ok) return res.status(500).json({
+            ok: false,
+            msg: 'No se pudo modificar el stock del producto'
+        })
+        
+        const movimiento = new MovimientoStock(req.body);
+        await movimiento.save();
 
         res.status(200).json({
             ok: true,
-            movimineto
+            movimiento
         });
 
     } catch (error) {

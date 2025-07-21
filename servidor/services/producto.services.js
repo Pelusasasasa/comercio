@@ -35,6 +35,34 @@ const cambiarStock = async(productos) => {
     };
 };
 
+const modificarStock = async(id, stock) =>{
+    try {
+        const producto = await Producto.findById(id);
+
+        if(!producto){
+            return {
+                ok: false,
+                msg: 'No existe el producto'
+            }
+        }
+
+        producto.stock = stock;
+        await producto.save();
+
+        return {
+            ok: true,
+            producto
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            ok: false,
+            msg: `No se pudo modificar el stock`
+        }
+    }
+}
+
 module.exports = {
-    cambiarStock
+    cambiarStock,
+    modificarStock
 };

@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Movimiento } from "../types/movimiento"
+import { Movimiento, MovimientoAdd } from "../types/movimiento"
 import { addMovimiento, deleteMovimiento, resetMovimientoSlice, savingMovimiento, setActiveMovimiento, setMovimientos, updateMovimiento } from "../store/movimiento/movimientosSlice";
 import Swal from "sweetalert2";
 import comercioApi from "../api/comercioApi";
+import { updateStock } from "../store/producto/productoSlice";
 
 interface RootState {
     movimiento: {
@@ -25,14 +26,15 @@ export const useMovimientoStore = () => {
         dispatch(resetMovimientoSlice());
     };
 
-    const startAgregarMovimento = async(movimiento: Movimiento) => {
+    const startAgregarMovimento = async(movimiento: MovimientoAdd) => {
         dispatch(savingMovimiento());
 
         try {
             const { data } = await comercioApi.post('movimientoStock', movimiento);
-
             if(data.ok){
                 dispatch(addMovimiento(data.movimiento));
+                dispatch(updateStock({_id: data.movimiento.producto, stock: data.movimiento.stockAhora}))
+                return data.ok
             }else{
                 await Swal.fire('Error al agregar el movimiento', data.msg, 'error')
             }

@@ -54,12 +54,18 @@ const modificarMovimiento = async(req, res) => {
 
         if(!movimiento) return res.status(404).json({
             ok: false,
-            msg: 'No existe el movimientp'
+            msg: 'No existe el movimiento'
         });
+
+        const result = await MovimientoStock.findById(movimiento._id)
+        .populate('producto', 'descripcion')
+        .populate('codigoCliente', ['nombre', 'codigo'])
+        .populate('creadoPor', 'nombre')
+        .sort({_id: -1});
 
         res.status(200).json({
             ok: true,
-            movimiento
+            movimiento: result
         });
     } catch (error) {
         console.error(error);;

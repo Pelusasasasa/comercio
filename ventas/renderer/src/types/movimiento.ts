@@ -18,6 +18,9 @@ export interface Movimiento {
 }
 
 export interface MovimientoAdd {
+    _id?: string;
+    fecha?: string; 
+    codigoCliente?: Cliente;
     producto?: string;
     tipo: string;
     cantidad: number;
@@ -25,5 +28,6 @@ export interface MovimientoAdd {
     stockAhora: number;
     numeroComprobante: string;
     nroSerie: string;
+    precio?: number;
     creadoPor?: string;
 }

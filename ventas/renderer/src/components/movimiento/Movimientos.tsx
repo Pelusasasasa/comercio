@@ -13,7 +13,7 @@ export const Movimientos = ({setButtonActive}: Props) => {
         traerMovimientos();
     }, []);
 
-  return (
+return (
     <div className='mx-2 border border-gray-200 min-h-[calc(100vh-150px)] bg-white'>
         <h3 className='text-2xl m-5 font-medium'>Historia de movimientos</h3>
 
@@ -23,6 +23,8 @@ export const Movimientos = ({setButtonActive}: Props) => {
                     <th className='text-gray-600 text-center'>Fecha</th>
                     <th className='text-gray-600 text-center'>Producto</th>
                     <th className='text-gray-600 text-center'>Tipo</th>
+                    <th className='text-gray-600 text-center'>Cod. Cliente</th>
+                    <th className='text-gray-600 text-center'>Cliente</th>
                     <th className='text-gray-600 text-center'>Cantidad</th>
                     <th className='text-gray-600 text-center'>Stock Antes</th>
                     <th className='text-gray-600 text-center'>Stock Ahora</th>

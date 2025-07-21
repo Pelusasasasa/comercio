@@ -78,6 +78,23 @@ export const useMovimientoStore = () => {
         }
     };
 
+    const startModiifcarSeriesMovimiento = async(movimiento: MovimientoAdd) => {  
+        
+        try {
+            const { data } = await comercioApi.put(`movimientoStock/${movimiento._id}`, movimiento);
+            if(data.ok){
+                dispatch(updateMovimiento(data.movimiento));
+                await Swal.fire('Movimiento de Stock', 'Numero de series Modificados', 'success');
+            }else{
+                await Swal.fire('No se pudo modificar el numero de series', data.msg, 'error')
+            }
+        } catch (error) {
+            console.log(error);
+            await Swal.fire('No se pudo modificar el numero de series', error.response?.data?.msg, 'error');
+            
+        }
+    }
+
     const traerMovimientos = async() => {
         dispatch(savingMovimiento());
 
@@ -146,6 +163,7 @@ export const useMovimientoStore = () => {
         startAgregarMovimento,
         startEliminarMovimiento,
         startModificarMovimiento,
+        startModiifcarSeriesMovimiento,
         traerMovimientos,
         traerMovimientosPorProducto,
         traerMovimientosPorTipoYNumero

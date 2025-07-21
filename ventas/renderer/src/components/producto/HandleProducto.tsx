@@ -9,15 +9,6 @@ import { useProvedorStore } from "../../hooks/useProvedorStore";
 import { useUnidadMedidaStore } from "../../hooks/useUnidadMedidaStore";
 import { useVariableStore } from "../../hooks/useVariableStore";
 
-interface useProductoStoreProps {
-    productoActive: Producto | null,
-    productos: Producto[],
-    startAgregarProducto: (arg: Producto) => void,
-    startBorrarProducto: (arg: string) => void,
-    startModificarProducto: (arg: Producto) => void,
-    startTraerProductos: () => void,
-    setProductoActivo: (arg: string) => void
-};
 
 interface Props {
     setButtonActive: (arg: string) => void
@@ -44,7 +35,7 @@ const initialState: Producto = {
 };
 
 const HandleProducto = ({ setButtonActive }: Props) => {
-    const { startAgregarProducto, productoActive, startModificarProducto }: useProductoStoreProps = useProductoStore();
+    const { startAgregarProducto, productoActive, startModificarProducto, limpiarProductoActivo } = useProductoStore();
     const { marcas } = useMarcaStore();
     const { categorias } = useCategoriaStore();
     const { provedores } = useProvedorStore();
@@ -123,6 +114,12 @@ const HandleProducto = ({ setButtonActive }: Props) => {
 
         setButtonActive('listado');
     };
+
+    const cancelar = () => {
+        setButtonActive('listado');
+        limpiarProductoActivo();
+
+    }
 
     const modificarProducto = async(e) => {
         startModificarProducto(formState);
@@ -225,7 +222,7 @@ return (
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="stock">Stock Inicial *</label>
-                    <input onChange={onInputChange} value={stock} className='border border-gray-400 rounded-sm p-1' placeholder='stock' type="number" name="stock" id="stock" />
+                    <input onChange={onInputChange} disabled={productoActive ? true : false} value={stock} className={`${productoActive ? 'bg-gray-300' : ''} border border-gray-400 rounded-sm p-1`} placeholder='stock' type="number" name="stock" id="stock" />
                 </div>
                 <div className='flex flex-col'>
                     <label className='font-medium mb-1' htmlFor="stockMinimo">Stock Minimo</label>
@@ -240,7 +237,7 @@ return (
         </form>
 
         <div className="flex justify-end bg-white p-2 gap-5">
-            <button className="border border-gray-400 p-2 font-medium rounded-md cursor-pointer hover:bg-gray-100" onClick={() => setButtonActive('listado')}>Cancelar</button>
+            <button className="border border-gray-400 p-2 font-medium rounded-md cursor-pointer hover:bg-gray-100" onClick={cancelar}>Cancelar</button>
             { 
             productoActive 
                 ? (<button type="button" onClick={modificarProducto} className="rounded-md p-2 font-medium cursor-pointer bg-yellow-500 text-gray-600 hover:bg-yellow-600">Modificar Producto</button>)

@@ -1,6 +1,6 @@
 import { trasnsformarHoraMenos3 } from "../../helpers/toISOStringUTCMinus3"
 
-export const MovimientoRow = ({_id, fecha, producto, tipo, cantidad, stockAntes, stockAhora, numeroComprobante, creadoPor, detalle}) => {
+export const MovimientoRow = ({_id, fecha, producto, codigoCliente, tipo, cantidad, stockAntes, stockAhora, numeroComprobante, creadoPor}) => {
     
     
     const tipoStyles = () => {
@@ -17,12 +17,13 @@ export const MovimientoRow = ({_id, fecha, producto, tipo, cantidad, stockAntes,
         <td>
             <p className={`${tipoStyles()}`}>{tipo}</p>
         </td>
+        <td>{codigoCliente?.codigo?.toString().padStart(4, '0')}</td>
+        <td>{codigoCliente?.nombre}</td>
         <td>{cantidad.toFixed(2)}</td>
         <td>{stockAntes?.toFixed(2)}</td>
         <td>{stockAhora?.toFixed(2)}</td>
         <td>{numeroComprobante}</td>
         <td>{creadoPor.nombre}</td>
-        <td>{detalle}</td>
     </tr>
   )
 }
